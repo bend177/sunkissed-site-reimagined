@@ -55,7 +55,7 @@ function About() {
             </h1>
             <p className="mt-6 max-w-lg text-sm leading-relaxed text-muted-foreground">
               Sunkissed started with one frustration: swimwear that looked good on a hanger and
-              nowhere else. We build the opposite — pieces engineered to hold their shape through
+              nowhere else. We build the opposite - pieces engineered to hold their shape through
               salt water, sunscreen and long, slow afternoons.
             </p>
             <Link to="/shop" search={{ c: "all" }} className="rule-link mt-8 text-sm">

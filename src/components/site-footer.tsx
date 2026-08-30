@@ -7,7 +7,7 @@ export function SiteFooter() {
         <div>
           <p className="display text-4xl">Sunkissed</p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Swimwear made for long days in the sun — sculpted fits, sand-free towels, and resort
+            Swimwear made for long days in the sun - sculpted fits, sand-free towels, and resort
             pieces that travel well.
           </p>
         </div>

@@ -23,7 +23,7 @@ export const Route = createFileRoute("/products/$handle")({
       ? `${loaderData.product.title} | Sunkissed`
       : "Product | Sunkissed";
     const description = loaderData
-      ? `${loaderData.product.title} — $${loaderData.product.price}. ${loaderData.description}`.slice(
+      ? `${loaderData.product.title} - $${loaderData.product.price}. ${loaderData.description}`.slice(
           0,
           158,
         )
@@ -114,7 +114,7 @@ function ProductPage() {
             <p className="mt-6 text-sm lowercase text-muted-foreground">{colorName}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {siblings.map((s) => {
-                const label = s.title.split("—")[1]?.trim() ?? s.title;
+                const label = s.title.split("-")[1]?.trim() ?? s.title;
                 const active = s.handle === product.handle;
                 return (
                   <Link

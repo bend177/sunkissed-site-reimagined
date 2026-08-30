@@ -79,13 +79,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Sunkissed — Swimwear & Resort Wear" },
+      { title: "Sunkissed - Swimwear & Resort Wear" },
       {
         name: "description",
         content: "Sculpting swimwear, resort wear and sand-free beach towels by Sunkissed.",
       },
       { name: "author", content: "Sunkissed" },
-      { property: "og:title", content: "Sunkissed — Swimwear & Resort Wear" },
+      { property: "og:title", content: "Sunkissed - Swimwear & Resort Wear" },
       {
         property: "og:description",
         content: "Sculpting swimwear, resort wear and sand-free beach towels by Sunkissed.",

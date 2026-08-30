@@ -10,7 +10,7 @@ const cdn = (src: string, w = 900) => `${src}${src.includes("?") ? "&" : "?"}wid
 
 export const products: Product[] = [
   {
-    title: "Le Bandeau Strapless Top — Rouge",
+    title: "Le Bandeau Strapless Top - Rouge",
     price: "79",
     handle: "le-bandeau-strapless-top-rouge",
     category: "swim",
@@ -19,7 +19,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "Le Triangle Top — Golden Leopard",
+    title: "Le Triangle Top - Golden Leopard",
     price: "79",
     handle: "le-triangle-top-golden-leopard",
     category: "swim",
@@ -28,7 +28,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "Le Sporty Top — Zebra",
+    title: "Le Sporty Top - Zebra",
     price: "79",
     handle: "le-sporty-top-zebra",
     category: "swim",
@@ -37,7 +37,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "Le Bas Cheeky Bottom — Cherry Red",
+    title: "Le Bas Cheeky Bottom - Cherry Red",
     price: "79",
     handle: "le-bas-cheeky-bottom-cherry-red",
     category: "swim",
@@ -46,7 +46,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "Le Triangle Bottom — Midnight Bloom",
+    title: "Le Triangle Bottom - Midnight Bloom",
     price: "79",
     handle: "le-triangle-bottom-midnight-bloom",
     category: "swim",
@@ -55,7 +55,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "Le Bas Cheeky Bottom — Emerald Green",
+    title: "Le Bas Cheeky Bottom - Emerald Green",
     price: "79",
     handle: "le-bas-cheeky-bottom-emerald-green",
     category: "swim",
@@ -64,7 +64,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "La Sirena One Piece — Zebra",
+    title: "La Sirena One Piece - Zebra",
     price: "175",
     handle: "la-sirena-one-piece-zebra",
     category: "one-piece",
@@ -73,7 +73,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "La Sirena One Piece — Cherry Red",
+    title: "La Sirena One Piece - Cherry Red",
     price: "175",
     handle: "la-sirena-one-piece-cherry-red",
     category: "one-piece",
@@ -82,7 +82,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "La Sirena One Piece — Leopard",
+    title: "La Sirena One Piece - Leopard",
     price: "175",
     handle: "la-sirena-one-piece-leopard",
     category: "one-piece",
@@ -91,7 +91,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "Le Bon Bon — Jet Black",
+    title: "Le Bon Bon - Jet Black",
     price: "160",
     handle: "le-bon-bon-black-1",
     category: "one-piece",
@@ -100,7 +100,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "Beach To Bar Dress — Leopard",
+    title: "Beach To Bar Dress - Leopard",
     price: "160",
     handle: "dress-leopard",
     category: "resort",
@@ -109,7 +109,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "Beach To Bar Dress — Black Mamba",
+    title: "Beach To Bar Dress - Black Mamba",
     price: "160",
     handle: "dress-black-mamba",
     category: "resort",
@@ -118,7 +118,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "Sarong — Rouge",
+    title: "Sarong - Rouge",
     price: "68",
     handle: "sarong-rouge",
     category: "resort",
@@ -127,7 +127,7 @@ export const products: Product[] = [
     ),
   },
   {
-    title: "Sarong — Leopard",
+    title: "Sarong - Leopard",
     price: "68",
     handle: "sarong-leopard",
     category: "resort",

@@ -13,7 +13,7 @@ export type ProductDetail = {
 };
 
 const splitTitle = (title: string): { base: string; color: string } => {
-  const parts = title.split("—").map((s) => s.trim());
+  const parts = title.split("-").map((s) => s.trim());
   return { base: parts[0] ?? title, color: parts[1] ?? "" };
 };
 
@@ -50,21 +50,21 @@ const copyFor = (product: Product) => {
     case "one-piece":
       return {
         description:
-          "A sculpted one piece cut from our signature double-lined fabric. Smooths, lifts and stays exactly where you put it — from first swim to last drink.",
+          "A sculpted one piece cut from our signature double-lined fabric. Smooths, lifts and stays exactly where you put it - from first swim to last drink.",
         fit: ["Full coverage seat", "Adjustable straps", "Model is 175 cm wearing a size s"],
         material: ["82% recycled polyamide, 18% elastane", "Fully lined", "Hand wash cold, dry flat"],
       };
     case "resort":
       return {
         description:
-          "The layer that takes you from towel to table. Lightweight, breathable and cut to move — designed to be thrown over anything.",
+          "The layer that takes you from towel to table. Lightweight, breathable and cut to move - designed to be thrown over anything.",
         fit: ["Relaxed fit", "Midi length", "Model is 175 cm wearing a size s"],
         material: ["Sheer quick-dry blend", "Unlined", "Hand wash cold, dry flat"],
       };
     default:
       return {
         description:
-          "Our best-selling shape in a buttery, second-skin fabric. Double lined, fully reversible-feeling and tested in real waves — no adjusting required.",
+          "Our best-selling shape in a buttery, second-skin fabric. Double lined, fully reversible-feeling and tested in real waves - no adjusting required.",
         fit: ["True to size", "Mix and match tops and bottoms", "Model is 175 cm wearing a size s"],
         material: ["82% recycled polyamide, 18% elastane", "Double lined", "Hand wash cold, dry flat"],
       };

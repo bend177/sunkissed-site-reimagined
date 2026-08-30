@@ -28,7 +28,7 @@ export function SiteHeader() {
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur">
         <div className="bg-ink px-4 py-2 text-center">
           <p className="eyebrow text-background">
-            free shipping on all u.s. orders — processed within 24 hours
+            free shipping on all u.s. orders - processed within 24 hours
           </p>
         </div>
 
@@ -77,7 +77,7 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {/* Mobile / tablet menu — rendered outside the header so `fixed` covers the full viewport */}
+      {/* Mobile / tablet menu - rendered outside the header so `fixed` covers the full viewport */}
       <div
         className={`fixed inset-0 z-[60] flex flex-col bg-background transition-opacity duration-300 lg:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"

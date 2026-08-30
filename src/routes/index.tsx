@@ -7,13 +7,13 @@ import { editorial, products } from "@/data/products";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sunkissed — Swimwear, Resort Wear & Sand-Free Towels" },
+      { title: "Sunkissed - Swimwear, Resort Wear & Sand-Free Towels" },
       {
         name: "description",
         content:
           "Sunkissed swimwear: sculpted bikinis, one pieces, beach-to-bar dresses and sand-free towels. Free shipping on all U.S. orders.",
       },
-      { property: "og:title", content: "Sunkissed — Swimwear Made For The Sun" },
+      { property: "og:title", content: "Sunkissed - Swimwear Made For The Sun" },
       {
         property: "og:description",
         content: "Sculpted swim, resort wear and sand-free towels. Designed to seduce.",
