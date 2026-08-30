@@ -1,6 +1,7 @@
 export type Product = {
   title: string;
   price: string;
+  compareAt?: string;
   handle: string;
   image: string;
   category: "swim" | "one-piece" | "resort" | "towels";
