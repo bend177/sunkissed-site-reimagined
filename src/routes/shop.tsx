@@ -215,7 +215,7 @@ function Shop() {
               <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {(
                   [
-                    ["Bikinis", ["sets"]],
+                    ["Shop by sets", ["sets"]],
                     ["Tops", ["tops"]],
                     ["Bottoms", ["bottoms"]],
                     ["One Pieces", ["one-pieces"]],
