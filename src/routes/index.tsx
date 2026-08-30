@@ -182,7 +182,7 @@ function Home() {
         </section>
 
         {/* Brand note */}
-        <section className="border-t border-border px-4 py-14 md:px-6 md:py-16">
+        <section className="border-t border-border px-4 py-12 md:px-6 md:py-14">
           <div className="mx-auto max-w-3xl text-center">
             <p className="eyebrow text-muted-foreground">since the first summer</p>
             <p className="display mt-5 text-4xl md:text-5xl">
