@@ -93,16 +93,22 @@ const printMap: Record<string, CSSProperties> = {
   },
 };
 
+// Prints need the real photo texture; solid colorways look cleaner as a fill.
+const PRINT_WORDS =
+  /leopard|zebra|cheeta|cheetah|tiger|snake|python|mamba|floral|floralia|bloom|animal|print|paisley|gingham|stripe|check|tie.?dye/i;
+
+export const isPrint = (colorName: string) => PRINT_WORDS.test(colorName);
+
 // Real swatch: a tight crop of the actual product photo for that colorway.
 export const realSwatchStyle = (
   image: string | undefined,
   colorName: string,
 ): CSSProperties =>
-  image
+  image && isPrint(colorName)
     ? {
         backgroundImage: `url(${image})`,
-        backgroundSize: "600%",
-        backgroundPosition: "50% 52%",
+        backgroundSize: "550%",
+        backgroundPosition: "50% 58%",
         backgroundRepeat: "no-repeat",
       }
     : swatchStyle(colorName);
