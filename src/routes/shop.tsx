@@ -237,30 +237,54 @@ function Shop() {
             </sup>
           </h1>
 
+          {/* Collection navigation - independent of filters */}
+          <nav
+            aria-label="Collections"
+            className="mt-4 flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {COLLECTIONS.map((col) => (
+              <Link
+                key={col.key}
+                to="/shop"
+                search={{ c: col.key }}
+                className={chip(col.key === c)}
+              >
+                {col.label}
+              </Link>
+            ))}
+          </nav>
+
           {bikiniFamily && (
             <div className="mt-4 flex flex-col gap-4">
-              <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {(
-                  [
-                    ["Bikini sets", ["sets"]],
-                    ["Tops", ["tops"]],
-                    ["Bottoms", ["bottoms"]],
-                    ["One Pieces", ["one-pieces"]],
-                    ["Separates", ["tops", "bottoms"]],
-                  ] as [string, ProductType[]][]
-                ).map(([label, t]) => (
-                  <button
-                    key={label}
-                    type="button"
-                    onClick={() => setOnly(t)}
-                    className={chip(
-                      types.length === t.length && t.every((x) => types.includes(x)),
-                    )}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
+              {c === "swim" && (
+                <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  {(
+                    [
+                      ["Bikini sets", ["sets"]],
+                      ["Tops", ["tops"]],
+                      ["Bottoms", ["bottoms"]],
+                      ["Separates", ["tops", "bottoms"]],
+                    ] as [string, ProductType[]][]
+                  ).map(([label, t]) => (
+                    <button
+                      key={label}
+                      type="button"
+                      onClick={() =>
+                        setOnly(
+                          types.length === t.length && t.every((x) => types.includes(x))
+                            ? []
+                            : t,
+                        )
+                      }
+                      className={chip(
+                        types.length === t.length && t.every((x) => types.includes(x)),
+                      )}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              )}
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
                 <span className="eyebrow text-muted-foreground">Featured Prints</span>
                 {prints.map((name) => {
