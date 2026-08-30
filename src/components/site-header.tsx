@@ -39,7 +39,7 @@ export function SiteHeader() {
         {/* Mobile / tablet bar: logo left, actions right (Reformation style) */}
         <div className="flex items-center justify-between border-b border-border px-4 py-3.5 lg:hidden">
           <Link to="/" aria-label="Sunkissed home" className="shrink-0">
-            <img src={logoAsset.url} alt="Sunkissed" className="h-[22px] w-auto" />
+            <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
           </Link>
           <div className="flex items-center gap-5">
             <button type="button" aria-label="Search">
@@ -66,7 +66,7 @@ export function SiteHeader() {
           </div>
 
           <Link to="/" aria-label="Sunkissed home" className="shrink-0">
-            <img src={logoAsset.url} alt="Sunkissed" className="h-5 w-auto md:h-[22px]" />
+            <img src={logoAsset.url} alt="Sunkissed" className="h-6 w-auto md:h-7" />
           </Link>
 
           <div className="flex min-w-0 items-center justify-end gap-5">
@@ -96,7 +96,7 @@ export function SiteHeader() {
         aria-hidden={!open}
       >
         <div className="flex items-center justify-between border-b border-border px-4 py-3.5">
-          <img src={logoAsset.url} alt="Sunkissed" className="h-[22px] w-auto" />
+          <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
           <button type="button" aria-label="Close menu" onClick={() => setOpen(false)}>
             <X className="size-6" strokeWidth={1.25} />
           </button>
