@@ -84,12 +84,6 @@ function Shop() {
 
   const newOnly = c === "new";
 
-  const collectionCount = products.filter((p) => {
-    const ts = typesFor(c);
-    if (newOnly) return p.category !== "towels";
-    return ts.length ? ts.includes(productType(p)) : true;
-  }).length;
-
   const toggle = <T,>(list: T[], set: (v: T[]) => void, value: T) =>
     set(list.includes(value) ? list.filter((x) => x !== value) : [...list, value]);
 
@@ -249,9 +243,9 @@ function Shop() {
         <section className="mx-auto box-border max-w-[1440px] px-4 pt-8 md:px-12 md:pt-14">
           <h1 className="display text-[38px] leading-[1.05] md:text-[clamp(48px,5vw,72px)]">
             {pageTitle}{" "}
-            <span className="font-sans align-super text-[14px] text-neutral-400 md:text-[18px]">
-              {collectionCount}
-            </span>
+            <sup className="font-sans text-[12px] text-muted-foreground md:text-[15px]">
+              {list.length}
+            </sup>
           </h1>
 
 
