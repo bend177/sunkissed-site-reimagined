@@ -221,6 +221,31 @@ function Shop() {
         </div>
       </div>
 
+      {styleOptions.length > 0 && (
+        <div className="border-t border-border">
+          <p className="pt-4 text-[15px]">Style</p>
+          <div className="flex flex-col gap-3 pb-5 pt-3.5">
+            {styleOptions.map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => toggle(styles, setStyles, s)}
+                className="flex items-center gap-2.5 text-left text-[13.5px]"
+              >
+                <span
+                  className={`flex size-[17px] shrink-0 items-center justify-center border border-foreground text-[11px] ${
+                    styles.includes(s) ? "bg-foreground text-background" : ""
+                  }`}
+                >
+                  {styles.includes(s) ? "✓" : ""}
+                </span>
+                {s}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="border-t border-border">
         <p className="pt-4 text-[15px]">Size</p>
         <div className="flex gap-1.5 pb-2.5 pt-3.5">
@@ -375,6 +400,7 @@ function Shop() {
                 onClick={() => {
                   setTypes([]);
                   setColors([]);
+                  setStyles([]);
                   setSizes([]);
                 }}
                 className="whitespace-nowrap text-[11px] underline underline-offset-[3px] md:text-[12px]"
