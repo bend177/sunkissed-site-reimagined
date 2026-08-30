@@ -107,8 +107,8 @@ export const realSwatchStyle = (
   image && isPrint(colorName)
     ? {
         backgroundImage: `url(${image})`,
-        backgroundSize: "550%",
-        backgroundPosition: "50% 58%",
+        backgroundSize: "600%",
+        backgroundPosition: "50% 48%",
         backgroundRepeat: "no-repeat",
       }
     : swatchStyle(colorName);
