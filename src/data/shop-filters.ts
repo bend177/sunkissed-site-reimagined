@@ -93,6 +93,34 @@ export const featuredPrints = (catalog: Product[]) => {
 
 export const SIZES = ["XS", "S", "M", "L", "XL"];
 
+// Style filter is driven by Shopify tags (Triangle, Sporty, Bandeau, Cheeky
+// for swim; Stonewashed/Striped/Traditional/Tie Die for towels). Tag a product
+// in Shopify and it shows up here automatically.
+export const STYLE_ORDER = [
+  "Triangle",
+  "Sporty",
+  "Bandeau",
+  "Cheeky",
+  "Stonewashed",
+  "Striped",
+  "Traditional",
+  "Tie Die",
+];
+
+const styleLookup = new Map(STYLE_ORDER.map((s) => [s.toLowerCase(), s]));
+
+export const stylesOf = (p: Product): string[] => {
+  const out: string[] = [];
+  for (const t of p.tags) {
+    const match = styleLookup.get(t.trim().toLowerCase());
+    if (match && !out.includes(match)) out.push(match);
+  }
+  return out;
+};
+
+export const stylesIn = (catalog: Product[]): string[] =>
+  STYLE_ORDER.filter((s) => catalog.some((p) => stylesOf(p).includes(s)));
+
 export type SortKey = "rec" | "new" | "price-asc" | "price-desc";
 
 export const SORT_LABEL: Record<SortKey, string> = {
