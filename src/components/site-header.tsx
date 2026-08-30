@@ -17,6 +17,7 @@ const nav = [
 type Fly = "search" | "bag" | null;
 
 export function SiteHeader() {
+  const onShop = useLocation({ select: (s) => s.pathname }).startsWith("/shop");
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
   const [q, setQ] = useState("");
