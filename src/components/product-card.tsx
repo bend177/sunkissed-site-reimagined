@@ -54,22 +54,18 @@ export function ProductCard({ product }: { product: Product }) {
                   to="/products/$handle"
                   params={{ handle: c.handle }}
                   aria-label={c.colorName}
+                  title={c.colorName}
                   onMouseEnter={() => setActive(c)}
                   onFocus={() => setActive(c)}
-                  className={`block size-5 shrink-0 overflow-hidden rounded-full ring-1 ring-inset transition-shadow ${
+                  className={`block size-5 shrink-0 rounded-full ring-1 ring-inset transition-shadow ${
                     active?.handle === c.handle
                       ? "ring-foreground"
                       : "ring-foreground/15 hover:ring-foreground/50"
                   }`}
-                >
-                  <img
-                    src={c.image}
-                    alt=""
-                    loading="lazy"
-                    className="size-full object-cover"
-                  />
-                </Link>
+                  style={swatchStyle(c.colorName)}
+                />
               ))}
+
             </div>
           )}
         </div>
