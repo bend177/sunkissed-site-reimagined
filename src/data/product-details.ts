@@ -241,7 +241,7 @@ export function siblingColors(catalog: Product[], product: Product) {
   // hidden behind the +N control.
   const currentIndex = colors.findIndex((c) => c.current);
   if (currentIndex > 0) {
-    const [currentColor] = colors.splice(currentIndex, 1);
+    const currentColor = colors.splice(currentIndex, 1)[0]!;
     colors.unshift(currentColor);
   }
   return colors;
