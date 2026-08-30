@@ -170,8 +170,6 @@
   text-transform: lowercase;
   color: var(--foreground);
   transition: opacity 200ms ease;
-}
-@utility nav-link {
   &:hover {
     opacity: 0.5;
   }
