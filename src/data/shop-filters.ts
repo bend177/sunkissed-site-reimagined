@@ -31,12 +31,9 @@ export const productType = (p: Product): ProductType => {
   return "sets";
 };
 
-export const colorOf = (p: Product) => {
-  const { base, color } = splitTitle(p.title);
-  return (color || base).trim();
-};
+export const colorOf = (p: Product) => splitTitle(p.title).color.trim();
 
-export const allColors = Array.from(new Set(products.map(colorOf)))
+export const allColors = Array.from(new Set(products.map(colorOf).filter(Boolean)))
   .sort((a, b) => a.localeCompare(b))
   .map((name) => ({ name, swatch: swatchColor(name) }));
 
