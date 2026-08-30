@@ -154,7 +154,11 @@ export function SiteHeader() {
               >
                 <div className="flex items-center justify-between gap-3 px-6 pb-3 pt-5">
                   <p className="eyebrow text-muted-foreground">
-                    {fly === "bag" ? "Bag (0)" : query ? "Results" : "Bestsellers"}
+                    {fly === "bag"
+                      ? `Bag (${cartCount})`
+                      : query
+                        ? "Results"
+                        : "Bestsellers"}
                   </p>
                   <button type="button" aria-label="Close" onClick={() => setFly(null)}>
                     <X className="size-[18px]" strokeWidth={1.25} />
@@ -162,39 +166,89 @@ export function SiteHeader() {
                 </div>
 
                 {fly === "bag" ? (
-                  <div className="flex-1 overflow-y-auto px-6 pb-7">
-                    <p className="py-4 text-sm">You haven&rsquo;t put any items in your bag.</p>
-                    <Link
-                      to="/shop"
-                      search={{ c: "all" }}
-                      onClick={() => setFly(null)}
-                      className="eyebrow underline underline-offset-4"
-                    >
-                      Start Shopping
-                    </Link>
-                    <p className="mb-3.5 mt-8 text-[15px] font-semibold">
-                      Before you go, there&rsquo;s more
-                    </p>
-                    <div className="grid grid-cols-2 gap-3.5">
-                      {suggestions.map((p) => (
+                  <div className="flex flex-1 flex-col overflow-hidden">
+                    {items.length === 0 ? (
+                      <div className="flex-1 overflow-y-auto px-6 pb-7">
+                        <p className="py-4 text-sm">
+                          You haven&rsquo;t put any items in your bag.
+                        </p>
                         <Link
-                          key={p.handle}
-                          to="/products/$handle"
-                          params={{ handle: p.handle }}
+                          to="/shop"
+                          search={{ c: "all" }}
                           onClick={() => setFly(null)}
-                          className="flex min-w-0 flex-col gap-1.5"
+                          className="eyebrow underline underline-offset-4"
                         >
-                          <img
-                            src={p.image}
-                            alt={p.title}
-                            className="aspect-[4/5] w-full object-cover"
-                          />
-                          <span className="text-xs leading-snug">{p.title}</span>
-                          <Price product={p} className="text-xs" />
+                          Start Shopping
                         </Link>
-                      ))}
-                    </div>
+                        <p className="mb-3.5 mt-8 text-[15px] font-semibold">
+                          Before you go, there&rsquo;s more
+                        </p>
+                        <div className="grid grid-cols-2 gap-3.5">
+                          {suggestions.map((p) => (
+                            <Link
+                              key={p.handle}
+                              to="/products/$handle"
+                              params={{ handle: p.handle }}
+                              onClick={() => setFly(null)}
+                              className="flex min-w-0 flex-col gap-1.5"
+                            >
+                              <img
+                                src={p.image}
+                                alt={p.title}
+                                className="aspect-[4/5] w-full object-cover"
+                              />
+                              <span className="text-xs leading-snug">{p.title}</span>
+                              <Price product={p} className="text-xs" />
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="flex-1 space-y-5 overflow-y-auto px-6 pb-5">
+                          {items.map((item) => (
+                            <div key={item.variantId} className="flex gap-3.5">
+                              <img
+                                src={item.image}
+                                alt={item.title}
+                                className="h-[104px] w-[78px] shrink-0 object-cover"
+                              />
+                              <div className="min-w-0 flex-1">
+                                <p className="text-[13px] leading-snug">{item.title}</p>
+                                <p className="mt-1 text-xs text-muted-foreground lowercase">
+                                  size {item.size} &middot; qty {item.quantity}
+                                </p>
+                                <p className="mt-1 text-[13px]">
+                                  ${(Number(item.price) * item.quantity).toFixed(2)}
+                                </p>
+                                <button
+                                  type="button"
+                                  onClick={() => removeItem(item.variantId)}
+                                  className="mt-1.5 text-[11px] uppercase tracking-widest text-muted-foreground underline underline-offset-4"
+                                >
+                                  Remove
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="border-t border-border px-6 py-5">
+                          <div className="flex items-center justify-between text-sm">
+                            <span>Subtotal</span>
+                            <span>${cartTotal.toFixed(2)}</span>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={checkout}
+                            className="mt-4 w-full bg-ink py-4 text-xs uppercase tracking-[0.18em] text-background"
+                          >
+                            Checkout
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </div>
+
                 ) : (
                   <div className="grid flex-1 grid-cols-2 content-start gap-3.5 overflow-y-auto px-6 pb-7">
                     {results.map((p) => (
