@@ -90,11 +90,15 @@ function Shop() {
   let list = products.filter((p) => {
     if (types.length && !types.includes(productType(p))) return false;
     if (colors.length && !colors.includes(colorOf(p))) return false;
-    // towels are one size - a size filter excludes them
-    if (sizes.length && p.category === "towels") return false;
+    if (
+      sizes.length &&
+      !p.variants.some((v) => v.available && sizes.includes(v.size.toUpperCase()))
+    )
+      return false;
     return true;
   });
-  if (newOnly) list = list.filter((p) => p.category !== "towels").slice(0, 8);
+  if (newOnly) list = list.filter((p) => p.category !== "towels").slice(0, 24);
+
   if (sort === "price-asc") list = [...list].sort((a, b) => priceNum(a) - priceNum(b));
   else if (sort === "price-desc") list = [...list].sort((a, b) => priceNum(b) - priceNum(a));
   else if (sort === "new") list = [...list].reverse();
