@@ -150,7 +150,8 @@ function ProductPage() {
             <p className="mt-6 text-sm text-muted-foreground">{colorName}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {siblings.map((s) => {
-                const label = s.title.split("-")[1]?.trim() ?? s.title;
+                const label = splitTitle(s.title).color || s.title;
+
                 const active = s.handle === product.handle;
                 return (
                   <Link
