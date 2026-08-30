@@ -42,7 +42,12 @@ export function ProductCard({ product }: { product: Product }) {
           </Link>
           <Price product={product} className="mt-0.5" />
           {colors.length > 1 && (
-            <div className="mt-1.5 flex items-center gap-1.5">
+            <div
+              className="mt-1.5 flex items-center gap-1.5"
+              onMouseLeave={() =>
+                setActive(colors.find((c) => c.current) ?? null)
+              }
+            >
               {colors.map((c) => (
                 <Link
                   key={c.handle}
