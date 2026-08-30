@@ -49,7 +49,7 @@ function Swatches({
   colors: ColorRef[];
   current: ColorRef | null;
   onHover: (c: ColorRef | null) => void;
-  catalog: Catalog;
+  catalog: Product[];
 }) {
   const [expanded, setExpanded] = useState(false);
   if (colors.length <= COLLAPSED_COUNT) {
