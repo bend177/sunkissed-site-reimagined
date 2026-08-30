@@ -19,7 +19,7 @@
  */
 
 @theme inline {
-  --font-sans: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
   --color-sand: var(--sand);
   --color-ink: var(--ink);
