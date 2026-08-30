@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import type { Product, ProductVariant } from "@/data/products";
 
 export const SHOPIFY_API_VERSION = "2025-07";
@@ -19,6 +20,12 @@ export async function storefrontApiRequest(
   });
 
   if (response.status === 402) {
+    if (typeof window !== "undefined") {
+      toast.error("Shopify: Payment required", {
+        description:
+          "Shopify API access requires an active Shopify billing plan. Visit https://admin.shopify.com to upgrade.",
+      });
+    }
     return null;
   }
 
