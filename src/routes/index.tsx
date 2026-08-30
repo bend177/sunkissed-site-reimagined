@@ -92,7 +92,7 @@ function Home() {
         <section className="px-4 py-14 md:px-6">
           <div className="flex items-end justify-between gap-6">
             <h2 className="display text-4xl md:text-5xl">Shop by category</h2>
-            <Link to="/shop" className="rule-link text-sm">
+            <Link to="/shop" search={{ c: "all" }} className="rule-link text-sm">
               view all
             </Link>
           </div>

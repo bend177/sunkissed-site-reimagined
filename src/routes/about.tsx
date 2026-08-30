@@ -58,7 +58,7 @@ function About() {
               nowhere else. We build the opposite — pieces engineered to hold their shape through
               salt water, sunscreen and long, slow afternoons.
             </p>
-            <Link to="/shop" className="rule-link mt-8 text-sm">
+            <Link to="/shop" search={{ c: "all" }} className="rule-link mt-8 text-sm">
               shop the collection
             </Link>
           </div>

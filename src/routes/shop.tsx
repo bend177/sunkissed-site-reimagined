@@ -17,7 +17,7 @@ const filters: { label: string; value: Filter }[] = [
 
 export const Route = createFileRoute("/shop")({
   validateSearch: (search: Record<string, unknown>) => ({
-    c: (search.c as Filter | undefined) ?? "all",
+    c: (search["c"] as Filter | undefined) ?? "all",
   }),
   head: () => ({
     meta: [
