@@ -234,35 +234,34 @@ function Shop() {
 
       <main>
         <section className="mx-auto box-border max-w-[1440px] px-4 pt-8 md:px-12 md:pt-14">
-          <div className="flex items-baseline gap-x-6 gap-y-2">
-            <h1 className="display shrink-0 text-[38px] leading-[1.05] md:text-[clamp(48px,5vw,72px)]">
-              {pageTitle}{" "}
-              <sup className="font-sans text-[12px] text-muted-foreground md:text-[15px]">
-                {list.length}
-              </sup>
-            </h1>
-
-            {/* Collection navigation - independent of filters */}
-            <nav
-              aria-label="Collections"
-              className="flex gap-x-4 overflow-x-auto whitespace-nowrap pb-1 text-[13px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:gap-x-5 md:text-[14px]"
-            >
-              {COLLECTIONS.map((col) => (
+          {/* Collection navigation - one row, same font; active collection is larger with its count */}
+          <nav
+            aria-label="Collections"
+            className="display flex items-baseline gap-x-5 gap-y-2 overflow-x-auto whitespace-nowrap pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:gap-x-7"
+          >
+            {COLLECTIONS.map((col) => {
+              const active = col.key === c;
+              return (
                 <Link
                   key={col.key}
                   to="/shop"
                   search={{ c: col.key }}
                   className={
-                    col.key === c
-                      ? "underline underline-offset-4"
-                      : "text-muted-foreground transition-colors hover:text-foreground"
+                    active
+                      ? "shrink-0 text-[38px] leading-[1.05] md:text-[clamp(48px,5vw,72px)]"
+                      : "shrink-0 text-[15px] text-muted-foreground transition-colors hover:text-foreground md:text-[17px]"
                   }
                 >
                   {col.label}
+                  {active && (
+                    <sup className="font-sans text-[12px] text-muted-foreground md:text-[15px]">
+                      {list.length}
+                    </sup>
+                  )}
                 </Link>
-              ))}
-            </nav>
-          </div>
+              );
+            })}
+          </nav>
 
           {bikiniFamily && (
             <div className="mt-4 flex flex-col gap-4">
