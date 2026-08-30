@@ -295,8 +295,8 @@ function Shop() {
         </section>
 
         {/* Filter toolbar */}
-        <div className="mx-auto box-border flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-4 pb-5 pt-6 md:px-12 md:pb-6 md:pt-11">
-          <div className="flex items-center gap-3.5">
+        <div className="mx-auto box-border flex max-w-[1440px] flex-nowrap items-center justify-between gap-3 px-4 pb-5 pt-6 md:gap-4 md:px-12 md:pb-6 md:pt-11">
+          <div className="flex min-w-0 items-center gap-2 md:gap-3.5">
             <span className="text-[12px] text-muted-foreground md:text-[13px]">
               {filterCount === 0
                 ? "No Filters Selected"
