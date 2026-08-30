@@ -141,9 +141,8 @@ export const flatPrintImage = (catalog: Product[], colorName: string) => {
   return flatCache.get(key);
 };
 
-// One entry point: real print texture when we have it, clean fill otherwise.
-// Product photos are lifestyle shots, so cropping them makes muddy swatches.
-// Prints render as generated pattern fills, solids as their real color.
+// One entry point: real uploaded fabric chip when we have it, generated
+// pattern/fill otherwise.
 export const swatchFill = (
   _catalog: Product[],
   colorName: string,
@@ -151,8 +150,18 @@ export const swatchFill = (
   _focusY = 40,
 ): CSSProperties => swatchStyle(colorName);
 
-export const swatchStyle = (colorName: string): CSSProperties =>
-  printMap[colorName.toLowerCase()] ?? { backgroundColor: swatchColor(colorName) };
+export const swatchStyle = (colorName: string): CSSProperties => {
+  const chip = swatchImages[colorName.toLowerCase()];
+  if (chip)
+    return {
+      backgroundImage: `url(${chip})`,
+      backgroundSize: "cover",
+      backgroundPosition: "50% 50%",
+      backgroundRepeat: "no-repeat",
+    };
+  return printMap[colorName.toLowerCase()] ?? { backgroundColor: swatchColor(colorName) };
+};
+
 
 const editorialFill = [editorial.tops, editorial.bottoms, editorial.newArrivals, editorial.allSets];
 
