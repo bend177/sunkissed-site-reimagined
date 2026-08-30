@@ -37,6 +37,24 @@ const typesFor = (c: Filter): ProductType[] => {
   }
 };
 
+const COLLECTIONS: { key: Filter; label: string }[] = [
+  { key: "swim", label: "Bikinis" },
+  { key: "one-piece", label: "One Pieces" },
+  { key: "resort", label: "Dresses & Resort" },
+  { key: "towels", label: "Beach Towels" },
+  { key: "new", label: "New Arrivals" },
+  { key: "all", label: "Shop All" },
+];
+
+const COLLECTION_LABEL: Record<Filter, string> = {
+  swim: "Bikinis",
+  "one-piece": "One Pieces",
+  resort: "Dresses & Resort",
+  towels: "Beach Towels",
+  new: "New Arrivals",
+  all: "Shop All",
+};
+
 export const Route = createFileRoute("/shop")({
   validateSearch: (search: Record<string, unknown>) => ({
     c: (search["c"] as Filter | undefined) ?? "all",
