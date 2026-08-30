@@ -85,7 +85,7 @@ function Shop() {
   const allColors = colorsIn(products);
 
 
-  const [types, setTypes] = useState<ProductType[]>(typesFor(c));
+  const [types, setTypes] = useState<ProductType[]>([]);
   const [colors, setColors] = useState<string[]>([]);
   const [sizes, setSizes] = useState<string[]>([]);
   const [sort, setSort] = useState<SortKey>("rec");
@@ -94,19 +94,25 @@ function Shop() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [printsAll, setPrintsAll] = useState(false);
 
+  // Filters are scoped to the collection; switching collections resets them.
   useEffect(() => {
-    setTypes(typesFor(c));
+    setTypes([]);
     setColors([]);
     setSizes([]);
+    setPrintsAll(false);
   }, [c]);
 
   const newOnly = c === "new";
+  const scope = typesFor(c);
 
   const toggle = <T,>(list: T[], set: (v: T[]) => void, value: T) =>
     set(list.includes(value) ? list.filter((x) => x !== value) : [...list, value]);
 
+  const activeTypes = types.length ? types : scope;
+
   let list = products.filter((p) => {
-    if (types.length && !types.includes(productType(p))) return false;
+    if (scope.length && !scope.includes(productType(p))) return false;
+    if (activeTypes.length && !activeTypes.includes(productType(p))) return false;
     if (colors.length && !colors.includes(colorOf(p))) return false;
     if (
       sizes.length &&
@@ -121,19 +127,10 @@ function Shop() {
   else if (sort === "price-desc") list = [...list].sort((a, b) => priceNum(b) - priceNum(a));
   else if (sort === "new") list = [...list].reverse();
 
-  const bikiniFamily =
-    types.length > 0 &&
-    types.every((t) => ["sets", "tops", "bottoms", "one-pieces"].includes(t));
+  const bikiniFamily = c === "swim" || c === "one-piece";
 
-  const pageTitle = newOnly
-    ? "New Arrivals"
-    : colors.length === 1 && !types.length
-      ? colors[0]!
-      : bikiniFamily && types.length === 3
-        ? "Bikinis"
-        : types.length === 1
-          ? TYPE_LABEL[types[0]!]
-          : "Shop All";
+  const pageTitle =
+    types.length === 1 ? TYPE_LABEL[types[0]!] : COLLECTION_LABEL[c];
 
   const filterCount = types.length + colors.length + sizes.length;
   const allPrints = featuredPrints(products);
