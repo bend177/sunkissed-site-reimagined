@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
-import { editorial, products } from "@/data/products";
+import { editorial } from "@/data/products";
+import { useCatalog } from "@/lib/catalog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -35,6 +36,7 @@ const categories = [
 ];
 
 function Home() {
+  const products = useCatalog();
   const featured = products.filter((p) => p.category !== "towels").slice(0, 8);
   const towels = products.filter((p) => p.category === "towels").slice(0, 4);
 
