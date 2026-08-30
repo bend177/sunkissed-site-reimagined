@@ -83,6 +83,55 @@ function Swatches({
 }
 
 
+function HoverQuickAdd({ product }: { product: Product }) {
+  const addItem = useCartStore((s) => s.addItem);
+  const isLoading = useCartStore((s) => s.isLoading);
+
+  const add = async (variant: Product["variants"][number]) => {
+    await addItem({
+      variantId: variant.id,
+      handle: product.handle,
+      title: product.title,
+      image: product.image,
+      size: variant.size,
+      price: variant.price,
+      currencyCode: variant.currencyCode,
+      quantity: 1,
+    });
+    toast.success("Added to bag", {
+      description: `${product.title} - size ${variant.size}`,
+      position: "top-center",
+    });
+  };
+
+  if (product.variants.length === 0) return null;
+
+  return (
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden translate-y-2 bg-background/95 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 lg:block">
+      <p className="px-3 pt-2.5 text-[11px] lowercase text-muted-foreground">
+        quick add
+      </p>
+      <div className="flex items-stretch overflow-x-auto px-1.5 pb-2 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {product.variants.map((v) => (
+          <button
+            key={v.id}
+            type="button"
+            disabled={!v.available || isLoading}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              void add(v);
+            }}
+            className="flex-1 px-1.5 py-1.5 text-xs lowercase transition-colors hover:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-30"
+          >
+            {v.size}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function ProductCard({ product }: { product: Product }) {
   const catalog = useCatalog();
   const colors = siblingColors(catalog, product);
@@ -92,25 +141,28 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article>
-      <Link
-        to="/products/$handle"
-        params={{ handle: current?.handle ?? product.handle }}
-        className="group block"
-      >
-        <div className="hover-zoom relative aspect-[3/4] bg-secondary">
-          <img
-            src={current?.image ?? product.image}
-            alt={product.title}
-            loading="lazy"
-            className="size-full object-cover"
-          />
-          {product.compareAt && (
-            <span className="absolute left-2 top-2 bg-background px-2 py-0.5 text-[11px] uppercase tracking-widest text-foreground">
-              Sale
-            </span>
-          )}
-        </div>
-      </Link>
+      <div className="group relative">
+        <Link
+          to="/products/$handle"
+          params={{ handle: current?.handle ?? product.handle }}
+          className="block"
+        >
+          <div className="hover-zoom relative aspect-[3/4] bg-secondary">
+            <img
+              src={current?.image ?? product.image}
+              alt={product.title}
+              loading="lazy"
+              className="size-full object-cover"
+            />
+            {product.compareAt && (
+              <span className="absolute left-2 top-2 bg-background px-2 py-0.5 text-[11px] uppercase tracking-widest text-foreground">
+                Sale
+              </span>
+            )}
+          </div>
+        </Link>
+        <HoverQuickAdd product={product} />
+      </div>
 
       <div className="mt-2.5 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
         <div className="min-w-0">
@@ -131,7 +183,7 @@ export function ProductCard({ product }: { product: Product }) {
           type="button"
           aria-label={`Quick add ${product.title}`}
           onClick={() => setOpen(true)}
-          className="shrink-0 p-0.5 text-foreground transition-opacity hover:opacity-60"
+          className="shrink-0 p-0.5 text-foreground transition-opacity hover:opacity-60 lg:hidden"
         >
           <Plus className="size-5" strokeWidth={1} />
         </button>
@@ -141,3 +193,4 @@ export function ProductCard({ product }: { product: Product }) {
     </article>
   );
 }
+
