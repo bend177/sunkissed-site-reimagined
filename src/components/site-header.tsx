@@ -27,48 +27,56 @@ export function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur">
-        <div className="bg-ink px-4 py-2 text-center">
-          <p className="eyebrow text-background">
-            free shipping on all u.s. orders - processed within 24 hours
+        <div className="bg-ink px-4 py-2.5 text-center lg:py-2">
+          <p className="text-[11px] tracking-[0.02em] text-background lg:eyebrow">
+            free shipping on all u.s. orders.{" "}
+            <Link to="/shop" search={{ c: "new" }} className="underline underline-offset-2">
+              shop new arrivals
+            </Link>
           </p>
         </div>
 
-        <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 border-b border-border px-4 py-3.5 lg:px-6">
+        {/* Mobile / tablet bar: logo left, actions right (Reformation style) */}
+        <div className="flex items-center justify-between border-b border-border px-4 py-3.5 lg:hidden">
+          <Link to="/" aria-label="Sunkissed home" className="shrink-0">
+            <img src={logoAsset.url} alt="Sunkissed" className="h-[22px] w-auto" />
+          </Link>
+          <div className="flex items-center gap-5">
+            <button type="button" aria-label="Search">
+              <Search className="size-[22px]" strokeWidth={1.25} />
+            </button>
+            <button type="button" aria-label="Bag">
+              <ShoppingBag className="size-[22px]" strokeWidth={1.25} />
+            </button>
+            <button type="button" aria-label="Open menu" onClick={() => setOpen(true)}>
+              <Menu className="size-[22px]" strokeWidth={1.25} />
+            </button>
+          </div>
+        </div>
+
+        <div className="hidden grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 border-b border-border px-4 py-3.5 lg:grid lg:px-6">
           <div className="flex min-w-0 items-center gap-6">
-            <nav className="hidden items-center gap-6 lg:flex">
+            <nav className="flex items-center gap-6">
               {links.map((l) => (
                 <Link key={l.label} to={l.to} search={l.search} className="nav-link">
                   {l.label}
                 </Link>
               ))}
             </nav>
-
-            <button
-              type="button"
-              aria-label="Open menu"
-              onClick={() => setOpen(true)}
-              className="lg:hidden"
-            >
-              <Menu className="size-5" strokeWidth={1.25} />
-            </button>
           </div>
 
           <Link to="/" aria-label="Sunkissed home" className="shrink-0">
-            <img
-              src={logoAsset.url}
-              alt="Sunkissed"
-              className="h-5 w-auto md:h-[22px]"
-            />
+            <img src={logoAsset.url} alt="Sunkissed" className="h-5 w-auto md:h-[22px]" />
           </Link>
 
           <div className="flex min-w-0 items-center justify-end gap-5">
-            <button type="button" aria-label="Search" className="nav-link hidden lg:block">
+            <button type="button" aria-label="Search" className="nav-link">
               <Search className="size-4" strokeWidth={1.25} />
             </button>
-            <Link to="/about" className="nav-link hidden lg:block">
+            <Link to="/about" className="nav-link">
               about
             </Link>
-            <button type="button" aria-label="Account" className="nav-link hidden lg:block">
+            <button type="button" aria-label="Account" className="nav-link">
               <User className="size-4" strokeWidth={1.25} />
             </button>
             <button type="button" className="nav-link flex items-center gap-1.5">
@@ -78,6 +86,7 @@ export function SiteHeader() {
           </div>
         </div>
       </header>
+
 
       {/* Mobile / tablet menu - rendered outside the header so `fixed` covers the full viewport */}
       <div

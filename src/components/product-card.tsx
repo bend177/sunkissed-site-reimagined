@@ -1,17 +1,22 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { Plus } from "lucide-react";
 import type { Product } from "@/data/products";
 import { siblingColors } from "@/data/product-details";
 import { Price } from "@/components/price";
+import { QuickAddDrawer } from "@/components/quick-add-drawer";
 
 export function ProductCard({ product }: { product: Product }) {
   const colors = siblingColors(product);
+  const [open, setOpen] = useState(false);
+
   return (
-    <Link
-      to="/products/$handle"
-      params={{ handle: product.handle }}
-      className="group block"
-    >
-      <article>
+    <article>
+      <Link
+        to="/products/$handle"
+        params={{ handle: product.handle }}
+        className="group block"
+      >
         <div className="hover-zoom relative aspect-[3/4] bg-secondary">
           <img
             src={product.image}
@@ -25,27 +30,31 @@ export function ProductCard({ product }: { product: Product }) {
             </span>
           )}
         </div>
-        <div className="mt-3 flex items-baseline justify-between gap-4">
-          <h3 className="text-sm">{product.title}</h3>
-          <Price product={product} className="shrink-0" />
+      </Link>
+
+      <div className="mt-2.5 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
+        <div className="min-w-0">
+          <Link to="/products/$handle" params={{ handle: product.handle }}>
+            <h3 className="truncate text-sm">{product.title}</h3>
+          </Link>
+          <Price product={product} className="mt-0.5" />
+          {colors.length > 1 && (
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              {colors.length} colors
+            </p>
+          )}
         </div>
-        {colors.length > 1 && (
-          <div className="mt-2 flex items-center gap-1.5">
-            {colors.map((c) => (
-              <span
-                key={c.handle}
-                title={c.colorName}
-                className={
-                  c.current
-                    ? "size-3.5 rounded-full border border-foreground ring-1 ring-foreground ring-offset-1 ring-offset-background"
-                    : "size-3.5 rounded-full border border-border"
-                }
-                style={{ backgroundColor: c.swatch }}
-              />
-            ))}
-          </div>
-        )}
-      </article>
-    </Link>
+        <button
+          type="button"
+          aria-label={`Quick add ${product.title}`}
+          onClick={() => setOpen(true)}
+          className="shrink-0 p-0.5 text-foreground transition-opacity hover:opacity-60"
+        >
+          <Plus className="size-5" strokeWidth={1} />
+        </button>
+      </div>
+
+      <QuickAddDrawer product={product} open={open} onOpenChange={setOpen} />
+    </article>
   );
 }
