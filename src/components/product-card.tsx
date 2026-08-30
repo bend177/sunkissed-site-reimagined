@@ -18,7 +18,7 @@ export function ProductCard({ product }: { product: Product }) {
           />
         </div>
         <div className="mt-3 flex items-baseline justify-between gap-4">
-          <h3 className="text-sm lowercase">{product.title}</h3>
+          <h3 className="text-sm">{product.title}</h3>
           <p className="text-sm text-muted-foreground">${product.price}</p>
         </div>
       </article>
