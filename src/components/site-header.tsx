@@ -57,7 +57,7 @@ export function SiteHeader() {
             <img
               src={logoAsset.url}
               alt="Sunkissed"
-              className="h-4 w-auto md:h-[18px]"
+              className="h-5 w-auto md:h-[22px]"
             />
           </Link>
 
@@ -87,7 +87,7 @@ export function SiteHeader() {
         aria-hidden={!open}
       >
         <div className="flex items-center justify-between border-b border-border px-4 py-3.5">
-          <img src={logoAsset.url} alt="Sunkissed" className="h-[18px] w-auto" />
+          <img src={logoAsset.url} alt="Sunkissed" className="h-[22px] w-auto" />
           <button type="button" aria-label="Close menu" onClick={() => setOpen(false)}>
             <X className="size-6" strokeWidth={1.25} />
           </button>

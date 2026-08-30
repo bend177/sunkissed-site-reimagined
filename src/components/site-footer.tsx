@@ -6,7 +6,7 @@ export function SiteFooter() {
     <footer className="border-t border-border bg-secondary">
       <div className="grid gap-12 px-4 py-16 md:grid-cols-[1.2fr_1fr_1fr_1fr] md:px-6">
         <div>
-          <img src={logoAsset.url} alt="Sunkissed" className="h-6 w-auto" />
+          <img src={logoAsset.url} alt="Sunkissed" className="h-8 w-auto" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
             Swimwear made for long days in the sun - sculpted fits, sand-free towels, and resort
             pieces that travel well.
