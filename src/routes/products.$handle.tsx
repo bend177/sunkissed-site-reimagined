@@ -182,38 +182,45 @@ function ProductPage() {
               </button>
             </div>
             <div className="mt-3 grid grid-cols-5 gap-2">
-              {sizes.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => setSize(s)}
-                  className={`border py-3 text-xs lowercase transition-colors ${
-                    size === s
-                      ? "border-foreground bg-foreground text-background"
-                      : "border-border hover:border-foreground"
-                  } ${sizes.length === 1 ? "col-span-5" : ""}`}
-                >
-                  {s}
-                </button>
-              ))}
+              {sizes.map((s) => {
+                const v = product.variants.find((x) => x.size === s);
+                return (
+                  <button
+                    key={s}
+                    type="button"
+                    disabled={v ? !v.available : false}
+                    onClick={() => setSize(s)}
+                    className={`border py-3 text-xs lowercase transition-colors disabled:cursor-not-allowed disabled:opacity-35 ${
+                      size === s
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-border hover:border-foreground"
+                    } ${sizes.length === 1 ? "col-span-5" : ""}`}
+                  >
+                    {s}
+                  </button>
+                );
+              })}
             </div>
 
             <button
               type="button"
-              onClick={() =>
-                size
-                  ? toast.success(`${base.toLowerCase()} (${size}) added to bag`)
-                  : toast("please select a size")
-              }
-              className="mt-4 w-full bg-foreground py-4 text-xs lowercase tracking-[0.15em] text-background transition-opacity hover:opacity-85"
+              disabled={isLoading}
+              onClick={async () => {
+                const added = await addToBag();
+                if (added) toast.success(`${base} (${added.size}) added to bag`);
+              }}
+              className="mt-4 w-full bg-foreground py-4 text-xs lowercase tracking-[0.15em] text-background transition-opacity hover:opacity-85 disabled:opacity-50"
             >
-              add to bag
+              {isLoading ? "adding..." : "add to bag"}
             </button>
             <button
               type="button"
-              className="mt-2 w-full border border-border py-4 text-xs lowercase tracking-[0.15em] transition-colors hover:border-foreground"
+              disabled={isLoading}
+              onClick={buyNow}
+              className="mt-2 w-full border border-border py-4 text-xs lowercase tracking-[0.15em] transition-colors hover:border-foreground disabled:opacity-50"
             >
               buy it now
+
             </button>
 
             <p className="mt-4 flex items-center gap-1 text-xs lowercase text-muted-foreground">
