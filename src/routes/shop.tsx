@@ -242,13 +242,14 @@ function Shop() {
                       title={name}
                       className="flex items-center gap-2 text-[13.5px] transition-opacity hover:opacity-60"
                     >
-                      <img
-                        src={cl?.image}
-                        alt={name}
-                        className={`size-[24px] shrink-0 rounded-full object-cover ring-1 ${
+                      <span
+                        aria-hidden
+                        style={swatchStyle(name)}
+                        className={`size-[24px] shrink-0 rounded-full ring-1 ${
                           colors.includes(name) ? "ring-2 ring-foreground" : "ring-border"
                         }`}
                       />
+
                       <span className="hidden sm:inline">{name}</span>
                     </button>
                   );
