@@ -59,7 +59,7 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        <div>
+        <div className="col-span-2 md:col-span-1">
           <p className="eyebrow text-muted-foreground">sun mail</p>
           <p className="mt-4 text-sm text-muted-foreground">
             New drops, restocks, and the occasional bribe.
