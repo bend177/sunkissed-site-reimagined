@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
 import type { Product } from "@/data/products";
-import { siblingColors } from "@/data/product-details";
+import { siblingColors, swatchStyle } from "@/data/product-details";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
 
