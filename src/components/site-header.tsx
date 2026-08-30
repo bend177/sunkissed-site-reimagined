@@ -1,20 +1,34 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
+import { products } from "@/data/products";
+import { Price } from "@/components/price";
 
-const links = [
-  { label: "new", to: "/shop", search: { c: "new" } as const },
-  { label: "swim", to: "/shop", search: { c: "swim" } as const },
-  { label: "one pieces", to: "/shop", search: { c: "one-piece" } as const },
-  { label: "resort wear", to: "/shop", search: { c: "resort" } as const },
-  { label: "towels", to: "/shop", search: { c: "towels" } as const },
+const nav = [
+  { label: "New", c: "new" as const },
+  { label: "Bikinis", c: "swim" as const },
+  { label: "One Pieces", c: "one-piece" as const },
+  { label: "Dresses & Resort", c: "resort" as const },
+  { label: "Beach Towels", c: "towels" as const },
 ];
+
+const secondary = [
+  { label: "Our Story", to: "/about" as const },
+  { label: "Shipping & Returns", to: "/about" as const },
+  { label: "Size Guide", to: "/about" as const },
+];
+
+const bestsellers = products.slice(0, 6);
+const suggestions = products.slice(6, 8);
+
+type Fly = "search" | "bag" | null;
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [fly, setFly] = useState<Fly>(null);
+  const [q, setQ] = useState("");
 
-  // Lock body scroll while the mobile menu is open
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -24,28 +38,27 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  const query = q.trim().toLowerCase();
+  const results = query
+    ? products.filter((p) => p.title.toLowerCase().includes(query))
+    : bestsellers;
+
   return (
     <>
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur">
-        <div className="bg-ink px-4 py-2.5 text-center lg:py-2">
-          <p className="text-[11px] tracking-[0.02em] text-background lg:eyebrow">
-            free shipping on all u.s. orders.{" "}
-            <Link to="/shop" search={{ c: "new" }} className="underline underline-offset-2">
-              shop new arrivals
-            </Link>
+      <header className="sticky top-0 z-50 border-b border-border bg-background">
+        <div className="bg-ink px-4 py-2 text-center">
+          <p className="eyebrow text-[9.5px] text-background lg:text-[11px]">
+            Free shipping on all U.S. orders. Processed within 24 hours.
           </p>
         </div>
 
-        {/* Mobile / tablet bar: logo left, actions right (Reformation style) */}
-        <div className="flex items-center justify-between border-b border-border px-4 py-3.5 lg:hidden">
+        {/* Mobile / tablet bar */}
+        <div className="flex items-center justify-between gap-4 px-4 py-3.5 lg:hidden">
           <Link to="/" aria-label="Sunkissed home" className="shrink-0">
             <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
           </Link>
           <div className="flex items-center gap-5">
-            <button type="button" aria-label="Search">
-              <Search className="size-[22px]" strokeWidth={1.25} />
-            </button>
-            <button type="button" aria-label="Bag">
+            <button type="button" aria-label="Bag" onClick={() => setFly("bag")}>
               <ShoppingBag className="size-[22px]" strokeWidth={1.25} />
             </button>
             <button type="button" aria-label="Open menu" onClick={() => setOpen(true)}>
@@ -54,86 +67,190 @@ export function SiteHeader() {
           </div>
         </div>
 
-        <div className="hidden grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 border-b border-border px-4 py-3.5 lg:grid lg:px-6">
-          <div className="flex min-w-0 items-center gap-6">
-            <nav className="flex items-center gap-6">
-              {links.map((l) => (
-                <Link key={l.label} to={l.to} search={l.search} className="nav-link">
-                  {l.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          <Link to="/" aria-label="Sunkissed home" className="shrink-0">
-            <img src={logoAsset.url} alt="Sunkissed" className="h-6 w-auto md:h-7" />
-          </Link>
-
-          <div className="flex min-w-0 items-center justify-end gap-5">
-            <button type="button" aria-label="Search" className="nav-link">
-              <Search className="size-4" strokeWidth={1.25} />
-            </button>
-            <Link to="/about" className="nav-link">
-              about
+        {/* Desktop: logo row + nav row */}
+        <div className="hidden lg:block">
+          <div className="relative z-[46] flex items-center justify-between gap-8 bg-background px-6 pb-1 pt-5">
+            <Link to="/" aria-label="Sunkissed home" className="shrink-0">
+              <img src={logoAsset.url} alt="Sunkissed" className="h-8 w-auto" />
             </Link>
-            <button type="button" aria-label="Account" className="nav-link">
-              <User className="size-4" strokeWidth={1.25} />
-            </button>
-            <button type="button" className="nav-link flex items-center gap-1.5">
-              <ShoppingBag className="size-4" strokeWidth={1.25} />
-              <span className="text-sm">(0)</span>
-            </button>
+            <div className="flex items-center gap-6">
+              {fly === "search" ? (
+                <div className="search-grow flex w-[210px] items-center gap-2.5 overflow-hidden border-b border-foreground px-0.5 py-1">
+                  <Search className="size-[15px] shrink-0" strokeWidth={1.25} />
+                  <input
+                    autoFocus
+                    value={q}
+                    onChange={(e) => setQ(e.target.value)}
+                    placeholder="SEARCH"
+                    className="eyebrow min-w-0 flex-1 bg-transparent outline-none"
+                  />
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  aria-label="Search"
+                  onClick={() => setFly("search")}
+                  onMouseEnter={() => setFly("search")}
+                >
+                  <Search className="size-[19px]" strokeWidth={1.25} />
+                </button>
+              )}
+              <button
+                type="button"
+                aria-label="Bag"
+                onClick={() => setFly("bag")}
+                onMouseEnter={() => setFly("bag")}
+              >
+                <ShoppingBag className="size-[21px]" strokeWidth={1.25} />
+              </button>
+              <button type="button" aria-label="Account">
+                <User className="size-[21px]" strokeWidth={1.25} />
+              </button>
+            </div>
           </div>
+
+          <nav className="relative z-[46] flex items-center gap-8 bg-background px-6 pb-4 pt-3.5">
+            {nav.map((l) => (
+              <Link
+                key={l.label}
+                to="/shop"
+                search={{ c: l.c }}
+                className="text-[13px] font-semibold transition-opacity hover:opacity-60"
+              >
+                {l.label}
+              </Link>
+            ))}
+            <Link
+              to="/about"
+              className="text-[13px] font-semibold transition-opacity hover:opacity-60"
+            >
+              Our Story
+            </Link>
+          </nav>
+
+          {fly && (
+            <>
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setFly(null)}
+                className="fade-in fixed inset-0 z-[45] cursor-default bg-foreground/30"
+              />
+              <div
+                onMouseLeave={() => setFly(null)}
+                className="fly-in absolute right-0 top-full z-[55] flex h-[calc(100vh-132px)] w-[min(360px,94vw)] flex-col border-l border-border bg-background shadow-[-16px_24px_48px_rgba(0,0,0,0.14)]"
+              >
+                <div className="flex items-center justify-between gap-3 px-6 pb-3 pt-5">
+                  <p className="eyebrow text-muted-foreground">
+                    {fly === "bag" ? "Bag (0)" : query ? "Results" : "Bestsellers"}
+                  </p>
+                  <button type="button" aria-label="Close" onClick={() => setFly(null)}>
+                    <X className="size-[18px]" strokeWidth={1.25} />
+                  </button>
+                </div>
+
+                {fly === "bag" ? (
+                  <div className="flex-1 overflow-y-auto px-6 pb-7">
+                    <p className="py-4 text-sm">You haven&rsquo;t put any items in your bag.</p>
+                    <Link
+                      to="/shop"
+                      search={{ c: "all" }}
+                      onClick={() => setFly(null)}
+                      className="eyebrow underline underline-offset-4"
+                    >
+                      Start Shopping
+                    </Link>
+                    <p className="mb-3.5 mt-8 text-[15px] font-semibold">
+                      Before you go, there&rsquo;s more
+                    </p>
+                    <div className="grid grid-cols-2 gap-3.5">
+                      {suggestions.map((p) => (
+                        <Link
+                          key={p.handle}
+                          to="/products/$handle"
+                          params={{ handle: p.handle }}
+                          onClick={() => setFly(null)}
+                          className="flex min-w-0 flex-col gap-1.5"
+                        >
+                          <img
+                            src={p.image}
+                            alt={p.title}
+                            className="aspect-[4/5] w-full object-cover"
+                          />
+                          <span className="text-xs leading-snug">{p.title}</span>
+                          <Price product={p} className="text-xs" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid flex-1 grid-cols-2 content-start gap-3.5 overflow-y-auto px-6 pb-7">
+                    {results.map((p) => (
+                      <Link
+                        key={p.handle}
+                        to="/products/$handle"
+                        params={{ handle: p.handle }}
+                        onClick={() => setFly(null)}
+                        className="flex min-w-0 flex-col gap-1.5"
+                      >
+                        <img
+                          src={p.image}
+                          alt={p.title}
+                          className="aspect-[4/5] w-full object-cover"
+                        />
+                        <span className="text-[11.5px] leading-snug">{p.title}</span>
+                        <Price product={p} className="text-[11.5px]" />
+                      </Link>
+                    ))}
+                    {results.length === 0 && (
+                      <p className="col-span-2 text-sm text-muted-foreground">No matches.</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </header>
 
-
-      {/* Mobile / tablet menu - rendered outside the header so `fixed` covers the full viewport */}
+      {/* Mobile / tablet full-screen menu */}
       <div
-        className={`fixed inset-0 z-[60] flex flex-col bg-background transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 z-[120] flex flex-col bg-background px-5 py-4 transition-opacity duration-200 lg:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         aria-hidden={!open}
       >
-        <div className="flex items-center justify-between border-b border-border px-4 py-3.5">
+        <div className="mb-8 flex items-center justify-between">
           <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
           <button type="button" aria-label="Close menu" onClick={() => setOpen(false)}>
-            <X className="size-6" strokeWidth={1.25} />
+            <X className="size-[22px]" strokeWidth={1.25} />
           </button>
         </div>
 
-        <nav className="flex flex-1 flex-col justify-center gap-1 px-6">
-          {links.map((l) => (
+        <nav className="flex flex-col gap-4">
+          {nav.map((l) => (
             <Link
               key={l.label}
-              to={l.to}
-              search={l.search}
+              to="/shop"
+              search={{ c: l.c }}
               onClick={() => setOpen(false)}
-              className="group flex items-baseline justify-between border-b border-border/60 py-4"
+              className="text-[22px] font-extrabold uppercase tracking-[0.04em]"
             >
-              <span className="display text-4xl leading-tight sm:text-5xl">{l.label}</span>
-              <ArrowRight
-                className="size-5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100"
-                strokeWidth={1.25}
-              />
+              {l.label}
             </Link>
           ))}
-          <Link
-            to="/about"
-            onClick={() => setOpen(false)}
-            className="group flex items-baseline justify-between py-4"
-          >
-            <span className="display text-4xl leading-tight sm:text-5xl">about</span>
-            <ArrowRight
-              className="size-5 shrink-0 opacity-0 transition-opacity group-hover:opacity-100"
-              strokeWidth={1.25}
-            />
-          </Link>
         </nav>
 
-        <div className="flex items-center justify-between border-t border-border px-6 py-5">
-          <p className="eyebrow">free u.s. shipping</p>
-          <p className="eyebrow">@getsunkissed</p>
+        <div className="mt-7 flex flex-col gap-3 border-t border-border pt-4.5 text-[13px]">
+          {secondary.map((s) => (
+            <Link key={s.label} to={s.to} onClick={() => setOpen(false)}>
+              {s.label}
+            </Link>
+          ))}
+          <a href="mailto:info@getsunkissed.com">Contact</a>
+          <a href="https://www.instagram.com/getsunkissed" target="_blank" rel="noreferrer">
+            Instagram
+          </a>
         </div>
       </div>
     </>
