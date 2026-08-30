@@ -53,7 +53,7 @@ export function SiteHeader() {
           </Link>
           <div className="flex items-center gap-5">
             <button type="button" aria-label="Bag" onClick={() => setFly("bag")}>
-              <ShoppingBag className="size-[22px]" strokeWidth={1.25} />
+              <ShoppingBag className="size-[19px]" strokeWidth={1.25} />
             </button>
             <button type="button" aria-label="Open menu" onClick={() => setOpen(true)}>
               <Menu className="size-[22px]" strokeWidth={1.25} />
@@ -95,7 +95,7 @@ export function SiteHeader() {
                 onClick={() => setFly("bag")}
                 onMouseEnter={() => setFly("bag")}
               >
-                <ShoppingBag className="size-[21px]" strokeWidth={1.25} />
+                <ShoppingBag className="size-[18px]" strokeWidth={1.25} />
               </button>
               <button type="button" aria-label="Account">
                 <User className="size-[21px]" strokeWidth={1.25} />
