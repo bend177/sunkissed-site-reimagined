@@ -1,0 +1,90 @@
+import { Link } from "@tanstack/react-router";
+
+export function SiteFooter() {
+  return (
+    <footer className="border-t border-border bg-secondary">
+      <div className="grid gap-12 px-4 py-16 md:grid-cols-[1.2fr_1fr_1fr_1fr] md:px-6">
+        <div>
+          <p className="display text-4xl">Sunkissed</p>
+          <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+            Swimwear made for long days in the sun — sculpted fits, sand-free towels, and resort
+            pieces that travel well.
+          </p>
+        </div>
+
+        <div>
+          <p className="eyebrow text-muted-foreground">shop</p>
+          <ul className="mt-4 space-y-2.5 text-sm">
+            <li>
+              <Link to="/shop" search={{ c: "swim" }} className="nav-link">
+                swimwear
+              </Link>
+            </li>
+            <li>
+              <Link to="/shop" search={{ c: "one-piece" }} className="nav-link">
+                one pieces
+              </Link>
+            </li>
+            <li>
+              <Link to="/shop" search={{ c: "resort" }} className="nav-link">
+                resort wear
+              </Link>
+            </li>
+            <li>
+              <Link to="/shop" search={{ c: "towels" }} className="nav-link">
+                beach towels
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p className="eyebrow text-muted-foreground">help</p>
+          <ul className="mt-4 space-y-2.5 text-sm">
+            <li>
+              <Link to="/about" className="nav-link">
+                our story
+              </Link>
+            </li>
+            <li>
+              <span className="nav-link">shipping</span>
+            </li>
+            <li>
+              <span className="nav-link">returns &amp; exchanges</span>
+            </li>
+            <li>
+              <span className="nav-link">size guide</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <p className="eyebrow text-muted-foreground">sun mail</p>
+          <p className="mt-4 text-sm text-muted-foreground">
+            New drops, restocks, and the occasional bribe.
+          </p>
+          <form
+            className="mt-5 flex items-center gap-3 border-b border-foreground pb-2"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              type="email"
+              required
+              placeholder="email address"
+              aria-label="Email address"
+              className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+            />
+            <button type="submit" className="eyebrow">
+              join
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-2 border-t border-border px-4 py-6 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between md:px-6">
+        <p>© {new Date().getFullYear()} Sunkissed. All rights reserved.</p>
+        <p className="lowercase">instagram · tiktok · pinterest</p>
+      </div>
+    </footer>
+  );
+}
