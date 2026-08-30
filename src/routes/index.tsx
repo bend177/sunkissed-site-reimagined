@@ -164,23 +164,26 @@ function Home() {
               className="size-full object-cover"
             />
             <div className="absolute inset-0 bg-ink/25" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-              <h2 className="display max-w-3xl text-6xl text-background md:text-7xl">
-                Beach towels
-              </h2>
-              <p className="mt-4 max-w-md text-sm text-background/90">
+            <div className="absolute inset-x-0 bottom-0 px-4 pb-8 md:px-6 md:pb-12">
+              <p className="max-w-md text-sm text-background/90">
                 Soft. Durable. Sand-resistant. Designed for life beyond the shore.
               </p>
-              <Link
-                to="/shop"
-                search={{ c: "towels" }}
-                className="rule-link mt-6 text-background"
-              >
-                shop all
-              </Link>
+              <div className="mt-3 flex items-end justify-between gap-6">
+                <h2 className="display text-6xl leading-[0.95] text-background md:text-7xl">
+                  Beach towels
+                </h2>
+                <Link
+                  to="/shop"
+                  search={{ c: "towels" }}
+                  className="pb-1 text-sm lowercase text-background md:text-base"
+                >
+                  shop now &rarr;
+                </Link>
+              </div>
             </div>
           </div>
         </section>
+
 
         <section className="px-4 py-10 md:px-6 md:py-12">
           <h2 className="display text-4xl md:text-5xl">Towels, rolled &amp; ready</h2>
