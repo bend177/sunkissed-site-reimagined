@@ -45,14 +45,15 @@ function Swatches({
   current,
   onHover,
   catalog,
+  moreHandle,
 }: {
   colors: ColorRef[];
   current: ColorRef | null;
   onHover: (c: ColorRef | null) => void;
   catalog: Product[];
+  moreHandle: string;
 }) {
-  const [expanded, setExpanded] = useState(false);
-  const visible = expanded ? colors : colors.slice(0, VISIBLE_COUNT);
+  const visible = colors.slice(0, VISIBLE_COUNT);
   const extra = colors.length - VISIBLE_COUNT;
 
   return (
@@ -69,27 +70,19 @@ function Swatches({
           onHover={onHover}
         />
       ))}
-      {!expanded && extra > 0 && (
-        <button
-          type="button"
-          onClick={() => setExpanded(true)}
-          className="ml-0.5 text-[11px] leading-none text-muted-foreground hover:text-foreground"
+      {extra > 0 && (
+        <Link
+          to="/products/$handle"
+          params={{ handle: moreHandle }}
+          className="ml-0.5 text-[11px] leading-none text-muted-foreground underline underline-offset-2 hover:text-foreground"
         >
-          +{extra}
-        </button>
-      )}
-      {expanded && extra > 0 && (
-        <button
-          type="button"
-          onClick={() => setExpanded(false)}
-          className="ml-0.5 text-[11px] underline underline-offset-2 text-muted-foreground hover:text-foreground"
-        >
-          Show less
-        </button>
+          +{extra} more
+        </Link>
       )}
     </div>
   );
 }
+
 
 export function ProductCard({ product }: { product: Product }) {
   const catalog = useCatalog();
@@ -132,6 +125,8 @@ export function ProductCard({ product }: { product: Product }) {
               current={current}
               onHover={setActive}
               catalog={catalog}
+              moreHandle={current?.handle ?? product.handle}
+
             />
           )}
         </div>
