@@ -93,6 +93,64 @@ const printMap: Record<string, CSSProperties> = {
   },
 };
 
+// Prints need the real photo texture; solid colorways look cleaner as a fill.
+const PRINT_WORDS =
+  /leopard|zebra|cheeta|cheetah|tiger|snake|python|mamba|floral|floralia|bloom|animal|print|paisley|gingham|stripe|check|tie.?dye/i;
+
+export const isPrint = (colorName: string) => PRINT_WORDS.test(colorName);
+
+// Real swatch: a tight crop of the actual product photo for that colorway.
+// Where the garment sits in a full-body shot, so the crop lands on fabric.
+export const swatchFocus = (title: string) => {
+  const t = title.toLowerCase();
+  if (t.includes("bottom")) return 62;
+  if (t.includes("top") || t.includes("bra")) return 33;
+  if (t.includes("towel") || t.includes("sarong") || t.includes("dress")) return 50;
+  return 40;
+};
+
+export const realSwatchStyle = (
+  image: string | undefined,
+  colorName: string,
+  focusY = 40,
+  flat = false,
+): CSSProperties =>
+  image && isPrint(colorName)
+    ? {
+        backgroundImage: `url(${image})`,
+        backgroundSize: flat ? "cover" : "620%",
+        backgroundPosition: flat ? "50% 50%" : `50% ${focusY}%`,
+        backgroundRepeat: "no-repeat",
+      }
+    : swatchStyle(colorName);
+
+// Flat goods (towels, sarongs) photograph the print edge to edge, which makes
+// the truest swatch. Prefer one of those images for a print colorway.
+const flatCache = new Map<string, string | undefined>();
+
+export const flatPrintImage = (catalog: Product[], colorName: string) => {
+  const key = colorName.toLowerCase();
+  if (!flatCache.has(key)) {
+    const match = catalog.find(
+      (p) =>
+        splitTitle(p.title).color.toLowerCase() === key &&
+        (p.category === "towels" || /towel|sarong|blanket|throw/i.test(p.title)),
+    );
+    flatCache.set(key, match?.image);
+  }
+  return flatCache.get(key);
+};
+
+// One entry point: real print texture when we have it, clean fill otherwise.
+// Product photos are lifestyle shots, so cropping them makes muddy swatches.
+// Prints render as generated pattern fills, solids as their real color.
+export const swatchFill = (
+  _catalog: Product[],
+  colorName: string,
+  _fallbackImage?: string,
+  _focusY = 40,
+): CSSProperties => swatchStyle(colorName);
+
 export const swatchStyle = (colorName: string): CSSProperties =>
   printMap[colorName.toLowerCase()] ?? { backgroundColor: swatchColor(colorName) };
 
@@ -161,6 +219,7 @@ export function siblingColors(catalog: Product[], product: Product) {
       colorName: splitTitle(p.title).color || base,
       swatch: swatchColor(splitTitle(p.title).color || base),
       image: p.image,
+      focusY: swatchFocus(p.title),
       current: p.handle === product.handle,
     }));
 }
