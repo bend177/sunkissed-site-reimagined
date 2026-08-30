@@ -101,8 +101,8 @@ export const realSwatchStyle = (
   image
     ? {
         backgroundImage: `url(${image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center 45%",
+        backgroundSize: "230%",
+        backgroundPosition: "50% 46%",
         backgroundRepeat: "no-repeat",
       }
     : swatchStyle(colorName);
