@@ -121,12 +121,19 @@ export function SiteHeader() {
               )}
               <button
                 type="button"
-                aria-label="Bag"
+                aria-label={`Bag (${cartCount})`}
                 onClick={() => setFly("bag")}
                 onMouseEnter={() => setFly("bag")}
+                className="relative"
               >
                 <ShoppingBag className="size-[18px]" strokeWidth={1.25} />
+                {cartCount > 0 && (
+                  <span className="absolute -right-2 -top-1.5 min-w-4 rounded-full bg-ink px-1 text-[9px] leading-4 text-background">
+                    {cartCount}
+                  </span>
+                )}
               </button>
+
               <button type="button" aria-label="Account">
                 <User className="size-[21px]" strokeWidth={1.25} />
               </button>
