@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
-import { products } from "@/data/products";
+import { useCatalog } from "@/lib/catalog";
 import {
-  allColors,
+  colorsIn,
   colorOf,
   FEATURED_PRINTS,
   priceNum,
@@ -18,6 +18,7 @@ import {
   type SortKey,
 } from "@/data/shop-filters";
 import { swatchStyle } from "@/data/product-details";
+
 
 type Filter = "all" | "new" | "swim" | "one-piece" | "resort" | "towels";
 
