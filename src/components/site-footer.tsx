@@ -82,13 +82,16 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 border-t border-border px-4 py-6 text-xs text-muted-foreground md:flex-row md:items-center md:justify-between md:px-6">
+      <div className="flex flex-row items-center justify-between gap-2 border-t border-border px-4 py-6 text-xs text-muted-foreground md:px-6">
         <p>© {new Date().getFullYear()} Sunkissed. All rights reserved.</p>
-        <p className="lowercase">
-          <a href="https://www.instagram.com/getsunkissed" target="_blank" rel="noreferrer" className="nav-link">
-            instagram
-          </a>
-        </p>
+        <a
+          href="https://www.instagram.com/getsunkissed"
+          target="_blank"
+          rel="noreferrer"
+          className="nav-link lowercase"
+        >
+          instagram
+        </a>
       </div>
     </footer>
   );
