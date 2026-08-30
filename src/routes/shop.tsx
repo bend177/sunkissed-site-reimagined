@@ -245,13 +245,6 @@ function Shop() {
               </div>
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
                 <span className="eyebrow text-muted-foreground">Featured Prints</span>
-                <button
-                  type="button"
-                  onClick={() => setPrintsAll(!printsAll)}
-                  className="text-[12px] underline underline-offset-4 hover:opacity-60"
-                >
-                  {printsAll ? "Show less" : "Show all"}
-                </button>
                 {prints.map((name) => {
                   return (
                     <button
@@ -273,6 +266,16 @@ function Shop() {
                     </button>
                   );
                 })}
+                {!printsAll && (
+                  <button
+                    type="button"
+                    aria-label="Show all featured prints"
+                    onClick={() => setPrintsAll(true)}
+                    className="flex size-[24px] shrink-0 items-center justify-center rounded-full border border-foreground/20 text-[14px] leading-none text-muted-foreground transition-colors hover:border-foreground/50 hover:text-foreground"
+                  >
+                    +
+                  </button>
+                )}
                 {printsAll && (
                   <button
                     type="button"
