@@ -30,7 +30,8 @@ export const products: Product[] = [
   },
   {
     title: "Le Sporty Top - Zebra",
-    price: "79",
+    price: "59",
+    compareAt: "79",
     handle: "le-sporty-top-zebra",
     category: "swim",
     image: cdn(
@@ -48,7 +49,8 @@ export const products: Product[] = [
   },
   {
     title: "Le Triangle Bottom - Midnight Bloom",
-    price: "79",
+    price: "59",
+    compareAt: "79",
     handle: "le-triangle-bottom-midnight-bloom",
     category: "swim",
     image: cdn(
@@ -84,7 +86,8 @@ export const products: Product[] = [
   },
   {
     title: "La Sirena One Piece - Leopard",
-    price: "175",
+    price: "129",
+    compareAt: "175",
     handle: "la-sirena-one-piece-leopard",
     category: "one-piece",
     image: cdn(
@@ -111,7 +114,8 @@ export const products: Product[] = [
   },
   {
     title: "Beach To Bar Dress - Black Mamba",
-    price: "160",
+    price: "119",
+    compareAt: "160",
     handle: "dress-black-mamba",
     category: "resort",
     image: cdn(
@@ -129,7 +133,8 @@ export const products: Product[] = [
   },
   {
     title: "Sarong - Leopard",
-    price: "68",
+    price: "49",
+    compareAt: "68",
     handle: "sarong-leopard",
     category: "resort",
     image: cdn(
@@ -156,7 +161,8 @@ export const products: Product[] = [
   },
   {
     title: "Mykonos • Sand Free Beach Towel",
-    price: "58",
+    price: "44",
+    compareAt: "58",
     handle: "stonewashed-mykonos-towel",
     category: "towels",
     image: cdn(
