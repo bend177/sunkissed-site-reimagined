@@ -79,10 +79,15 @@ export const featuredPrints = (catalog: Product[]) => {
       .map(([name]) => name);
   }
 
-  return [...colorsIn(catalog)]
-    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name))
-    .slice(0, 6)
-    .map((c) => c.name);
+  // Fallback: colorways of the best-selling products (catalog arrives from
+  // Shopify sorted by BEST_SELLING), first 6 distinct prints.
+  const seen: string[] = [];
+  for (const p of catalog) {
+    const c = colorOf(p);
+    if (c && !seen.includes(c)) seen.push(c);
+    if (seen.length === 6) break;
+  }
+  return seen;
 };
 
 

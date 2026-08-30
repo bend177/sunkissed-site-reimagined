@@ -42,7 +42,7 @@ export async function storefrontApiRequest(
 
 const PRODUCTS_QUERY = `
   query GetProducts($first: Int!, $after: String) {
-    products(first: $first, after: $after) {
+    products(first: $first, after: $after, sortKey: BEST_SELLING) {
       pageInfo { hasNextPage endCursor }
       edges {
         node {
