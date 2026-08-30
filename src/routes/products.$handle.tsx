@@ -8,7 +8,6 @@ import { Price } from "@/components/price";
 import {
   getProductDetail,
   relatedProducts,
-  swatchColor,
   type ProductDetail,
 } from "@/data/product-details";
 import { toast } from "sonner";
