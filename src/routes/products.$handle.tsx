@@ -4,6 +4,7 @@ import { ChevronDown, Minus, Plus } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
+import { Price } from "@/components/price";
 import {
   getProductDetail,
   relatedProducts,
