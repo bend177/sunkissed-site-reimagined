@@ -118,7 +118,10 @@ function Shop() {
           : "Shop All";
 
   const filterCount = types.length + colors.length + sizes.length;
-  const prints = printsAll ? allColors.map((x) => x.name) : featuredPrints(products);
+  const allPrints = featuredPrints(products);
+  const prints = printsAll
+    ? allColors.map((x) => x.name)
+    : allPrints.slice(0, 3);
   const colorImage = new Map(allColors.map((x) => [x.name, x] as const));
 
   const chip = (on: boolean) =>
