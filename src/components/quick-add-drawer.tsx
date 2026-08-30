@@ -8,8 +8,8 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import type { Product } from "@/data/products";
-import { getProductDetail } from "@/data/product-details";
 import { Price } from "@/components/price";
+import { useCartStore } from "@/lib/cart-store";
 
 export function QuickAddDrawer({
   product,
@@ -20,16 +20,32 @@ export function QuickAddDrawer({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
-  const detail = getProductDetail(product.handle);
-  const sizes = detail?.sizes ?? ["one size"];
-  const [size, setSize] = useState<string | null>(null);
+  const variants = product.variants;
+  const [size, setSize] = useState<string | null>(
+    variants.length === 1 ? (variants[0]?.size ?? null) : null,
+  );
+  const addItem = useCartStore((s) => s.addItem);
+  const isLoading = useCartStore((s) => s.isLoading);
 
-  const add = () => {
-    if (!size) return;
+  const variant = variants.find((v) => v.size === size);
+
+  const add = async () => {
+    if (!variant) return;
+    await addItem({
+      variantId: variant.id,
+      handle: product.handle,
+      title: product.title,
+      image: product.image,
+      size: variant.size,
+      price: variant.price,
+      currencyCode: variant.currencyCode,
+      quantity: 1,
+    });
     onOpenChange(false);
-    setSize(null);
-    toast.success("added to bag", {
-      description: `${product.title} - size ${size}`,
+    setSize(variants.length === 1 ? (variants[0]?.size ?? null) : null);
+    toast.success("Added to bag", {
+      description: `${product.title} - size ${variant.size}`,
+      position: "top-center",
     });
   };
 
@@ -56,18 +72,19 @@ export function QuickAddDrawer({
 
           <p className="eyebrow mt-6">select size</p>
           <div className="mt-3 grid grid-cols-5 gap-2">
-            {sizes.map((s) => (
+            {variants.map((v) => (
               <button
-                key={s}
+                key={v.id}
                 type="button"
-                onClick={() => setSize(s)}
-                className={`border py-3 text-xs lowercase transition-colors ${
-                  size === s
+                disabled={!v.available}
+                onClick={() => setSize(v.size)}
+                className={`border py-3 text-xs lowercase transition-colors disabled:cursor-not-allowed disabled:opacity-35 ${
+                  size === v.size
                     ? "border-foreground bg-foreground text-background"
                     : "border-border hover:border-foreground"
                 }`}
               >
-                {s}
+                {v.size}
               </button>
             ))}
           </div>
@@ -75,10 +92,10 @@ export function QuickAddDrawer({
           <button
             type="button"
             onClick={add}
-            disabled={!size}
+            disabled={!variant || isLoading}
             className="mt-5 w-full bg-ink py-4 text-xs uppercase tracking-[0.18em] text-background transition-opacity disabled:opacity-40"
           >
-            {size ? "add to bag" : "select a size"}
+            {isLoading ? "adding..." : variant ? "add to bag" : "select a size"}
           </button>
         </div>
       </DrawerContent>

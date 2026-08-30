@@ -5,29 +5,30 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
 import { Price } from "@/components/price";
+import { catalogQueryOptions } from "@/lib/catalog";
+import { useCartStore } from "@/lib/cart-store";
 import {
   getProductDetail,
   relatedProducts,
+  splitTitle,
   type ProductDetail,
   swatchStyle,
 } from "@/data/product-details";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/products/$handle")({
-  loader: ({ params }) => {
-    const detail = getProductDetail(params.handle);
+  loader: async ({ params, context }) => {
+    const catalog = await context.queryClient.ensureQueryData(catalogQueryOptions());
+    const detail = getProductDetail(catalog, params.handle);
     if (!detail) throw notFound();
-    return detail;
+    return { detail, catalog };
   },
+
   head: ({ loaderData }) => {
-    const title = loaderData
-      ? `${loaderData.product.title} | Sunkissed`
-      : "Product | Sunkissed";
-    const description = loaderData
-      ? `${loaderData.product.title} - $${loaderData.product.price}. ${loaderData.description}`.slice(
-          0,
-          158,
-        )
+    const detail = loaderData?.detail;
+    const title = detail ? `${detail.product.title} | Sunkissed` : "Product | Sunkissed";
+    const description = detail
+      ? `${detail.product.title} - $${detail.product.price}. ${detail.description}`.slice(0, 158)
       : "Shop Sunkissed swimwear.";
     return {
       meta: [
@@ -37,15 +38,16 @@ export const Route = createFileRoute("/products/$handle")({
         { property: "og:description", content: description },
         { property: "og:type", content: "product" },
         { name: "twitter:card", content: "summary_large_image" },
-        ...(loaderData
+        ...(detail
           ? [
-              { property: "og:image", content: loaderData.product.image },
-              { name: "twitter:image", content: loaderData.product.image },
+              { property: "og:image", content: detail.product.image },
+              { name: "twitter:image", content: detail.product.image },
             ]
           : []),
       ],
     };
   },
+
   component: ProductPage,
 });
 
@@ -67,10 +69,43 @@ function Accordion({ label, children }: { label: string; children: React.ReactNo
 }
 
 function ProductPage() {
-  const detail = Route.useLoaderData() as ProductDetail;
+  const { detail, catalog } = Route.useLoaderData() as {
+    detail: ProductDetail;
+    catalog: Parameters<typeof relatedProducts>[0];
+  };
   const { product, base, colorName, siblings, gallery, sizes, description, fit, material } = detail;
   const [size, setSize] = useState<string | null>(sizes.length === 1 ? sizes[0]! : null);
-  const related = relatedProducts(product);
+  const related = relatedProducts(catalog, product);
+  const addItem = useCartStore((s) => s.addItem);
+  const isLoading = useCartStore((s) => s.isLoading);
+  const getCheckoutUrl = useCartStore((s) => s.getCheckoutUrl);
+  const variant = product.variants.find((v) => v.size === size);
+
+  const addToBag = async () => {
+    if (!variant) {
+      toast("Please select a size");
+      return null;
+    }
+    await addItem({
+      variantId: variant.id,
+      handle: product.handle,
+      title: product.title,
+      image: product.image,
+      size: variant.size,
+      price: variant.price,
+      currencyCode: variant.currencyCode,
+      quantity: 1,
+    });
+    return variant;
+  };
+
+  const buyNow = async () => {
+    const added = await addToBag();
+    if (!added) return;
+    const url = getCheckoutUrl();
+    if (url) window.location.href = url;
+  };
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -115,7 +150,8 @@ function ProductPage() {
             <p className="mt-6 text-sm text-muted-foreground">{colorName}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {siblings.map((s) => {
-                const label = s.title.split("-")[1]?.trim() ?? s.title;
+                const label = splitTitle(s.title).color || s.title;
+
                 const active = s.handle === product.handle;
                 return (
                   <Link
@@ -146,38 +182,45 @@ function ProductPage() {
               </button>
             </div>
             <div className="mt-3 grid grid-cols-5 gap-2">
-              {sizes.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => setSize(s)}
-                  className={`border py-3 text-xs lowercase transition-colors ${
-                    size === s
-                      ? "border-foreground bg-foreground text-background"
-                      : "border-border hover:border-foreground"
-                  } ${sizes.length === 1 ? "col-span-5" : ""}`}
-                >
-                  {s}
-                </button>
-              ))}
+              {sizes.map((s) => {
+                const v = product.variants.find((x) => x.size === s);
+                return (
+                  <button
+                    key={s}
+                    type="button"
+                    disabled={v ? !v.available : false}
+                    onClick={() => setSize(s)}
+                    className={`border py-3 text-xs lowercase transition-colors disabled:cursor-not-allowed disabled:opacity-35 ${
+                      size === s
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-border hover:border-foreground"
+                    } ${sizes.length === 1 ? "col-span-5" : ""}`}
+                  >
+                    {s}
+                  </button>
+                );
+              })}
             </div>
 
             <button
               type="button"
-              onClick={() =>
-                size
-                  ? toast.success(`${base.toLowerCase()} (${size}) added to bag`)
-                  : toast("please select a size")
-              }
-              className="mt-4 w-full bg-foreground py-4 text-xs lowercase tracking-[0.15em] text-background transition-opacity hover:opacity-85"
+              disabled={isLoading}
+              onClick={async () => {
+                const added = await addToBag();
+                if (added) toast.success(`${base} (${added.size}) added to bag`);
+              }}
+              className="mt-4 w-full bg-foreground py-4 text-xs lowercase tracking-[0.15em] text-background transition-opacity hover:opacity-85 disabled:opacity-50"
             >
-              add to bag
+              {isLoading ? "adding..." : "add to bag"}
             </button>
             <button
               type="button"
-              className="mt-2 w-full border border-border py-4 text-xs lowercase tracking-[0.15em] transition-colors hover:border-foreground"
+              disabled={isLoading}
+              onClick={buyNow}
+              className="mt-2 w-full border border-border py-4 text-xs lowercase tracking-[0.15em] transition-colors hover:border-foreground disabled:opacity-50"
             >
               buy it now
+
             </button>
 
             <p className="mt-4 flex items-center gap-1 text-xs lowercase text-muted-foreground">

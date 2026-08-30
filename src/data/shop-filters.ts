@@ -1,4 +1,4 @@
-import { products, type Product } from "@/data/products";
+import type { Product } from "@/data/products";
 import { splitTitle, swatchColor } from "@/data/product-details";
 
 export type ProductType = "sets" | "tops" | "bottoms" | "one-pieces" | "resort" | "towels";
@@ -25,21 +25,23 @@ export const productType = (p: Product): ProductType => {
   if (p.category === "towels") return "towels";
   if (p.category === "resort") return "resort";
   if (p.category === "one-piece") return "one-pieces";
+  const tags = p.tags.map((t) => t.toLowerCase());
   const t = p.title.toLowerCase();
-  if (t.includes("top")) return "tops";
-  if (t.includes("bottom")) return "bottoms";
+  if (tags.includes("top") || t.includes("top")) return "tops";
+  if (tags.includes("bottom") || t.includes("bottom")) return "bottoms";
   return "sets";
 };
 
 export const colorOf = (p: Product) => splitTitle(p.title).color.trim();
 
-export const allColors = Array.from(new Set(products.map(colorOf).filter(Boolean)))
-  .sort((a, b) => a.localeCompare(b))
-  .map((name) => ({
-    name,
-    swatch: swatchColor(name),
-    image: products.find((p) => colorOf(p) === name)?.image ?? "",
-  }));
+export const colorsIn = (catalog: Product[]) =>
+  Array.from(new Set(catalog.map(colorOf).filter(Boolean)))
+    .sort((a, b) => a.localeCompare(b))
+    .map((name) => ({
+      name,
+      swatch: swatchColor(name),
+      image: catalog.find((p) => colorOf(p) === name)?.image ?? "",
+    }));
 
 export const FEATURED_PRINTS = ["Leopard", "Zebra", "Golden Leopard", "Rouge"];
 

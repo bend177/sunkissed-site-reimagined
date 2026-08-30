@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
-import { products } from "@/data/products";
+import { useCatalog } from "@/lib/catalog";
 import {
-  allColors,
+  colorsIn,
   colorOf,
   FEATURED_PRINTS,
   priceNum,
@@ -18,6 +18,7 @@ import {
   type SortKey,
 } from "@/data/shop-filters";
 import { swatchStyle } from "@/data/product-details";
+
 
 type Filter = "all" | "new" | "swim" | "one-piece" | "resort" | "towels";
 
@@ -62,6 +63,9 @@ export const Route = createFileRoute("/shop")({
 
 function Shop() {
   const { c } = Route.useSearch();
+  const products = useCatalog();
+  const allColors = colorsIn(products);
+
 
   const [types, setTypes] = useState<ProductType[]>(typesFor(c));
   const [colors, setColors] = useState<string[]>([]);
@@ -86,11 +90,15 @@ function Shop() {
   let list = products.filter((p) => {
     if (types.length && !types.includes(productType(p))) return false;
     if (colors.length && !colors.includes(colorOf(p))) return false;
-    // towels are one size - a size filter excludes them
-    if (sizes.length && p.category === "towels") return false;
+    if (
+      sizes.length &&
+      !p.variants.some((v) => v.available && sizes.includes(v.size.toUpperCase()))
+    )
+      return false;
     return true;
   });
-  if (newOnly) list = list.filter((p) => p.category !== "towels").slice(0, 8);
+  if (newOnly) list = list.filter((p) => p.category !== "towels").slice(0, 24);
+
   if (sort === "price-asc") list = [...list].sort((a, b) => priceNum(a) - priceNum(b));
   else if (sort === "price-desc") list = [...list].sort((a, b) => priceNum(b) - priceNum(a));
   else if (sort === "new") list = [...list].reverse();

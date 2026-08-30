@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { products, editorial, type Product } from "@/data/products";
+import { editorial, type Product } from "@/data/products";
 
 export type ProductDetail = {
   product: Product;
@@ -14,10 +14,9 @@ export type ProductDetail = {
 };
 
 export const splitTitle = (title: string): { base: string; color: string } => {
-  const parts = title.split("-").map((s) => s.trim());
-  return { base: parts[0] ?? title, color: parts[1] ?? "" };
+  const parts = title.split(" - ").map((s) => s.trim());
+  return { base: parts[0] ?? title, color: parts.slice(1).join(" - ") ?? "" };
 };
-
 
 const swatchMap: Record<string, string> = {
   rouge: "oklch(0.52 0.19 26)",
@@ -27,8 +26,24 @@ const swatchMap: Record<string, string> = {
   zebra: "oklch(0.92 0 0)",
   "midnight bloom": "oklch(0.35 0.07 265)",
   "emerald green": "oklch(0.45 0.11 160)",
+  "jackfruit green": "oklch(0.62 0.13 145)",
   "jet black": "oklch(0.18 0 0)",
+  "coco white": "oklch(0.96 0.01 90)",
   "black mamba": "oklch(0.22 0.01 280)",
+  "klara blue": "oklch(0.55 0.13 245)",
+  turquoise: "oklch(0.72 0.11 195)",
+  "spicy orange": "oklch(0.68 0.17 45)",
+  "just pink": "oklch(0.78 0.11 5)",
+  "cosmic purple": "oklch(0.45 0.14 300)",
+  "espresso martini": "oklch(0.32 0.05 55)",
+  "sunshine yellow": "oklch(0.87 0.15 95)",
+  brass: "oklch(0.72 0.09 85)",
+  acid: "oklch(0.86 0.18 120)",
+  coral: "oklch(0.72 0.15 30)",
+  eden: "oklch(0.42 0.07 165)",
+  floralia: "oklch(0.78 0.09 350)",
+  cheetafly: "oklch(0.76 0.1 75)",
+  "wild zebra": "oklch(0.9 0.01 90)",
 };
 
 export const swatchColor = (colorName: string) =>
@@ -51,6 +66,21 @@ const printMap: Record<string, CSSProperties> = {
     backgroundImage:
       "repeating-linear-gradient(115deg, oklch(0.18 0 0) 0 3px, transparent 3px 8px)",
   },
+  cheetafly: {
+    backgroundColor: "oklch(0.8 0.1 76)",
+    backgroundImage:
+      "radial-gradient(ellipse 26% 20% at 26% 30%, oklch(0.3 0.05 60) 60%, transparent 62%), radial-gradient(ellipse 24% 18% at 70% 60%, oklch(0.3 0.05 60) 60%, transparent 62%), radial-gradient(ellipse 22% 16% at 44% 82%, oklch(0.3 0.05 60) 60%, transparent 62%)",
+  },
+  "wild zebra": {
+    backgroundColor: "oklch(0.94 0.01 90)",
+    backgroundImage:
+      "repeating-linear-gradient(100deg, oklch(0.2 0 0) 0 3px, transparent 3px 9px)",
+  },
+  floralia: {
+    backgroundColor: "oklch(0.9 0.04 350)",
+    backgroundImage:
+      "radial-gradient(circle 20% at 32% 34%, oklch(0.62 0.14 350) 60%, transparent 62%), radial-gradient(circle 16% at 70% 66%, oklch(0.55 0.1 150) 60%, transparent 62%)",
+  },
   "black mamba": {
     backgroundColor: "oklch(0.22 0.01 280)",
     backgroundImage:
@@ -66,55 +96,49 @@ const printMap: Record<string, CSSProperties> = {
 export const swatchStyle = (colorName: string): CSSProperties =>
   printMap[colorName.toLowerCase()] ?? { backgroundColor: swatchColor(colorName) };
 
-
 const editorialFill = [editorial.tops, editorial.bottoms, editorial.newArrivals, editorial.allSets];
-
-const sizesFor = (product: Product) =>
-  product.category === "towels" ? ["one size"] : ["xs", "s", "m", "l", "xl"];
 
 const copyFor = (product: Product) => {
   switch (product.category) {
     case "towels":
       return {
-        description:
-          "Sand simply falls off. Woven from ultra-fine long-staple cotton, this towel dries fast, packs flat and only gets softer with every swim.",
-        fit: ["Oversized 90 x 170 cm", "Rolls down to fit any beach bag", "Fringed finish"],
-        material: ["100% long-staple cotton", "Sand free weave", "Machine wash cold, tumble dry low"],
+        fit: ["Oversized", "Rolls down to fit any beach bag", "Sand free weave"],
+        material: [
+          "100% long-staple cotton",
+          "Sand free weave",
+          "Machine wash cold, tumble dry low",
+        ],
       };
     case "one-piece":
       return {
-        description:
-          "A sculpted one piece cut from our signature double-lined fabric. Smooths, lifts and stays exactly where you put it - from first swim to last drink.",
         fit: ["Full coverage seat", "Adjustable straps", "Model is 175 cm wearing a size s"],
         material: ["82% recycled polyamide, 18% elastane", "Fully lined", "Hand wash cold, dry flat"],
       };
     case "resort":
       return {
-        description:
-          "The layer that takes you from towel to table. Lightweight, breathable and cut to move - designed to be thrown over anything.",
         fit: ["Relaxed fit", "Midi length", "Model is 175 cm wearing a size s"],
         material: ["Sheer quick-dry blend", "Unlined", "Hand wash cold, dry flat"],
       };
     default:
       return {
-        description:
-          "Our best-selling shape in a buttery, second-skin fabric. Double lined, fully reversible-feeling and tested in real waves - no adjusting required.",
         fit: ["True to size", "Mix and match tops and bottoms", "Model is 175 cm wearing a size s"],
         material: ["82% recycled polyamide, 18% elastane", "Double lined", "Hand wash cold, dry flat"],
       };
   }
 };
 
-export function getProductDetail(handle: string): ProductDetail | null {
-  const product = products.find((p) => p.handle === handle);
+export function getProductDetail(catalog: Product[], handle: string): ProductDetail | null {
+  const product = catalog.find((p) => p.handle === handle);
   if (!product) return null;
   const { base, color } = splitTitle(product.title);
-  const siblings = products.filter((p) => splitTitle(p.title).base === base);
+  const siblings = catalog.filter((p) => splitTitle(p.title).base === base);
   const gallery = [
-    product.image,
+    ...product.images,
     ...siblings.filter((p) => p.handle !== product.handle).map((p) => p.image),
     ...editorialFill,
-  ].slice(0, 5);
+  ]
+    .filter(Boolean)
+    .slice(0, 5);
 
   return {
     product,
@@ -122,14 +146,15 @@ export function getProductDetail(handle: string): ProductDetail | null {
     colorName: color || base,
     siblings,
     gallery,
-    sizes: sizesFor(product),
+    sizes: product.sizes.length ? product.sizes : ["one size"],
+    description: product.description,
     ...copyFor(product),
   };
 }
 
-export function siblingColors(product: Product) {
+export function siblingColors(catalog: Product[], product: Product) {
   const { base } = splitTitle(product.title);
-  return products
+  return catalog
     .filter((p) => splitTitle(p.title).base === base)
     .map((p) => ({
       handle: p.handle,
@@ -140,10 +165,13 @@ export function siblingColors(product: Product) {
     }));
 }
 
-export function relatedProducts(product: Product, limit = 4) {
+export function relatedProducts(catalog: Product[], product: Product, limit = 4) {
   const { base } = splitTitle(product.title);
-  return products
+  return catalog
     .filter((p) => p.handle !== product.handle && splitTitle(p.title).base !== base)
-    .sort((a, b) => (a.category === product.category ? -1 : 0) - (b.category === product.category ? -1 : 0))
+    .sort(
+      (a, b) =>
+        (a.category === product.category ? -1 : 0) - (b.category === product.category ? -1 : 0),
+    )
     .slice(0, limit);
 }

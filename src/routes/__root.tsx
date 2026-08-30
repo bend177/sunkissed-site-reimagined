@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { useCartSync } from "@/hooks/use-cart-sync";
+
 
 
 function NotFoundComponent() {
@@ -133,10 +135,16 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <CartSync />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <Toaster position="bottom-right" />
     </QueryClientProvider>
-
   );
 }
+
+function CartSync() {
+  useCartSync();
+  return null;
+}
+
