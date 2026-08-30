@@ -227,21 +227,21 @@ export function SiteHeader() {
           </button>
         </div>
 
-        <nav className="flex flex-col gap-4">
+        <nav className="flex flex-col">
           {nav.map((l) => (
             <Link
               key={l.label}
               to="/shop"
               search={{ c: l.c }}
               onClick={() => setOpen(false)}
-              className="text-[22px] font-extrabold uppercase tracking-[0.04em]"
+              className="display border-b border-border py-4 text-[34px] lowercase leading-none"
             >
               {l.label}
             </Link>
           ))}
         </nav>
 
-        <div className="mt-7 flex flex-col gap-3 border-t border-border pt-4.5 text-[13px]">
+        <div className="mt-auto flex flex-col gap-3 pt-6 text-[13px]">
           {secondary.map((s) => (
             <Link key={s.label} to={s.to} onClick={() => setOpen(false)}>
               {s.label}
