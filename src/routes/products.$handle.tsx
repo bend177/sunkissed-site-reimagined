@@ -69,10 +69,43 @@ function Accordion({ label, children }: { label: string; children: React.ReactNo
 }
 
 function ProductPage() {
-  const detail = Route.useLoaderData() as ProductDetail;
+  const { detail, catalog } = Route.useLoaderData() as {
+    detail: ProductDetail;
+    catalog: Parameters<typeof relatedProducts>[0];
+  };
   const { product, base, colorName, siblings, gallery, sizes, description, fit, material } = detail;
   const [size, setSize] = useState<string | null>(sizes.length === 1 ? sizes[0]! : null);
-  const related = relatedProducts(product);
+  const related = relatedProducts(catalog, product);
+  const addItem = useCartStore((s) => s.addItem);
+  const isLoading = useCartStore((s) => s.isLoading);
+  const getCheckoutUrl = useCartStore((s) => s.getCheckoutUrl);
+  const variant = product.variants.find((v) => v.size === size);
+
+  const addToBag = async () => {
+    if (!variant) {
+      toast("Please select a size");
+      return null;
+    }
+    await addItem({
+      variantId: variant.id,
+      handle: product.handle,
+      title: product.title,
+      image: product.image,
+      size: variant.size,
+      price: variant.price,
+      currencyCode: variant.currencyCode,
+      quantity: 1,
+    });
+    return variant;
+  };
+
+  const buyNow = async () => {
+    const added = await addToBag();
+    if (!added) return;
+    const url = getCheckoutUrl();
+    if (url) window.location.href = url;
+  };
+
 
   return (
     <div className="min-h-screen bg-background">
