@@ -68,25 +68,6 @@ function Home() {
           </div>
         </section>
 
-        {/* Marquee */}
-        <div className="overflow-hidden border-y border-border py-3">
-          <div className="marquee-track">
-            {[0, 1].map((k) => (
-              <span key={k} className="eyebrow flex shrink-0 gap-10 pr-10 text-muted-foreground">
-                <span>sculpting fits</span>
-                <span>·</span>
-                <span>italian fabric</span>
-                <span>·</span>
-                <span>sand-free towels</span>
-                <span>·</span>
-                <span>free u.s. shipping</span>
-                <span>·</span>
-                <span>hassle-free returns</span>
-                <span>·</span>
-              </span>
-            ))}
-          </div>
-        </div>
 
         {/* Category grid */}
         <section className="px-4 py-14 md:px-6">
