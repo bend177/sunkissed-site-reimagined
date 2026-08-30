@@ -40,10 +40,16 @@ export const colorsIn = (catalog: Product[]) =>
     .map((name) => ({
       name,
       swatch: swatchColor(name),
+      count: catalog.filter((p) => colorOf(p) === name).length,
       image: catalog.find((p) => colorOf(p) === name)?.image ?? "",
     }));
 
-export const FEATURED_PRINTS = ["Leopard", "Zebra", "Golden Leopard", "Rouge"];
+// Most-carried colors/prints in the live catalog, so every swatch is real.
+export const featuredPrints = (catalog: Product[]) =>
+  [...colorsIn(catalog)]
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name))
+    .slice(0, 6)
+    .map((c) => c.name);
 
 export const SIZES = ["XS", "S", "M", "L", "XL"];
 

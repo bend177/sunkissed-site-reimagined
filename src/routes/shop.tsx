@@ -7,7 +7,7 @@ import { useCatalog } from "@/lib/catalog";
 import {
   colorsIn,
   colorOf,
-  FEATURED_PRINTS,
+  featuredPrints,
   priceNum,
   productType,
   SIZES,
@@ -17,7 +17,7 @@ import {
   type ProductType,
   type SortKey,
 } from "@/data/shop-filters";
-import { swatchStyle } from "@/data/product-details";
+import { realSwatchStyle, swatchStyle } from "@/data/product-details";
 
 
 type Filter = "all" | "new" | "swim" | "one-piece" | "resort" | "towels";
@@ -118,7 +118,8 @@ function Shop() {
           : "Shop All";
 
   const filterCount = types.length + colors.length + sizes.length;
-  const prints = printsAll ? allColors.map((x) => x.name) : FEATURED_PRINTS;
+  const prints = printsAll ? allColors.map((x) => x.name) : featuredPrints(products);
+  const colorImage = new Map(allColors.map((x) => [x.name, x.image] as const));
 
   const chip = (on: boolean) =>
     `eyebrow border px-2.5 py-1.5 text-[10.5px] whitespace-nowrap transition-colors ${
@@ -175,7 +176,7 @@ function Shop() {
               </span>
               <span
                 title={cl.name}
-                style={swatchStyle(cl.name)}
+                style={realSwatchStyle(cl.image, cl.name)}
                 className="size-[22px] shrink-0 rounded-full ring-1 ring-border"
               />
 
@@ -255,7 +256,7 @@ function Shop() {
                     >
                       <span
                         aria-hidden
-                        style={swatchStyle(name)}
+                        style={realSwatchStyle(colorImage.get(name), name)}
                         className={`size-[24px] shrink-0 rounded-full ring-1 ${
                           colors.includes(name) ? "ring-2 ring-foreground" : "ring-border"
                         }`}

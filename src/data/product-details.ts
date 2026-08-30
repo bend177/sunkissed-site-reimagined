@@ -93,6 +93,20 @@ const printMap: Record<string, CSSProperties> = {
   },
 };
 
+// Real swatch: a tight crop of the actual product photo for that colorway.
+export const realSwatchStyle = (
+  image: string | undefined,
+  colorName: string,
+): CSSProperties =>
+  image
+    ? {
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center 45%",
+        backgroundRepeat: "no-repeat",
+      }
+    : swatchStyle(colorName);
+
 export const swatchStyle = (colorName: string): CSSProperties =>
   printMap[colorName.toLowerCase()] ?? { backgroundColor: swatchColor(colorName) };
 
