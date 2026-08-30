@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
+import { toast } from "sonner";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchFill } from "@/data/product-details";
 import { useCatalog } from "@/lib/catalog";
+import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
 
