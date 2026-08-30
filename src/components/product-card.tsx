@@ -4,8 +4,127 @@ import { Plus } from "lucide-react";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchFill } from "@/data/product-details";
 import { useCatalog } from "@/lib/catalog";
+import type { Catalog } from "@/lib/catalog";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
+
+const COLLAPSED_COUNT = 3;
+
+type ColorRef = ReturnType<typeof siblingColors>[number];
+
+function SwatchChip({
+  color,
+  active,
+  catalog,
+  onHover,
+}: {
+  color: ColorRef;
+  active: boolean;
+  catalog: Catalog;
+  onHover: (c: ColorRef | null) => void;
+}) {
+  return (
+    <Link
+      to="/products/$handle"
+      params={{ handle: color.handle }}
+      aria-label={color.colorName}
+      title={color.colorName}
+      onMouseEnter={() => onHover(color)}
+      onFocus={() => onHover(color)}
+      className={`block size-3.5 shrink-0 rounded-full ring-1 ring-inset transition-shadow ${
+        active
+          ? "ring-foreground"
+          : "ring-foreground/15 hover:ring-foreground/50"
+      }`}
+      style={swatchFill(catalog, color.colorName, color.image, color.focusY)}
+    />
+  );
+}
+
+function Swatches({
+  colors,
+  current,
+  onHover,
+  catalog,
+}: {
+  colors: ColorRef[];
+  current: ColorRef | null;
+  onHover: (c: ColorRef | null) => void;
+  catalog: Catalog;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  if (colors.length <= COLLAPSED_COUNT) {
+    return (
+      <div
+        className="mt-1.5 flex flex-nowrap items-center gap-1"
+        onMouseLeave={() => onHover(null)}
+      >
+        {colors.map((c) => (
+          <SwatchChip
+            key={c.handle}
+            color={c}
+            active={current?.handle === c.handle}
+            catalog={catalog}
+            onHover={onHover}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (expanded) {
+    return (
+      <div
+        className="mt-1.5 flex flex-wrap items-center gap-1"
+        onMouseLeave={() => onHover(null)}
+      >
+        {colors.map((c) => (
+          <SwatchChip
+            key={c.handle}
+            color={c}
+            active={current?.handle === c.handle}
+            catalog={catalog}
+            onHover={onHover}
+          />
+        ))}
+        <button
+          type="button"
+          onClick={() => setExpanded(false)}
+          className="ml-0.5 text-[11px] underline underline-offset-2 text-muted-foreground hover:text-foreground"
+        >
+          Show less
+        </button>
+      </div>
+    );
+  }
+
+  const visible = colors.slice(0, COLLAPSED_COUNT);
+  return (
+    <div
+      className="mt-1.5 flex flex-nowrap items-center gap-1"
+      onMouseLeave={() => onHover(null)}
+    >
+      {visible.map((c) => (
+        <SwatchChip
+          key={c.handle}
+          color={c}
+          active={current?.handle === c.handle}
+          catalog={catalog}
+          onHover={onHover}
+        />
+      ))}
+      <button
+        type="button"
+        aria-label={`Show ${colors.length - COLLAPSED_COUNT} more colors`}
+        title={`+${colors.length - COLLAPSED_COUNT} more`}
+        onClick={() => setExpanded(true)}
+        className="ml-0.5 flex size-3.5 shrink-0 items-center justify-center rounded-full border border-foreground/20 text-[10px] leading-none text-muted-foreground transition-colors hover:border-foreground/50 hover:text-foreground"
+      >
+        +
+      </button>
+    </div>
+  );
+}
 
 export function ProductCard({ product }: { product: Product }) {
   const catalog = useCatalog();
