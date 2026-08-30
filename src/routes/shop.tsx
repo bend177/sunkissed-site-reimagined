@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -144,6 +144,8 @@ function Shop() {
       on ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground"
     }`;
 
+  const typeOptions = scope.length ? TYPE_ORDER.filter((t) => scope.includes(t)) : TYPE_ORDER;
+
   const setOnly = (t: ProductType[]) => {
     setTypes(t);
     setColors([]);
@@ -152,10 +154,11 @@ function Shop() {
 
   const filterBody = (
     <>
+      {typeOptions.length > 1 && (
       <div>
         <p className="text-[15px]">Product Type</p>
         <div className="flex flex-col gap-3 pb-5 pt-3.5">
-          {TYPE_ORDER.map((t) => (
+          {typeOptions.map((t) => (
             <button
               key={t}
               type="button"
@@ -174,6 +177,7 @@ function Shop() {
           ))}
         </div>
       </div>
+      )}
 
       <div className="border-t border-border">
         <p className="pt-4 text-[15px]">Color</p>
