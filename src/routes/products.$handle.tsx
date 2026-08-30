@@ -5,20 +5,25 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
 import { Price } from "@/components/price";
+import { catalogQueryOptions } from "@/lib/catalog";
+import { useCartStore } from "@/lib/cart-store";
 import {
   getProductDetail,
   relatedProducts,
+  splitTitle,
   type ProductDetail,
   swatchStyle,
 } from "@/data/product-details";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/products/$handle")({
-  loader: ({ params }) => {
-    const detail = getProductDetail(params.handle);
+  loader: async ({ params, context }) => {
+    const catalog = await context.queryClient.ensureQueryData(catalogQueryOptions());
+    const detail = getProductDetail(catalog, params.handle);
     if (!detail) throw notFound();
-    return detail;
+    return { detail, catalog };
   },
+
   head: ({ loaderData }) => {
     const title = loaderData
       ? `${loaderData.product.title} | Sunkissed`
