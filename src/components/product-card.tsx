@@ -7,7 +7,7 @@ import { useCatalog } from "@/lib/catalog";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
 
-const COLLAPSED_COUNT = 3;
+const VISIBLE_COUNT = 5;
 
 type ColorRef = ReturnType<typeof siblingColors>[number];
 
@@ -52,55 +52,12 @@ function Swatches({
   catalog: Product[];
 }) {
   const [expanded, setExpanded] = useState(false);
-  if (colors.length <= COLLAPSED_COUNT) {
-    return (
-      <div
-        className="mt-1.5 flex flex-nowrap items-center gap-1"
-        onMouseLeave={() => onHover(null)}
-      >
-        {colors.map((c) => (
-          <SwatchChip
-            key={c.handle}
-            color={c}
-            active={current?.handle === c.handle}
-            catalog={catalog}
-            onHover={onHover}
-          />
-        ))}
-      </div>
-    );
-  }
+  const visible = expanded ? colors : colors.slice(0, VISIBLE_COUNT);
+  const extra = colors.length - VISIBLE_COUNT;
 
-  if (expanded) {
-    return (
-      <div
-        className="mt-1.5 flex flex-wrap items-center gap-1"
-        onMouseLeave={() => onHover(null)}
-      >
-        {colors.map((c) => (
-          <SwatchChip
-            key={c.handle}
-            color={c}
-            active={current?.handle === c.handle}
-            catalog={catalog}
-            onHover={onHover}
-          />
-        ))}
-        <button
-          type="button"
-          onClick={() => setExpanded(false)}
-          className="ml-0.5 text-[11px] underline underline-offset-2 text-muted-foreground hover:text-foreground"
-        >
-          Show less
-        </button>
-      </div>
-    );
-  }
-
-  const visible = colors.slice(0, COLLAPSED_COUNT);
   return (
     <div
-      className="mt-1.5 flex flex-nowrap items-center gap-1"
+      className="mt-1.5 flex flex-wrap items-center gap-1"
       onMouseLeave={() => onHover(null)}
     >
       {visible.map((c) => (
@@ -112,15 +69,24 @@ function Swatches({
           onHover={onHover}
         />
       ))}
-      <button
-        type="button"
-        aria-label={`Show ${colors.length - COLLAPSED_COUNT} more colors`}
-        title={`+${colors.length - COLLAPSED_COUNT} more`}
-        onClick={() => setExpanded(true)}
-        className="ml-0.5 flex size-3.5 shrink-0 items-center justify-center rounded-full border border-foreground/20 text-[10px] leading-none text-muted-foreground transition-colors hover:border-foreground/50 hover:text-foreground"
-      >
-        +
-      </button>
+      {!expanded && extra > 0 && (
+        <button
+          type="button"
+          onClick={() => setExpanded(true)}
+          className="ml-0.5 text-[11px] leading-none text-muted-foreground hover:text-foreground"
+        >
+          +{extra}
+        </button>
+      )}
+      {expanded && extra > 0 && (
+        <button
+          type="button"
+          onClick={() => setExpanded(false)}
+          className="ml-0.5 text-[11px] underline underline-offset-2 text-muted-foreground hover:text-foreground"
+        >
+          Show less
+        </button>
+      )}
     </div>
   );
 }
