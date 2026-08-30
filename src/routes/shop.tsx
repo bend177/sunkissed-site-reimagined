@@ -423,25 +423,6 @@ function Shop() {
             )}
           </div>
           <div className="ml-auto flex shrink-0 items-center gap-3 md:gap-4">
-            <span className="whitespace-nowrap text-[11px] text-muted-foreground md:text-[13px]">
-              {filterCount === 0
-                ? "No Filters"
-                : `${filterCount} Filter${filterCount === 1 ? "" : "s"}`}
-            </span>
-            {filterCount > 0 && (
-              <button
-                type="button"
-                onClick={() => {
-                  setTypes([]);
-                  setColors([]);
-                  setStyles([]);
-                  setSizes([]);
-                }}
-                className="whitespace-nowrap text-[11px] underline underline-offset-[3px] md:text-[12px]"
-              >
-                Clear
-              </button>
-            )}
             <div className="relative">
               <button
                 type="button"
