@@ -128,11 +128,12 @@ function ProductPage() {
                       active ? "border-foreground" : "border-border hover:border-muted-foreground"
                     }`}
                   >
-                    <img
-                      src={s.image}
-                      alt={label}
-                      className="block size-full rounded-full object-cover"
+                    <span
+                      aria-hidden
+                      style={swatchStyle(label)}
+                      className="block size-full rounded-full"
                     />
+
                   </Link>
                 );
               })}
