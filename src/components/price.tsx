@@ -5,7 +5,7 @@ export function Price({ product, className }: { product: Product; className?: st
   if (product.compareAt) {
     return (
       <p className={cn("text-sm", className)}>
-        <span className="text-destructive">${product.price}</span>{" "}
+        <span className="text-foreground">${product.price}</span>{" "}
         <span className="text-muted-foreground line-through">${product.compareAt}</span>
       </p>
     );

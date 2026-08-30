@@ -25,7 +25,7 @@ export function ProductCard({ product }: { product: Product }) {
             className="size-full object-cover"
           />
           {product.compareAt && (
-            <span className="absolute left-2 top-2 bg-background px-2 py-0.5 text-[11px] uppercase tracking-widest text-destructive">
+            <span className="absolute left-2 top-2 bg-background px-2 py-0.5 text-[11px] uppercase tracking-widest text-foreground">
               Sale
             </span>
           )}
