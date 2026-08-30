@@ -9,6 +9,7 @@ import {
   getProductDetail,
   relatedProducts,
   type ProductDetail,
+  swatchStyle,
 } from "@/data/product-details";
 import { toast } from "sonner";
 

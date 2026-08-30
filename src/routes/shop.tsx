@@ -17,6 +17,7 @@ import {
   type ProductType,
   type SortKey,
 } from "@/data/shop-filters";
+import { swatchStyle } from "@/data/product-details";
 
 type Filter = "all" | "new" | "swim" | "one-piece" | "resort" | "towels";
 
@@ -233,7 +234,6 @@ function Shop() {
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
                 <span className="eyebrow text-muted-foreground">Featured Prints</span>
                 {prints.map((name) => {
-                  const cl = allColors.find((x) => x.name === name);
                   return (
                     <button
                       key={name}
