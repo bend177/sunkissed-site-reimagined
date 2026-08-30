@@ -295,12 +295,12 @@ function Shop() {
         </section>
 
         {/* Filter toolbar */}
-        <div className="mx-auto box-border flex max-w-[1440px] flex-nowrap items-center justify-between gap-3 px-4 pb-5 pt-6 md:gap-4 md:px-12 md:pb-6 md:pt-11">
-          <div className="flex min-w-0 items-center gap-2 md:gap-3.5">
-            <span className="text-[12px] text-muted-foreground md:text-[13px]">
+        <div className="mx-auto box-border flex max-w-[1440px] flex-nowrap items-center justify-between gap-2 px-4 pb-5 pt-6 md:gap-4 md:px-12 md:pb-6 md:pt-11">
+          <div className="flex shrink-0 items-center gap-2 md:gap-3.5">
+            <span className="whitespace-nowrap text-[11px] text-muted-foreground md:text-[13px]">
               {filterCount === 0
-                ? "No Filters Selected"
-                : `${filterCount} Filter${filterCount === 1 ? "" : "s"} Selected`}
+                ? "No Filters"
+                : `${filterCount} Filter${filterCount === 1 ? "" : "s"}`}
             </span>
             {filterCount > 0 && (
               <button
