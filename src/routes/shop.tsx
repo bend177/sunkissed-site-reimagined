@@ -164,9 +164,10 @@ function Shop() {
               >
                 {colors.includes(cl.name) ? "✓" : ""}
               </span>
-              <span
-                className="size-[19px] shrink-0 rounded-full ring-1 ring-border"
-                style={{ background: cl.swatch }}
+              <img
+                src={cl.image}
+                alt={cl.name}
+                className="size-[22px] shrink-0 rounded-full object-cover ring-1 ring-border"
               />
               {cl.name}
             </button>
@@ -200,9 +201,11 @@ function Shop() {
 
       <main>
         <section className="mx-auto box-border max-w-[1440px] px-4 pt-8 md:px-12 md:pt-14">
-          <h1 className="text-[34px] leading-[1.05] md:text-[clamp(44px,5vw,68px)]">
+          <h1 className="display text-[38px] leading-[1.05] md:text-[clamp(48px,5vw,72px)]">
             {pageTitle}{" "}
-            <sup className="text-[12px] text-muted-foreground md:text-[15px]">{list.length}</sup>
+            <sup className="font-sans text-[12px] text-muted-foreground md:text-[15px]">
+              {list.length}
+            </sup>
           </h1>
 
           {bikiniFamily && (
@@ -228,20 +231,27 @@ function Shop() {
               </div>
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
                 <span className="eyebrow text-muted-foreground">Featured Prints</span>
-                {prints.map((name) => (
-                  <button
-                    key={name}
-                    type="button"
-                    onClick={() => setColors([name])}
-                    className="flex items-center gap-2 text-[13.5px] transition-opacity hover:opacity-60"
-                  >
-                    <span
-                      className="size-[18px] shrink-0 rounded-full ring-1 ring-border"
-                      style={{ background: allColors.find((x) => x.name === name)?.swatch }}
-                    />
-                    <span className="hidden sm:inline">{name}</span>
-                  </button>
-                ))}
+                {prints.map((name) => {
+                  const cl = allColors.find((x) => x.name === name);
+                  return (
+                    <button
+                      key={name}
+                      type="button"
+                      onClick={() => setColors([name])}
+                      title={name}
+                      className="flex items-center gap-2 text-[13.5px] transition-opacity hover:opacity-60"
+                    >
+                      <img
+                        src={cl?.image}
+                        alt={name}
+                        className={`size-[24px] shrink-0 rounded-full object-cover ring-1 ${
+                          colors.includes(name) ? "ring-2 ring-foreground" : "ring-border"
+                        }`}
+                      />
+                      <span className="hidden sm:inline">{name}</span>
+                    </button>
+                  );
+                })}
                 <button
                   type="button"
                   aria-label="Show all prints"
