@@ -8,7 +8,6 @@ import { Price } from "@/components/price";
 import {
   getProductDetail,
   relatedProducts,
-  swatchColor,
   type ProductDetail,
 } from "@/data/product-details";
 import { toast } from "sonner";
@@ -128,9 +127,10 @@ function ProductPage() {
                       active ? "border-foreground" : "border-border hover:border-muted-foreground"
                     }`}
                   >
-                    <span
-                      className="block size-full rounded-full"
-                      style={{ background: swatchColor(label) }}
+                    <img
+                      src={s.image}
+                      alt={label}
+                      className="block size-full rounded-full object-cover"
                     />
                   </Link>
                 );

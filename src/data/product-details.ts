@@ -101,6 +101,7 @@ export function siblingColors(product: Product) {
       handle: p.handle,
       colorName: splitTitle(p.title).color || base,
       swatch: swatchColor(splitTitle(p.title).color || base),
+      image: p.image,
       current: p.handle === product.handle,
     }));
 }
