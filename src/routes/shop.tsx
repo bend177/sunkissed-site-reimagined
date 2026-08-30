@@ -63,6 +63,9 @@ export const Route = createFileRoute("/shop")({
 
 function Shop() {
   const { c } = Route.useSearch();
+  const products = useCatalog();
+  const allColors = colorsIn(products);
+
 
   const [types, setTypes] = useState<ProductType[]>(typesFor(c));
   const [colors, setColors] = useState<string[]>([]);
