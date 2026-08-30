@@ -1,5 +1,7 @@
 import type { CSSProperties } from "react";
 import { editorial, type Product } from "@/data/products";
+import { swatchImages } from "@/data/swatch-images";
+
 
 export type ProductDetail = {
   product: Product;
