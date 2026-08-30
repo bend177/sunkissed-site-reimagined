@@ -1,4 +1,4 @@
-// Real fabric swatch chips uploaded per colorway.
+// Real fabric swatch chips, one per colorway (uploaded by the brand).
 export const swatchImages: Record<string, string> = {
   "acid.jpg": "/__l5e/assets-v1/b116bb33-de34-414b-8546-f06b3c009bfa/acid.jpg",
   "black mamba.jpg": "/__l5e/assets-v1/1443cb9d-16e0-45f9-bffa-bb8190f89999/black-mamba.jpg",
