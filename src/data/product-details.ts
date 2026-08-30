@@ -113,15 +113,46 @@ export const realSwatchStyle = (
   image: string | undefined,
   colorName: string,
   focusY = 40,
+  flat = false,
 ): CSSProperties =>
   image && isPrint(colorName)
     ? {
         backgroundImage: `url(${image})`,
-        backgroundSize: "620%",
-        backgroundPosition: `50% ${focusY}%`,
+        backgroundSize: flat ? "cover" : "620%",
+        backgroundPosition: flat ? "50% 50%" : `50% ${focusY}%`,
         backgroundRepeat: "no-repeat",
       }
     : swatchStyle(colorName);
+
+// Flat goods (towels, sarongs) photograph the print edge to edge, which makes
+// the truest swatch. Prefer one of those images for a print colorway.
+const flatCache = new Map<string, string | undefined>();
+
+export const flatPrintImage = (catalog: Product[], colorName: string) => {
+  const key = colorName.toLowerCase();
+  if (!flatCache.has(key)) {
+    const match = catalog.find(
+      (p) =>
+        splitTitle(p.title).color.toLowerCase() === key &&
+        (p.category === "towels" || /towel|sarong|blanket|throw/i.test(p.title)),
+    );
+    flatCache.set(key, match?.image);
+  }
+  return flatCache.get(key);
+};
+
+// One entry point: real print texture when we have it, clean fill otherwise.
+export const swatchFill = (
+  catalog: Product[],
+  colorName: string,
+  fallbackImage?: string,
+  focusY = 40,
+): CSSProperties => {
+  if (!isPrint(colorName)) return swatchStyle(colorName);
+  const flat = flatPrintImage(catalog, colorName);
+  if (flat) return realSwatchStyle(flat, colorName, 50, true);
+  return realSwatchStyle(fallbackImage, colorName, focusY);
+};
 
 export const swatchStyle = (colorName: string): CSSProperties =>
   printMap[colorName.toLowerCase()] ?? { backgroundColor: swatchColor(colorName) };

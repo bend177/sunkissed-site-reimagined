@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
 import type { Product } from "@/data/products";
-import { realSwatchStyle, siblingColors } from "@/data/product-details";
+import { siblingColors, swatchFill } from "@/data/product-details";
 import { useCatalog } from "@/lib/catalog";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
@@ -61,7 +61,7 @@ export function ProductCard({ product }: { product: Product }) {
                       ? "ring-foreground"
                       : "ring-foreground/15 hover:ring-foreground/50"
                   }`}
-                  style={realSwatchStyle(c.image, c.colorName, c.focusY)}
+                  style={swatchFill(catalog, c.colorName, c.image, c.focusY)}
                 />
               ))}
               {colors.length > 8 && (
