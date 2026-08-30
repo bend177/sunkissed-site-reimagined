@@ -224,19 +224,29 @@ function Shop() {
                 ["Beach Towels", "towels"],
                 ["New Arrivals", "new"],
               ] as [string, Filter][]
-            ).map(([label, key]) => (
-              <li key={key}>
-                <Link
-                  to="/shop"
-                  search={{ c: key }}
-                  className={`whitespace-nowrap text-[14px] font-semibold transition-opacity hover:opacity-60 md:text-[16px] ${
-                    c === key ? "" : "text-foreground/70"
-                  }`}
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+            ).map(([label, key]) => {
+              const count = products.filter((p) => {
+                const ts = typesFor(key);
+                if (key === "new") return p.category !== "towels";
+                return ts.length ? ts.includes(productType(p)) : true;
+              }).length;
+              return (
+                <li key={key}>
+                  <Link
+                    to="/shop"
+                    search={{ c: key }}
+                    className={`whitespace-nowrap text-[14px] font-semibold transition-opacity hover:opacity-60 md:text-[16px] ${
+                      c === key ? "" : "text-foreground/70"
+                    }`}
+                  >
+                    {label}{" "}
+                    <span className="font-normal text-muted-foreground/80">
+                      {count}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
