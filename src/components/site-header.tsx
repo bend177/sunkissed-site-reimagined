@@ -70,9 +70,21 @@ export function SiteHeader() {
             <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
           </Link>
           <div className="flex items-center gap-5">
-            <button type="button" aria-label="Bag" onClick={() => setFly("bag")}>
+            <button
+              type="button"
+              aria-label={`Bag (${cartCount})`}
+              onClick={checkout}
+              disabled={cartCount === 0}
+              className="relative disabled:opacity-40"
+            >
               <ShoppingBag className="size-[19px]" strokeWidth={1.25} />
+              {cartCount > 0 && (
+                <span className="absolute -right-2 -top-1.5 min-w-4 rounded-full bg-ink px-1 text-[9px] leading-4 text-background">
+                  {cartCount}
+                </span>
+              )}
             </button>
+
             <button type="button" aria-label="Open menu" onClick={() => setOpen(true)}>
               <Menu className="size-[22px]" strokeWidth={1.25} />
             </button>
