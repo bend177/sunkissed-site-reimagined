@@ -92,7 +92,7 @@ export function SiteHeader() {
         </div>
 
         <nav className="flex flex-1 flex-col justify-center gap-1 px-6">
-          {links.map((l, i) => (
+          {links.map((l) => (
             <Link
               key={l.label}
               to={l.to}
