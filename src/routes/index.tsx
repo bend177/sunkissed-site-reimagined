@@ -70,7 +70,7 @@ function Home() {
 
 
         {/* Category grid */}
-        <section className="px-4 py-10 md:px-6 md:py-12">
+        <section className="px-4 py-8 md:px-6 md:py-10">
           <div className="flex items-end justify-between gap-6">
             <h2 className="display text-4xl md:text-5xl">Shop by category</h2>
             <Link to="/shop" search={{ c: "all" }} className="rule-link text-sm">
