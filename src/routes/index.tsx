@@ -172,7 +172,7 @@ function Home() {
           </div>
         </section>
 
-        <section className="px-4 py-12 md:px-6 md:py-14">
+        <section className="px-4 py-10 md:px-6 md:py-12">
           <h2 className="display text-4xl md:text-5xl">Towels, rolled &amp; ready</h2>
           <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-4 md:gap-x-4">
             {towels.map((p) => (
