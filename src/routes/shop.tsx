@@ -295,12 +295,12 @@ function Shop() {
         </section>
 
         {/* Filter toolbar */}
-        <div className="mx-auto box-border flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-4 pb-5 pt-6 md:px-12 md:pb-6 md:pt-11">
-          <div className="flex items-center gap-3.5">
-            <span className="text-[12px] text-muted-foreground md:text-[13px]">
+        <div className="mx-auto box-border flex max-w-[1440px] flex-nowrap items-center justify-between gap-2 px-4 pb-5 pt-6 md:gap-4 md:px-12 md:pb-6 md:pt-11">
+          <div className="flex min-w-0 items-center gap-2 md:gap-3.5">
+            <span className="whitespace-nowrap text-[11px] text-muted-foreground md:text-[13px]">
               {filterCount === 0
-                ? "No Filters Selected"
-                : `${filterCount} Filter${filterCount === 1 ? "" : "s"} Selected`}
+                ? "No Filters"
+                : `${filterCount} Filter${filterCount === 1 ? "" : "s"}`}
             </span>
             {filterCount > 0 && (
               <button
@@ -310,20 +310,20 @@ function Shop() {
                   setColors([]);
                   setSizes([]);
                 }}
-                className="text-[12px] underline underline-offset-[3px]"
+                className="whitespace-nowrap text-[11px] underline underline-offset-[3px] md:text-[12px]"
               >
-                Clear Filters
+                Clear
               </button>
             )}
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex shrink-0 items-center gap-3 md:gap-4">
             <button
               type="button"
               onClick={() => {
                 setSidebarOpen(!sidebarOpen);
                 setMobileFiltersOpen(!mobileFiltersOpen);
               }}
-              className="flex items-center gap-1.5 border border-foreground px-3 py-1.5 text-[12px] transition-colors hover:bg-foreground hover:text-background"
+              className="flex items-center gap-1.5 whitespace-nowrap border border-foreground px-2.5 py-1.5 text-[11px] transition-colors hover:bg-foreground hover:text-background md:px-3 md:text-[12px]"
             >
               Filters{" "}
               <span className="text-[15px] leading-none">
@@ -334,9 +334,9 @@ function Shop() {
               <button
                 type="button"
                 onClick={() => setSortOpen(!sortOpen)}
-                className="text-[12px] md:text-[13.5px]"
+                className="whitespace-nowrap text-[11px] md:text-[13.5px]"
               >
-                Sort by:{" "}
+                Sort:{" "}
                 <span className="underline underline-offset-[3px]">{SORT_LABEL[sort]}</span>
               </button>
               {sortOpen && (
