@@ -310,9 +310,9 @@ function Shop() {
                   setColors([]);
                   setSizes([]);
                 }}
-                className="text-[12px] underline underline-offset-[3px]"
+                className="whitespace-nowrap text-[11px] underline underline-offset-[3px] md:text-[12px]"
               >
-                Clear Filters
+                Clear
               </button>
             )}
           </div>
