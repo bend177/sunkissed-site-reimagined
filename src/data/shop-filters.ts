@@ -35,7 +35,11 @@ export const colorOf = (p: Product) => splitTitle(p.title).color.trim();
 
 export const allColors = Array.from(new Set(products.map(colorOf).filter(Boolean)))
   .sort((a, b) => a.localeCompare(b))
-  .map((name) => ({ name, swatch: swatchColor(name) }));
+  .map((name) => ({
+    name,
+    swatch: swatchColor(name),
+    image: products.find((p) => colorOf(p) === name)?.image ?? "",
+  }));
 
 export const FEATURED_PRINTS = ["Leopard", "Zebra", "Golden Leopard", "Rouge"];
 
