@@ -226,7 +226,7 @@ export function getProductDetail(catalog: Product[], handle: string): ProductDet
 
 export function siblingColors(catalog: Product[], product: Product) {
   const { base } = splitTitle(product.title);
-  return catalog
+  const colors = catalog
     .filter((p) => splitTitle(p.title).base === base)
     .map((p) => ({
       handle: p.handle,
@@ -236,6 +236,15 @@ export function siblingColors(catalog: Product[], product: Product) {
       focusY: swatchFocus(p.title),
       current: p.handle === product.handle,
     }));
+
+  // The colorway shown on the card always leads, so its own swatch is never
+  // hidden behind the +N control.
+  const currentIndex = colors.findIndex((c) => c.current);
+  if (currentIndex > 0) {
+    const [currentColor] = colors.splice(currentIndex, 1);
+    colors.unshift(currentColor);
+  }
+  return colors;
 }
 
 export function relatedProducts(catalog: Product[], product: Product, limit = 4) {
