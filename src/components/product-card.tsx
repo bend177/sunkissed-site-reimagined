@@ -44,10 +44,10 @@ export function ProductCard({ product }: { product: Product }) {
           <Price product={product} className="mt-0.5" />
           {colors.length > 1 && (
             <div
-              className="mt-1.5 flex flex-wrap items-center gap-1.5"
+              className="mt-1.5 flex flex-nowrap items-center gap-1"
               onMouseLeave={() => setActive(null)}
             >
-              {colors.slice(0, 8).map((c) => (
+              {colors.slice(0, 5).map((c) => (
                 <Link
                   key={c.handle}
                   to="/products/$handle"
@@ -56,7 +56,7 @@ export function ProductCard({ product }: { product: Product }) {
                   title={c.colorName}
                   onMouseEnter={() => setActive(c)}
                   onFocus={() => setActive(c)}
-                  className={`block size-5 shrink-0 rounded-full ring-1 ring-inset transition-shadow ${
+                  className={`block size-3.5 shrink-0 rounded-full ring-1 ring-inset transition-shadow ${
                     current?.handle === c.handle
                       ? "ring-foreground"
                       : "ring-foreground/15 hover:ring-foreground/50"
@@ -64,9 +64,10 @@ export function ProductCard({ product }: { product: Product }) {
                   style={swatchFill(catalog, c.colorName, c.image, c.focusY)}
                 />
               ))}
-              {colors.length > 8 && (
-                <span className="text-[11px] text-muted-foreground">+{colors.length - 8}</span>
+              {colors.length > 5 && (
+                <span className="ml-0.5 text-[11px] text-muted-foreground">+{colors.length - 5}</span>
               )}
+
 
             </div>
           )}
