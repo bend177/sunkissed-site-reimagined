@@ -219,13 +219,16 @@ function Shop() {
                     ["Tops", ["tops"]],
                     ["Bottoms", ["bottoms"]],
                     ["One Pieces", ["one-pieces"]],
+                    ["Separates", ["tops", "bottoms"]],
                   ] as [string, ProductType[]][]
                 ).map(([label, t]) => (
                   <button
                     key={label}
                     type="button"
                     onClick={() => setOnly(t)}
-                    className={chip(types.length === 1 && types[0] === t[0])}
+                    className={chip(
+                      types.length === t.length && t.every((x) => types.includes(x)),
+                    )}
                   >
                     {label}
                   </button>
