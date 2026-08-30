@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { products, editorial, type Product } from "@/data/products";
 
 export type ProductDetail = {
@@ -34,7 +35,7 @@ export const swatchColor = (colorName: string) =>
   swatchMap[colorName.toLowerCase()] ?? "oklch(0.8 0.02 84)";
 
 // Prints get a small generated pattern instead of a flat fill.
-const printMap: Record<string, React.CSSProperties> = {
+const printMap: Record<string, CSSProperties> = {
   leopard: {
     backgroundColor: "oklch(0.78 0.09 72)",
     backgroundImage:
@@ -62,7 +63,7 @@ const printMap: Record<string, React.CSSProperties> = {
   },
 };
 
-export const swatchStyle = (colorName: string): React.CSSProperties =>
+export const swatchStyle = (colorName: string): CSSProperties =>
   printMap[colorName.toLowerCase()] ?? { backgroundColor: swatchColor(colorName) };
 
 
