@@ -164,11 +164,12 @@ function Shop() {
               >
                 {colors.includes(cl.name) ? "✓" : ""}
               </span>
-              <img
-                src={cl.image}
-                alt={cl.name}
-                className="size-[22px] shrink-0 rounded-full object-cover ring-1 ring-border"
+              <span
+                title={cl.name}
+                style={swatchStyle(cl.name)}
+                className="size-[22px] shrink-0 rounded-full ring-1 ring-border"
               />
+
               {cl.name}
             </button>
           ))}
