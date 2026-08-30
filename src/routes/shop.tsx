@@ -316,7 +316,7 @@ function Shop() {
               </button>
             )}
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex shrink-0 items-center gap-3 md:gap-4">
             <button
               type="button"
               onClick={() => {
