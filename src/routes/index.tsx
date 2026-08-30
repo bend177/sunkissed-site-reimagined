@@ -130,7 +130,7 @@ function Home() {
         </section>
 
         {/* Featured products */}
-        <section className="px-4 py-12 md:px-6 md:py-14">
+        <section className="px-4 py-10 md:px-6 md:py-12">
           <div className="flex items-end justify-between gap-6">
             <h2 className="display text-4xl md:text-5xl">Just landed</h2>
             <Link to="/shop" search={{ c: "new" }} className="rule-link text-sm">
