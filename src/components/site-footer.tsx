@@ -1,11 +1,12 @@
 import { Link } from "@tanstack/react-router";
+import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-secondary">
       <div className="grid gap-12 px-4 py-16 md:grid-cols-[1.2fr_1fr_1fr_1fr] md:px-6">
         <div>
-          <p className="display text-4xl">Sunkissed</p>
+          <img src={logoAsset.url} alt="Sunkissed" className="h-6 w-auto" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
             Swimwear made for long days in the sun - sculpted fits, sand-free towels, and resort
             pieces that travel well.

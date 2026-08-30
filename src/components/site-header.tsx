@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ArrowRight, Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 
 const links = [
   { label: "new", to: "/shop", search: { c: "new" } as const },
@@ -52,11 +53,12 @@ export function SiteHeader() {
             </button>
           </div>
 
-          <Link
-            to="/"
-            className="display shrink-0 text-2xl tracking-tight md:text-[28px]"
-          >
-            Sunkissed
+          <Link to="/" aria-label="Sunkissed home" className="shrink-0">
+            <img
+              src={logoAsset.url}
+              alt="Sunkissed"
+              className="h-4 w-auto md:h-[18px]"
+            />
           </Link>
 
           <div className="flex min-w-0 items-center justify-end gap-5">
@@ -85,7 +87,7 @@ export function SiteHeader() {
         aria-hidden={!open}
       >
         <div className="flex items-center justify-between border-b border-border px-4 py-3.5">
-          <span className="display text-2xl tracking-tight">Sunkissed</span>
+          <img src={logoAsset.url} alt="Sunkissed" className="h-[18px] w-auto" />
           <button type="button" aria-label="Close menu" onClick={() => setOpen(false)}>
             <X className="size-6" strokeWidth={1.25} />
           </button>
