@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { products, editorial, type Product } from "@/data/products";
 
 export type ProductDetail = {
@@ -32,6 +33,39 @@ const swatchMap: Record<string, string> = {
 
 export const swatchColor = (colorName: string) =>
   swatchMap[colorName.toLowerCase()] ?? "oklch(0.8 0.02 84)";
+
+// Prints get a small generated pattern instead of a flat fill.
+const printMap: Record<string, CSSProperties> = {
+  leopard: {
+    backgroundColor: "oklch(0.78 0.09 72)",
+    backgroundImage:
+      "radial-gradient(ellipse 30% 22% at 25% 28%, oklch(0.28 0.05 60) 60%, transparent 62%), radial-gradient(ellipse 26% 20% at 68% 55%, oklch(0.28 0.05 60) 60%, transparent 62%), radial-gradient(ellipse 24% 18% at 40% 80%, oklch(0.28 0.05 60) 60%, transparent 62%), radial-gradient(ellipse 22% 18% at 85% 15%, oklch(0.28 0.05 60) 60%, transparent 62%)",
+  },
+  "golden leopard": {
+    backgroundColor: "oklch(0.83 0.11 82)",
+    backgroundImage:
+      "radial-gradient(ellipse 30% 22% at 22% 30%, oklch(0.34 0.06 62) 60%, transparent 62%), radial-gradient(ellipse 26% 20% at 70% 58%, oklch(0.34 0.06 62) 60%, transparent 62%), radial-gradient(ellipse 24% 18% at 45% 82%, oklch(0.34 0.06 62) 60%, transparent 62%), radial-gradient(ellipse 22% 18% at 86% 18%, oklch(0.34 0.06 62) 60%, transparent 62%)",
+  },
+  zebra: {
+    backgroundColor: "oklch(0.96 0 0)",
+    backgroundImage:
+      "repeating-linear-gradient(115deg, oklch(0.18 0 0) 0 3px, transparent 3px 8px)",
+  },
+  "black mamba": {
+    backgroundColor: "oklch(0.22 0.01 280)",
+    backgroundImage:
+      "repeating-linear-gradient(115deg, oklch(0.45 0.02 280) 0 2px, transparent 2px 7px)",
+  },
+  "midnight bloom": {
+    backgroundColor: "oklch(0.35 0.07 265)",
+    backgroundImage:
+      "radial-gradient(circle 22% at 30% 30%, oklch(0.72 0.09 330) 60%, transparent 62%), radial-gradient(circle 18% at 70% 65%, oklch(0.72 0.09 330) 60%, transparent 62%)",
+  },
+};
+
+export const swatchStyle = (colorName: string): CSSProperties =>
+  printMap[colorName.toLowerCase()] ?? { backgroundColor: swatchColor(colorName) };
+
 
 const editorialFill = [editorial.tops, editorial.bottoms, editorial.newArrivals, editorial.allSets];
 
