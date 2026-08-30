@@ -84,6 +84,12 @@ function Shop() {
 
   const newOnly = c === "new";
 
+  const collectionCount = products.filter((p) => {
+    const ts = typesFor(c);
+    if (newOnly) return p.category !== "towels";
+    return ts.length ? ts.includes(productType(p)) : true;
+  }).length;
+
   const toggle = <T,>(list: T[], set: (v: T[]) => void, value: T) =>
     set(list.includes(value) ? list.filter((x) => x !== value) : [...list, value]);
 
