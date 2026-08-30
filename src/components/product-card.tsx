@@ -47,7 +47,7 @@ export function ProductCard({ product }: { product: Product }) {
               className="mt-1.5 flex flex-wrap items-center gap-1.5"
               onMouseLeave={() => setActive(null)}
             >
-              {colors.map((c) => (
+              {colors.slice(0, 8).map((c) => (
                 <Link
                   key={c.handle}
                   to="/products/$handle"
@@ -64,6 +64,10 @@ export function ProductCard({ product }: { product: Product }) {
                   style={swatchStyle(c.colorName)}
                 />
               ))}
+              {colors.length > 8 && (
+                <span className="text-[11px] text-muted-foreground">+{colors.length - 8}</span>
+              )}
+
             </div>
           )}
         </div>
