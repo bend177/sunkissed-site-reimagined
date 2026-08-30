@@ -12,10 +12,11 @@ export type ProductDetail = {
   sizes: string[];
 };
 
-const splitTitle = (title: string) => {
-  const [base, color] = title.split("—").map((s) => s.trim());
-  return { base, color: color ?? "" };
+const splitTitle = (title: string): { base: string; color: string } => {
+  const parts = title.split("—").map((s) => s.trim());
+  return { base: parts[0] ?? title, color: parts[1] ?? "" };
 };
+
 
 const swatchMap: Record<string, string> = {
   rouge: "oklch(0.52 0.19 26)",
