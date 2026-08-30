@@ -19,8 +19,8 @@
  */
 
 @theme inline {
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-serif: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --color-sand: var(--sand);
   --color-ink: var(--ink);
   --radius-sm: calc(var(--radius) - 4px);
