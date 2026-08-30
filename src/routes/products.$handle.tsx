@@ -25,14 +25,10 @@ export const Route = createFileRoute("/products/$handle")({
   },
 
   head: ({ loaderData }) => {
-    const title = loaderData
-      ? `${loaderData.product.title} | Sunkissed`
-      : "Product | Sunkissed";
-    const description = loaderData
-      ? `${loaderData.product.title} - $${loaderData.product.price}. ${loaderData.description}`.slice(
-          0,
-          158,
-        )
+    const detail = loaderData?.detail;
+    const title = detail ? `${detail.product.title} | Sunkissed` : "Product | Sunkissed";
+    const description = detail
+      ? `${detail.product.title} - $${detail.product.price}. ${detail.description}`.slice(0, 158)
       : "Shop Sunkissed swimwear.";
     return {
       meta: [
@@ -42,15 +38,16 @@ export const Route = createFileRoute("/products/$handle")({
         { property: "og:description", content: description },
         { property: "og:type", content: "product" },
         { name: "twitter:card", content: "summary_large_image" },
-        ...(loaderData
+        ...(detail
           ? [
-              { property: "og:image", content: loaderData.product.image },
-              { name: "twitter:image", content: loaderData.product.image },
+              { property: "og:image", content: detail.product.image },
+              { name: "twitter:image", content: detail.product.image },
             ]
           : []),
       ],
     };
   },
+
   component: ProductPage,
 });
 
