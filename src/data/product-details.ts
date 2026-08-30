@@ -116,8 +116,9 @@ export const realSwatchStyle = (
   colorName: string,
   focusY = 40,
   flat = false,
-): CSSProperties =>
-  image && isPrint(colorName)
+): CSSProperties => {
+  if (swatchImages[colorName.toLowerCase()]) return swatchStyle(colorName);
+  return image && isPrint(colorName)
     ? {
         backgroundImage: `url(${image})`,
         backgroundSize: flat ? "cover" : "620%",
@@ -125,6 +126,8 @@ export const realSwatchStyle = (
         backgroundRepeat: "no-repeat",
       }
     : swatchStyle(colorName);
+};
+
 
 // Flat goods (towels, sarongs) photograph the print edge to edge, which makes
 // the truest swatch. Prefer one of those images for a print colorway.
