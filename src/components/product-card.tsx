@@ -7,6 +7,124 @@ import { useCatalog } from "@/lib/catalog";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
 
+const COLLAPSED_COUNT = 3;
+
+type ColorRef = ReturnType<typeof siblingColors>[number];
+
+function SwatchChip({
+  color,
+  active,
+  catalog,
+  onHover,
+}: {
+  color: ColorRef;
+  active: boolean;
+  catalog: Product[];
+  onHover: (c: ColorRef | null) => void;
+}) {
+  return (
+    <Link
+      to="/products/$handle"
+      params={{ handle: color.handle }}
+      aria-label={color.colorName}
+      title={color.colorName}
+      onMouseEnter={() => onHover(color)}
+      onFocus={() => onHover(color)}
+      className={`block size-3.5 shrink-0 rounded-full ring-1 ring-inset transition-shadow ${
+        active
+          ? "ring-foreground"
+          : "ring-foreground/15 hover:ring-foreground/50"
+      }`}
+      style={swatchFill(catalog, color.colorName, color.image, color.focusY)}
+    />
+  );
+}
+
+function Swatches({
+  colors,
+  current,
+  onHover,
+  catalog,
+}: {
+  colors: ColorRef[];
+  current: ColorRef | null;
+  onHover: (c: ColorRef | null) => void;
+  catalog: Product[];
+}) {
+  const [expanded, setExpanded] = useState(false);
+  if (colors.length <= COLLAPSED_COUNT) {
+    return (
+      <div
+        className="mt-1.5 flex flex-nowrap items-center gap-1"
+        onMouseLeave={() => onHover(null)}
+      >
+        {colors.map((c) => (
+          <SwatchChip
+            key={c.handle}
+            color={c}
+            active={current?.handle === c.handle}
+            catalog={catalog}
+            onHover={onHover}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  if (expanded) {
+    return (
+      <div
+        className="mt-1.5 flex flex-wrap items-center gap-1"
+        onMouseLeave={() => onHover(null)}
+      >
+        {colors.map((c) => (
+          <SwatchChip
+            key={c.handle}
+            color={c}
+            active={current?.handle === c.handle}
+            catalog={catalog}
+            onHover={onHover}
+          />
+        ))}
+        <button
+          type="button"
+          onClick={() => setExpanded(false)}
+          className="ml-0.5 text-[11px] underline underline-offset-2 text-muted-foreground hover:text-foreground"
+        >
+          Show less
+        </button>
+      </div>
+    );
+  }
+
+  const visible = colors.slice(0, COLLAPSED_COUNT);
+  return (
+    <div
+      className="mt-1.5 flex flex-nowrap items-center gap-1"
+      onMouseLeave={() => onHover(null)}
+    >
+      {visible.map((c) => (
+        <SwatchChip
+          key={c.handle}
+          color={c}
+          active={current?.handle === c.handle}
+          catalog={catalog}
+          onHover={onHover}
+        />
+      ))}
+      <button
+        type="button"
+        aria-label={`Show ${colors.length - COLLAPSED_COUNT} more colors`}
+        title={`+${colors.length - COLLAPSED_COUNT} more`}
+        onClick={() => setExpanded(true)}
+        className="ml-0.5 flex size-3.5 shrink-0 items-center justify-center rounded-full border border-foreground/20 text-[10px] leading-none text-muted-foreground transition-colors hover:border-foreground/50 hover:text-foreground"
+      >
+        +
+      </button>
+    </div>
+  );
+}
+
 export function ProductCard({ product }: { product: Product }) {
   const catalog = useCatalog();
   const colors = siblingColors(catalog, product);
@@ -43,33 +161,12 @@ export function ProductCard({ product }: { product: Product }) {
           </Link>
           <Price product={product} className="mt-0.5" />
           {colors.length > 1 && (
-            <div
-              className="mt-1.5 flex flex-nowrap items-center gap-1"
-              onMouseLeave={() => setActive(null)}
-            >
-              {colors.slice(0, 5).map((c) => (
-                <Link
-                  key={c.handle}
-                  to="/products/$handle"
-                  params={{ handle: c.handle }}
-                  aria-label={c.colorName}
-                  title={c.colorName}
-                  onMouseEnter={() => setActive(c)}
-                  onFocus={() => setActive(c)}
-                  className={`block size-3.5 shrink-0 rounded-full ring-1 ring-inset transition-shadow ${
-                    current?.handle === c.handle
-                      ? "ring-foreground"
-                      : "ring-foreground/15 hover:ring-foreground/50"
-                  }`}
-                  style={swatchFill(catalog, c.colorName, c.image, c.focusY)}
-                />
-              ))}
-              {colors.length > 5 && (
-                <span className="ml-0.5 text-[11px] text-muted-foreground">+{colors.length - 5}</span>
-              )}
-
-
-            </div>
+            <Swatches
+              colors={colors}
+              current={current}
+              onHover={setActive}
+              catalog={catalog}
+            />
           )}
         </div>
         <button
