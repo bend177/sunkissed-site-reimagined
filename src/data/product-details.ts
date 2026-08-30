@@ -142,17 +142,14 @@ export const flatPrintImage = (catalog: Product[], colorName: string) => {
 };
 
 // One entry point: real print texture when we have it, clean fill otherwise.
+// Product photos are lifestyle shots, so cropping them makes muddy swatches.
+// Prints render as generated pattern fills, solids as their real color.
 export const swatchFill = (
-  catalog: Product[],
+  _catalog: Product[],
   colorName: string,
-  fallbackImage?: string,
-  focusY = 40,
-): CSSProperties => {
-  if (!isPrint(colorName)) return swatchStyle(colorName);
-  const flat = flatPrintImage(catalog, colorName);
-  if (flat) return realSwatchStyle(flat, colorName, 50, true);
-  return realSwatchStyle(fallbackImage, colorName, focusY);
-};
+  _fallbackImage?: string,
+  _focusY = 40,
+): CSSProperties => swatchStyle(colorName);
 
 export const swatchStyle = (colorName: string): CSSProperties =>
   printMap[colorName.toLowerCase()] ?? { backgroundColor: swatchColor(colorName) };
