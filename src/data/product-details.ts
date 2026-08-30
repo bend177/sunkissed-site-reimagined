@@ -100,15 +100,25 @@ const PRINT_WORDS =
 export const isPrint = (colorName: string) => PRINT_WORDS.test(colorName);
 
 // Real swatch: a tight crop of the actual product photo for that colorway.
+// Where the garment sits in a full-body shot, so the crop lands on fabric.
+export const swatchFocus = (title: string) => {
+  const t = title.toLowerCase();
+  if (t.includes("bottom")) return 62;
+  if (t.includes("top") || t.includes("bra")) return 33;
+  if (t.includes("towel") || t.includes("sarong") || t.includes("dress")) return 50;
+  return 40;
+};
+
 export const realSwatchStyle = (
   image: string | undefined,
   colorName: string,
+  focusY = 40,
 ): CSSProperties =>
   image && isPrint(colorName)
     ? {
         backgroundImage: `url(${image})`,
-        backgroundSize: "600%",
-        backgroundPosition: "50% 48%",
+        backgroundSize: "620%",
+        backgroundPosition: `50% ${focusY}%`,
         backgroundRepeat: "no-repeat",
       }
     : swatchStyle(colorName);
@@ -181,6 +191,7 @@ export function siblingColors(catalog: Product[], product: Product) {
       colorName: splitTitle(p.title).color || base,
       swatch: swatchColor(splitTitle(p.title).color || base),
       image: p.image,
+      focusY: swatchFocus(p.title),
       current: p.handle === product.handle,
     }));
 }

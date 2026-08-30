@@ -13,6 +13,7 @@ import {
   splitTitle,
   type ProductDetail,
   realSwatchStyle,
+  swatchFocus,
 } from "@/data/product-details";
 import { toast } from "sonner";
 
@@ -166,7 +167,7 @@ function ProductPage() {
                   >
                     <span
                       aria-hidden
-                      style={realSwatchStyle(s.image, label)}
+                      style={realSwatchStyle(s.image, label, swatchFocus(s.title))}
                       className="block size-full rounded-full"
                     />
 

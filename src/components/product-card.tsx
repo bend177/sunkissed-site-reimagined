@@ -61,7 +61,7 @@ export function ProductCard({ product }: { product: Product }) {
                       ? "ring-foreground"
                       : "ring-foreground/15 hover:ring-foreground/50"
                   }`}
-                  style={realSwatchStyle(c.image, c.colorName)}
+                  style={realSwatchStyle(c.image, c.colorName, c.focusY)}
                 />
               ))}
               {colors.length > 8 && (

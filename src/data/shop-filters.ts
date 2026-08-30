@@ -1,5 +1,5 @@
 import type { Product } from "@/data/products";
-import { splitTitle, swatchColor } from "@/data/product-details";
+import { splitTitle, swatchColor, swatchFocus } from "@/data/product-details";
 
 export type ProductType = "sets" | "tops" | "bottoms" | "one-pieces" | "resort" | "towels";
 
@@ -42,6 +42,7 @@ export const colorsIn = (catalog: Product[]) =>
       swatch: swatchColor(name),
       count: catalog.filter((p) => colorOf(p) === name).length,
       image: catalog.find((p) => colorOf(p) === name)?.image ?? "",
+      focusY: swatchFocus(catalog.find((p) => colorOf(p) === name)?.title ?? ""),
     }));
 
 // Most-carried colors/prints in the live catalog, so every swatch is real.

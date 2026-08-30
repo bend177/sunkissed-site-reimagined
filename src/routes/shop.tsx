@@ -119,7 +119,7 @@ function Shop() {
 
   const filterCount = types.length + colors.length + sizes.length;
   const prints = printsAll ? allColors.map((x) => x.name) : featuredPrints(products);
-  const colorImage = new Map(allColors.map((x) => [x.name, x.image] as const));
+  const colorImage = new Map(allColors.map((x) => [x.name, x] as const));
 
   const chip = (on: boolean) =>
     `eyebrow border px-2.5 py-1.5 text-[10.5px] whitespace-nowrap transition-colors ${
@@ -176,7 +176,7 @@ function Shop() {
               </span>
               <span
                 title={cl.name}
-                style={realSwatchStyle(cl.image, cl.name)}
+                style={realSwatchStyle(cl.image, cl.name, cl.focusY)}
                 className="size-[22px] shrink-0 rounded-full ring-1 ring-border"
               />
 
@@ -256,7 +256,7 @@ function Shop() {
                     >
                       <span
                         aria-hidden
-                        style={realSwatchStyle(colorImage.get(name), name)}
+                        style={realSwatchStyle(colorImage.get(name)?.image, name, colorImage.get(name)?.focusY)}
                         className={`size-[24px] shrink-0 rounded-full ring-1 ${
                           colors.includes(name) ? "ring-2 ring-foreground" : "ring-border"
                         }`}
