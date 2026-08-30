@@ -221,71 +221,32 @@ export function SiteHeader() {
           </button>
         </div>
 
-        <div className="flex flex-col gap-8">
+        <nav className="flex flex-col">
+          {nav.map((l) => (
+            <Link
+              key={l.label}
+              to="/shop"
+              search={{ c: l.c }}
+              onClick={() => setOpen(false)}
+              className="display border-b border-border py-4 text-[34px] lowercase leading-none"
+            >
+              {l.label.toLowerCase()}
+            </Link>
+          ))}
           <Link
-            to="/shop"
-            search={{ c: "new" }}
+            to="/about"
             onClick={() => setOpen(false)}
-            className="display border-b border-border pb-4 text-[34px] lowercase leading-none"
+            className="display border-b border-border py-4 text-[34px] lowercase leading-none"
           >
-            new
+            our story
           </Link>
+        </nav>
 
+        <div className="mt-auto pt-8">
           <div className="grid grid-cols-2 gap-x-6 gap-y-8">
-            <div>
-              <p className="eyebrow text-muted-foreground">shop</p>
-              <ul className="mt-4 space-y-2.5 text-[15px]">
-                <li>
-                  <Link
-                    to="/shop"
-                    search={{ c: "swim" }}
-                    onClick={() => setOpen(false)}
-                    className="nav-link"
-                  >
-                    swimwear
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/shop"
-                    search={{ c: "one-piece" }}
-                    onClick={() => setOpen(false)}
-                    className="nav-link"
-                  >
-                    one pieces
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/shop"
-                    search={{ c: "resort" }}
-                    onClick={() => setOpen(false)}
-                    className="nav-link"
-                  >
-                    resort wear
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/shop"
-                    search={{ c: "towels" }}
-                    onClick={() => setOpen(false)}
-                    className="nav-link"
-                  >
-                    beach towels
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
             <div>
               <p className="eyebrow text-muted-foreground">help</p>
               <ul className="mt-4 space-y-2.5 text-[15px]">
-                <li>
-                  <Link to="/about" onClick={() => setOpen(false)} className="nav-link">
-                    our story
-                  </Link>
-                </li>
                 <li>
                   <Link to="/about" onClick={() => setOpen(false)} className="nav-link">
                     shipping
@@ -308,40 +269,40 @@ export function SiteHeader() {
                 </li>
               </ul>
             </div>
+
+            <div>
+              <p className="eyebrow text-muted-foreground">sun mail</p>
+              <p className="mt-4 text-sm text-muted-foreground">
+                New drops, restocks, and the occasional bribe.
+              </p>
+              <form
+                className="mt-5 flex items-center gap-3 border-b border-foreground pb-2"
+                onSubmit={(e) => e.preventDefault()}
+              >
+                <input
+                  type="email"
+                  required
+                  placeholder="email address"
+                  aria-label="Email address"
+                  className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                />
+                <button type="submit" className="eyebrow">
+                  join
+                </button>
+              </form>
+            </div>
           </div>
 
-          <div>
-            <p className="eyebrow text-muted-foreground">sun mail</p>
-            <p className="mt-4 text-sm text-muted-foreground">
-              New drops, restocks, and the occasional bribe.
-            </p>
-            <form
-              className="mt-5 flex items-center gap-3 border-b border-foreground pb-2"
-              onSubmit={(e) => e.preventDefault()}
+          <div className="mt-8 text-[13px]">
+            <a
+              href="https://www.instagram.com/getsunkissed"
+              target="_blank"
+              rel="noreferrer"
+              className="nav-link lowercase"
             >
-              <input
-                type="email"
-                required
-                placeholder="email address"
-                aria-label="Email address"
-                className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-              />
-              <button type="submit" className="eyebrow">
-                join
-              </button>
-            </form>
+              instagram
+            </a>
           </div>
-        </div>
-
-        <div className="mt-auto pt-8 text-[13px]">
-          <a
-            href="https://www.instagram.com/getsunkissed"
-            target="_blank"
-            rel="noreferrer"
-            className="nav-link lowercase"
-          >
-            instagram
-          </a>
         </div>
       </div>
     </>
