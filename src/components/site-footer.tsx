@@ -3,7 +3,7 @@ import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-secondary">
+    <footer className="border-t border-border bg-background">
       <div className="grid gap-12 px-4 py-16 md:grid-cols-[1.2fr_1fr_1fr_1fr] md:px-6">
         <div>
           <img src={logoAsset.url} alt="Sunkissed" className="h-8 w-auto" />
