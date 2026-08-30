@@ -113,7 +113,7 @@ function Shop() {
   const prints = printsAll ? allColors.map((x) => x.name) : FEATURED_PRINTS;
 
   const chip = (on: boolean) =>
-    `eyebrow border px-3 py-1.5 text-[10.5px] transition-colors ${
+    `eyebrow border px-2.5 py-1.5 text-[10.5px] whitespace-nowrap transition-colors ${
       on ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground"
     }`;
 
@@ -212,7 +212,7 @@ function Shop() {
 
           {bikiniFamily && (
             <div className="mt-4 flex flex-col gap-4">
-              <div className="flex flex-wrap gap-2">
+              <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {(
                   [
                     ["Bikinis", ["sets"]],
