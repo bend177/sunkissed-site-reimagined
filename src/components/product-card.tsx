@@ -124,8 +124,6 @@ export function ProductCard({ product }: { product: Product }) {
               current={current}
               onHover={setActive}
               catalog={catalog}
-              moreHandle={current?.handle ?? product.handle}
-
             />
           )}
         </div>
