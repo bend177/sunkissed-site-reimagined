@@ -388,7 +388,20 @@ function Shop() {
 
         {/* Filter toolbar */}
         <div className="mx-auto box-border flex max-w-[1440px] flex-nowrap items-center justify-between gap-2 px-4 pb-5 pt-6 md:gap-4 md:px-12 md:pb-6 md:pt-11">
-          <div className="flex shrink-0 items-center gap-2 md:gap-3.5">
+          <button
+            type="button"
+            onClick={() => {
+              setSidebarOpen(!sidebarOpen);
+              setMobileFiltersOpen(!mobileFiltersOpen);
+            }}
+            className="flex shrink-0 items-center gap-1.5 border border-foreground px-3 py-1.5 text-[12px] transition-colors hover:bg-foreground hover:text-background"
+          >
+            Filters{" "}
+            <span className="text-[15px] leading-none">
+              {mobileFiltersOpen || sidebarOpen ? "−" : "+"}
+            </span>
+          </button>
+          <div className="flex shrink-0 items-center gap-3 md:gap-4">
             <span className="whitespace-nowrap text-[11px] text-muted-foreground md:text-[13px]">
               {filterCount === 0
                 ? "No Filters"
@@ -408,21 +421,6 @@ function Shop() {
                 Clear
               </button>
             )}
-          </div>
-          <div className="flex shrink-0 items-center gap-3 md:gap-4">
-            <button
-              type="button"
-              onClick={() => {
-                setSidebarOpen(!sidebarOpen);
-                setMobileFiltersOpen(!mobileFiltersOpen);
-              }}
-              className="flex items-center gap-1.5 border border-foreground px-3 py-1.5 text-[12px] transition-colors hover:bg-foreground hover:text-background"
-            >
-              Filters{" "}
-              <span className="text-[15px] leading-none">
-                {mobileFiltersOpen || sidebarOpen ? "−" : "+"}
-              </span>
-            </button>
             <div className="relative">
               <button
                 type="button"
