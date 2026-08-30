@@ -19,7 +19,7 @@ function SwatchChip({
 }: {
   color: ColorRef;
   active: boolean;
-  catalog: Catalog;
+  catalog: Product[];
   onHover: (c: ColorRef | null) => void;
 }) {
   return (
