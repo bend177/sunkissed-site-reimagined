@@ -4,7 +4,7 @@ export type ProductVariant = {
   size: string;
   price: string;
   currencyCode: string;
-  compareAt?: string;
+  compareAt?: string | undefined;
   available: boolean;
   selectedOptions: { name: string; value: string }[];
 };
@@ -15,7 +15,7 @@ export type Product = {
   handle: string;
   description: string;
   price: string;
-  compareAt?: string;
+  compareAt?: string | undefined;
   currencyCode: string;
   image: string;
   images: string[];
