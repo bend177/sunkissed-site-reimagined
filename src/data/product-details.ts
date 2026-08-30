@@ -38,6 +38,12 @@ const swatchMap: Record<string, string> = {
   "espresso martini": "oklch(0.32 0.05 55)",
   "sunshine yellow": "oklch(0.87 0.15 95)",
   brass: "oklch(0.72 0.09 85)",
+  acid: "oklch(0.86 0.18 120)",
+  coral: "oklch(0.72 0.15 30)",
+  eden: "oklch(0.42 0.07 165)",
+  floralia: "oklch(0.78 0.09 350)",
+  cheetafly: "oklch(0.76 0.1 75)",
+  "wild zebra": "oklch(0.9 0.01 90)",
 };
 
 export const swatchColor = (colorName: string) =>
@@ -59,6 +65,21 @@ const printMap: Record<string, CSSProperties> = {
     backgroundColor: "oklch(0.96 0 0)",
     backgroundImage:
       "repeating-linear-gradient(115deg, oklch(0.18 0 0) 0 3px, transparent 3px 8px)",
+  },
+  cheetafly: {
+    backgroundColor: "oklch(0.8 0.1 76)",
+    backgroundImage:
+      "radial-gradient(ellipse 26% 20% at 26% 30%, oklch(0.3 0.05 60) 60%, transparent 62%), radial-gradient(ellipse 24% 18% at 70% 60%, oklch(0.3 0.05 60) 60%, transparent 62%), radial-gradient(ellipse 22% 16% at 44% 82%, oklch(0.3 0.05 60) 60%, transparent 62%)",
+  },
+  "wild zebra": {
+    backgroundColor: "oklch(0.94 0.01 90)",
+    backgroundImage:
+      "repeating-linear-gradient(100deg, oklch(0.2 0 0) 0 3px, transparent 3px 9px)",
+  },
+  floralia: {
+    backgroundColor: "oklch(0.9 0.04 350)",
+    backgroundImage:
+      "radial-gradient(circle 20% at 32% 34%, oklch(0.62 0.14 350) 60%, transparent 62%), radial-gradient(circle 16% at 70% 66%, oklch(0.55 0.1 150) 60%, transparent 62%)",
   },
   "black mamba": {
     backgroundColor: "oklch(0.22 0.01 280)",
