@@ -32,9 +32,9 @@ export function SiteHeader() {
           </p>
         </div>
 
-        <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 border-b border-border px-4 py-3.5 md:px-6">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-4 border-b border-border px-4 py-3.5 lg:px-6">
           <div className="flex min-w-0 items-center gap-6">
-            <nav className="hidden items-center gap-6 md:flex">
+            <nav className="hidden items-center gap-6 lg:flex">
               {links.map((l) => (
                 <Link key={l.label} to={l.to} search={l.search} className="nav-link">
                   {l.label}
@@ -46,7 +46,7 @@ export function SiteHeader() {
               type="button"
               aria-label="Open menu"
               onClick={() => setOpen(true)}
-              className="md:hidden"
+              className="lg:hidden"
             >
               <Menu className="size-5" strokeWidth={1.25} />
             </button>
@@ -60,13 +60,13 @@ export function SiteHeader() {
           </Link>
 
           <div className="flex min-w-0 items-center justify-end gap-5">
-            <button type="button" aria-label="Search" className="nav-link hidden md:block">
+            <button type="button" aria-label="Search" className="nav-link hidden lg:block">
               <Search className="size-4" strokeWidth={1.25} />
             </button>
-            <Link to="/about" className="nav-link hidden md:block">
+            <Link to="/about" className="nav-link hidden lg:block">
               about
             </Link>
-            <button type="button" aria-label="Account" className="nav-link hidden md:block">
+            <button type="button" aria-label="Account" className="nav-link hidden lg:block">
               <User className="size-4" strokeWidth={1.25} />
             </button>
             <button type="button" className="nav-link flex items-center gap-1.5">
@@ -79,7 +79,7 @@ export function SiteHeader() {
 
       {/* Mobile / tablet menu — rendered outside the header so `fixed` covers the full viewport */}
       <div
-        className={`fixed inset-0 z-[60] flex flex-col bg-background transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 z-[60] flex flex-col bg-background transition-opacity duration-300 lg:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
         aria-hidden={!open}
