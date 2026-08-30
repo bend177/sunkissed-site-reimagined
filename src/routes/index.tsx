@@ -70,7 +70,7 @@ function Home() {
 
 
         {/* Category grid */}
-        <section className="px-4 py-14 md:px-6">
+        <section className="px-4 py-10 md:px-6 md:py-12">
           <div className="flex items-end justify-between gap-6">
             <h2 className="display text-4xl md:text-5xl">Shop by category</h2>
             <Link to="/shop" search={{ c: "all" }} className="rule-link text-sm">
@@ -130,7 +130,7 @@ function Home() {
         </section>
 
         {/* Featured products */}
-        <section className="px-4 py-16 md:px-6">
+        <section className="px-4 py-12 md:px-6 md:py-14">
           <div className="flex items-end justify-between gap-6">
             <h2 className="display text-4xl md:text-5xl">Just landed</h2>
             <Link to="/shop" search={{ c: "new" }} className="rule-link text-sm">
@@ -172,7 +172,7 @@ function Home() {
           </div>
         </section>
 
-        <section className="px-4 py-16 md:px-6">
+        <section className="px-4 py-12 md:px-6 md:py-14">
           <h2 className="display text-4xl md:text-5xl">Towels, rolled &amp; ready</h2>
           <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-4 md:gap-x-4">
             {towels.map((p) => (
@@ -182,7 +182,7 @@ function Home() {
         </section>
 
         {/* Brand note */}
-        <section className="border-t border-border px-4 py-20 md:px-6">
+        <section className="border-t border-border px-4 py-14 md:px-6 md:py-16">
           <div className="mx-auto max-w-3xl text-center">
             <p className="eyebrow text-muted-foreground">since the first summer</p>
             <p className="display mt-5 text-4xl md:text-5xl">
