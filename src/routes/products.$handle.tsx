@@ -108,10 +108,10 @@ function ProductPage() {
 
           {/* Buy rail */}
           <div className="lg:sticky lg:top-24 lg:self-start lg:pt-2">
-            <h1 className="text-xl lowercase">{base}</h1>
+            <h1 className="text-xl">{base}</h1>
             <p className="mt-2 text-sm">${product.price}</p>
 
-            <p className="mt-6 text-sm lowercase text-muted-foreground">{colorName}</p>
+            <p className="mt-6 text-sm text-muted-foreground">{colorName}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               {siblings.map((s) => {
                 const label = s.title.split("-")[1]?.trim() ?? s.title;
