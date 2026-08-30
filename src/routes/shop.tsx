@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -37,6 +37,24 @@ const typesFor = (c: Filter): ProductType[] => {
   }
 };
 
+const COLLECTIONS: { key: Filter; label: string }[] = [
+  { key: "swim", label: "Bikinis" },
+  { key: "one-piece", label: "One Pieces" },
+  { key: "resort", label: "Dresses & Resort" },
+  { key: "towels", label: "Beach Towels" },
+  { key: "new", label: "New Arrivals" },
+  { key: "all", label: "Shop All" },
+];
+
+const COLLECTION_LABEL: Record<Filter, string> = {
+  swim: "Bikinis",
+  "one-piece": "One Pieces",
+  resort: "Dresses & Resort",
+  towels: "Beach Towels",
+  new: "New Arrivals",
+  all: "Shop All",
+};
+
 export const Route = createFileRoute("/shop")({
   validateSearch: (search: Record<string, unknown>) => ({
     c: (search["c"] as Filter | undefined) ?? "all",
@@ -67,7 +85,7 @@ function Shop() {
   const allColors = colorsIn(products);
 
 
-  const [types, setTypes] = useState<ProductType[]>(typesFor(c));
+  const [types, setTypes] = useState<ProductType[]>([]);
   const [colors, setColors] = useState<string[]>([]);
   const [sizes, setSizes] = useState<string[]>([]);
   const [sort, setSort] = useState<SortKey>("rec");
@@ -76,19 +94,25 @@ function Shop() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [printsAll, setPrintsAll] = useState(false);
 
+  // Filters are scoped to the collection; switching collections resets them.
   useEffect(() => {
-    setTypes(typesFor(c));
+    setTypes([]);
     setColors([]);
     setSizes([]);
+    setPrintsAll(false);
   }, [c]);
 
   const newOnly = c === "new";
+  const scope = typesFor(c);
 
   const toggle = <T,>(list: T[], set: (v: T[]) => void, value: T) =>
     set(list.includes(value) ? list.filter((x) => x !== value) : [...list, value]);
 
+  const activeTypes = types.length ? types : scope;
+
   let list = products.filter((p) => {
-    if (types.length && !types.includes(productType(p))) return false;
+    if (scope.length && !scope.includes(productType(p))) return false;
+    if (activeTypes.length && !activeTypes.includes(productType(p))) return false;
     if (colors.length && !colors.includes(colorOf(p))) return false;
     if (
       sizes.length &&
@@ -103,19 +127,10 @@ function Shop() {
   else if (sort === "price-desc") list = [...list].sort((a, b) => priceNum(b) - priceNum(a));
   else if (sort === "new") list = [...list].reverse();
 
-  const bikiniFamily =
-    types.length > 0 &&
-    types.every((t) => ["sets", "tops", "bottoms", "one-pieces"].includes(t));
+  const bikiniFamily = c === "swim" || c === "one-piece";
 
-  const pageTitle = newOnly
-    ? "New Arrivals"
-    : colors.length === 1 && !types.length
-      ? colors[0]!
-      : bikiniFamily && types.length === 3
-        ? "Bikinis"
-        : types.length === 1
-          ? TYPE_LABEL[types[0]!]
-          : "Shop All";
+  const pageTitle =
+    types.length === 1 ? TYPE_LABEL[types[0]!] : COLLECTION_LABEL[c];
 
   const filterCount = types.length + colors.length + sizes.length;
   const allPrints = featuredPrints(products);
@@ -129,6 +144,8 @@ function Shop() {
       on ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground"
     }`;
 
+  const typeOptions = scope.length ? TYPE_ORDER.filter((t) => scope.includes(t)) : TYPE_ORDER;
+
   const setOnly = (t: ProductType[]) => {
     setTypes(t);
     setColors([]);
@@ -137,10 +154,11 @@ function Shop() {
 
   const filterBody = (
     <>
+      {typeOptions.length > 1 && (
       <div>
         <p className="text-[15px]">Product Type</p>
         <div className="flex flex-col gap-3 pb-5 pt-3.5">
-          {TYPE_ORDER.map((t) => (
+          {typeOptions.map((t) => (
             <button
               key={t}
               type="button"
@@ -159,6 +177,7 @@ function Shop() {
           ))}
         </div>
       </div>
+      )}
 
       <div className="border-t border-border">
         <p className="pt-4 text-[15px]">Color</p>
@@ -222,30 +241,54 @@ function Shop() {
             </sup>
           </h1>
 
+          {/* Collection navigation - independent of filters */}
+          <nav
+            aria-label="Collections"
+            className="mt-4 flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {COLLECTIONS.map((col) => (
+              <Link
+                key={col.key}
+                to="/shop"
+                search={{ c: col.key }}
+                className={chip(col.key === c)}
+              >
+                {col.label}
+              </Link>
+            ))}
+          </nav>
+
           {bikiniFamily && (
             <div className="mt-4 flex flex-col gap-4">
-              <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {(
-                  [
-                    ["Bikini sets", ["sets"]],
-                    ["Tops", ["tops"]],
-                    ["Bottoms", ["bottoms"]],
-                    ["One Pieces", ["one-pieces"]],
-                    ["Separates", ["tops", "bottoms"]],
-                  ] as [string, ProductType[]][]
-                ).map(([label, t]) => (
-                  <button
-                    key={label}
-                    type="button"
-                    onClick={() => setOnly(t)}
-                    className={chip(
-                      types.length === t.length && t.every((x) => types.includes(x)),
-                    )}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
+              {c === "swim" && (
+                <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  {(
+                    [
+                      ["Bikini sets", ["sets"]],
+                      ["Tops", ["tops"]],
+                      ["Bottoms", ["bottoms"]],
+                      ["Separates", ["tops", "bottoms"]],
+                    ] as [string, ProductType[]][]
+                  ).map(([label, t]) => (
+                    <button
+                      key={label}
+                      type="button"
+                      onClick={() =>
+                        setOnly(
+                          types.length === t.length && t.every((x) => types.includes(x))
+                            ? []
+                            : t,
+                        )
+                      }
+                      className={chip(
+                        types.length === t.length && t.every((x) => types.includes(x)),
+                      )}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              )}
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
                 <span className="eyebrow text-muted-foreground">Featured Prints</span>
                 {prints.map((name) => {
