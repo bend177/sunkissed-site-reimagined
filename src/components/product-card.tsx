@@ -9,17 +9,20 @@ import { QuickAddDrawer } from "@/components/quick-add-drawer";
 export function ProductCard({ product }: { product: Product }) {
   const colors = siblingColors(product);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(() =>
+    colors.find((c) => c.current) ?? null,
+  );
 
   return (
     <article>
       <Link
         to="/products/$handle"
-        params={{ handle: product.handle }}
+        params={{ handle: active?.handle ?? product.handle }}
         className="group block"
       >
         <div className="hover-zoom relative aspect-[3/4] bg-secondary">
           <img
-            src={product.image}
+            src={active?.image ?? product.image}
             alt={product.title}
             loading="lazy"
             className="size-full object-cover"
@@ -39,9 +42,35 @@ export function ProductCard({ product }: { product: Product }) {
           </Link>
           <Price product={product} className="mt-0.5" />
           {colors.length > 1 && (
-            <p className="mt-0.5 text-xs text-muted-foreground">
-              {colors.length} colors
-            </p>
+            <div
+              className="mt-1.5 flex items-center gap-1.5"
+              onMouseLeave={() =>
+                setActive(colors.find((c) => c.current) ?? null)
+              }
+            >
+              {colors.map((c) => (
+                <Link
+                  key={c.handle}
+                  to="/products/$handle"
+                  params={{ handle: c.handle }}
+                  aria-label={c.colorName}
+                  onMouseEnter={() => setActive(c)}
+                  onFocus={() => setActive(c)}
+                  className={`block size-5 shrink-0 overflow-hidden rounded-full ring-1 ring-inset transition-shadow ${
+                    active?.handle === c.handle
+                      ? "ring-foreground"
+                      : "ring-foreground/15 hover:ring-foreground/50"
+                  }`}
+                >
+                  <img
+                    src={c.image}
+                    alt=""
+                    loading="lazy"
+                    className="size-full object-cover"
+                  />
+                </Link>
+              ))}
+            </div>
           )}
         </div>
         <button
