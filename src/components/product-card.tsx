@@ -73,7 +73,7 @@ function Swatches({
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="ml-0.5 text-[11px] leading-none text-muted-foreground underline underline-offset-2 hover:text-foreground"
+          className="ml-0.5 text-[11px] leading-none text-muted-foreground hover:text-foreground"
         >
           {expanded ? "Show less" : `+${extra}`}
         </button>
