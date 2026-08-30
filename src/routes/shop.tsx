@@ -12,6 +12,8 @@ import {
   productType,
   SIZES,
   SORT_LABEL,
+  stylesIn,
+  stylesOf,
   TYPE_LABEL,
   TYPE_ORDER,
   type ProductType,
@@ -87,6 +89,7 @@ function Shop() {
 
   const [types, setTypes] = useState<ProductType[]>([]);
   const [colors, setColors] = useState<string[]>([]);
+  const [styles, setStyles] = useState<string[]>([]);
   const [sizes, setSizes] = useState<string[]>([]);
   const [sort, setSort] = useState<SortKey>("rec");
   const [sortOpen, setSortOpen] = useState(false);
@@ -98,6 +101,7 @@ function Shop() {
   useEffect(() => {
     setTypes([]);
     setColors([]);
+    setStyles([]);
     setSizes([]);
     setPrintsAll(false);
   }, [c]);
@@ -114,6 +118,7 @@ function Shop() {
     if (scope.length && !scope.includes(productType(p))) return false;
     if (activeTypes.length && !activeTypes.includes(productType(p))) return false;
     if (colors.length && !colors.includes(colorOf(p))) return false;
+    if (styles.length && !stylesOf(p).some((s) => styles.includes(s))) return false;
     if (
       sizes.length &&
       !p.variants.some((v) => v.available && sizes.includes(v.size.toUpperCase()))
@@ -132,7 +137,15 @@ function Shop() {
   const pageTitle =
     types.length === 1 ? TYPE_LABEL[types[0]!] : COLLECTION_LABEL[c];
 
-  const filterCount = types.length + colors.length + sizes.length;
+  const filterCount = types.length + colors.length + styles.length + sizes.length;
+  // Styles offered are scoped to the collection + product type selection.
+  const styleOptions = stylesIn(
+    products.filter((p) => {
+      if (scope.length && !scope.includes(productType(p))) return false;
+      if (activeTypes.length && !activeTypes.includes(productType(p))) return false;
+      return true;
+    }),
+  );
   const allPrints = featuredPrints(products);
   const prints = printsAll
     ? allColors.map((x) => x.name)
