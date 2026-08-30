@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -214,32 +214,6 @@ function Shop() {
       <SiteHeader />
 
       <main>
-        <nav className="border-b border-border">
-          <ul className="mx-auto flex max-w-[1440px] items-center gap-6 overflow-x-auto px-4 py-3.5 md:justify-center md:gap-12 md:px-12 md:py-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {(
-              [
-                ["Bikinis", "swim"],
-                ["One Pieces", "one-piece"],
-                ["Dresses & Resort", "resort"],
-                ["Beach Towels", "towels"],
-                ["New Arrivals", "new"],
-              ] as [string, Filter][]
-            ).map(([label, key]) => (
-              <li key={key}>
-                <Link
-                  to="/shop"
-                  search={{ c: key }}
-                  className={`whitespace-nowrap text-[14px] font-semibold transition-opacity hover:opacity-60 md:text-[16px] ${
-                    c === key ? "" : "text-foreground/70"
-                  }`}
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
         <section className="mx-auto box-border max-w-[1440px] px-4 pt-8 md:px-12 md:pt-14">
           <h1 className="display text-[38px] leading-[1.05] md:text-[clamp(48px,5vw,72px)]">
             {pageTitle}{" "}
@@ -247,7 +221,6 @@ function Shop() {
               {list.length}
             </sup>
           </h1>
-
 
           {bikiniFamily && (
             <div className="mt-4 flex flex-col gap-4">
@@ -322,7 +295,7 @@ function Shop() {
         </section>
 
         {/* Filter toolbar */}
-        <div className="mx-auto box-border flex max-w-[1440px] items-center justify-between gap-4 overflow-x-auto px-4 pb-5 pt-6 md:px-12 md:pb-6 md:pt-11 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="mx-auto box-border flex max-w-[1440px] flex-wrap items-center justify-between gap-4 px-4 pb-5 pt-6 md:px-12 md:pb-6 md:pt-11">
           <div className="flex items-center gap-3.5">
             <span className="text-[12px] text-muted-foreground md:text-[13px]">
               {filterCount === 0
@@ -333,7 +306,7 @@ function Shop() {
               <button
                 type="button"
                 onClick={() => {
-                  setTypes(typesFor(c));
+                  setTypes([]);
                   setColors([]);
                   setSizes([]);
                 }}
