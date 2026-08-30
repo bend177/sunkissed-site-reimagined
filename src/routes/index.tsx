@@ -144,7 +144,7 @@ function Home() {
           <div className="flex items-end justify-between gap-6">
             <h2 className="display text-4xl md:text-5xl">Just landed</h2>
             <Link to="/shop" search={{ c: "new" }} className="rule-link text-sm">
-              shop new
+              shop new arrivals
             </Link>
           </div>
           <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-4 md:gap-x-4">
