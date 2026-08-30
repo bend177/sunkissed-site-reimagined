@@ -45,12 +45,46 @@ export const colorsIn = (catalog: Product[]) =>
       focusY: swatchFocus(catalog.find((p) => colorOf(p) === name)?.title ?? ""),
     }));
 
-// Most-carried colors/prints in the live catalog, so every swatch is real.
-export const featuredPrints = (catalog: Product[]) =>
-  [...colorsIn(catalog)]
+// Featured prints are merchandised from Shopify tags.
+// Tag any product with "featured-print" to feature its colorway.
+// Optionally control order with "featured-print-1", "featured-print-2", ...
+// If no product is tagged, we fall back to the most-carried colorways.
+const FEATURED_TAG = /^featured[-\s]?print(?:[-\s]?(\d+))?$/i;
+
+const featuredRank = (p: Product): number | null => {
+  let rank: number | null = null;
+  for (const t of p.tags) {
+    const m = FEATURED_TAG.exec(t.trim());
+    if (!m) continue;
+    const n = m[1] ? Number(m[1]) : 999;
+    if (rank === null || n < rank) rank = n;
+  }
+  return rank;
+};
+
+export const featuredPrints = (catalog: Product[]) => {
+  const ranked = new Map<string, number>();
+  for (const p of catalog) {
+    const rank = featuredRank(p);
+    if (rank === null) continue;
+    const color = colorOf(p);
+    if (!color) continue;
+    const prev = ranked.get(color);
+    if (prev === undefined || rank < prev) ranked.set(color, rank);
+  }
+
+  if (ranked.size > 0) {
+    return [...ranked.entries()]
+      .sort((a, b) => a[1] - b[1] || a[0].localeCompare(b[0]))
+      .map(([name]) => name);
+  }
+
+  return [...colorsIn(catalog)]
     .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name))
     .slice(0, 6)
     .map((c) => c.name);
+};
+
 
 export const SIZES = ["XS", "S", "M", "L", "XL"];
 
