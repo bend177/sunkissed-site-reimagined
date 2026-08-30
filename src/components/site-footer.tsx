@@ -4,8 +4,8 @@ import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-background">
-      <div className="grid gap-12 px-4 py-16 md:grid-cols-[1.2fr_1fr_1fr_1fr] md:px-6">
-        <div>
+      <div className="grid grid-cols-2 gap-x-6 gap-y-10 px-4 py-14 md:grid-cols-[1.2fr_1fr_1fr_1fr] md:px-6">
+        <div className="col-span-2 md:col-span-1">
           <img src={logoAsset.url} alt="Sunkissed" className="h-8 w-auto" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
             Swimwear made for long days in the sun - sculpted fits, sand-free towels, and resort
@@ -59,7 +59,7 @@ export function SiteFooter() {
           </ul>
         </div>
 
-        <div>
+        <div className="col-span-2 md:col-span-1">
           <p className="eyebrow text-muted-foreground">sun mail</p>
           <p className="mt-4 text-sm text-muted-foreground">
             New drops, restocks, and the occasional bribe.
