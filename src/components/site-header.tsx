@@ -333,56 +333,26 @@ export function SiteHeader() {
           </Link>
         </nav>
 
-        <div className="mt-auto pt-8">
-          <div className="grid grid-cols-2 gap-x-6 gap-y-8">
-            <div>
-              <p className="eyebrow text-muted-foreground">help</p>
-              <ul className="mt-4 space-y-2.5 text-[15px]">
-                <li>
-                  <Link to="/about" onClick={() => setOpen(false)} className="nav-link">
-                    shipping
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/about" onClick={() => setOpen(false)} className="nav-link">
-                    returns & exchanges
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/about" onClick={() => setOpen(false)} className="nav-link">
-                    size guide
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/about" onClick={() => setOpen(false)} className="nav-link">
-                    contact
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="eyebrow text-muted-foreground">sun mail</p>
-              <p className="mt-4 text-sm text-muted-foreground">
-                New drops, restocks, and the occasional bribe.
-              </p>
-              <form
-                className="mt-5 flex items-center gap-3 border-b border-foreground pb-2"
-                onSubmit={(e) => e.preventDefault()}
-              >
-                <input
-                  type="email"
-                  required
-                  placeholder="email address"
-                  aria-label="Email address"
-                  className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-                />
-                <button type="submit" className="eyebrow">
-                  join
-                </button>
-              </form>
-            </div>
-          </div>
+        <div className="mt-auto pt-10">
+          <p className="eyebrow text-muted-foreground">sun mail</p>
+          <p className="mt-4 max-w-[18rem] text-sm leading-relaxed text-muted-foreground">
+            New drops, restocks, and the occasional bribe.
+          </p>
+          <form
+            className="mt-5 flex items-center gap-3 border-b border-foreground pb-2"
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <input
+              type="email"
+              required
+              placeholder="email address"
+              aria-label="Email address"
+              className="w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+            />
+            <button type="submit" className="eyebrow shrink-0">
+              join
+            </button>
+          </form>
 
           <div className="mt-8 text-[13px]">
             <a
