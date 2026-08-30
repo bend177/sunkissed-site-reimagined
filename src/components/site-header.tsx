@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
@@ -17,6 +17,7 @@ const nav = [
 type Fly = "search" | "bag" | null;
 
 export function SiteHeader() {
+  const onShop = useLocation({ select: (s) => s.pathname }).startsWith("/shop");
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
   const [q, setQ] = useState("");
@@ -140,6 +141,7 @@ export function SiteHeader() {
             </div>
           </div>
 
+          {!onShop && (
           <nav className="relative z-[46] flex items-center gap-8 bg-background px-6 pb-4 pt-3.5">
             {nav.map((l) => (
               <Link
@@ -158,6 +160,7 @@ export function SiteHeader() {
               Our Story
             </Link>
           </nav>
+          )}
 
           {fly && (
             <>
