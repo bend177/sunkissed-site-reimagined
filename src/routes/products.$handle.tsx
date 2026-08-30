@@ -4,6 +4,7 @@ import { ChevronDown, Minus, Plus } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
+import { Price } from "@/components/price";
 import {
   getProductDetail,
   relatedProducts,
@@ -109,7 +110,7 @@ function ProductPage() {
           {/* Buy rail */}
           <div className="lg:sticky lg:top-24 lg:self-start lg:pt-2">
             <h1 className="text-xl">{base}</h1>
-            <p className="mt-2 text-sm">${product.price}</p>
+            <Price product={product} className="mt-2" />
 
             <p className="mt-6 text-sm text-muted-foreground">{colorName}</p>
             <div className="mt-3 flex flex-wrap gap-2">

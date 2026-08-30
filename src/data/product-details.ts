@@ -12,7 +12,7 @@ export type ProductDetail = {
   sizes: string[];
 };
 
-const splitTitle = (title: string): { base: string; color: string } => {
+export const splitTitle = (title: string): { base: string; color: string } => {
   const parts = title.split("-").map((s) => s.trim());
   return { base: parts[0] ?? title, color: parts[1] ?? "" };
 };
@@ -91,6 +91,18 @@ export function getProductDetail(handle: string): ProductDetail | null {
     sizes: sizesFor(product),
     ...copyFor(product),
   };
+}
+
+export function siblingColors(product: Product) {
+  const { base } = splitTitle(product.title);
+  return products
+    .filter((p) => splitTitle(p.title).base === base)
+    .map((p) => ({
+      handle: p.handle,
+      colorName: splitTitle(p.title).color || base,
+      swatch: swatchColor(splitTitle(p.title).color || base),
+      current: p.handle === product.handle,
+    }));
 }
 
 export function relatedProducts(product: Product, limit = 4) {
