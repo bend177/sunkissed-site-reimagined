@@ -215,7 +215,7 @@ function Shop() {
 
       <main>
         <section className="mx-auto box-border max-w-[1440px] px-4 pt-8 md:px-12 md:pt-14">
-          <h1 className="display text-[30px] leading-[1.05] md:text-[clamp(40px,4.5vw,60px)]">
+          <h1 className="display text-[38px] leading-[1.05] md:text-[clamp(48px,5vw,72px)]">
             {pageTitle}{" "}
             <sup className="font-sans text-[12px] text-muted-foreground md:text-[15px]">
               {list.length}
