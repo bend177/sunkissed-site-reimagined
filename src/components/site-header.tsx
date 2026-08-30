@@ -6,11 +6,11 @@ import { products } from "@/data/products";
 import { Price } from "@/components/price";
 
 const nav = [
-  { label: "New", c: "new" as const },
   { label: "Bikinis", c: "swim" as const },
   { label: "One Pieces", c: "one-piece" as const },
   { label: "Dresses & Resort", c: "resort" as const },
   { label: "Beach Towels", c: "towels" as const },
+  { label: "New Arrivals", c: "new" as const },
 ];
 
 const bestsellers = products.slice(0, 6);
