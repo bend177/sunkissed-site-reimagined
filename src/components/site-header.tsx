@@ -2,7 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
-import { products } from "@/data/products";
+import { useCatalog } from "@/lib/catalog";
+import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
 
 const nav = [
@@ -13,15 +14,31 @@ const nav = [
   { label: "New Arrivals", c: "new" as const },
 ];
 
-const bestsellers = products.slice(0, 6);
-const suggestions = products.slice(6, 8);
-
 type Fly = "search" | "bag" | null;
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
   const [q, setQ] = useState("");
+  const products = useCatalog();
+  const bestsellers = products.slice(0, 6);
+  const suggestions = products.slice(6, 8);
+
+  const items = useCartStore((s) => s.items);
+  const removeItem = useCartStore((s) => s.removeItem);
+  const getCheckoutUrl = useCartStore((s) => s.getCheckoutUrl);
+  const syncCart = useCartStore((s) => s.syncCart);
+  const cartCount = items.reduce((n, i) => n + i.quantity, 0);
+  const cartTotal = items.reduce((n, i) => n + Number(i.price) * i.quantity, 0);
+
+  const checkout = () => {
+    const url = getCheckoutUrl();
+    if (url) window.open(url, "_blank");
+  };
+
+  useEffect(() => {
+    if (fly === "bag") syncCart();
+  }, [fly, syncCart]);
 
   useEffect(() => {
     if (!open) return;
@@ -34,8 +51,9 @@ export function SiteHeader() {
 
   const query = q.trim().toLowerCase();
   const results = query
-    ? products.filter((p) => p.title.toLowerCase().includes(query))
+    ? products.filter((p) => p.title.toLowerCase().includes(query)).slice(0, 12)
     : bestsellers;
+
 
   return (
     <>
