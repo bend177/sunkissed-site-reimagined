@@ -3,26 +3,27 @@ import { Link } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchStyle } from "@/data/product-details";
+import { useCatalog } from "@/lib/catalog";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
 
 export function ProductCard({ product }: { product: Product }) {
-  const colors = siblingColors(product);
+  const catalog = useCatalog();
+  const colors = siblingColors(catalog, product);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(() =>
-    colors.find((c) => c.current) ?? null,
-  );
+  const [active, setActive] = useState<(typeof colors)[number] | null>(null);
+  const current = active ?? colors.find((c) => c.current) ?? null;
 
   return (
     <article>
       <Link
         to="/products/$handle"
-        params={{ handle: active?.handle ?? product.handle }}
+        params={{ handle: current?.handle ?? product.handle }}
         className="group block"
       >
         <div className="hover-zoom relative aspect-[3/4] bg-secondary">
           <img
-            src={active?.image ?? product.image}
+            src={current?.image ?? product.image}
             alt={product.title}
             loading="lazy"
             className="size-full object-cover"
@@ -43,10 +44,8 @@ export function ProductCard({ product }: { product: Product }) {
           <Price product={product} className="mt-0.5" />
           {colors.length > 1 && (
             <div
-              className="mt-1.5 flex items-center gap-1.5"
-              onMouseLeave={() =>
-                setActive(colors.find((c) => c.current) ?? null)
-              }
+              className="mt-1.5 flex flex-wrap items-center gap-1.5"
+              onMouseLeave={() => setActive(null)}
             >
               {colors.map((c) => (
                 <Link
@@ -58,14 +57,13 @@ export function ProductCard({ product }: { product: Product }) {
                   onMouseEnter={() => setActive(c)}
                   onFocus={() => setActive(c)}
                   className={`block size-5 shrink-0 rounded-full ring-1 ring-inset transition-shadow ${
-                    active?.handle === c.handle
+                    current?.handle === c.handle
                       ? "ring-foreground"
                       : "ring-foreground/15 hover:ring-foreground/50"
                   }`}
                   style={swatchStyle(c.colorName)}
                 />
               ))}
-
             </div>
           )}
         </div>
