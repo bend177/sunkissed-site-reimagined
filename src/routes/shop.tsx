@@ -17,7 +17,7 @@ import {
   type ProductType,
   type SortKey,
 } from "@/data/shop-filters";
-import { realSwatchStyle, swatchStyle } from "@/data/product-details";
+import { realSwatchStyle } from "@/data/product-details";
 
 
 type Filter = "all" | "new" | "swim" | "one-piece" | "resort" | "towels";
