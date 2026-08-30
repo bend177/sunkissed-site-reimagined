@@ -13,12 +13,6 @@ const nav = [
   { label: "Beach Towels", c: "towels" as const },
 ];
 
-const secondary = [
-  { label: "Our Story", to: "/about" as const },
-  { label: "Shipping & Returns", to: "/about" as const },
-  { label: "Size Guide", to: "/about" as const },
-];
-
 const bestsellers = products.slice(0, 6);
 const suggestions = products.slice(6, 8);
 
