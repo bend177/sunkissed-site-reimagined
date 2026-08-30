@@ -261,6 +261,12 @@ function Shop() {
                 </Link>
               );
             })}
+            <Link
+              to="/about"
+              className="shrink-0 text-[15px] text-muted-foreground transition-colors hover:text-foreground md:text-[17px]"
+            >
+              Our Story
+            </Link>
           </nav>
 
           {bikiniFamily && (
