@@ -367,6 +367,21 @@ function Shop() {
             </Link>
           </nav>
 
+          {subs.length > 0 && (
+            <div className="mt-4 flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {subs.map((s) => (
+                <button
+                  key={s.label}
+                  type="button"
+                  onClick={() => setSub(sub === s.label ? null : s.label)}
+                  className={chip(sub === s.label)}
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
+          )}
+
           {bikiniFamily && (
             <div className="mt-4 flex flex-col gap-4">
               {c === "swim" && (
