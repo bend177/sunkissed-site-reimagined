@@ -95,6 +95,10 @@ function Shop() {
   const products = useCatalog();
   const allColors = colorsIn(products);
 
+  const newArrivalIds = useMemo(
+    () => new Set(products.filter((p) => p.category !== "towels").slice(0, 24).map((p) => p.id)),
+    [products],
+  );
 
   const [types, setTypes] = useState<ProductType[]>([]);
   const [colors, setColors] = useState<string[]>([]);
@@ -105,6 +109,7 @@ function Shop() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [printsAll, setPrintsAll] = useState(false);
+  const [sub, setSub] = useState<string | null>(null);
 
   // Filters are scoped to the collection; switching collections resets them.
   useEffect(() => {
