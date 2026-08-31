@@ -118,6 +118,7 @@ function Shop() {
     setStyles([]);
     setSizes([]);
     setPrintsAll(false);
+    setSub(null);
   }, [c]);
 
   const newOnly = c === "new";
