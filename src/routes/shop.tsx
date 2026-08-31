@@ -58,6 +58,14 @@ const COLLECTION_LABEL: Record<Filter, string> = {
   all: "Shop All",
 };
 
+// Per-collection subcategory chips. Each applies a quick filter on top of the
+// manual filter panel. Swim keeps its existing Product Type chips.
+type SubDef = { label: string; match: (p: Product) => boolean };
+
+const hasTag = (p: Product, tag: string) =>
+  p.tags.some((t) => t.toLowerCase() === tag.toLowerCase());
+
+
 export const Route = createFileRoute("/shop")({
   validateSearch: (search: Record<string, unknown>) => ({
     c: (search["c"] as Filter | undefined) ?? "all",
