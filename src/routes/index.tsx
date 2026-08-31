@@ -63,10 +63,9 @@ function Home() {
                 <Link
                   to="/shop"
                   search={{ c: "new" }}
-                  className="flex flex-col items-end pb-1 text-sm lowercase leading-none text-background md:text-base"
+                  className="pb-1 text-sm lowercase text-background md:text-base"
                 >
-                  <span>shop now</span>
-                  <span className="mt-1">&rarr;</span>
+                  shop now &rarr;
                 </Link>
               </div>
             </div>
