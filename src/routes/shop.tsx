@@ -46,6 +46,7 @@ const COLLECTIONS: { key: Filter; label: string }[] = [
   { key: "resort", label: "Dresses & Resort" },
   { key: "towels", label: "Beach Towels" },
   { key: "new", label: "New Arrivals" },
+  { key: "best", label: "Best Sellers" },
   { key: "all", label: "Shop All" },
 ];
 
@@ -55,6 +56,7 @@ const COLLECTION_LABEL: Record<Filter, string> = {
   resort: "Dresses & Resort",
   towels: "Beach Towels",
   new: "New Arrivals",
+  best: "Best Sellers",
   all: "Shop All",
 };
 
