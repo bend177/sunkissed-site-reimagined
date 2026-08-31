@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
@@ -19,7 +19,8 @@ import {
   type ProductType,
   type SortKey,
 } from "@/data/shop-filters";
-import { swatchFill } from "@/data/product-details";
+import { isPrint, swatchFill } from "@/data/product-details";
+import type { Product } from "@/data/products";
 
 
 type Filter = "all" | "new" | "swim" | "one-piece" | "resort" | "towels";
