@@ -350,8 +350,8 @@ function Shop() {
                   search={{ c: col.key }}
                   className={
                     active
-                      ? "shrink-0 text-[38px] leading-[1.05] md:text-[clamp(48px,5vw,72px)]"
-                      : "shrink-0 text-[15px] text-muted-foreground transition-colors hover:text-foreground md:text-[17px]"
+                      ? "shrink-0 text-[38px] leading-[1.05] transition-all duration-300 ease-out md:text-[clamp(48px,5vw,72px)]"
+                      : "shrink-0 text-[15px] text-muted-foreground transition-all duration-300 ease-out hover:text-foreground md:text-[17px]"
                   }
                 >
                   {col.label}
@@ -534,9 +534,18 @@ function Shop() {
         )}
 
         <div className="mx-auto box-border flex max-w-[1440px] items-start gap-9 px-4 pb-16 md:px-12">
-          <section className="grid min-w-0 flex-1 grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-3 md:gap-x-4 xl:grid-cols-4">
-            {list.map((p) => (
-              <ProductCard key={p.handle} product={p} />
+          <section
+            key={c}
+            className="grid min-w-0 flex-1 grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-3 md:gap-x-4 xl:grid-cols-4"
+          >
+            {list.map((p, i) => (
+              <div
+                key={p.handle}
+                className="collection-in"
+                style={{ animationDelay: `${Math.min(i * 45, 450)}ms` }}
+              >
+                <ProductCard product={p} />
+              </div>
             ))}
             {list.length === 0 && (
               <p className="col-span-full py-10 text-sm text-muted-foreground">
