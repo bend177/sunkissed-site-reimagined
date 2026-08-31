@@ -474,6 +474,7 @@ function Shop() {
                     setColors([]);
                     setStyles([]);
                     setSizes([]);
+                    setSub(null);
                   }}
                   className="whitespace-nowrap text-[11px] underline underline-offset-[3px] md:text-[12px]"
                 >
