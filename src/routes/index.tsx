@@ -54,12 +54,14 @@ function Home() {
               className="size-full object-cover object-center"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-ink/10" />
-            <div className="absolute inset-x-0 bottom-0 px-4 pb-8 md:px-6 md:pb-12">
-              <p className="eyebrow rise text-background/80">the animalistique collection</p>
-              <h1 className="display rise mt-2 whitespace-nowrap text-[13vw] leading-[0.95] text-background md:text-[7vw]">
-                Designed to seduce
-              </h1>
-              <div className="rise mt-3 flex justify-end md:mt-4">
+            <div className="absolute inset-x-0 bottom-0 px-4 pb-6 md:px-6 md:pb-10">
+              <div className="mb-12 md:mb-16">
+                <p className="eyebrow rise text-background/80">the animalistique collection</p>
+                <h1 className="display rise mt-2 whitespace-nowrap text-[13vw] leading-[0.95] text-background md:text-[7vw]">
+                  Designed to seduce
+                </h1>
+              </div>
+              <div className="rise flex justify-end">
                 <Link
                   to="/shop"
                   search={{ c: "new" }}
