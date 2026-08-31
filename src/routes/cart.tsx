@@ -240,3 +240,117 @@ function Stepper({
     </div>
   );
 }
+
+/**
+ * Suggests the matching counterpart piece for the tops/bottoms already in the
+ * bag so shoppers can complete the set right before checkout.
+ */
+function CompleteTheSet() {
+  const catalog = useCatalog();
+  const items = useCartStore((s) => s.items);
+
+  const inBag = new Set(items.map((i) => i.handle));
+  const suggestions: Product[] = [];
+  for (const item of items) {
+    const product = catalog.find((p) => p.handle === item.handle);
+    if (!product) continue;
+    const pair = findPair(catalog, product);
+    if (!pair || inBag.has(pair.handle)) continue;
+    if (suggestions.some((s) => s.handle === pair.handle)) continue;
+    suggestions.push(pair);
+  }
+
+  if (suggestions.length === 0) return null;
+
+  return (
+    <section className="mt-12 border-t border-border pt-8">
+      <h2 className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+        Complete your set
+      </h2>
+      <div className="mt-5 grid gap-6 sm:grid-cols-2">
+        {suggestions.slice(0, 2).map((pair) => (
+          <SetSuggestion key={pair.handle} pair={pair} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function SetSuggestion({ pair }: { pair: Product }) {
+  const [size, setSize] = useState<string | null>(
+    pair.sizes.length === 1 ? pair.sizes[0]! : null,
+  );
+  const addItem = useCartStore((s) => s.addItem);
+  const isLoading = useCartStore((s) => s.isLoading);
+  const variant = pair.variants.find((v) => v.size === size);
+
+  const add = async () => {
+    if (!variant) return;
+    await addItem({
+      variantId: variant.id,
+      handle: pair.handle,
+      title: pair.title,
+      image: pair.image,
+      size: variant.size,
+      price: variant.price,
+      currencyCode: variant.currencyCode,
+      quantity: 1,
+    });
+    toast.success("Added to bag", {
+      description: `${splitTitle(pair.title).base} - ${variant.size}`,
+    });
+  };
+
+  return (
+    <div className="flex gap-4">
+      <Link to="/products/$handle" params={{ handle: pair.handle }} className="shrink-0">
+        <img
+          src={pair.image}
+          alt={pair.title}
+          loading="lazy"
+          className="h-[132px] w-[100px] object-cover"
+        />
+      </Link>
+      <div className="min-w-0 flex-1">
+        <Link
+          to="/products/$handle"
+          params={{ handle: pair.handle }}
+          className="text-[13px] leading-snug hover:underline underline-offset-4"
+        >
+          {splitTitle(pair.title).base}
+        </Link>
+        <p className="mt-1 text-[13px]">
+          ${Number(pair.variants[0]?.price ?? 0).toFixed(0)}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {pair.sizes.map((s) => {
+            const available = pair.variants.some((v) => v.size === s && v.available);
+            return (
+              <button
+                key={s}
+                type="button"
+                disabled={!available}
+                onClick={() => setSize(s)}
+                className={`min-w-9 border px-2 py-1.5 text-[11px] uppercase tracking-[0.08em] transition-colors ${
+                  size === s
+                    ? "border-foreground bg-ink text-background"
+                    : "border-border hover:border-foreground"
+                } ${available ? "" : "cursor-not-allowed text-muted-foreground/50 line-through"}`}
+              >
+                {s}
+              </button>
+            );
+          })}
+        </div>
+        <button
+          type="button"
+          disabled={!variant || isLoading}
+          onClick={add}
+          className="mt-3 w-full border border-ink py-3 text-[11px] uppercase tracking-[0.18em] transition-colors hover:bg-ink hover:text-background disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          {variant ? "Add to bag" : "Select a size"}
+        </button>
+      </div>
+    </div>
+  );
+}
