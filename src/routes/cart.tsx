@@ -167,7 +167,10 @@ function CartPage() {
               ))}
             </div>
 
+            <CompleteTheSet />
+
             {/* Summary */}
+
             <div className="mt-10 lg:flex lg:justify-end">
               <div className="w-full lg:max-w-[420px]">
                 <div className="flex items-center justify-between border-b border-border pb-4 text-[16px]">
