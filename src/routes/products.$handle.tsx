@@ -177,17 +177,12 @@ function ProductPage() {
           {/* Gallery - swipeable on mobile, 2-up grid on desktop */}
           <div className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-2 lg:gap-1 lg:overflow-visible">
             {gallery.map((src, i) => (
-              <div
+              <GalleryImage
                 key={src + i}
-                className="aspect-[3/4] w-full shrink-0 snap-center bg-secondary lg:w-auto lg:shrink"
-              >
-                <img
-                  src={src}
-                  alt={`${product.title} view ${i + 1}`}
-                  loading={i === 0 ? "eager" : "lazy"}
-                  className="size-full object-cover"
-                />
-              </div>
+                src={src}
+                alt={`${product.title} view ${i + 1}`}
+                eager={i === 0}
+              />
             ))}
           </div>
 
