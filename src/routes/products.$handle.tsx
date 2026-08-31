@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Price } from "@/components/price";
 import { catalogQueryOptions } from "@/lib/catalog";
-import { useWhiteBackground } from "@/lib/white-bg";
+import { useBackgroundKind } from "@/lib/white-bg";
 import { useCartStore } from "@/lib/cart-store";
 import {
   getProductDetail,

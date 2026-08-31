@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchFill } from "@/data/product-details";
 import { useCatalog } from "@/lib/catalog";
-import { useWhiteBackground } from "@/lib/white-bg";
+import { useBackgroundKind } from "@/lib/white-bg";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
