@@ -192,7 +192,6 @@ function Shop() {
   else if (sort === "price-desc") list = [...list].sort((a, b) => priceNum(b) - priceNum(a));
   else if (sort === "new") list = [...list].reverse();
 
-  const bikiniFamily = c === "swim" || c === "one-piece";
 
   const pageTitle =
     types.length === 1 ? TYPE_LABEL[types[0]!] : COLLECTION_LABEL[c];
@@ -451,13 +450,11 @@ function Shop() {
                     onClick={() => setPrintsAll(false)}
                     className="text-[12px] underline underline-offset-4 hover:opacity-60"
                   >
-                    Show less
+                  Show less
                   </button>
                 )}
               </div>
-
-            </div>
-          )}
+          </div>
         </section>
 
         {/* Filter toolbar */}
