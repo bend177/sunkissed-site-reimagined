@@ -23,7 +23,7 @@ import { isPrint, swatchFill } from "@/data/product-details";
 import type { Product } from "@/data/products";
 
 
-type Filter = "all" | "new" | "swim" | "one-piece" | "resort" | "towels";
+type Filter = "all" | "best" | "new" | "swim" | "one-piece" | "resort" | "towels";
 
 const typesFor = (c: Filter): ProductType[] => {
   switch (c) {
