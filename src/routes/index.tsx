@@ -56,14 +56,14 @@ function Home() {
             <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-ink/10" />
             <div className="absolute inset-x-0 bottom-0 px-4 pb-8 md:px-6 md:pb-12">
               <p className="eyebrow rise text-background/80">the animalistique collection</p>
-              <div className="rise mt-3 flex items-end justify-between gap-0 md:gap-6">
-                <h1 className="display whitespace-nowrap text-[13vw] leading-[0.95] text-background md:text-[7vw]">
-                  Designed to seduce
-                </h1>
+              <h1 className="display rise mt-2 whitespace-nowrap text-[13vw] leading-[0.95] text-background md:text-[7vw]">
+                Designed to seduce
+              </h1>
+              <div className="rise mt-3 flex justify-end md:mt-4">
                 <Link
                   to="/shop"
                   search={{ c: "new" }}
-                  className="shrink-0 whitespace-nowrap pb-1 text-xs lowercase text-background md:text-base"
+                  className="pb-1 text-sm lowercase text-background md:text-base"
                 >
                   shop now &rarr;
                 </Link>
