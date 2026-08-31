@@ -63,7 +63,7 @@ function Home() {
                 <Link
                   to="/shop"
                   search={{ c: "new" }}
-                  className="pb-1 text-sm lowercase text-background md:text-base"
+                  className="whitespace-nowrap pb-1 text-sm lowercase text-background md:text-base"
                 >
                   shop now &rarr;
                 </Link>
