@@ -35,7 +35,7 @@ function detect(src: string): Promise<boolean> {
         let white = 0;
         for (const [x, y] of pts) {
           const d = ctx.getImageData(x, y, 1, 1).data;
-          if (d[0]! > 235 && d[1]! > 235 && d[2]! > 235) white++;
+          if (d[0]! > 225 && d[1]! > 225 && d[2]! > 225) white++;
         }
         const isWhite = white >= pts.length - 1;
         cache.set(src, isWhite);
