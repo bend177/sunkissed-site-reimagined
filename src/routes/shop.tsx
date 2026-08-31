@@ -542,7 +542,7 @@ function Shop() {
               <div
                 key={p.handle}
                 className="collection-in"
-                style={{ animationDelay: `${Math.min(i * 45, 450)}ms` }}
+                style={{ animationDelay: `${Math.min(i * 25, 200)}ms` }}
               >
                 <ProductCard product={p} />
               </div>
