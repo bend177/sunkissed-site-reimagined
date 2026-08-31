@@ -384,8 +384,7 @@ function Shop() {
 
           <div className="mt-4 flex flex-col gap-4">
             {c === "swim" && (
-              {c === "swim" && (
-                <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                 <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                   {(
                     [
                       ["Bikini sets", ["sets"]],
