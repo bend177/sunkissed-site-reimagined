@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
@@ -19,7 +19,8 @@ import {
   type ProductType,
   type SortKey,
 } from "@/data/shop-filters";
-import { swatchFill } from "@/data/product-details";
+import { isPrint, swatchFill } from "@/data/product-details";
+import type { Product } from "@/data/products";
 
 
 type Filter = "all" | "new" | "swim" | "one-piece" | "resort" | "towels";
@@ -57,6 +58,14 @@ const COLLECTION_LABEL: Record<Filter, string> = {
   all: "Shop All",
 };
 
+// Per-collection subcategory chips. Each applies a quick filter on top of the
+// manual filter panel. Swim keeps its existing Product Type chips.
+type SubDef = { label: string; match: (p: Product) => boolean };
+
+const hasTag = (p: Product, tag: string) =>
+  p.tags.some((t) => t.toLowerCase() === tag.toLowerCase());
+
+
 export const Route = createFileRoute("/shop")({
   validateSearch: (search: Record<string, unknown>) => ({
     c: (search["c"] as Filter | undefined) ?? "all",
@@ -86,6 +95,10 @@ function Shop() {
   const products = useCatalog();
   const allColors = colorsIn(products);
 
+  const newArrivalIds = useMemo(
+    () => new Set(products.filter((p) => p.category !== "towels").slice(0, 24).map((p) => p.id)),
+    [products],
+  );
 
   const [types, setTypes] = useState<ProductType[]>([]);
   const [colors, setColors] = useState<string[]>([]);
@@ -96,6 +109,7 @@ function Shop() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [printsAll, setPrintsAll] = useState(false);
+  const [sub, setSub] = useState<string | null>(null);
 
   // Filters are scoped to the collection; switching collections resets them.
   useEffect(() => {
@@ -104,10 +118,55 @@ function Shop() {
     setStyles([]);
     setSizes([]);
     setPrintsAll(false);
+    setSub(null);
   }, [c]);
 
   const newOnly = c === "new";
   const scope = typesFor(c);
+
+  // Per-collection subcategory quick-filters (Bikinis uses its own type chips).
+  const subs: SubDef[] = useMemo(() => {
+    switch (c) {
+      case "one-piece":
+        return [
+          { label: "Classic Colors", match: (p: Product) => !isPrint(colorOf(p)) },
+          { label: "Seasonal Colors", match: (p: Product) => isPrint(colorOf(p)) },
+        ];
+      case "resort":
+        return [
+          { label: "Dresses", match: (p: Product) => hasTag(p, "Dress") || /dress/i.test(p.productType) },
+          {
+            label: "Skirts",
+            match: (p: Product) =>
+              hasTag(p, "Skirt") || /skirt/i.test(p.productType) || /skirt/i.test(p.title),
+          },
+          { label: "Square Tops", match: (p: Product) => hasTag(p, "Square Top") || /square/i.test(p.title) },
+        ];
+      case "towels":
+        return [
+          { label: "Stonewashed", match: (p: Product) => stylesOf(p).includes("Stonewashed") },
+          { label: "Striped", match: (p: Product) => stylesOf(p).includes("Striped") },
+          { label: "Traditional", match: (p: Product) => stylesOf(p).includes("Traditional") },
+        ];
+      case "new":
+        return [
+          { label: "Bikinis", match: (p: Product) => p.category === "swim" },
+          { label: "Resort", match: (p: Product) => p.category === "resort" },
+        ];
+      case "all":
+        return [
+          { label: "Bikinis", match: (p: Product) => p.category === "swim" },
+          { label: "One Pieces", match: (p: Product) => p.category === "one-piece" },
+          { label: "Dresses & Resort", match: (p: Product) => p.category === "resort" },
+          { label: "Beach Towels", match: (p: Product) => p.category === "towels" },
+          { label: "New Arrivals", match: (p: Product) => newArrivalIds.has(p.id) },
+        ];
+      default:
+        return [];
+    }
+  }, [c, newArrivalIds]);
+
+  const activeSub = sub ? subs.find((s) => s.label === sub) : undefined;
 
   const toggle = <T,>(list: T[], set: (v: T[]) => void, value: T) =>
     set(list.includes(value) ? list.filter((x) => x !== value) : [...list, value]);
@@ -124,6 +183,7 @@ function Shop() {
       !p.variants.some((v) => v.available && sizes.includes(v.size.toUpperCase()))
     )
       return false;
+    if (activeSub && !activeSub.match(p)) return false;
     return true;
   });
   if (newOnly) list = list.filter((p) => p.category !== "towels").slice(0, 24);
@@ -137,7 +197,7 @@ function Shop() {
   const pageTitle =
     types.length === 1 ? TYPE_LABEL[types[0]!] : COLLECTION_LABEL[c];
 
-  const filterCount = types.length + colors.length + styles.length + sizes.length;
+  const filterCount = types.length + colors.length + styles.length + sizes.length + (sub ? 1 : 0);
   // Styles offered are scoped to the collection + product type selection.
   const styleOptions = stylesIn(
     products.filter((p) => {
@@ -307,6 +367,21 @@ function Shop() {
             </Link>
           </nav>
 
+          {subs.length > 0 && (
+            <div className="mt-4 flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {subs.map((s) => (
+                <button
+                  key={s.label}
+                  type="button"
+                  onClick={() => setSub(sub === s.label ? null : s.label)}
+                  className={chip(sub === s.label)}
+                >
+                  {s.label}
+                </button>
+              ))}
+            </div>
+          )}
+
           {bikiniFamily && (
             <div className="mt-4 flex flex-col gap-4">
               {c === "swim" && (
@@ -414,6 +489,7 @@ function Shop() {
                     setColors([]);
                     setStyles([]);
                     setSizes([]);
+                    setSub(null);
                   }}
                   className="whitespace-nowrap text-[11px] underline underline-offset-[3px] md:text-[12px]"
                 >
