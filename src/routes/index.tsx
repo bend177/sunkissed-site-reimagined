@@ -56,7 +56,7 @@ function Home() {
             <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/5 to-ink/10" />
             <div className="absolute inset-x-0 bottom-0 px-4 pb-8 md:px-6 md:pb-12">
               <p className="eyebrow rise text-background/80">the animalistique collection</p>
-              <div className="rise mt-3 flex items-end justify-between gap-2 md:gap-6">
+              <div className="rise mt-3 flex items-end justify-between gap-1 md:gap-6">
                 <h1 className="display whitespace-nowrap text-[13vw] leading-[0.95] text-background md:text-[7vw]">
                   Designed to seduce
                 </h1>
