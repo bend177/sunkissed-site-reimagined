@@ -215,7 +215,7 @@ function ProductPage() {
                 Size Chart
               </button>
             </div>
-            <div className="mt-2 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+            <div className="mt-2 flex gap-2">
               {sizes.map((s) => {
                 const v = product.variants.find((x) => x.size === s);
                 return (
