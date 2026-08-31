@@ -183,6 +183,13 @@
   line-height: 0.92;
 }
 
+@utility product-meta {
+  font-family: var(--font-product);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
 @utility eyebrow {
   font-size: 0.6875rem;
   letter-spacing: 0.18em;
