@@ -103,14 +103,16 @@ function ColorGroup({
               params={{ handle: s.handle }}
               aria-label={label}
               title={label}
-              className={`size-10 border p-[3px] ${
-                active ? "border-foreground" : "border-transparent hover:border-muted-foreground"
+              className={`block size-8 shrink-0 rounded-full ring-1 ring-inset transition-shadow ${
+                active
+                  ? "ring-foreground"
+                  : "ring-foreground/15 hover:ring-foreground/50"
               }`}
             >
               <span
                 aria-hidden
                 style={swatchFill(catalog, label, s.image, swatchFocus(s.title))}
-                className="block size-full"
+                className="block size-full rounded-full"
               />
             </Link>
           );
