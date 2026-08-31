@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchFill } from "@/data/product-details";
 import { useCatalog } from "@/lib/catalog";
+import { useWhiteBackground } from "@/lib/white-bg";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
@@ -140,6 +141,10 @@ export function ProductCard({ product }: { product: Product }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<(typeof colors)[number] | null>(null);
   const current = active ?? colors.find((c) => c.current) ?? null;
+  const mainSrc = current?.image ?? product.image;
+  const hoverSrc = !active ? product.images[1] : undefined;
+  const mainWhite = useWhiteBackground(mainSrc);
+  const hoverWhite = useWhiteBackground(hoverSrc);
 
   return (
     <article>
@@ -149,20 +154,20 @@ export function ProductCard({ product }: { product: Product }) {
           params={{ handle: current?.handle ?? product.handle }}
           className="block"
         >
-          <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
+          <div className="relative aspect-[3/4] overflow-hidden bg-announcement">
             <img
-              src={current?.image ?? product.image}
+              src={mainSrc}
               alt={product.title}
               loading="lazy"
-              className="size-full object-cover"
+              className={`size-full object-cover ${mainWhite ? "mix-blend-multiply" : ""}`}
             />
-            {!active && product.images[1] && (
+            {hoverSrc && (
               <img
-                src={product.images[1]}
+                src={hoverSrc}
                 alt=""
                 aria-hidden
                 loading="lazy"
-                className="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                className={`absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${hoverWhite ? "mix-blend-multiply" : ""}`}
               />
             )}
             {product.compareAt && (
