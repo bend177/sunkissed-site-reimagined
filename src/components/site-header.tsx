@@ -12,6 +12,7 @@ const nav = [
   { label: "Dresses & Resort", c: "resort" as const },
   { label: "Beach Towels", c: "towels" as const },
   { label: "New Arrivals", c: "new" as const },
+  { label: "Best Sellers", c: "best" as const },
 ];
 
 type Fly = "search" | "bag" | null;
