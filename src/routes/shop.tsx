@@ -197,7 +197,7 @@ function Shop() {
   const pageTitle =
     types.length === 1 ? TYPE_LABEL[types[0]!] : COLLECTION_LABEL[c];
 
-  const filterCount = types.length + colors.length + styles.length + sizes.length;
+  const filterCount = types.length + colors.length + styles.length + sizes.length + (sub ? 1 : 0);
   // Styles offered are scoped to the collection + product type selection.
   const styleOptions = stylesIn(
     products.filter((p) => {
