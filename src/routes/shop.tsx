@@ -23,7 +23,7 @@ import { isPrint, swatchFill } from "@/data/product-details";
 import type { Product } from "@/data/products";
 
 
-type Filter = "all" | "new" | "swim" | "one-piece" | "resort" | "towels";
+type Filter = "all" | "best" | "new" | "swim" | "one-piece" | "resort" | "towels";
 
 const typesFor = (c: Filter): ProductType[] => {
   switch (c) {
@@ -46,6 +46,7 @@ const COLLECTIONS: { key: Filter; label: string }[] = [
   { key: "resort", label: "Dresses & Resort" },
   { key: "towels", label: "Beach Towels" },
   { key: "new", label: "New Arrivals" },
+  { key: "best", label: "Best Sellers" },
   { key: "all", label: "Shop All" },
 ];
 
@@ -55,6 +56,7 @@ const COLLECTION_LABEL: Record<Filter, string> = {
   resort: "Dresses & Resort",
   towels: "Beach Towels",
   new: "New Arrivals",
+  best: "Best Sellers",
   all: "Shop All",
 };
 
@@ -122,6 +124,7 @@ function Shop() {
   }, [c]);
 
   const newOnly = c === "new";
+  const bestOnly = c === "best";
   const scope = typesFor(c);
 
   // Per-collection subcategory quick-filters (Bikinis uses its own type chips).
@@ -153,6 +156,7 @@ function Shop() {
           { label: "Bikinis", match: (p: Product) => p.category === "swim" },
           { label: "Resort", match: (p: Product) => p.category === "resort" },
         ];
+      case "best":
       case "all":
         return [
           { label: "Bikinis", match: (p: Product) => p.category === "swim" },
@@ -187,6 +191,7 @@ function Shop() {
     return true;
   });
   if (newOnly) list = list.filter((p) => p.category !== "towels").slice(0, 24);
+  if (bestOnly) list = list.slice(0, 48);
 
   if (sort === "price-asc") list = [...list].sort((a, b) => priceNum(a) - priceNum(b));
   else if (sort === "price-desc") list = [...list].sort((a, b) => priceNum(b) - priceNum(a));
