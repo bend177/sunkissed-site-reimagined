@@ -215,7 +215,7 @@ function ProductPage() {
                 Size Chart
               </button>
             </div>
-            <div className="mt-2 flex flex-wrap gap-2">
+            <div className="mt-2 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
               {sizes.map((s) => {
                 const v = product.variants.find((x) => x.size === s);
                 return (
@@ -224,7 +224,7 @@ function ProductPage() {
                     type="button"
                     disabled={v ? !v.available : false}
                     onClick={() => setSize(s)}
-                    className={`min-w-11 border px-3 py-2 text-xs uppercase transition-colors disabled:cursor-not-allowed disabled:line-through disabled:opacity-35 ${
+                    className={`flex-1 border px-3 py-2 text-xs uppercase transition-colors disabled:cursor-not-allowed disabled:line-through disabled:opacity-35 ${
                       size === s
                         ? "border-foreground bg-foreground text-background"
                         : "border-border hover:border-foreground"
