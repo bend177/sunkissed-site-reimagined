@@ -57,7 +57,7 @@ function Home() {
             <div className="absolute inset-x-0 bottom-0 px-4 pb-8 md:px-6 md:pb-12">
               <p className="eyebrow rise text-background/80">the animalistique collection</p>
               <div className="rise mt-3 flex items-end justify-between gap-6">
-                <h1 className="display max-w-3xl text-[9vw] leading-[0.95] text-background md:text-[7vw]">
+                <h1 className="display max-w-3xl text-[13vw] leading-[0.95] text-background md:text-[7vw]">
                   Designed to seduce
                 </h1>
                 <Link
