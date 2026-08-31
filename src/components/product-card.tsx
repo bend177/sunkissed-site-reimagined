@@ -5,7 +5,6 @@ import { toast } from "sonner";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchFill } from "@/data/product-details";
 import { useCatalog } from "@/lib/catalog";
-import { useBackgroundKind } from "@/lib/white-bg";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
@@ -141,10 +140,6 @@ export function ProductCard({ product }: { product: Product }) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<(typeof colors)[number] | null>(null);
   const current = active ?? colors.find((c) => c.current) ?? null;
-  const mainSrc = current?.image ?? product.image;
-  const hoverSrc = !active ? product.images[1] : undefined;
-  const mainWhite = useBackgroundKind(mainSrc) === "white";
-  const hoverWhite = useBackgroundKind(hoverSrc) === "white";
 
   return (
     <article>
@@ -154,20 +149,20 @@ export function ProductCard({ product }: { product: Product }) {
           params={{ handle: current?.handle ?? product.handle }}
           className="block"
         >
-          <div className="relative aspect-[3/4] overflow-hidden bg-announcement">
+          <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
             <img
-              src={mainSrc}
+              src={current?.image ?? product.image}
               alt={product.title}
               loading="lazy"
-              className={`size-full object-cover ${mainWhite ? "mix-blend-multiply" : ""}`}
+              className="size-full object-cover"
             />
-            {hoverSrc && (
+            {!active && product.images[1] && (
               <img
-                src={hoverSrc}
+                src={product.images[1]}
                 alt=""
                 aria-hidden
                 loading="lazy"
-                className={`absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${hoverWhite ? "mix-blend-multiply" : ""}`}
+                className="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
               />
             )}
             {product.compareAt && (
