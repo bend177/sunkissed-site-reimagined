@@ -143,8 +143,8 @@ export function ProductCard({ product }: { product: Product }) {
   const current = active ?? colors.find((c) => c.current) ?? null;
   const mainSrc = current?.image ?? product.image;
   const hoverSrc = !active ? product.images[1] : undefined;
-  const mainWhite = useWhiteBackground(mainSrc);
-  const hoverWhite = useWhiteBackground(hoverSrc);
+  const mainWhite = useBackgroundKind(mainSrc) === "white";
+  const hoverWhite = useBackgroundKind(hoverSrc) === "white";
 
   return (
     <article>

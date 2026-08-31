@@ -62,7 +62,7 @@ function GalleryImage({
   alt: string;
   eager?: boolean;
 }) {
-  const isWhite = useWhiteBackground(src);
+  const isWhite = useBackgroundKind(src) === "white";
   return (
     <div className="aspect-[3/4] w-full shrink-0 snap-center bg-announcement lg:w-auto lg:shrink">
       <img
