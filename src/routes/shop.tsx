@@ -124,6 +124,7 @@ function Shop() {
   }, [c]);
 
   const newOnly = c === "new";
+  const bestOnly = c === "best";
   const scope = typesFor(c);
 
   // Per-collection subcategory quick-filters (Bikinis uses its own type chips).
