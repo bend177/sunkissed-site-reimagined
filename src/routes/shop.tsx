@@ -190,6 +190,7 @@ function Shop() {
     return true;
   });
   if (newOnly) list = list.filter((p) => p.category !== "towels").slice(0, 24);
+  if (bestOnly) list = list.slice(0, 48);
 
   if (sort === "price-asc") list = [...list].sort((a, b) => priceNum(a) - priceNum(b));
   else if (sort === "price-desc") list = [...list].sort((a, b) => priceNum(b) - priceNum(a));
