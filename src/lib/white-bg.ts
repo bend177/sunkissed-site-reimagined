@@ -22,22 +22,21 @@ function detect(src: string): Promise<boolean> {
         const ctx = canvas.getContext("2d");
         if (!ctx) throw new Error("no ctx");
         ctx.drawImage(img, 0, 0, size, size);
-        // Sample the four corners + edge midpoints; a studio shot on white
-        // has near-white pixels around the whole frame.
-        const pts: [number, number][] = [
-          [1, 1],
-          [size - 2, 1],
-          [1, size - 2],
-          [size - 2, size - 2],
-          [Math.floor(size / 2), 1],
-          [Math.floor(size / 2), size - 2],
-        ];
+        // Sample a ring of points along all four edges; a studio shot on
+        // white is mostly near-white around the frame even when the model
+        // touches one or two edges.
+        const pts: [number, number][] = [];
+        const steps = 6;
+        for (let i = 0; i <= steps; i++) {
+          const t = 1 + Math.round((i / steps) * (size - 3));
+          pts.push([t, 1], [t, size - 2], [1, t], [size - 2, t]);
+        }
         let white = 0;
         for (const [x, y] of pts) {
           const d = ctx.getImageData(x, y, 1, 1).data;
           if (d[0]! > 225 && d[1]! > 225 && d[2]! > 225) white++;
         }
-        const isWhite = white >= pts.length - 1;
+        const isWhite = white / pts.length >= 0.6;
         cache.set(src, isWhite);
         resolve(isWhite);
       } catch {
