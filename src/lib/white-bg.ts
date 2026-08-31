@@ -59,9 +59,9 @@ function detect(src: string): Promise<BgKind> {
         const bAvg = bSum / n;
         for (const [r, g, b] of samples) {
           if (
-            Math.abs(r - rAvg) < 18 &&
-            Math.abs(g - gAvg) < 18 &&
-            Math.abs(b - bAvg) < 18
+            Math.abs(r! - rAvg) < 18 &&
+            Math.abs(g! - gAvg) < 18 &&
+            Math.abs(b! - bAvg) < 18
           )
             uniform++;
         }
@@ -115,9 +115,4 @@ export function useBackgroundKind(src: string | undefined): BgKind {
   }, [src]);
 
   return kind;
-}
-
-/** True when the image appears to be shot on a white background. */
-export function useWhiteBackground(src: string | undefined): boolean {
-  return useBackgroundKind(src) === "white";
 }
