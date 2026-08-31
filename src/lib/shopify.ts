@@ -108,7 +108,7 @@ const categoryFor = (productType: string): Product["category"] => {
   const t = productType.toLowerCase();
   if (t.includes("towel") || t.includes("blanket") || t.includes("throw")) return "towels";
   if (t.includes("one piece")) return "one-piece";
-  if (t.includes("separate")) return "swim";
+  if (t.includes("separate") || t.includes("set") || t.includes("bikini")) return "swim";
   return "resort";
 };
 
