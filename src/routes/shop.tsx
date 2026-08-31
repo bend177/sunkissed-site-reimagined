@@ -156,6 +156,7 @@ function Shop() {
           { label: "Bikinis", match: (p: Product) => p.category === "swim" },
           { label: "Resort", match: (p: Product) => p.category === "resort" },
         ];
+      case "best":
       case "all":
         return [
           { label: "Bikinis", match: (p: Product) => p.category === "swim" },
