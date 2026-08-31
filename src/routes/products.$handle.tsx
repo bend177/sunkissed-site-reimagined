@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Price } from "@/components/price";
 import { catalogQueryOptions } from "@/lib/catalog";
-import { useWhiteBackground } from "@/lib/white-bg";
+import { useBackgroundKind } from "@/lib/white-bg";
 import { useCartStore } from "@/lib/cart-store";
 import {
   getProductDetail,
@@ -62,7 +62,7 @@ function GalleryImage({
   alt: string;
   eager?: boolean;
 }) {
-  const isWhite = useWhiteBackground(src);
+  const isWhite = useBackgroundKind(src) === "white";
   return (
     <div className="aspect-[3/4] w-full shrink-0 snap-center bg-announcement lg:w-auto lg:shrink">
       <img

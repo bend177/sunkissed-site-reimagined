@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchFill } from "@/data/product-details";
 import { useCatalog } from "@/lib/catalog";
-import { useWhiteBackground } from "@/lib/white-bg";
+import { useBackgroundKind } from "@/lib/white-bg";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
@@ -143,8 +143,8 @@ export function ProductCard({ product }: { product: Product }) {
   const current = active ?? colors.find((c) => c.current) ?? null;
   const mainSrc = current?.image ?? product.image;
   const hoverSrc = !active ? product.images[1] : undefined;
-  const mainWhite = useWhiteBackground(mainSrc);
-  const hoverWhite = useWhiteBackground(hoverSrc);
+  const mainWhite = useBackgroundKind(mainSrc) === "white";
+  const hoverWhite = useBackgroundKind(hoverSrc) === "white";
 
   return (
     <article>
