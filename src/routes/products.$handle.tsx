@@ -16,6 +16,7 @@ import {
   swatchFocus,
 } from "@/data/product-details";
 import { toast } from "sonner";
+import { PairAdd, findPair } from "@/components/pair-add";
 
 export const Route = createFileRoute("/products/$handle")({
   loader: async ({ params, context }) => {
@@ -130,6 +131,7 @@ function ProductPage() {
   const { product, base, colorName, siblings, gallery, sizes, description, fit, material } = detail;
   const [size, setSize] = useState<string | null>(sizes.length === 1 ? sizes[0]! : null);
   const related = relatedProducts(catalog, product, 2);
+  const pair = findPair(catalog, product);
   const addItem = useCartStore((s) => s.addItem);
   const isLoading = useCartStore((s) => s.isLoading);
   const variant = product.variants.find((v) => v.size === size);
@@ -275,6 +277,8 @@ function ProductPage() {
                 Returns accepted within 30 days on unworn pieces.
               </Accordion>
             </div>
+
+            {pair && <PairAdd pair={pair} product={product} />}
 
             {related.length > 0 && (
               <section className="mt-8 pb-14">
