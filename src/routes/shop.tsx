@@ -124,6 +124,50 @@ function Shop() {
   const newOnly = c === "new";
   const scope = typesFor(c);
 
+  // Per-collection subcategory quick-filters (Bikinis uses its own type chips).
+  const subs: SubDef[] = useMemo(() => {
+    switch (c) {
+      case "one-piece":
+        return [
+          { label: "Classic Colors", match: (p: Product) => !isPrint(colorOf(p)) },
+          { label: "Seasonal Colors", match: (p: Product) => isPrint(colorOf(p)) },
+        ];
+      case "resort":
+        return [
+          { label: "Dresses", match: (p: Product) => hasTag(p, "Dress") || /dress/i.test(p.productType) },
+          {
+            label: "Skirts",
+            match: (p: Product) =>
+              hasTag(p, "Skirt") || /skirt/i.test(p.productType) || /skirt/i.test(p.title),
+          },
+          { label: "Square Tops", match: (p: Product) => hasTag(p, "Square Top") || /square/i.test(p.title) },
+        ];
+      case "towels":
+        return [
+          { label: "Stonewashed", match: (p: Product) => stylesOf(p).includes("Stonewashed") },
+          { label: "Striped", match: (p: Product) => stylesOf(p).includes("Striped") },
+          { label: "Traditional", match: (p: Product) => stylesOf(p).includes("Traditional") },
+        ];
+      case "new":
+        return [
+          { label: "Bikinis", match: (p: Product) => p.category === "swim" },
+          { label: "Resort", match: (p: Product) => p.category === "resort" },
+        ];
+      case "all":
+        return [
+          { label: "Bikinis", match: (p: Product) => p.category === "swim" },
+          { label: "One Pieces", match: (p: Product) => p.category === "one-piece" },
+          { label: "Dresses & Resort", match: (p: Product) => p.category === "resort" },
+          { label: "Beach Towels", match: (p: Product) => p.category === "towels" },
+          { label: "New Arrivals", match: (p: Product) => newArrivalIds.has(p.id) },
+        ];
+      default:
+        return [];
+    }
+  }, [c, newArrivalIds]);
+
+  const activeSub = sub ? subs.find((s) => s.label === sub) : undefined;
+
   const toggle = <T,>(list: T[], set: (v: T[]) => void, value: T) =>
     set(list.includes(value) ? list.filter((x) => x !== value) : [...list, value]);
 
@@ -139,6 +183,7 @@ function Shop() {
       !p.variants.some((v) => v.available && sizes.includes(v.size.toUpperCase()))
     )
       return false;
+    if (activeSub && !activeSub.match(p)) return false;
     return true;
   });
   if (newOnly) list = list.filter((p) => p.category !== "towels").slice(0, 24);
