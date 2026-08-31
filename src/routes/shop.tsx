@@ -339,7 +339,7 @@ function Shop() {
           {/* Collection navigation - one row, same font; active collection is larger with its count */}
           <nav
             aria-label="Collections"
-            className="display flex items-baseline gap-x-5 gap-y-2 overflow-x-auto whitespace-nowrap pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:gap-x-7"
+            className="display flex h-[44px] items-end gap-x-5 gap-y-2 overflow-x-auto whitespace-nowrap pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:h-[80px] md:gap-x-7"
           >
             {COLLECTIONS.map((col) => {
               const active = col.key === c;
