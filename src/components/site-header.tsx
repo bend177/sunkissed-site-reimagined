@@ -59,9 +59,9 @@ export function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-border bg-background">
-        <div className="bg-ink px-3 py-2 text-center lg:px-4">
-          <p className="eyebrow whitespace-nowrap text-[8px] tracking-[0.12em] text-background lg:text-[11px] lg:tracking-[0.18em]">
-            Free shipping on all U.S. orders. Processed within 24 hours.
+        <div className="bg-muted px-3 py-2 text-center lg:px-4">
+          <p className="eyebrow whitespace-nowrap text-[8px] tracking-[0.12em] text-foreground lg:text-[11px] lg:tracking-[0.18em]">
+            Free US shipping on orders over $100
           </p>
         </div>
 
