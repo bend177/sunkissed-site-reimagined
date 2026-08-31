@@ -192,7 +192,6 @@ function Shop() {
   else if (sort === "price-desc") list = [...list].sort((a, b) => priceNum(b) - priceNum(a));
   else if (sort === "new") list = [...list].reverse();
 
-  const bikiniFamily = c === "swim" || c === "one-piece";
 
   const pageTitle =
     types.length === 1 ? TYPE_LABEL[types[0]!] : COLLECTION_LABEL[c];
@@ -382,10 +381,9 @@ function Shop() {
             </div>
           )}
 
-          {bikiniFamily && (
-            <div className="mt-4 flex flex-col gap-4">
-              {c === "swim" && (
-                <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="mt-4 flex flex-col gap-4">
+            {c === "swim" && (
+                 <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                   {(
                     [
                       ["Bikini sets", ["sets"]],
@@ -452,13 +450,11 @@ function Shop() {
                     onClick={() => setPrintsAll(false)}
                     className="text-[12px] underline underline-offset-4 hover:opacity-60"
                   >
-                    Show less
+                  Show less
                   </button>
                 )}
               </div>
-
-            </div>
-          )}
+          </div>
         </section>
 
         {/* Filter toolbar */}
