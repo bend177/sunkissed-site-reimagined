@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 import { useCatalog } from "@/lib/catalog";
 import { useCartStore } from "@/lib/cart-store";
@@ -28,6 +28,7 @@ export function SiteHeader() {
 
   const items = useCartStore((s) => s.items);
   const removeItem = useCartStore((s) => s.removeItem);
+  const updateQuantity = useCartStore((s) => s.updateQuantity);
   const getCheckoutUrl = useCartStore((s) => s.getCheckoutUrl);
   const syncCart = useCartStore((s) => s.syncCart);
   const cartCount = items.reduce((n, i) => n + i.quantity, 0);
@@ -174,13 +175,24 @@ export function SiteHeader() {
                 className="fly-in absolute right-0 top-full z-[55] flex h-[calc(100vh-132px)] w-[min(360px,94vw)] flex-col border-l border-border bg-background shadow-[-16px_24px_48px_rgba(0,0,0,0.14)]"
               >
                 <div className="flex items-center justify-between gap-3 px-6 pb-3 pt-5">
-                  <p className="eyebrow text-muted-foreground">
-                    {fly === "bag"
-                      ? `Bag (${cartCount})`
-                      : query
-                        ? "Results"
-                        : "Bestsellers"}
-                  </p>
+                  <div className="flex items-baseline gap-4">
+                    <p className="text-[14px]">
+                      {fly === "bag"
+                        ? `Bag (${cartCount})`
+                        : query
+                          ? "Results"
+                          : "Bestsellers"}
+                    </p>
+                    {fly === "bag" && items.length > 0 && (
+                      <Link
+                        to="/cart"
+                        onClick={() => setFly(null)}
+                        className="text-[13px] underline underline-offset-4"
+                      >
+                        View more details
+                      </Link>
+                    )}
+                  </div>
                   <button type="button" aria-label="Close" onClick={() => setFly(null)}>
                     <X className="size-[18px]" strokeWidth={1.25} />
                   </button>
@@ -226,7 +238,20 @@ export function SiteHeader() {
                       </div>
                     ) : (
                       <>
-                        <div className="flex-1 space-y-5 overflow-y-auto px-6 pb-5">
+                        <div className="px-6">
+                          <div className="h-[3px] w-full bg-border">
+                            <div
+                              className="h-full bg-ink transition-[width] duration-500"
+                              style={{ width: `${Math.min(1, cartTotal / 100) * 100}%` }}
+                            />
+                          </div>
+                          <p className="mt-2.5 text-[11px] uppercase tracking-[0.1em]">
+                            {cartTotal >= 100
+                              ? "You qualify for free shipping!"
+                              : `$${(100 - cartTotal).toFixed(0)} away from free shipping`}
+                          </p>
+                        </div>
+                        <div className="mt-4 flex-1 space-y-6 overflow-y-auto px-6 pb-5">
                           {items.map((item) => (
                             <div key={item.variantId} className="flex gap-3.5">
                               <img
@@ -236,25 +261,72 @@ export function SiteHeader() {
                               />
                               <div className="min-w-0 flex-1">
                                 <p className="text-[13px] leading-snug">{item.title}</p>
-                                <p className="mt-1 text-xs text-muted-foreground lowercase">
-                                  size {item.size} &middot; qty {item.quantity}
-                                </p>
                                 <p className="mt-1 text-[13px]">
                                   ${(Number(item.price) * item.quantity).toFixed(2)}
                                 </p>
-                                <button
-                                  type="button"
-                                  onClick={() => removeItem(item.variantId)}
-                                  className="mt-1.5 text-[11px] uppercase tracking-widest text-muted-foreground underline underline-offset-4"
-                                >
-                                  Remove
-                                </button>
+                                <p className="mt-2 text-[12px] text-muted-foreground">
+                                  Size: <span className="text-foreground">{item.size}</span>
+                                </p>
+                                <div className="mt-3 flex items-center gap-3">
+                                  <div className="flex items-center border border-border">
+                                    <button
+                                      type="button"
+                                      aria-label="Decrease quantity"
+                                      onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
+                                      className="px-2.5 py-2 text-muted-foreground transition-colors hover:text-foreground"
+                                    >
+                                      <Minus className="size-3" strokeWidth={1.5} />
+                                    </button>
+                                    <span className="min-w-6 text-center text-[13px]">
+                                      {item.quantity}
+                                    </span>
+                                    <button
+                                      type="button"
+                                      aria-label="Increase quantity"
+                                      onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
+                                      className="px-2.5 py-2 text-muted-foreground transition-colors hover:text-foreground"
+                                    >
+                                      <Plus className="size-3" strokeWidth={1.5} />
+                                    </button>
+                                  </div>
+                                  <button
+                                    type="button"
+                                    aria-label="Remove item"
+                                    onClick={() => removeItem(item.variantId)}
+                                    className="text-muted-foreground transition-colors hover:text-foreground"
+                                  >
+                                    <Trash2 className="size-4" strokeWidth={1.25} />
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           ))}
                         </div>
+                        <div className="px-6 pb-5">
+                          <p className="flex items-center gap-2 text-[12px] uppercase tracking-[0.1em]">
+                            <span className="size-2.5 bg-ink" />
+                            You may also like
+                          </p>
+                          <div className="mt-3 grid grid-cols-2 gap-3">
+                            {suggestions.map((p) => (
+                              <Link
+                                key={p.handle}
+                                to="/products/$handle"
+                                params={{ handle: p.handle }}
+                                onClick={() => setFly(null)}
+                                className="min-w-0"
+                              >
+                                <img
+                                  src={p.image}
+                                  alt={p.title}
+                                  className="aspect-[4/5] w-full object-cover"
+                                />
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
                         <div className="border-t border-border px-6 py-5">
-                          <div className="flex items-center justify-between text-sm">
+                          <div className="flex items-center justify-between text-[15px]">
                             <span>Subtotal</span>
                             <span>${cartTotal.toFixed(2)}</span>
                           </div>
@@ -265,13 +337,6 @@ export function SiteHeader() {
                           >
                             Checkout
                           </button>
-                          <Link
-                            to="/cart"
-                            onClick={() => setFly(null)}
-                            className="eyebrow mt-3 block text-center underline underline-offset-4"
-                          >
-                            View bag
-                          </Link>
                         </div>
                       </>
                     )}
