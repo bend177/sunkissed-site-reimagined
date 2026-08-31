@@ -149,13 +149,22 @@ export function ProductCard({ product }: { product: Product }) {
           params={{ handle: current?.handle ?? product.handle }}
           className="block"
         >
-          <div className="hover-zoom relative aspect-[3/4] bg-secondary">
+          <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
             <img
               src={current?.image ?? product.image}
               alt={product.title}
               loading="lazy"
               className="size-full object-cover"
             />
+            {!active && product.images[1] && (
+              <img
+                src={product.images[1]}
+                alt=""
+                aria-hidden
+                loading="lazy"
+                className="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              />
+            )}
             {product.compareAt && (
               <span className="absolute left-2 top-2 bg-background px-2 py-0.5 text-[11px] uppercase tracking-widest text-foreground">
                 Sale
