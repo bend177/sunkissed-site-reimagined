@@ -173,7 +173,7 @@ function ProductPage() {
 
         <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1fr_460px] lg:gap-10 lg:px-6">
           {/* Gallery - swipeable on mobile, 2-up grid on desktop */}
-          <div className="flex snap-x snap-mandatory overflow-x-auto scrollbar-none lg:grid lg:grid-cols-2 lg:gap-1 lg:overflow-visible">
+          <div className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-2 lg:gap-1 lg:overflow-visible">
             {gallery.map((src, i) => (
               <div
                 key={src + i}
