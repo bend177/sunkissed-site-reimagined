@@ -72,12 +72,10 @@ export function SiteHeader() {
             <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
           </Link>
           <div className="flex items-center gap-5">
-            <button
-              type="button"
+            <Link
+              to="/cart"
               aria-label={`Bag (${cartCount})`}
-              onClick={checkout}
-              disabled={cartCount === 0}
-              className="relative disabled:opacity-40"
+              className="relative"
             >
               <ShoppingBag className="size-[19px]" strokeWidth={1.25} />
               {cartCount > 0 && (
@@ -85,7 +83,7 @@ export function SiteHeader() {
                   {cartCount}
                 </span>
               )}
-            </button>
+            </Link>
 
             <button type="button" aria-label="Open menu" onClick={() => setOpen(true)}>
               <Menu className="size-[22px]" strokeWidth={1.25} />
@@ -267,6 +265,13 @@ export function SiteHeader() {
                           >
                             Checkout
                           </button>
+                          <Link
+                            to="/cart"
+                            onClick={() => setFly(null)}
+                            className="eyebrow mt-3 block text-center underline underline-offset-4"
+                          >
+                            View bag
+                          </Link>
                         </div>
                       </>
                     )}
