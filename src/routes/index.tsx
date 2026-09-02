@@ -46,7 +46,7 @@ function Home() {
 
       <main>
         {/* Hero */}
-        <section className="relative">
+        <section className="relative lg:-mt-[5.25rem]">
           <div className="relative h-[78vh] min-h-[520px] w-full overflow-hidden md:h-[92vh]">
             <img
               src={editorial.hero}
