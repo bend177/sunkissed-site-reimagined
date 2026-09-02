@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import { notifyAddedToBag } from "@/lib/toast-added";
 import { onOpenBagFlyout } from "@/lib/bag-events";
