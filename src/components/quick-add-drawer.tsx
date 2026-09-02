@@ -96,7 +96,7 @@ export function QuickAddDrawer({
             disabled={!variant || isLoading}
             className="mt-5 w-full bg-ink py-4 text-xs uppercase tracking-[0.18em] text-background transition-opacity disabled:opacity-40"
           >
-            {isLoading ? "adding..." : variant ? "add to bag" : "select a size"}
+            {isLoading ? "ADDING..." : variant ? "ADD TO BAG" : "SELECT A SIZE"}
           </button>
         </div>
       </DrawerContent>
