@@ -30,12 +30,17 @@ export function SiteHeader() {
   const [fly, setFly] = useState<Fly>(null);
   const [closing, setClosing] = useState(false);
   const closeFly = useCallback(() => {
-    setClosing(true);
-    window.setTimeout(() => {
-      setFly(null);
-      setClosing(false);
-    }, 320);
+    setClosing((wasClosing) => {
+      if (!wasClosing) {
+        window.setTimeout(() => {
+          setFly(null);
+          setClosing(false);
+        }, 320);
+      }
+      return true;
+    });
   }, []);
+
 
   const [q, setQ] = useState("");
   const [scrolled, setScrolled] = useState(false);
