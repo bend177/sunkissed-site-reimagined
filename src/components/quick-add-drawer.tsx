@@ -8,6 +8,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import type { Product } from "@/data/products";
+import { splitTitle } from "@/data/product-details";
 import { Price } from "@/components/price";
 import { useCartStore } from "@/lib/cart-store";
 
@@ -61,7 +62,7 @@ export function QuickAddDrawer({
             />
             <div className="min-w-0 flex-1">
               <DrawerTitle className="truncate text-sm font-normal">
-                {product.title}
+                {splitTitle(product.title).base}
               </DrawerTitle>
               <Price product={product} className="mt-1" />
             </div>
