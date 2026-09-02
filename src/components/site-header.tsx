@@ -124,7 +124,7 @@ export function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-50">
-        <div className="bg-announcement px-3 py-2 text-center lg:px-4">
+        <div className={`px-3 py-2 text-center lg:px-4 ${transparent ? "bg-announcement lg:bg-transparent" : "bg-announcement"}`}>
           <p className={`eyebrow whitespace-nowrap text-[8px] tracking-[0.12em] text-foreground lg:text-[11px] lg:tracking-[0.18em] ${transparent ? "lg:text-background/80" : ""}`}>
             Free US shipping on orders over $100
           </p>
