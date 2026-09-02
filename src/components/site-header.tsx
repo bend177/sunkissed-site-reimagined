@@ -184,7 +184,7 @@ export function SiteHeader() {
 
             <div className="flex items-center justify-end gap-6">
               {fly === "search" ? (
-                <div className="search-grow flex w-[210px] items-center gap-2.5 overflow-hidden border-b border-foreground px-0.5 py-1">
+                <div className="search-grow flex w-[210px] items-center gap-2.5 overflow-hidden border-b border-current px-0.5 py-1">
                   <Search className="size-[15px] shrink-0" strokeWidth={1.25} />
                   <input
                     autoFocus
