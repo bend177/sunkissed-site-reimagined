@@ -350,29 +350,19 @@ export function SiteHeader() {
                               </div>
                             </div>
                           ))}
-                        </div>
-                        <div className="px-6 pb-5">
-                          <p className="flex items-center gap-2 text-[12px] uppercase tracking-[0.1em]">
-                            <span className="size-2.5 bg-ink" />
-                            You may also like
-                          </p>
-                          <div className="mt-3 grid grid-cols-2 gap-3">
-                            {suggestions.map((p) => (
-                              <Link
-                                key={p.handle}
-                                to="/products/$handle"
-                                params={{ handle: p.handle }}
-                                onClick={() => setFly(null)}
-                                className="min-w-0"
-                              >
-                                <img
-                                  src={p.image}
-                                  alt={p.title}
-                                  className="aspect-[4/5] w-full object-cover"
-                                />
-                              </Link>
-                            ))}
-                          </div>
+                          {bagSuggestions.length > 0 && (
+                            <div className="border-t border-border pt-5">
+                              <p className="flex items-center gap-2 text-[12px] uppercase tracking-[0.1em]">
+                                <span className="size-2.5 bg-ink" />
+                                {setPairs.length > 0 ? "Complete the set" : "You may also like"}
+                              </p>
+                              <div className="mt-4 space-y-5">
+                                {bagSuggestions.map((p) => (
+                                  <BagSuggestion key={p.handle} product={p} />
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
                         <div className="border-t border-border px-6 py-5">
                           <div className="flex items-center justify-between text-[15px]">
