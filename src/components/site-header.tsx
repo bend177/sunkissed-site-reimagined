@@ -395,7 +395,6 @@ export function SiteHeader() {
               </div>
             </>
           )}
-        </div>
       </header>
 
       {/* Mobile / tablet full-screen menu */}
