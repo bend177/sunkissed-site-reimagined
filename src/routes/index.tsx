@@ -61,7 +61,7 @@ function Home() {
                   Designed to seduce
                 </h1>
               </div>
-              <div className="rise flex justify-end">
+              <div className="rise flex justify-start">
                 <Link
                   to="/shop"
                   search={{ c: "new" }}
