@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import { notifyAddedToBag } from "@/lib/toast-added";
@@ -29,9 +29,22 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
   const [q, setQ] = useState("");
+  const [scrolled, setScrolled] = useState(false);
   const products = useCatalog();
   const bestsellers = products.slice(0, 6);
   const suggestions = products.slice(6, 8);
+
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  // Desktop header is transparent over the homepage hero at the very top,
+  // then turns solid white once the user scrolls (or on any non-home page).
+  const transparent = pathname === "/" && !scrolled;
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const items = useCartStore((s) => s.items);
   const removeItem = useCartStore((s) => s.removeItem);
@@ -110,15 +123,15 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-border bg-background">
-        <div className="bg-announcement px-3 py-2 text-center lg:px-4">
-          <p className="eyebrow whitespace-nowrap text-[8px] tracking-[0.12em] text-foreground lg:text-[11px] lg:tracking-[0.18em]">
+      <header className="sticky top-0 z-50">
+        <div className={`px-3 py-2 text-center lg:px-4 ${transparent ? "bg-announcement lg:bg-transparent" : "bg-announcement"}`}>
+          <p className={`eyebrow whitespace-nowrap text-[8px] tracking-[0.12em] text-foreground lg:text-[11px] lg:tracking-[0.18em] ${transparent ? "lg:text-background/80" : ""}`}>
             Free US shipping on orders over $100
           </p>
         </div>
 
         {/* Mobile / tablet bar */}
-        <div className="flex items-center justify-between gap-4 px-4 py-3.5 lg:hidden">
+        <div className="flex items-center justify-between gap-4 border-b border-border bg-background px-4 py-3.5 lg:hidden">
           <Link to="/" aria-label="Sunkissed home" className="shrink-0">
             <img src={logoAsset.url} alt="Sunkissed" className="-ml-1 h-7 w-auto" />
           </Link>
@@ -145,7 +158,7 @@ export function SiteHeader() {
 
         {/* Desktop: single row - nav left, centered logo, actions right */}
         <div className="hidden lg:block">
-          <div className="relative z-[46] grid grid-cols-[1fr_auto_1fr] items-center gap-8 bg-background px-6 py-3.5">
+          <div className={`relative z-[46] grid grid-cols-[1fr_auto_1fr] items-center gap-8 px-6 py-3.5 ${transparent ? "bg-transparent text-background" : "bg-background text-foreground"} ${transparent ? "" : "border-b border-border"}`}>
             <nav className="flex items-center gap-6">
               {nav.map((l) => (
                 <Link
@@ -166,12 +179,12 @@ export function SiteHeader() {
             </nav>
 
             <Link to="/" aria-label="Sunkissed home" className="shrink-0 justify-self-center">
-              <img src={logoAsset.url} alt="Sunkissed" className="h-6 w-auto" />
+              <img src={logoAsset.url} alt="Sunkissed" className={`h-6 w-auto ${transparent ? "invert" : ""}`} />
             </Link>
 
             <div className="flex items-center justify-end gap-6">
               {fly === "search" ? (
-                <div className="search-grow flex w-[210px] items-center gap-2.5 overflow-hidden border-b border-foreground px-0.5 py-1">
+                <div className="search-grow flex w-[210px] items-center gap-2.5 overflow-hidden border-b border-current px-0.5 py-1">
                   <Search className="size-[15px] shrink-0" strokeWidth={1.25} />
                   <input
                     autoFocus
