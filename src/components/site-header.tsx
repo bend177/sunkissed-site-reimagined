@@ -29,6 +29,13 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
   const [closing, setClosing] = useState(false);
+  const closeFly = useCallback(() => {
+    setClosing(true);
+    window.setTimeout(() => {
+      setFly(null);
+      setClosing(false);
+    }, 320);
+  }, []);
   const [q, setQ] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const products = useCatalog();
