@@ -199,12 +199,17 @@
 }
 
 /*
- * Demo only: grey background behind all product images.
- * Remove this block (or the class) once real transparent/on-background
- * images are in place.
+ * Demo only: light beige background behind all product images.
+ * mix-blend-mode: darken replaces only the white/near-white photo
+ * background pixels with this beige, leaving darker subjects (people,
+ * swimwear) untouched. Remove this block once real transparent
+ * /on-background images are in place.
  */
 @utility image-bg {
-  background-color: oklch(0.87 0 0);
+  background-color: oklch(0.93 0.012 80);
+  & img {
+    mix-blend-mode: darken;
+  }
 }
 
 @utility hover-zoom {
