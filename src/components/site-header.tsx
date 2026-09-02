@@ -9,6 +9,8 @@ import { useCatalog } from "@/lib/catalog";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
 import { findPair } from "@/components/pair-add";
+import { ApplePayButton } from "@/components/apple-pay-button";
+
 import { splitTitle } from "@/data/product-details";
 import type { Product } from "@/data/products";
 
