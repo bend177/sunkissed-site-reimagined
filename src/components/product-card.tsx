@@ -107,10 +107,7 @@ function HoverQuickAdd({ product }: { product: Product }) {
       currencyCode: variant.currencyCode,
       quantity: 1,
     });
-    toast.success("Added to bag", {
-      description: `${product.title} - size ${variant.size}`,
-      position: "top-center",
-    });
+    notifyAddedToBag(`${splitTitle(product.title).base} - size ${variant.size}`);
   };
 
   if (product.variants.length === 0) return null;
