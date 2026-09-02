@@ -2,6 +2,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import { notifyAddedToBag } from "@/lib/toast-added";
+import { onOpenBagFlyout } from "@/lib/bag-events";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 import chevronAsset from "@/assets/serif-chevron.png.asset.json";
 import { useCatalog } from "@/lib/catalog";
