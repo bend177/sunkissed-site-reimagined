@@ -435,7 +435,7 @@ function Shop() {
                     <button
                       key={name}
                       type="button"
-                      onClick={() => setColors([name])}
+                      onClick={() => toggle(colors, setColors, name)}
                       title={name}
                       className="flex items-center gap-2 text-[13.5px] transition-opacity hover:opacity-60"
                     >
