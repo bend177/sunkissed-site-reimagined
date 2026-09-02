@@ -439,9 +439,9 @@ function Shop() {
                     type="button"
                     aria-label="Show all featured prints"
                     onClick={() => setPrintsAll(true)}
-                    className="flex size-[24px] shrink-0 items-center justify-center rounded-full border border-foreground/20 text-[14px] leading-none text-muted-foreground transition-colors hover:border-foreground/50 hover:text-foreground"
+                    className="flex size-[24px] shrink-0 items-center justify-center rounded-full ring-1 ring-border text-muted-foreground transition-colors hover:ring-foreground/50 hover:text-foreground"
                   >
-                    +
+                    <Plus className="size-3" strokeWidth={1.5} />
                   </button>
                 )}
                 {printsAll && (
