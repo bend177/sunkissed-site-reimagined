@@ -200,15 +200,11 @@
 
 /*
  * Demo only: grey background behind all product images.
- * The photos ship with baked-in white backgrounds, so `multiply` blending lets
- * the grey show through the white pixels. Remove this block (or the class)
- * once real transparent/on-background images are in place.
+ * Remove this block (or the class) once real transparent/on-background
+ * images are in place.
  */
 @utility image-bg {
   background-color: oklch(0.87 0 0);
-  & img {
-    mix-blend-mode: multiply;
-  }
 }
 
 @utility hover-zoom {
