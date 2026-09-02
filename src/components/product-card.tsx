@@ -175,31 +175,30 @@ export function ProductCard({ product }: { product: Product }) {
         <HoverQuickAdd product={product} />
       </div>
 
-      <div className="mt-2.5 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
-        <div className="min-w-0">
-          <div className="flex items-baseline justify-between gap-2">
-            <Link to="/products/$handle" params={{ handle: product.handle }}>
-              <h3 className="product-meta truncate">{splitTitle(product.title).base}</h3>
-            </Link>
-            <Price product={product} className="shrink-0" />
-          </div>
-          {colors.length > 1 && (
-            <Swatches
-              colors={colors}
-              current={current}
-              onHover={setActive}
-              catalog={catalog}
-            />
-          )}
+      <div className="mt-2.5">
+        <div className="flex items-baseline justify-between gap-2">
+          <Link to="/products/$handle" params={{ handle: product.handle }} className="min-w-0">
+            <h3 className="product-meta truncate">{splitTitle(product.title).base}</h3>
+          </Link>
+          <button
+            type="button"
+            aria-label={`Quick add ${product.title}`}
+            onClick={() => setOpen(true)}
+            className="shrink-0 p-0.5 text-foreground transition-opacity hover:opacity-60 lg:hidden"
+          >
+            <Plus className="size-5" strokeWidth={1} />
+          </button>
+          <Price product={product} className="shrink-0 hidden lg:block" />
         </div>
-        <button
-          type="button"
-          aria-label={`Quick add ${product.title}`}
-          onClick={() => setOpen(true)}
-          className="shrink-0 p-0.5 text-foreground transition-opacity hover:opacity-60 lg:hidden"
-        >
-          <Plus className="size-5" strokeWidth={1} />
-        </button>
+        <Price product={product} className="mt-0.5 lg:hidden" />
+        {colors.length > 1 && (
+          <Swatches
+            colors={colors}
+            current={current}
+            onHover={setActive}
+            catalog={catalog}
+          />
+        )}
       </div>
 
       <QuickAddDrawer product={product} open={open} onOpenChange={setOpen} />
