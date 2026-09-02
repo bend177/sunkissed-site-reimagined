@@ -44,6 +44,25 @@ export function SiteHeader() {
   const cartCount = items.reduce((n, i) => n + i.quantity, 0);
   const cartTotal = items.reduce((n, i) => n + Number(i.price) * i.quantity, 0);
 
+  // Complete-the-set pairs for pieces already in the bag, then other
+  // products the shopper does not have yet.
+  const inBag = new Set(items.map((i) => i.handle));
+  const setPairs: Product[] = [];
+  for (const item of items) {
+    const product = products.find((p) => p.handle === item.handle);
+    if (!product) continue;
+    const pair = findPair(products, product);
+    if (!pair || inBag.has(pair.handle)) continue;
+    if (setPairs.some((s) => s.handle === pair.handle)) continue;
+    setPairs.push(pair);
+  }
+  const bagSuggestions = [
+    ...setPairs,
+    ...products.filter(
+      (p) => !inBag.has(p.handle) && !setPairs.some((s) => s.handle === p.handle),
+    ),
+  ].slice(0, 2);
+
   const checkout = () => {
     const url = getCheckoutUrl();
     if (url) window.open(url, "_blank");
