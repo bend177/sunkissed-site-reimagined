@@ -493,3 +493,81 @@ export function SiteHeader() {
     </>
   );
 }
+
+/** Compact suggestion row in the bag flyout with inline size selection. */
+function BagSuggestion({ product }: { product: Product }) {
+  const [size, setSize] = useState<string | null>(
+    product.sizes.length === 1 ? product.sizes[0]! : null,
+  );
+  const addItem = useCartStore((s) => s.addItem);
+  const isLoading = useCartStore((s) => s.isLoading);
+  const variant = product.variants.find((v) => v.size === size);
+
+  const add = async () => {
+    if (!variant) return;
+    await addItem({
+      variantId: variant.id,
+      handle: product.handle,
+      title: product.title,
+      image: product.image,
+      size: variant.size,
+      price: variant.price,
+      currencyCode: variant.currencyCode,
+      quantity: 1,
+    });
+    toast.success("Added to bag", {
+      description: `${splitTitle(product.title).base} - ${variant.size}`,
+    });
+  };
+
+  return (
+    <div className="flex gap-3.5">
+      <Link to="/products/$handle" params={{ handle: product.handle }} className="shrink-0">
+        <img
+          src={product.image}
+          alt={product.title}
+          loading="lazy"
+          className="h-[104px] w-[78px] object-cover"
+        />
+      </Link>
+      <div className="min-w-0 flex-1">
+        <Link
+          to="/products/$handle"
+          params={{ handle: product.handle }}
+          className="text-[13px] leading-snug hover:underline underline-offset-4"
+        >
+          {splitTitle(product.title).base}
+        </Link>
+        <Price product={product} className="mt-1 text-[13px]" />
+        <div className="mt-2.5 flex flex-wrap gap-1">
+          {product.sizes.map((s) => {
+            const available = product.variants.some((v) => v.size === s && v.available);
+            return (
+              <button
+                key={s}
+                type="button"
+                disabled={!available}
+                onClick={() => setSize(s)}
+                className={`min-w-8 border px-1.5 py-1 text-[10px] uppercase tracking-[0.08em] transition-colors ${
+                  size === s
+                    ? "border-foreground bg-ink text-background"
+                    : "border-border hover:border-foreground"
+                } ${available ? "" : "cursor-not-allowed text-muted-foreground/50 line-through"}`}
+              >
+                {s}
+              </button>
+            );
+          })}
+        </div>
+        <button
+          type="button"
+          disabled={!variant || isLoading}
+          onClick={add}
+          className="mt-2.5 w-full border border-ink py-2 text-[10px] uppercase tracking-[0.16em] transition-colors hover:bg-ink hover:text-background disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          {variant ? "Add to bag" : "Select a size"}
+        </button>
+      </div>
+    </div>
+  );
+}
