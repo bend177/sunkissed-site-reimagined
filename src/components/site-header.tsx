@@ -13,14 +13,11 @@ function SerifArrow({ className = "" }: { className?: string }) {
       fill="none"
       aria-hidden
       className={className}
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
     >
-      {/* hairline shaft evoking the high-contrast strokes of Instrument Serif */}
-      <path d="M1 14 H30" strokeWidth={0.75} />
-      {/* refined serif-style arrowhead */}
-      <path d="M22 6.5 L30.5 14 L22 21.5" strokeWidth={1} />
+      {/* hairline shaft - the thin stroke of a high-contrast serif */}
+      <path d="M1 14 H27" stroke="currentColor" strokeWidth={0.6} strokeLinecap="round" />
+      {/* solid filled head - the heavy stroke of a high-contrast serif */}
+      <path d="M27 6 L35 14 L27 22 Z" fill="currentColor" />
     </svg>
   );
 }
