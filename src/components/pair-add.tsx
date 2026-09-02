@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { toast } from "sonner";
+import { notifyAddedToBag } from "@/lib/toast-added";
 import type { Product } from "@/data/products";
 import { splitTitle } from "@/data/product-details";
 import { colorOf, productType } from "@/data/shop-filters";

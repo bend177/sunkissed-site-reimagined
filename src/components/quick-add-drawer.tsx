@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import { toast } from "sonner";
+import { notifyAddedToBag } from "@/lib/toast-added";
 import {
   Drawer,
   DrawerClose,
