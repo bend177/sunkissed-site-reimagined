@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
+import { Plus, Minus } from "lucide-react";
 import { useCatalog } from "@/lib/catalog";
 import {
   colorsIn,
@@ -468,8 +469,11 @@ function Shop() {
               className="flex items-center gap-1.5 border border-foreground px-3 py-1.5 text-[12px] transition-colors hover:bg-foreground hover:text-background"
             >
               Filters{" "}
-              <span className="text-[15px] leading-none">
-                {mobileFiltersOpen || sidebarOpen ? "−" : "+"}
+              <span className="inline-flex items-center leading-none lg:hidden">
+                {mobileFiltersOpen ? <Minus className="size-3.5" strokeWidth={1.5} /> : <Plus className="size-3.5" strokeWidth={1.5} />}
+              </span>
+              <span className="hidden items-center leading-none lg:inline-flex">
+                {sidebarOpen ? <Minus className="size-3.5" strokeWidth={1.5} /> : <Plus className="size-3.5" strokeWidth={1.5} />}
               </span>
             </button>
             {filterCount > 0 && (
