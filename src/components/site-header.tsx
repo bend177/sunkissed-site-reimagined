@@ -1,11 +1,15 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
+import { toast } from "sonner";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 import chevronAsset from "@/assets/serif-chevron.png.asset.json";
 import { useCatalog } from "@/lib/catalog";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
+import { findPair } from "@/components/pair-add";
+import { splitTitle } from "@/data/product-details";
+import type { Product } from "@/data/products";
 
 
 
@@ -39,6 +43,25 @@ export function SiteHeader() {
   const syncCart = useCartStore((s) => s.syncCart);
   const cartCount = items.reduce((n, i) => n + i.quantity, 0);
   const cartTotal = items.reduce((n, i) => n + Number(i.price) * i.quantity, 0);
+
+  // Complete-the-set pairs for pieces already in the bag, then other
+  // products the shopper does not have yet.
+  const inBag = new Set(items.map((i) => i.handle));
+  const setPairs: Product[] = [];
+  for (const item of items) {
+    const product = products.find((p) => p.handle === item.handle);
+    if (!product) continue;
+    const pair = findPair(products, product);
+    if (!pair || inBag.has(pair.handle)) continue;
+    if (setPairs.some((s) => s.handle === pair.handle)) continue;
+    setPairs.push(pair);
+  }
+  const bagSuggestions = [
+    ...setPairs,
+    ...products.filter(
+      (p) => !inBag.has(p.handle) && !setPairs.some((s) => s.handle === p.handle),
+    ),
+  ].slice(0, 2);
 
   const checkout = () => {
     const url = getCheckoutUrl();
@@ -327,29 +350,19 @@ export function SiteHeader() {
                               </div>
                             </div>
                           ))}
-                        </div>
-                        <div className="px-6 pb-5">
-                          <p className="flex items-center gap-2 text-[12px] uppercase tracking-[0.1em]">
-                            <span className="size-2.5 bg-ink" />
-                            You may also like
-                          </p>
-                          <div className="mt-3 grid grid-cols-2 gap-3">
-                            {suggestions.map((p) => (
-                              <Link
-                                key={p.handle}
-                                to="/products/$handle"
-                                params={{ handle: p.handle }}
-                                onClick={() => setFly(null)}
-                                className="min-w-0"
-                              >
-                                <img
-                                  src={p.image}
-                                  alt={p.title}
-                                  className="aspect-[4/5] w-full object-cover"
-                                />
-                              </Link>
-                            ))}
-                          </div>
+                          {bagSuggestions.length > 0 && (
+                            <div className="border-t border-border pt-5">
+                              <p className="flex items-center gap-2 text-[12px] uppercase tracking-[0.1em]">
+                                <span className="size-2.5 bg-ink" />
+                                {setPairs.length > 0 ? "Complete the set" : "You may also like"}
+                              </p>
+                              <div className="mt-4 space-y-5">
+                                {bagSuggestions.map((p) => (
+                                  <BagSuggestion key={p.handle} product={p} />
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
                         <div className="border-t border-border px-6 py-5">
                           <div className="flex items-center justify-between text-[15px]">
@@ -478,5 +491,83 @@ export function SiteHeader() {
         </div>
       </div>
     </>
+  );
+}
+
+/** Compact suggestion row in the bag flyout with inline size selection. */
+function BagSuggestion({ product }: { product: Product }) {
+  const [size, setSize] = useState<string | null>(
+    product.sizes.length === 1 ? product.sizes[0]! : null,
+  );
+  const addItem = useCartStore((s) => s.addItem);
+  const isLoading = useCartStore((s) => s.isLoading);
+  const variant = product.variants.find((v) => v.size === size);
+
+  const add = async () => {
+    if (!variant) return;
+    await addItem({
+      variantId: variant.id,
+      handle: product.handle,
+      title: product.title,
+      image: product.image,
+      size: variant.size,
+      price: variant.price,
+      currencyCode: variant.currencyCode,
+      quantity: 1,
+    });
+    toast.success("Added to bag", {
+      description: `${splitTitle(product.title).base} - ${variant.size}`,
+    });
+  };
+
+  return (
+    <div className="flex gap-3.5">
+      <Link to="/products/$handle" params={{ handle: product.handle }} className="shrink-0">
+        <img
+          src={product.image}
+          alt={product.title}
+          loading="lazy"
+          className="h-[104px] w-[78px] object-cover"
+        />
+      </Link>
+      <div className="min-w-0 flex-1">
+        <Link
+          to="/products/$handle"
+          params={{ handle: product.handle }}
+          className="text-[13px] leading-snug hover:underline underline-offset-4"
+        >
+          {splitTitle(product.title).base}
+        </Link>
+        <Price product={product} className="mt-1 text-[13px]" />
+        <div className="mt-2.5 flex flex-wrap gap-1">
+          {product.sizes.map((s) => {
+            const available = product.variants.some((v) => v.size === s && v.available);
+            return (
+              <button
+                key={s}
+                type="button"
+                disabled={!available}
+                onClick={() => setSize(s)}
+                className={`min-w-8 border px-1.5 py-1 text-[10px] uppercase tracking-[0.08em] transition-colors ${
+                  size === s
+                    ? "border-foreground bg-ink text-background"
+                    : "border-border hover:border-foreground"
+                } ${available ? "" : "cursor-not-allowed text-muted-foreground/50 line-through"}`}
+              >
+                {s}
+              </button>
+            );
+          })}
+        </div>
+        <button
+          type="button"
+          disabled={!variant || isLoading}
+          onClick={add}
+          className="mt-2.5 w-full border border-ink py-2 text-[10px] uppercase tracking-[0.16em] transition-colors hover:bg-ink hover:text-background disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          {variant ? "Add to bag" : "Select a size"}
+        </button>
+      </div>
+    </div>
   );
 }
