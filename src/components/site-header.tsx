@@ -123,15 +123,15 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-border bg-background">
-        <div className="bg-announcement px-3 py-2 text-center lg:px-4">
-          <p className="eyebrow whitespace-nowrap text-[8px] tracking-[0.12em] text-foreground lg:text-[11px] lg:tracking-[0.18em]">
+      <header className="sticky top-0 z-50">
+        <div className={`px-3 py-2 text-center lg:px-4 ${transparent ? "bg-transparent lg:bg-transparent" : "bg-announcement"}`}>
+          <p className={`eyebrow whitespace-nowrap text-[8px] tracking-[0.12em] text-foreground lg:text-[11px] lg:tracking-[0.18em] ${transparent ? "lg:text-background/80" : ""}`}>
             Free US shipping on orders over $100
           </p>
         </div>
 
         {/* Mobile / tablet bar */}
-        <div className="flex items-center justify-between gap-4 px-4 py-3.5 lg:hidden">
+        <div className="flex items-center justify-between gap-4 border-b border-border bg-background px-4 py-3.5 lg:hidden">
           <Link to="/" aria-label="Sunkissed home" className="shrink-0">
             <img src={logoAsset.url} alt="Sunkissed" className="-ml-1 h-7 w-auto" />
           </Link>
@@ -158,7 +158,7 @@ export function SiteHeader() {
 
         {/* Desktop: single row - nav left, centered logo, actions right */}
         <div className="hidden lg:block">
-          <div className="relative z-[46] grid grid-cols-[1fr_auto_1fr] items-center gap-8 bg-background px-6 py-3.5">
+          <div className={`relative z-[46] grid grid-cols-[1fr_auto_1fr] items-center gap-8 px-6 py-3.5 ${transparent ? "bg-transparent text-background" : "bg-background text-foreground"} ${transparent ? "" : "border-b border-border"}`}>
             <nav className="flex items-center gap-6">
               {nav.map((l) => (
                 <Link
