@@ -124,8 +124,8 @@ export function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-50">
-        <div className={`px-3 py-2 text-center lg:px-4 ${transparent ? "bg-announcement lg:bg-transparent" : "bg-announcement"}`}>
-          <p className={`eyebrow whitespace-nowrap text-[8px] tracking-[0.12em] text-foreground lg:text-[11px] lg:tracking-[0.18em] ${transparent ? "lg:text-background/80" : ""}`}>
+        <div className="bg-announcement px-3 py-2 text-center lg:px-4">
+          <p className="eyebrow whitespace-nowrap text-[8px] tracking-[0.12em] text-foreground lg:text-[11px] lg:tracking-[0.18em]">
             Free US shipping on orders over $100
           </p>
         </div>
@@ -158,7 +158,7 @@ export function SiteHeader() {
 
         {/* Desktop: single row - nav left, centered logo, actions right */}
         <div className="hidden lg:block">
-          <div className={`relative z-[46] grid grid-cols-[1fr_auto_1fr] items-center gap-8 px-6 py-3.5 ${transparent ? "bg-transparent text-background" : "bg-background text-foreground"} ${transparent ? "" : "border-b border-border"}`}>
+          <div className={`relative z-[46] grid grid-cols-[1fr_auto_1fr] items-center gap-8 border-b px-6 py-3.5 transition-[background-color,color,border-color] duration-500 ease-out ${transparent ? "border-transparent bg-transparent text-background" : "border-border bg-background text-foreground"}`}>
             <nav className="flex items-center gap-6">
               {nav.map((l) => (
                 <Link
@@ -179,7 +179,7 @@ export function SiteHeader() {
             </nav>
 
             <Link to="/" aria-label="Sunkissed home" className="shrink-0 justify-self-center">
-              <img src={logoAsset.url} alt="Sunkissed" className={`h-6 w-auto ${transparent ? "invert" : ""}`} />
+              <img src={logoAsset.url} alt="Sunkissed" className={`h-6 w-auto transition-[filter] duration-500 ease-out ${transparent ? "invert" : ""}`} />
             </Link>
 
             <div className="flex items-center justify-end gap-6">
