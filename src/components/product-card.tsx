@@ -9,7 +9,7 @@ import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
 
-const VISIBLE_COUNT = 5;
+const VISIBLE_COUNT = 3;
 
 type ColorRef = ReturnType<typeof siblingColors>[number];
 
