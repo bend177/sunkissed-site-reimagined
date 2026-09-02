@@ -102,7 +102,7 @@ function CartPage() {
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="h-[132px] w-[100px] object-cover lg:h-[200px] lg:w-[150px]"
+                        className="image-bg h-[132px] w-[100px] object-cover lg:h-[200px] lg:w-[150px]"
                       />
                     </Link>
                     <div className="min-w-0 flex-1">
@@ -308,7 +308,7 @@ function SetSuggestion({ pair }: { pair: Product }) {
           src={pair.image}
           alt={pair.title}
           loading="lazy"
-          className="h-[132px] w-[100px] object-cover"
+          className="image-bg h-[132px] w-[100px] object-cover"
         />
       </Link>
       <div className="min-w-0 flex-1">
