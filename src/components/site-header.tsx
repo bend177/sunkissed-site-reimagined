@@ -28,6 +28,7 @@ type Fly = "search" | "bag" | null;
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
+  const [closing, setClosing] = useState(false);
   const [q, setQ] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const products = useCatalog();
