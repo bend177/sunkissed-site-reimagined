@@ -78,11 +78,11 @@ function Swatches({
           className="flex items-center gap-1 text-[11px] leading-none text-muted-foreground hover:text-foreground"
         >
           {expanded ? (
-            <span className="px-0.5">−</span>
+            <span className="flex h-3.5 items-center px-0.5">−</span>
           ) : (
             <>
-              <span className="px-0.5">+</span>
-              <span>{extra}</span>
+              <span className="flex h-3.5 items-center px-0.5">+</span>
+              <span className="flex h-3.5 items-center">{extra}</span>
             </>
           )}
         </button>
