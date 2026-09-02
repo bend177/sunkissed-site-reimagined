@@ -22,7 +22,7 @@ function ToastCartAction() {
 /**
  * After an item is added: on desktop, slides the header bag flyout open so
  * the shopper can review the bag. On mobile/tablet, shows the standard
- * "Added to bag" toast with a cart icon action instead.
+ * "Added to bag" toast with a cart icon action that opens the bag drawer.
  */
 export function notifyAddedToBag(description: string) {
   if (isDesktopViewport()) {
