@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import { notifyAddedToBag } from "@/lib/toast-added";
