@@ -1,11 +1,15 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
+import { toast } from "sonner";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 import chevronAsset from "@/assets/serif-chevron.png.asset.json";
 import { useCatalog } from "@/lib/catalog";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
+import { findPair } from "@/components/pair-add";
+import { splitTitle } from "@/data/product-details";
+import type { Product } from "@/data/products";
 
 
 
