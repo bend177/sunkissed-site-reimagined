@@ -35,7 +35,7 @@ export function notifyAddedToBag(description: string) {
     action: {
       label: (<ToastCartAction />) as unknown as string,
       onClick: () => {
-        window.location.href = "/cart";
+        openBagFlyout();
       },
     },
   });
