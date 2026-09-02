@@ -7,6 +7,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { useCartStore } from "@/lib/cart-store";
 import { useCatalog } from "@/lib/catalog";
 import { findPair } from "@/components/pair-add";
+import { ApplePayButton } from "@/components/apple-pay-button";
+
 import { splitTitle } from "@/data/product-details";
 import type { Product } from "@/data/products";
 
