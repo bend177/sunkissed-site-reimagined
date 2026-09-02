@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
+import { ArrowRight, Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 import { useCatalog } from "@/lib/catalog";
 import { useCartStore } from "@/lib/cart-store";
@@ -393,17 +393,19 @@ export function SiteHeader() {
               to="/shop"
               search={{ c: l.c }}
               onClick={() => setOpen(false)}
-              className="display border-b border-border py-4 text-[34px] lowercase leading-none"
+              className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
             >
               {l.label.toLowerCase()}
+              <ArrowRight className="size-5 text-muted-foreground" strokeWidth={1.25} />
             </Link>
           ))}
           <Link
             to="/about"
             onClick={() => setOpen(false)}
-            className="display border-b border-border py-4 text-[34px] lowercase leading-none"
+            className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
           >
             our story
+            <ArrowRight className="size-5 text-muted-foreground" strokeWidth={1.25} />
           </Link>
         </nav>
 
