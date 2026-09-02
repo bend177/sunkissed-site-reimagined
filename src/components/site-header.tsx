@@ -58,6 +58,24 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!fly) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setFly(null);
+    };
+    window.addEventListener("keydown", onKey);
+    const small = window.matchMedia("(max-width: 1023px)").matches;
+    let prev = "";
+    if (small) {
+      prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      if (small) document.body.style.overflow = prev;
+    };
+  }, [fly]);
+
   const query = q.trim().toLowerCase();
   const results = query
     ? products.filter((p) => p.title.toLowerCase().includes(query)).slice(0, 12)
