@@ -6,6 +6,27 @@ import { useCatalog } from "@/lib/catalog";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
 
+function SerifArrow({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 36 28"
+      fill="none"
+      aria-hidden
+      className={className}
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      {/* hairline shaft evoking the high-contrast strokes of Instrument Serif */}
+      <path d="M1 14 H30" strokeWidth={0.75} />
+      {/* refined serif-style arrowhead */}
+      <path d="M22 6.5 L30.5 14 L22 21.5" strokeWidth={1} />
+    </svg>
+  );
+}
+
+
+
 const nav = [
   { label: "Bikinis", c: "swim" as const },
   { label: "One Pieces", c: "one-piece" as const },
