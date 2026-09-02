@@ -229,7 +229,7 @@ export function SiteHeader() {
               />
               <div
                 onMouseLeave={() => setFly(null)}
-                className="fly-in absolute right-0 top-full z-[55] flex h-[calc(100dvh-5.5rem)] w-[min(360px,94vw)] flex-col border-l border-border bg-background shadow-[-16px_24px_48px_rgba(0,0,0,0.14)] lg:h-[calc(100vh-132px)]"
+                className={`fly-in absolute right-0 top-full z-[55] flex h-[calc(100dvh-5.5rem)] w-[min(360px,94vw)] flex-col border-l border-border bg-background shadow-[-16px_24px_48px_rgba(0,0,0,0.14)] ${onShop ? "lg:h-[calc(100dvh-5.6rem)]" : "lg:h-[calc(100dvh-8.5rem)]"}`}
               >
                 <div className="flex items-center justify-between gap-3 px-6 pb-3 pt-5">
                   <div className="flex items-baseline gap-4">
