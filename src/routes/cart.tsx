@@ -189,6 +189,8 @@ function CartPage() {
                 >
                   Proceed to checkout
                 </button>
+                <ApplePayButton onClick={checkout} className="mt-2.5" />
+
                 <Link
                   to="/shop"
                   search={{ c: "all" }}
