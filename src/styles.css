@@ -170,7 +170,7 @@
   position: relative;
   font-size: 0.875rem;
   letter-spacing: 0.01em;
-  text-transform: lowercase;
+  text-transform: capitalize;
   color: var(--foreground);
   transition: opacity 200ms ease;
   &:hover {
@@ -210,7 +210,7 @@
 
 @utility rule-link {
   display: inline-block;
-  text-transform: lowercase;
+  text-transform: capitalize;
   border-bottom: 1px solid currentColor;
   padding-bottom: 2px;
   transition: opacity 200ms ease;

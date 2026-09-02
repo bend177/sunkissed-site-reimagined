@@ -88,7 +88,7 @@ export function SiteFooter() {
           href="https://www.instagram.com/getsunkissed"
           target="_blank"
           rel="noreferrer"
-          className="nav-link lowercase"
+          className="nav-link capitalize"
         >
           instagram
         </a>
