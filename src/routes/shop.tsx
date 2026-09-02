@@ -542,7 +542,7 @@ function Shop() {
         <div className="mx-auto box-border flex max-w-[1440px] items-start gap-9 px-4 pb-16 md:px-12">
           <section
             key={c}
-            className="grid min-w-0 flex-1 grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-3 md:gap-x-4 xl:grid-cols-4"
+            className="grid min-w-0 flex-1 grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3 md:gap-x-4 xl:grid-cols-4"
           >
             {list.map((p, i) => (
               <div
