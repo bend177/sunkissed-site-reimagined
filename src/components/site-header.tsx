@@ -396,7 +396,7 @@ export function SiteHeader() {
               className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
             >
               {l.label.toLowerCase()}
-              <ArrowRight className="size-5 text-muted-foreground" strokeWidth={1.25} />
+              <span aria-hidden className="display text-[34px] leading-none text-muted-foreground">{"\u2192"}</span>
             </Link>
           ))}
           <Link
@@ -405,7 +405,7 @@ export function SiteHeader() {
             className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
           >
             our story
-            <ArrowRight className="size-5 text-muted-foreground" strokeWidth={1.25} />
+            <span aria-hidden className="display text-[34px] leading-none text-muted-foreground">{"\u2192"}</span>
           </Link>
         </nav>
 
