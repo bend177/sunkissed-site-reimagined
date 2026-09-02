@@ -110,7 +110,7 @@ function HoverQuickAdd({ product }: { product: Product }) {
 
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden translate-y-2 bg-background/95 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 lg:block">
-      <p className="px-3 pt-2.5 text-[11px] lowercase text-muted-foreground">
+      <p className="px-3 pt-2.5 text-[11px] uppercase tracking-widest text-muted-foreground">
         quick add
       </p>
       <div className="flex items-stretch overflow-x-auto px-1.5 pb-2 pt-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
