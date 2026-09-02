@@ -414,7 +414,7 @@ export function SiteHeader() {
               className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
             >
               {l.label.toLowerCase()}
-              <SerifArrow className="h-7 w-9 text-muted-foreground" />
+              <span aria-hidden className="display text-[30px] leading-none text-muted-foreground">{"{">"}</span>
             </Link>
           ))}
           <Link
@@ -423,7 +423,7 @@ export function SiteHeader() {
             className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
           >
             our story
-            <SerifArrow className="h-7 w-9 text-muted-foreground" />
+            <span aria-hidden className="display text-[30px] leading-none text-muted-foreground">{"{">"}</span>
           </Link>
         </nav>
 
