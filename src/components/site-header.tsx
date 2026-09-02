@@ -179,7 +179,7 @@ export function SiteHeader() {
             </nav>
 
             <Link to="/" aria-label="Sunkissed home" className="shrink-0 justify-self-center">
-              <img src={logoAsset.url} alt="Sunkissed" className="h-6 w-auto" />
+              <img src={logoAsset.url} alt="Sunkissed" className={`h-6 w-auto ${transparent ? "invert" : ""}`} />
             </Link>
 
             <div className="flex items-center justify-end gap-6">
