@@ -406,6 +406,8 @@ export function SiteHeader() {
                           >
                             Checkout
                           </button>
+                          <ApplePayButton onClick={checkout} className="mt-2.5" />
+
                         </div>
                       </>
                     )}
