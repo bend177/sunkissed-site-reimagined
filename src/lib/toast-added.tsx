@@ -1,11 +1,17 @@
 import { toast } from "sonner";
 import { ShoppingBag } from "lucide-react";
+import { isDesktopViewport, openBagFlyout } from "@/lib/bag-events";
 
 /**
- * Shows the standard "Added to bag" toast with a cart icon action that
- * takes the shopper to the cart page so they can review what they added.
+ * After an item is added: on desktop, slides the header bag flyout open so
+ * the shopper can review the bag. On mobile/tablet, shows the standard
+ * "Added to bag" toast with a cart icon action instead.
  */
 export function notifyAddedToBag(description: string) {
+  if (isDesktopViewport()) {
+    openBagFlyout();
+    return;
+  }
   toast.success("Added to bag", {
     description,
     position: "top-center",

@@ -2,6 +2,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import { notifyAddedToBag } from "@/lib/toast-added";
+import { onOpenBagFlyout } from "@/lib/bag-events";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 import chevronAsset from "@/assets/serif-chevron.png.asset.json";
 import { useCatalog } from "@/lib/catalog";
@@ -71,6 +72,13 @@ export function SiteHeader() {
   useEffect(() => {
     if (fly === "bag") syncCart();
   }, [fly, syncCart]);
+
+  // Open the bag flyout when an item is added on desktop (quick add, PDP, etc.).
+  useEffect(() => {
+    return onOpenBagFlyout(() => {
+      if (window.matchMedia("(min-width: 1024px)").matches) setFly("bag");
+    });
+  }, []);
 
   useEffect(() => {
     if (!open) return;
