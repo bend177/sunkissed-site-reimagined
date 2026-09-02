@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Plus } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 import { toast } from "sonner";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchFill, splitTitle } from "@/data/product-details";
@@ -78,11 +78,15 @@ function Swatches({
           className="flex items-center gap-1 text-[11px] leading-none text-muted-foreground hover:text-foreground"
         >
           {expanded ? (
-            <span className="px-0.5">−</span>
+            <span className="flex h-3.5 items-center justify-center px-0.5">
+              <Minus className="size-3" strokeWidth={1.75} />
+            </span>
           ) : (
             <>
-              <span className="px-0.5">+</span>
-              <span>{extra}</span>
+              <span className="flex h-3.5 items-center justify-center px-0.5">
+                <Plus className="size-3" strokeWidth={1.75} />
+              </span>
+              <span className="flex h-3.5 items-center">{extra}</span>
             </>
           )}
         </button>
