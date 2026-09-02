@@ -79,7 +79,7 @@ export function QuickAddDrawer({
                 type="button"
                 disabled={!v.available}
                 onClick={() => setSize(v.size)}
-                className={`border py-3 text-xs lowercase transition-colors disabled:cursor-not-allowed disabled:opacity-35 ${
+                className={`border py-3 text-xs uppercase tracking-[0.08em] transition-colors disabled:cursor-not-allowed disabled:opacity-35 ${
                   size === v.size
                     ? "border-foreground bg-foreground text-background"
                     : "border-border hover:border-foreground"
