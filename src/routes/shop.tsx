@@ -24,10 +24,20 @@ import { isPrint, swatchFill } from "@/data/product-details";
 import type { Product } from "@/data/products";
 
 
-type Filter = "all" | "best" | "new" | "swim" | "one-piece" | "resort" | "towels";
+type Filter =
+  | "all"
+  | "best"
+  | "new"
+  | "swimwear"
+  | "swim"
+  | "one-piece"
+  | "resort"
+  | "towels";
 
 const typesFor = (c: Filter): ProductType[] => {
   switch (c) {
+    case "swimwear":
+      return ["sets", "tops", "bottoms", "one-pieces"];
     case "swim":
       return ["sets", "tops", "bottoms"];
     case "one-piece":
@@ -42,6 +52,7 @@ const typesFor = (c: Filter): ProductType[] => {
 };
 
 const COLLECTIONS: { key: Filter; label: string }[] = [
+  { key: "swimwear", label: "Swimwear" },
   { key: "swim", label: "Bikinis" },
   { key: "one-piece", label: "One Pieces" },
   { key: "resort", label: "Dresses & Resort" },
@@ -52,6 +63,7 @@ const COLLECTIONS: { key: Filter; label: string }[] = [
 ];
 
 const COLLECTION_LABEL: Record<Filter, string> = {
+  swimwear: "Swimwear",
   swim: "Bikinis",
   "one-piece": "One Pieces",
   resort: "Dresses & Resort",
@@ -135,6 +147,11 @@ function Shop() {
         return [
           { label: "Classic Colors", match: (p: Product) => !isPrint(colorOf(p)) },
           { label: "Seasonal Colors", match: (p: Product) => isPrint(colorOf(p)) },
+        ];
+      case "swimwear":
+        return [
+          { label: "Bikinis", match: (p: Product) => p.category === "swim" },
+          { label: "One Pieces", match: (p: Product) => p.category === "one-piece" },
         ];
       case "resort":
         return [
