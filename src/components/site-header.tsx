@@ -97,9 +97,10 @@ export function SiteHeader() {
             <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
           </Link>
           <div className="flex items-center gap-5">
-            <Link
-              to="/cart"
+            <button
+              type="button"
               aria-label={`Bag (${cartCount})`}
+              onClick={() => setFly("bag")}
               className="relative"
             >
               <ShoppingBag className="size-[19px]" strokeWidth={1.25} />
@@ -108,7 +109,7 @@ export function SiteHeader() {
                   {cartCount}
                 </span>
               )}
-            </Link>
+            </button>
 
             <button type="button" aria-label="Open menu" onClick={() => setOpen(true)}>
               <Menu className="size-[22px]" strokeWidth={1.25} />
