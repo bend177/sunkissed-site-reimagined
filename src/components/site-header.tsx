@@ -2,6 +2,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
+import chevronAsset from "@/assets/serif-chevron.png.asset.json";
 import { useCatalog } from "@/lib/catalog";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
@@ -401,7 +402,12 @@ export function SiteHeader() {
               className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
             >
               {l.label.toLowerCase()}
-              <span aria-hidden className="display text-[30px] leading-none text-muted-foreground">{">"}</span>
+              <img
+                src={chevronAsset.url}
+                alt=""
+                aria-hidden
+                className="h-[30px] w-auto opacity-50"
+              />
             </Link>
           ))}
           <Link
@@ -410,7 +416,12 @@ export function SiteHeader() {
             className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
           >
             our story
-            <span aria-hidden className="display text-[30px] leading-none text-muted-foreground">{">"}</span>
+            <img
+              src={chevronAsset.url}
+              alt=""
+              aria-hidden
+              className="h-[30px] w-auto opacity-50"
+            />
           </Link>
         </nav>
 
