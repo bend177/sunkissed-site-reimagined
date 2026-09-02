@@ -16,6 +16,7 @@ import {
   swatchFocus,
 } from "@/data/product-details";
 import { toast } from "sonner";
+import { notifyAddedToBag } from "@/lib/toast-added";
 import { PairAdd, findPair } from "@/components/pair-add";
 
 export const Route = createFileRoute("/products/$handle")({
@@ -245,7 +246,7 @@ function ProductPage() {
               disabled={isLoading}
               onClick={async () => {
                 const added = await addToBag();
-                if (added) toast.success(`${base} (${added.size}) added to bag`);
+                if (added) notifyAddedToBag(`${base} - size ${added.size}`);
               }}
               className={`mt-4 w-full py-4 text-xs uppercase tracking-[0.12em] transition-colors disabled:opacity-50 ${
                 variant

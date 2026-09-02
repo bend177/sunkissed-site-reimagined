@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import { toast } from "sonner";
+import { notifyAddedToBag } from "@/lib/toast-added";
 import {
   Drawer,
   DrawerClose,
@@ -44,10 +44,7 @@ export function QuickAddDrawer({
     });
     onOpenChange(false);
     setSize(variants.length === 1 ? (variants[0]?.size ?? null) : null);
-    toast.success("Added to bag", {
-      description: `${product.title} - size ${variant.size}`,
-      position: "top-center",
-    });
+    notifyAddedToBag(`${splitTitle(product.title).base} - size ${variant.size}`);
   };
 
   return (

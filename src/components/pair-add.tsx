@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { toast } from "sonner";
+import { notifyAddedToBag } from "@/lib/toast-added";
 import type { Product } from "@/data/products";
 import { splitTitle } from "@/data/product-details";
 import { colorOf, productType } from "@/data/shop-filters";
@@ -49,7 +49,7 @@ export function PairAdd({ pair, product }: { pair: Product; product: Product }) 
       currencyCode: variant.currencyCode,
       quantity: 1,
     });
-    toast.success("Added to bag", { description: `${splitTitle(pair.title).base} - ${variant.size}` });
+    notifyAddedToBag(`${splitTitle(pair.title).base} - ${variant.size}`);
   };
 
   return (

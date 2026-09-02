@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Plus, Minus } from "lucide-react";
-import { toast } from "sonner";
+import { notifyAddedToBag } from "@/lib/toast-added";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchFill, splitTitle } from "@/data/product-details";
 import { useCatalog } from "@/lib/catalog";
@@ -107,10 +107,7 @@ function HoverQuickAdd({ product }: { product: Product }) {
       currencyCode: variant.currencyCode,
       quantity: 1,
     });
-    toast.success("Added to bag", {
-      description: `${product.title} - size ${variant.size}`,
-      position: "top-center",
-    });
+    notifyAddedToBag(`${splitTitle(product.title).base} - size ${variant.size}`);
   };
 
   if (product.variants.length === 0) return null;
