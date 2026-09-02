@@ -418,7 +418,9 @@ export function SiteHeader() {
         aria-hidden={!open}
       >
         <div className="mb-8 flex items-center justify-between">
-          <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
+          <Link to="/" aria-label="Sunkissed home" onClick={() => setOpen(false)} className="shrink-0">
+            <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
+          </Link>
           <button type="button" aria-label="Close menu" onClick={() => setOpen(false)}>
             <X className="size-[22px]" strokeWidth={1.25} />
           </button>
