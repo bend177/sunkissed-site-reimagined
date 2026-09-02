@@ -336,7 +336,7 @@ function Shop() {
       <SiteHeader />
 
       <main>
-        <section className="mx-auto box-border max-w-[1440px] px-4 pt-8 md:px-6 md:pt-14">
+        <section className="mx-auto box-border max-w-[1440px] px-4 pt-8 lg:px-6 md:pt-14">
           {/* Collection navigation - one row, same font; active collection is larger with its count */}
           <nav
             aria-label="Collections"
