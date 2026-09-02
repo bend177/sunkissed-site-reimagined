@@ -71,7 +71,7 @@ export function QuickAddDrawer({
             </DrawerClose>
           </div>
 
-          <p className="eyebrow mt-6">select size</p>
+          <p className="eyebrow mt-6">SELECT SIZE</p>
           <div className="mt-3 grid grid-cols-5 gap-2">
             {variants.map((v) => (
               <button
@@ -79,7 +79,7 @@ export function QuickAddDrawer({
                 type="button"
                 disabled={!v.available}
                 onClick={() => setSize(v.size)}
-                className={`border py-3 text-xs lowercase transition-colors disabled:cursor-not-allowed disabled:opacity-35 ${
+                className={`border py-3 text-xs uppercase tracking-[0.08em] transition-colors disabled:cursor-not-allowed disabled:opacity-35 ${
                   size === v.size
                     ? "border-foreground bg-foreground text-background"
                     : "border-border hover:border-foreground"
@@ -96,7 +96,7 @@ export function QuickAddDrawer({
             disabled={!variant || isLoading}
             className="mt-5 w-full bg-ink py-4 text-xs uppercase tracking-[0.18em] text-background transition-opacity disabled:opacity-40"
           >
-            {isLoading ? "adding..." : variant ? "add to bag" : "select a size"}
+            {isLoading ? "ADDING..." : variant ? "ADD TO BAG" : "SELECT A SIZE"}
           </button>
         </div>
       </DrawerContent>
