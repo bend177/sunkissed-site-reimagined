@@ -153,7 +153,7 @@ export function ProductCard({ product }: { product: Product }) {
           params={{ handle: current?.handle ?? product.handle }}
           className="block"
         >
-          <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
+          <div className="image-bg relative aspect-[3/4] overflow-hidden">
             <img
               src={current?.image ?? product.image}
               alt={product.title}
