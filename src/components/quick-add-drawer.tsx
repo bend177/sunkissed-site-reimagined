@@ -8,6 +8,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import type { Product } from "@/data/products";
+import { splitTitle } from "@/data/product-details";
 import { Price } from "@/components/price";
 import { useCartStore } from "@/lib/cart-store";
 
