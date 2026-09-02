@@ -466,7 +466,7 @@ function Shop() {
                 setSidebarOpen(!sidebarOpen);
                 setMobileFiltersOpen(!mobileFiltersOpen);
               }}
-              className="flex items-center gap-1.5 border border-foreground px-3 py-1.5 text-[12px] transition-colors hover:bg-foreground hover:text-background"
+              className="flex items-center gap-1.5 px-1 py-1.5 text-[12px] transition-colors hover:opacity-60"
             >
               Filters{" "}
               <span className="inline-flex items-center leading-none lg:hidden">
@@ -502,7 +502,7 @@ function Shop() {
               <button
                 type="button"
                 onClick={() => setSortOpen(!sortOpen)}
-                className="flex items-center gap-1.5 border border-foreground px-3 py-1.5 text-[12px] transition-colors hover:bg-foreground hover:text-background md:text-[13.5px]"
+                className="flex items-center gap-1.5 px-1 py-1.5 text-[12px] transition-colors hover:opacity-60 md:text-[13.5px]"
               >
                 Sort by{" "}
                 <span className="inline-flex items-center leading-none">
