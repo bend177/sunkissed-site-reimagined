@@ -198,6 +198,14 @@
   text-transform: uppercase;
 }
 
+/*
+ * Demo only: grey background behind all product images.
+ * Swap the color here (or remove the class) to revert for production.
+ */
+@utility image-bg {
+  background-color: oklch(0.87 0 0);
+}
+
 @utility hover-zoom {
   overflow: hidden;
   & img {
