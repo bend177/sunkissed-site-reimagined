@@ -124,7 +124,7 @@ export function SiteHeader() {
         {/* Mobile / tablet bar */}
         <div className="flex items-center justify-between gap-4 px-4 py-3.5 lg:hidden">
           <Link to="/" aria-label="Sunkissed home" className="shrink-0">
-            <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
+            <img src={logoAsset.url} alt="Sunkissed" className="-ml-1 h-7 w-auto" />
           </Link>
           <div className="flex items-center gap-5">
             <button
@@ -151,7 +151,7 @@ export function SiteHeader() {
         <div className="hidden lg:block">
           <div className="relative z-[46] flex items-center justify-between gap-8 bg-background px-6 pb-1 pt-5">
             <Link to="/" aria-label="Sunkissed home" className="shrink-0">
-              <img src={logoAsset.url} alt="Sunkissed" className="h-8 w-auto" />
+              <img src={logoAsset.url} alt="Sunkissed" className="-ml-[5px] h-8 w-auto" />
             </Link>
             <div className="flex items-center gap-6">
               {fly === "search" ? (
@@ -426,7 +426,7 @@ export function SiteHeader() {
       >
         <div className="mb-8 flex items-center justify-between">
           <Link to="/" aria-label="Sunkissed home" onClick={() => setOpen(false)} className="shrink-0">
-            <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
+            <img src={logoAsset.url} alt="Sunkissed" className="-ml-1 h-7 w-auto" />
           </Link>
           <button type="button" aria-label="Close menu" onClick={() => setOpen(false)}>
             <X className="size-[22px]" strokeWidth={1.25} />
