@@ -75,7 +75,7 @@ function Swatches({
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="flex items-center gap-1 text-[11px] leading-none text-muted-foreground hover:text-foreground"
+          className="flex items-center gap-1 text-[11px] leading-none text-muted-foreground hover:text-foreground -translate-y-px"
         >
           {expanded ? (
             <span className="flex h-3.5 items-center px-0.5">−</span>
