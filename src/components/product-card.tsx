@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Plus, Minus } from "lucide-react";
-import { toast } from "sonner";
+import { notifyAddedToBag } from "@/lib/toast-added";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchFill, splitTitle } from "@/data/product-details";
 import { useCatalog } from "@/lib/catalog";
