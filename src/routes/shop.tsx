@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
+import { Plus, Minus } from "lucide-react";
 import { useCatalog } from "@/lib/catalog";
 import {
   colorsIn,
