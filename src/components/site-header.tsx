@@ -452,7 +452,7 @@ export function SiteHeader() {
               src={chevronAsset.url}
               alt=""
               aria-hidden
-              className="h-[30px] w-auto opacity-50"
+              className="h-[30px] w-auto brightness-0"
             />
           </Link>
         </nav>
