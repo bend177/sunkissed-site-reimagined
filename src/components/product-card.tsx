@@ -9,7 +9,7 @@ import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
 import { QuickAddDrawer } from "@/components/quick-add-drawer";
 
-const VISIBLE_COUNT = 5;
+const VISIBLE_COUNT = 3;
 
 type ColorRef = ReturnType<typeof siblingColors>[number];
 
@@ -75,9 +75,16 @@ function Swatches({
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="ml-0.5 text-[11px] leading-none text-muted-foreground hover:text-foreground"
+          className="ml-0.5 flex items-center gap-0.5 text-[11px] leading-none text-muted-foreground hover:text-foreground"
         >
-          {expanded ? "Show less" : `+${extra}`}
+          {expanded ? (
+            "Show less"
+          ) : (
+            <>
+              <Plus className="size-2.5" strokeWidth={1.5} />
+              <span>{extra}</span>
+            </>
+          )}
         </button>
       )}
     </div>
