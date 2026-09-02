@@ -182,7 +182,7 @@ function ProductPage() {
             {gallery.map((src, i) => (
               <div
                 key={src + i}
-                className="aspect-[3/4] w-full shrink-0 snap-center bg-secondary lg:w-auto lg:shrink"
+                className="image-bg aspect-[3/4] w-full shrink-0 snap-center lg:w-auto lg:shrink"
               >
                 <img
                   src={src}
@@ -287,7 +287,7 @@ function ProductPage() {
                 <div className="mt-3 grid grid-cols-2 gap-1">
                   {related.map((p) => (
                     <Link key={p.handle} to="/products/$handle" params={{ handle: p.handle }}>
-                      <div className="aspect-[3/4] bg-secondary">
+                      <div className="image-bg aspect-[3/4]">
                         <img
                           src={p.image}
                           alt={p.title}

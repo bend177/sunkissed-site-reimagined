@@ -293,7 +293,7 @@ export function SiteHeader() {
                               <img
                                 src={p.image}
                                 alt={p.title}
-                                className="aspect-[4/5] w-full object-cover"
+                                className="image-bg aspect-[4/5] w-full object-cover"
                               />
                               <span className="text-xs leading-snug">{p.title}</span>
                               <Price product={p} className="text-xs" />
@@ -322,7 +322,7 @@ export function SiteHeader() {
                               <img
                                 src={item.image}
                                 alt={item.title}
-                                className="h-[104px] w-[78px] shrink-0 object-cover"
+                                className="image-bg h-[104px] w-[78px] shrink-0 object-cover"
                               />
                               <div className="min-w-0 flex-1">
                                 <p className="text-[13px] leading-snug">{item.title}</p>
@@ -410,7 +410,7 @@ export function SiteHeader() {
                         <img
                           src={p.image}
                           alt={p.title}
-                          className="aspect-[4/5] w-full object-cover"
+                          className="image-bg aspect-[4/5] w-full object-cover"
                         />
                         <span className="text-[11.5px] leading-snug">{p.title}</span>
                         <Price product={p} className="text-[11.5px]" />
@@ -543,7 +543,7 @@ function BagSuggestion({ product }: { product: Product }) {
           src={product.image}
           alt={product.title}
           loading="lazy"
-          className="h-[104px] w-[78px] object-cover"
+          className="image-bg h-[104px] w-[78px] object-cover"
         />
       </Link>
       <div className="min-w-0 flex-1">

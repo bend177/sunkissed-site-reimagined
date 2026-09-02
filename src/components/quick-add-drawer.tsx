@@ -55,7 +55,7 @@ export function QuickAddDrawer({
             <img
               src={product.image}
               alt={product.title}
-              className="h-24 w-[72px] shrink-0 object-cover"
+              className="image-bg h-24 w-[72px] shrink-0 object-cover"
             />
             <div className="min-w-0 flex-1">
               <DrawerTitle className="truncate text-sm font-normal">

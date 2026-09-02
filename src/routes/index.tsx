@@ -92,7 +92,7 @@ function Home() {
                 search={{ c: cat.c }}
                 className="group block"
               >
-                <div className="hover-zoom aspect-[3/4] bg-secondary">
+                <div className="hover-zoom image-bg aspect-[3/4]">
                   <img
                     src={cat.image}
                     alt={cat.label}

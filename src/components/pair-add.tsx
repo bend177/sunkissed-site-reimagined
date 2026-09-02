@@ -57,12 +57,12 @@ export function PairAdd({ pair, product }: { pair: Product; product: Product }) 
       <h2 className="text-sm">{label}</h2>
       <div className="mt-4 flex gap-4">
         <Link to="/products/$handle" params={{ handle: pair.handle }} className="shrink-0">
-          <img
-            src={pair.image}
-            alt={pair.title}
-            loading="lazy"
-            className="h-[124px] w-[94px] object-cover"
-          />
+        <img
+          src={pair.image}
+          alt={pair.title}
+          loading="lazy"
+          className="image-bg h-[124px] w-[94px] object-cover"
+        />
         </Link>
         <div className="min-w-0 flex-1">
           <Link
