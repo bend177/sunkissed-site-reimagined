@@ -1,4 +1,4 @@
-import { Link, useLocation } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import { notifyAddedToBag } from "@/lib/toast-added";
@@ -29,7 +29,6 @@ const nav = [
 type Fly = "search" | "bag" | null;
 
 export function SiteHeader() {
-  const onShop = useLocation({ select: (s) => s.pathname }).startsWith("/shop");
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
   const [q, setQ] = useState("");
@@ -147,13 +146,33 @@ export function SiteHeader() {
           </div>
         </div>
 
-        {/* Desktop: logo row + nav row */}
+        {/* Desktop: single row - nav left, centered logo, actions right */}
         <div className="hidden lg:block">
-          <div className="relative z-[46] flex items-center justify-between gap-8 bg-background px-6 pb-1 pt-5">
-            <Link to="/" aria-label="Sunkissed home" className="shrink-0">
-              <img src={logoAsset.url} alt="Sunkissed" className="-ml-[5px] h-8 w-auto" />
+          <div className="relative z-[46] grid grid-cols-[1fr_auto_1fr] items-center gap-8 bg-background px-6 py-3.5">
+            <nav className="flex items-center gap-6">
+              {nav.map((l) => (
+                <Link
+                  key={l.label}
+                  to="/shop"
+                  search={{ c: l.c }}
+                  className="whitespace-nowrap text-[13px] transition-opacity hover:opacity-60"
+                >
+                  {l.label}
+                </Link>
+              ))}
+              <Link
+                to="/about"
+                className="whitespace-nowrap text-[13px] transition-opacity hover:opacity-60"
+              >
+                Our Story
+              </Link>
+            </nav>
+
+            <Link to="/" aria-label="Sunkissed home" className="shrink-0 justify-self-center">
+              <img src={logoAsset.url} alt="Sunkissed" className="h-6 w-auto" />
             </Link>
-            <div className="flex items-center gap-6">
+
+            <div className="flex items-center justify-end gap-6">
               {fly === "search" ? (
                 <div className="search-grow flex w-[210px] items-center gap-2.5 overflow-hidden border-b border-foreground px-0.5 py-1">
                   <Search className="size-[15px] shrink-0" strokeWidth={1.25} />
@@ -183,11 +202,11 @@ export function SiteHeader() {
                 className="relative"
               >
                 <ShoppingBag className="size-[18px]" strokeWidth={1.25} />
-              {cartCount > 0 && (
-                <span className="absolute -right-2 -top-1.5 flex size-4 items-center justify-center rounded-full bg-ink text-[9px] leading-none text-background">
-                  {cartCount}
-                </span>
-              )}
+                {cartCount > 0 && (
+                  <span className="absolute -right-2 -top-1.5 flex size-4 items-center justify-center rounded-full bg-ink text-[9px] leading-none text-background">
+                    {cartCount}
+                  </span>
+                )}
               </button>
 
               <button type="button" aria-label="Account">
@@ -195,28 +214,8 @@ export function SiteHeader() {
               </button>
             </div>
           </div>
-
-          {!onShop && (
-          <nav className="relative z-[46] flex items-center gap-8 bg-background px-6 pb-4 pt-3.5">
-            {nav.map((l) => (
-              <Link
-                key={l.label}
-                to="/shop"
-                search={{ c: l.c }}
-                className="text-[13px] font-semibold transition-opacity hover:opacity-60"
-              >
-                {l.label}
-              </Link>
-            ))}
-            <Link
-              to="/about"
-              className="text-[13px] font-semibold transition-opacity hover:opacity-60"
-            >
-              Our Story
-            </Link>
-          </nav>
-          )}
           </div>
+
 
           {fly && (
             <>
@@ -228,7 +227,7 @@ export function SiteHeader() {
               />
               <div
                 onMouseLeave={() => setFly(null)}
-                className={`fly-in absolute right-0 top-full z-[55] flex h-[calc(100dvh-5.5rem)] w-[min(360px,94vw)] flex-col border-l border-border bg-background shadow-[-16px_24px_48px_rgba(0,0,0,0.14)] ${onShop ? "lg:h-[calc(100dvh-5.6rem)]" : "lg:h-[calc(100dvh-8.5rem)]"}`}
+                className="fly-in absolute right-0 top-full z-[55] flex h-[calc(100dvh-5.5rem)] w-[min(360px,94vw)] flex-col border-l border-border bg-background shadow-[-16px_24px_48px_rgba(0,0,0,0.14)] lg:h-[calc(100dvh-5.6rem)]"
               >
                 <div className="flex items-center justify-between gap-3 px-6 pb-3 pt-5">
                   <div className="flex items-baseline gap-4">
