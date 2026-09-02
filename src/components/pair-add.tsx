@@ -49,7 +49,7 @@ export function PairAdd({ pair, product }: { pair: Product; product: Product }) 
       currencyCode: variant.currencyCode,
       quantity: 1,
     });
-    toast.success("Added to bag", { description: `${splitTitle(pair.title).base} - ${variant.size}` });
+    notifyAddedToBag(`${splitTitle(pair.title).base} - ${variant.size}`);
   };
 
   return (

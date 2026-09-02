@@ -517,9 +517,7 @@ function BagSuggestion({ product }: { product: Product }) {
       currencyCode: variant.currencyCode,
       quantity: 1,
     });
-    toast.success("Added to bag", {
-      description: `${splitTitle(product.title).base} - ${variant.size}`,
-    });
+    notifyAddedToBag(`${splitTitle(product.title).base} - ${variant.size}`);
   };
 
   return (

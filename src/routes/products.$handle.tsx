@@ -245,7 +245,7 @@ function ProductPage() {
               disabled={isLoading}
               onClick={async () => {
                 const added = await addToBag();
-                if (added) toast.success(`${base} (${added.size}) added to bag`);
+                if (added) notifyAddedToBag(`${base} - size ${added.size}`);
               }}
               className={`mt-4 w-full py-4 text-xs uppercase tracking-[0.12em] transition-colors disabled:opacity-50 ${
                 variant
