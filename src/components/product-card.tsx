@@ -82,7 +82,7 @@ function Swatches({
           ) : (
             <>
               <Plus className="size-3 shrink-0" strokeWidth={1.75} />
-              <span className="-ml-px tabular-nums leading-none">{extra}</span>
+              <span className="-ml-px -translate-y-px tabular-nums leading-none">{extra}</span>
             </>
           )}
         </button>
