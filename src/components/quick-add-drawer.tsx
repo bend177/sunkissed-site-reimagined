@@ -61,7 +61,7 @@ export function QuickAddDrawer({
             />
             <div className="min-w-0 flex-1">
               <DrawerTitle className="truncate text-sm font-normal">
-                {product.title}
+                {splitTitle(product.title).base}
               </DrawerTitle>
               <Price product={product} className="mt-1" />
             </div>
