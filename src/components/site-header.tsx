@@ -18,8 +18,7 @@ import type { Product } from "@/data/products";
 
 
 const nav = [
-  { label: "Bikinis", c: "swim" as const },
-  { label: "One Pieces", c: "one-piece" as const },
+  { label: "Swimwear", c: "swimwear" as const },
   { label: "Dresses & Resort", c: "resort" as const },
   { label: "Beach Towels", c: "towels" as const },
   { label: "New Arrivals", c: "new" as const },
