@@ -173,7 +173,7 @@ export function ProductCard({ product }: { product: Product }) {
               />
             )}
             {product.compareAt && (
-              <span className="absolute left-2 top-2 bg-background px-2 py-0.5 text-[11px] uppercase tracking-widest text-foreground">
+              <span className="absolute left-2 top-2 bg-foreground px-1.5 py-0.5 text-[9px] uppercase tracking-[0.18em] text-background">
                 Sale
               </span>
             )}
