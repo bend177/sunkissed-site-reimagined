@@ -32,10 +32,11 @@ export function SiteHeader() {
   const closeFly = useCallback(() => {
     setClosing(true);
     window.setTimeout(() => {
-      closeFly();
+      setFly(null);
       setClosing(false);
     }, 320);
   }, []);
+
   const [q, setQ] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const products = useCatalog();
