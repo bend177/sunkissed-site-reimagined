@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import { notifyAddedToBag } from "@/lib/toast-added";
 import { onOpenBagFlyout } from "@/lib/bag-events";
@@ -28,6 +28,14 @@ type Fly = "search" | "bag" | null;
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
+  const [closing, setClosing] = useState(false);
+  const closeFly = useCallback(() => {
+    setClosing(true);
+    window.setTimeout(() => {
+      closeFly();
+      setClosing(false);
+    }, 320);
+  }, []);
   const [q, setQ] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const products = useCatalog();
@@ -100,7 +108,7 @@ export function SiteHeader() {
   useEffect(() => {
     if (!fly) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setFly(null);
+      if (e.key === "Escape") closeFly();
     };
     window.addEventListener("keydown", onKey);
     const small = window.matchMedia("(max-width: 1023px)").matches;
@@ -232,12 +240,12 @@ export function SiteHeader() {
               <button
                 type="button"
                 aria-label="Close"
-                onClick={() => setFly(null)}
-                className="fade-in fixed inset-0 z-[45] cursor-default bg-foreground/30"
+                onClick={() => closeFly()}
+                className={`${closing ? "backdrop-out" : "backdrop-in"} fixed inset-0 z-[45] cursor-default bg-foreground/30`}
               />
               <div
-                onMouseLeave={() => setFly(null)}
-                className="fly-in fixed top-0 right-0 z-[55] flex h-dvh w-[min(360px,94vw)] flex-col border-l border-border bg-background lg:absolute lg:top-full lg:h-[calc(100dvh-5.6rem)] lg:w-[min(360px,94vw)] lg:shadow-[-16px_24px_48px_rgba(0,0,0,0.14)]"
+                onMouseLeave={() => closeFly()}
+                className={`${closing ? "fly-out" : "fly-in"} fixed top-0 right-0 z-[55] flex h-dvh w-[min(360px,94vw)] flex-col border-l border-border bg-background lg:absolute lg:top-full lg:h-[calc(100dvh-5.6rem)] lg:w-[min(360px,94vw)] lg:shadow-[-16px_24px_48px_rgba(0,0,0,0.14)]`}
               >
                 <div className="flex items-center justify-between gap-3 px-6 pb-3 pt-5">
                   <div className="flex items-baseline gap-4">
@@ -251,14 +259,14 @@ export function SiteHeader() {
                     {fly === "bag" && items.length > 0 && (
                       <Link
                         to="/cart"
-                        onClick={() => setFly(null)}
+                        onClick={() => closeFly()}
                         className="text-[13px] underline underline-offset-4"
                       >
                         View more details
                       </Link>
                     )}
                   </div>
-                  <button type="button" aria-label="Close" onClick={() => setFly(null)} className="flex size-8 items-center justify-center rounded-full transition-colors hover:bg-secondary">
+                  <button type="button" aria-label="Close" onClick={() => closeFly()} className="flex size-8 items-center justify-center rounded-full transition-colors hover:bg-secondary">
                     <X className="size-[18px]" strokeWidth={1.25} />
                   </button>
                 </div>
@@ -273,7 +281,7 @@ export function SiteHeader() {
                         <Link
                           to="/shop"
                           search={{ c: "all" }}
-                          onClick={() => setFly(null)}
+                          onClick={() => closeFly()}
                           className="eyebrow underline underline-offset-4"
                         >
                           Start Shopping
@@ -287,7 +295,7 @@ export function SiteHeader() {
                               key={p.handle}
                               to="/products/$handle"
                               params={{ handle: p.handle }}
-                              onClick={() => setFly(null)}
+                              onClick={() => closeFly()}
                               className="flex min-w-0 flex-col gap-1.5"
                             >
                               <img
@@ -404,7 +412,7 @@ export function SiteHeader() {
                         key={p.handle}
                         to="/products/$handle"
                         params={{ handle: p.handle }}
-                        onClick={() => setFly(null)}
+                        onClick={() => closeFly()}
                         className="flex min-w-0 flex-col gap-1.5"
                       >
                         <img
