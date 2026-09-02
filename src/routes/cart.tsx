@@ -7,6 +7,8 @@ import { SiteFooter } from "@/components/site-footer";
 import { useCartStore } from "@/lib/cart-store";
 import { useCatalog } from "@/lib/catalog";
 import { findPair } from "@/components/pair-add";
+import { ApplePayButton } from "@/components/apple-pay-button";
+
 import { splitTitle } from "@/data/product-details";
 import type { Product } from "@/data/products";
 
@@ -189,6 +191,8 @@ function CartPage() {
                 >
                   Proceed to checkout
                 </button>
+                <ApplePayButton onClick={checkout} className="mt-2.5" />
+
                 <Link
                   to="/shop"
                   search={{ c: "all" }}
