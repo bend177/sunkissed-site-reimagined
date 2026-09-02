@@ -176,7 +176,7 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
 
       <div className="mt-2.5">
-        <div className="flex items-baseline justify-between gap-2">
+        <div className="flex items-center justify-between gap-2">
           <Link to="/products/$handle" params={{ handle: product.handle }} className="min-w-0">
             <h3 className="product-meta truncate">{splitTitle(product.title).base}</h3>
           </Link>
