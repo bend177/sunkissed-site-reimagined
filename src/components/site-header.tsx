@@ -29,9 +29,22 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
   const [q, setQ] = useState("");
+  const [scrolled, setScrolled] = useState(false);
   const products = useCatalog();
   const bestsellers = products.slice(0, 6);
   const suggestions = products.slice(6, 8);
+
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  // Desktop header is transparent over the homepage hero at the very top,
+  // then turns solid white once the user scrolls (or on any non-home page).
+  const transparent = pathname === "/" && !scrolled;
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const items = useCartStore((s) => s.items);
   const removeItem = useCartStore((s) => s.removeItem);
