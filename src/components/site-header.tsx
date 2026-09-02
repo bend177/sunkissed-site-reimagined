@@ -426,7 +426,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="mt-auto pt-10">
-          <p className="eyebrow text-muted-foreground">sun mail</p>
+          <p className="eyebrow text-muted-foreground">newsletter</p>
           <p className="mt-4 max-w-[18rem] text-sm leading-relaxed text-muted-foreground">
             New drops, restocks, and the occasional bribe.
           </p>
