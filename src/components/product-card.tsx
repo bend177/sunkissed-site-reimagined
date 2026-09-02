@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import type { Product } from "@/data/products";
-import { siblingColors, swatchFill } from "@/data/product-details";
+import { siblingColors, swatchFill, splitTitle } from "@/data/product-details";
 import { useCatalog } from "@/lib/catalog";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
@@ -179,7 +179,7 @@ export function ProductCard({ product }: { product: Product }) {
         <div className="min-w-0">
           <div className="flex items-baseline justify-between gap-2">
             <Link to="/products/$handle" params={{ handle: product.handle }}>
-              <h3 className="product-meta truncate">{product.title}</h3>
+              <h3 className="product-meta truncate">{splitTitle(product.title).base}</h3>
             </Link>
             <Price product={product} className="shrink-0" />
           </div>
