@@ -72,6 +72,13 @@ export function SiteHeader() {
     if (fly === "bag") syncCart();
   }, [fly, syncCart]);
 
+  // Open the bag flyout when an item is added on desktop (quick add, PDP, etc.).
+  useEffect(() => {
+    return onOpenBagFlyout(() => {
+      if (window.matchMedia("(min-width: 1024px)").matches) setFly("bag");
+    });
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
