@@ -177,10 +177,12 @@ export function ProductCard({ product }: { product: Product }) {
 
       <div className="mt-2.5 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
         <div className="min-w-0">
-          <Link to="/products/$handle" params={{ handle: product.handle }}>
-            <h3 className="product-meta truncate">{product.title}</h3>
-          </Link>
-          <Price product={product} className="mt-1" />
+          <div className="flex items-baseline justify-between gap-2">
+            <Link to="/products/$handle" params={{ handle: product.handle }}>
+              <h3 className="product-meta truncate">{product.title}</h3>
+            </Link>
+            <Price product={product} className="shrink-0" />
+          </div>
           {colors.length > 1 && (
             <Swatches
               colors={colors}
