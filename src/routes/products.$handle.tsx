@@ -16,6 +16,7 @@ import {
   swatchFocus,
 } from "@/data/product-details";
 import { toast } from "sonner";
+import { notifyAddedToBag } from "@/lib/toast-added";
 import { PairAdd, findPair } from "@/components/pair-add";
 
 export const Route = createFileRoute("/products/$handle")({
