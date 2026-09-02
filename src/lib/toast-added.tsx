@@ -9,7 +9,7 @@ function ToastCartAction() {
   );
   return (
     <span className="relative inline-flex items-center justify-center">
-      <ShoppingBag className="size-[18px]" strokeWidth={1.25} />
+      <ShoppingBag className="size-[26px]" strokeWidth={1.25} />
       {count > 0 && (
         <span className="absolute -right-2 -top-1.5 flex size-4 items-center justify-center rounded-full bg-ink text-[9px] leading-none text-background">
           {count}
