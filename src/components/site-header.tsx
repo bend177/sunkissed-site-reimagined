@@ -6,21 +6,8 @@ import { useCatalog } from "@/lib/catalog";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
 
-function SerifArrow({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 36 28"
-      fill="none"
-      aria-hidden
-      className={className}
-    >
-      {/* hairline shaft - the thin stroke of a high-contrast serif */}
-      <path d="M1 14 H27" stroke="currentColor" strokeWidth={0.6} strokeLinecap="round" />
-      {/* solid filled head - the heavy stroke of a high-contrast serif */}
-      <path d="M27 6 L35 14 L27 22 Z" fill="currentColor" />
-    </svg>
-  );
-}
+
+
 
 
 
