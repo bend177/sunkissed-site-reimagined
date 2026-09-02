@@ -8,10 +8,10 @@ function ToastCartAction() {
     s.items.reduce((sum, item) => sum + item.quantity, 0)
   );
   return (
-    <span className="relative inline-flex size-9 items-center justify-center rounded-full border border-ink bg-background">
-      <ShoppingBag className="size-[18px]" strokeWidth={1.5} />
+    <span className="relative inline-flex items-center justify-center">
+      <ShoppingBag className="size-[18px]" strokeWidth={1.25} />
       {count > 0 && (
-        <span className="absolute -right-1 -top-1 flex size-4 items-center justify-center rounded-full bg-ink text-[9px] leading-none text-background">
+        <span className="absolute -right-2 -top-1.5 flex size-4 items-center justify-center rounded-full bg-ink text-[9px] leading-none text-background">
           {count}
         </span>
       )}
