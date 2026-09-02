@@ -67,7 +67,7 @@ function Home() {
                   search={{ c: "new" }}
                   className="pb-1 text-sm lowercase text-background md:text-base"
                 >
-                  shop now &rarr;
+                  shop now <span aria-hidden="true" className="align-middle">&rarr;</span>
                 </Link>
               </div>
             </div>
@@ -133,7 +133,7 @@ function Home() {
                   {block.title}
                 </h2>
                 <span className="pb-1 text-sm lowercase text-background md:text-base">
-                  shop now &rarr;
+                  shop now <span aria-hidden="true" className="align-middle">&rarr;</span>
                 </span>
               </div>
 
@@ -179,7 +179,7 @@ function Home() {
                   search={{ c: "towels" }}
                   className="pb-1 text-sm lowercase text-background md:text-base"
                 >
-                  shop now &rarr;
+                  shop now <span aria-hidden="true" className="align-middle">&rarr;</span>
                 </Link>
               </div>
             </div>
