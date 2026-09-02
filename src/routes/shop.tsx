@@ -504,8 +504,7 @@ function Shop() {
                 onClick={() => setSortOpen(!sortOpen)}
                 className="flex items-center gap-1.5 border border-foreground px-3 py-1.5 text-[12px] transition-colors hover:bg-foreground hover:text-background md:text-[13.5px]"
               >
-                Sort by:{" "}
-                <span className="underline underline-offset-[3px]">{SORT_LABEL[sort]}</span>
+                Sort by{" "}
                 <span className="inline-flex items-center leading-none">
                   {sortOpen ? <Minus className="size-3.5" strokeWidth={1.5} /> : <Plus className="size-3.5" strokeWidth={1.5} />}
                 </span>
