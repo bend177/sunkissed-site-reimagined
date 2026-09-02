@@ -128,11 +128,11 @@ export function SiteHeader() {
                 className="relative"
               >
                 <ShoppingBag className="size-[18px]" strokeWidth={1.25} />
-                {cartCount > 0 && (
-                  <span className="absolute -right-2 -top-1.5 min-w-4 rounded-full bg-ink px-1 text-[9px] leading-4 text-background">
-                    {cartCount}
-                  </span>
-                )}
+              {cartCount > 0 && (
+                <span className="absolute -right-2 -top-1.5 flex size-4 items-center justify-center rounded-full bg-ink text-[9px] leading-none text-background">
+                  {cartCount}
+                </span>
+              )}
               </button>
 
               <button type="button" aria-label="Account">
