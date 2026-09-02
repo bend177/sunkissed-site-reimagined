@@ -1,10 +1,28 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowRight, Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
+import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 import { useCatalog } from "@/lib/catalog";
 import { useCartStore } from "@/lib/cart-store";
 import { Price } from "@/components/price";
+
+function SerifArrow({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 36 28"
+      fill="none"
+      aria-hidden
+      className={className}
+    >
+      {/* hairline shaft - the thin stroke of a high-contrast serif */}
+      <path d="M1 14 H27" stroke="currentColor" strokeWidth={0.6} strokeLinecap="round" />
+      {/* solid filled head - the heavy stroke of a high-contrast serif */}
+      <path d="M27 6 L35 14 L27 22 Z" fill="currentColor" />
+    </svg>
+  );
+}
+
+
 
 const nav = [
   { label: "Bikinis", c: "swim" as const },
@@ -396,7 +414,7 @@ export function SiteHeader() {
               className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
             >
               {l.label.toLowerCase()}
-              <ArrowRight className="size-5 text-muted-foreground" strokeWidth={1.25} />
+              <SerifArrow className="h-7 w-9 text-muted-foreground" />
             </Link>
           ))}
           <Link
@@ -405,7 +423,7 @@ export function SiteHeader() {
             className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
           >
             our story
-            <ArrowRight className="size-5 text-muted-foreground" strokeWidth={1.25} />
+            <SerifArrow className="h-7 w-9 text-muted-foreground" />
           </Link>
         </nav>
 
