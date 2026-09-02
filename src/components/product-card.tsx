@@ -124,7 +124,7 @@ function HoverQuickAdd({ product }: { product: Product }) {
               e.stopPropagation();
               void add(v);
             }}
-            className="flex-1 px-1.5 py-1.5 text-xs lowercase transition-colors hover:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-30"
+            className="flex-1 px-1.5 py-1.5 text-xs uppercase tracking-[0.08em] transition-colors hover:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-30"
           >
             {v.size}
           </button>
