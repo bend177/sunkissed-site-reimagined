@@ -58,6 +58,24 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!fly) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setFly(null);
+    };
+    window.addEventListener("keydown", onKey);
+    const small = window.matchMedia("(max-width: 1023px)").matches;
+    let prev = "";
+    if (small) {
+      prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      if (small) document.body.style.overflow = prev;
+    };
+  }, [fly]);
+
   const query = q.trim().toLowerCase();
   const results = query
     ? products.filter((p) => p.title.toLowerCase().includes(query)).slice(0, 12)
@@ -79,9 +97,10 @@ export function SiteHeader() {
             <img src={logoAsset.url} alt="Sunkissed" className="h-7 w-auto" />
           </Link>
           <div className="flex items-center gap-5">
-            <Link
-              to="/cart"
+            <button
+              type="button"
               aria-label={`Bag (${cartCount})`}
+              onClick={() => setFly("bag")}
               className="relative"
             >
               <ShoppingBag className="size-[19px]" strokeWidth={1.25} />
@@ -90,7 +109,7 @@ export function SiteHeader() {
                   {cartCount}
                 </span>
               )}
-            </Link>
+            </button>
 
             <button type="button" aria-label="Open menu" onClick={() => setOpen(true)}>
               <Menu className="size-[22px]" strokeWidth={1.25} />
@@ -167,6 +186,7 @@ export function SiteHeader() {
             </Link>
           </nav>
           )}
+          </div>
 
           {fly && (
             <>
@@ -178,7 +198,7 @@ export function SiteHeader() {
               />
               <div
                 onMouseLeave={() => setFly(null)}
-                className="fly-in absolute right-0 top-full z-[55] flex h-[calc(100vh-132px)] w-[min(360px,94vw)] flex-col border-l border-border bg-background shadow-[-16px_24px_48px_rgba(0,0,0,0.14)]"
+                className="fly-in absolute right-0 top-full z-[55] flex h-[calc(100dvh-5.5rem)] w-[min(360px,94vw)] flex-col border-l border-border bg-background shadow-[-16px_24px_48px_rgba(0,0,0,0.14)] lg:h-[calc(100vh-132px)]"
               >
                 <div className="flex items-center justify-between gap-3 px-6 pb-3 pt-5">
                   <div className="flex items-baseline gap-4">
@@ -199,7 +219,7 @@ export function SiteHeader() {
                       </Link>
                     )}
                   </div>
-                  <button type="button" aria-label="Close" onClick={() => setFly(null)}>
+                  <button type="button" aria-label="Close" onClick={() => setFly(null)} className="flex size-8 items-center justify-center rounded-full transition-colors hover:bg-secondary">
                     <X className="size-[18px]" strokeWidth={1.25} />
                   </button>
                 </div>
@@ -375,7 +395,6 @@ export function SiteHeader() {
               </div>
             </>
           )}
-        </div>
       </header>
 
       {/* Mobile / tablet full-screen menu */}
