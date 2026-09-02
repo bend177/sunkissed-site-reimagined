@@ -502,10 +502,13 @@ function Shop() {
               <button
                 type="button"
                 onClick={() => setSortOpen(!sortOpen)}
-                className="text-[12px] md:text-[13.5px]"
+                className="flex items-center gap-1.5 border border-foreground px-3 py-1.5 text-[12px] transition-colors hover:bg-foreground hover:text-background md:text-[13.5px]"
               >
                 Sort by:{" "}
                 <span className="underline underline-offset-[3px]">{SORT_LABEL[sort]}</span>
+                <span className="inline-flex items-center leading-none">
+                  {sortOpen ? <Minus className="size-3.5" strokeWidth={1.5} /> : <Plus className="size-3.5" strokeWidth={1.5} />}
+                </span>
               </button>
               {sortOpen && (
                 <div className="absolute right-0 top-[calc(100%+10px)] z-[60] flex min-w-[210px] flex-col border border-border bg-background p-1.5 shadow-[0_12px_32px_rgba(0,0,0,0.12)]">
