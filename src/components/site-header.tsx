@@ -219,7 +219,7 @@ export function SiteHeader() {
                       </Link>
                     )}
                   </div>
-                  <button type="button" aria-label="Close" onClick={() => setFly(null)}>
+                  <button type="button" aria-label="Close" onClick={() => setFly(null)} className="flex size-8 items-center justify-center rounded-full transition-colors hover:bg-secondary">
                     <X className="size-[18px]" strokeWidth={1.25} />
                   </button>
                 </div>
