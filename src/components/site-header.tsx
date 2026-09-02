@@ -73,11 +73,10 @@ export function SiteHeader() {
     if (fly === "bag") syncCart();
   }, [fly, syncCart]);
 
-  // Open the bag flyout when an item is added on desktop (quick add, PDP, etc.).
+  // Open the bag flyout when requested (quick add on desktop, toast cart
+  // action on mobile/tablet, PDP add, etc.).
   useEffect(() => {
-    return onOpenBagFlyout(() => {
-      if (window.matchMedia("(min-width: 1024px)").matches) setFly("bag");
-    });
+    return onOpenBagFlyout(() => setFly("bag"));
   }, []);
 
   useEffect(() => {
