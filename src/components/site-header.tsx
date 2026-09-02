@@ -440,7 +440,7 @@ export function SiteHeader() {
               to="/shop"
               search={{ c: l.c }}
               onClick={() => setOpen(false)}
-              className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
+              className="display flex items-center justify-between border-b border-border py-4 text-[34px] capitalize leading-none"
             >
               {l.label.toLowerCase()}
               <img
@@ -454,7 +454,7 @@ export function SiteHeader() {
           <Link
             to="/about"
             onClick={() => setOpen(false)}
-            className="display flex items-center justify-between border-b border-border py-4 text-[34px] lowercase leading-none"
+            className="display flex items-center justify-between border-b border-border py-4 text-[34px] capitalize leading-none"
           >
             our story
             <img
@@ -492,7 +492,7 @@ export function SiteHeader() {
               href="https://www.instagram.com/getsunkissed"
               target="_blank"
               rel="noreferrer"
-              className="nav-link lowercase"
+              className="nav-link capitalize"
             >
               instagram
             </a>

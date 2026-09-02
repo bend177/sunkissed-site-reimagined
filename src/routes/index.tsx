@@ -65,7 +65,7 @@ function Home() {
                 <Link
                   to="/shop"
                   search={{ c: "new" }}
-                  className="pb-1 text-sm lowercase text-background md:text-base"
+                  className="pb-1 text-sm capitalize text-background md:text-base"
                 >
                   shop now <span aria-hidden="true" className="align-middle">&rarr;</span>
                 </Link>
@@ -101,7 +101,7 @@ function Home() {
                   />
                 </div>
                 <div className="mt-3 flex items-baseline justify-between">
-                  <span className="text-sm lowercase">{cat.label}</span>
+                  <span className="text-sm capitalize">{cat.label}</span>
                   <span className="text-sm text-muted-foreground">{cat.count}</span>
                 </div>
               </Link>
@@ -132,7 +132,7 @@ function Home() {
                 <h2 className="display text-5xl leading-[0.95] text-background md:text-6xl">
                   {block.title}
                 </h2>
-                <span className="pb-1 text-sm lowercase text-background md:text-base">
+                <span className="pb-1 text-sm capitalize text-background md:text-base">
                   shop now <span aria-hidden="true" className="align-middle">&rarr;</span>
                 </span>
               </div>
@@ -177,7 +177,7 @@ function Home() {
                 <Link
                   to="/shop"
                   search={{ c: "towels" }}
-                  className="pb-1 text-sm lowercase text-background md:text-base"
+                  className="pb-1 text-sm capitalize text-background md:text-base"
                 >
                   shop now <span aria-hidden="true" className="align-middle">&rarr;</span>
                 </Link>
