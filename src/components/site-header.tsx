@@ -1,4 +1,4 @@
-import { Link, useLocation } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import { notifyAddedToBag } from "@/lib/toast-added";
@@ -29,7 +29,6 @@ const nav = [
 type Fly = "search" | "bag" | null;
 
 export function SiteHeader() {
-  const onShop = useLocation({ select: (s) => s.pathname }).startsWith("/shop");
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
   const [q, setQ] = useState("");
