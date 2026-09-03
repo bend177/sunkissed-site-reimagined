@@ -87,7 +87,7 @@ function ColorGroup({
   currentHandle,
 }: {
   title: string;
-  selectedColor?: string;
+  selectedColor?: string | undefined;
   items: { handle: string; title: string; image: string }[];
   catalog: Parameters<typeof swatchFill>[0];
   currentHandle: string;
