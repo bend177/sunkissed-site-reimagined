@@ -188,10 +188,10 @@ export function ProductCard({ product }: { product: Product }) {
             type="button"
             aria-label={`Quick add ${product.title}`}
             onClick={() => setOpen(true)}
-            className="relative mr-1 shrink-0 text-foreground transition-opacity hover:opacity-70 lg:hidden"
+            className="relative mr-2 shrink-0 text-foreground transition-opacity hover:opacity-70 lg:hidden"
           >
             <ShoppingBag className="size-4" strokeWidth={1.5} />
-            <span className="absolute -right-1 -top-1.5 flex size-3 items-center justify-center rounded-full bg-ink text-background ring-[1.5px] ring-background">
+            <span className="absolute -right-0.5 -top-1.5 flex size-3 items-center justify-center rounded-full bg-ink text-background ring-[1.5px] ring-background">
               <Plus className="size-2" strokeWidth={3} />
             </span>
           </button>
