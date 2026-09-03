@@ -94,7 +94,7 @@ function ColorGroup({
   return (
     <div className="mt-5">
       <p className="text-sm">{title}</p>
-      <div className="mt-2 flex flex-wrap gap-1.5 md:gap-2">
+      <div className="mt-2 flex flex-wrap gap-1.5">
         {items.map((s) => {
           const label = splitTitle(s.title).color || s.title;
           const active = s.handle === currentHandle;
