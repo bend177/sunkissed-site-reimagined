@@ -262,7 +262,7 @@ function ProductPage() {
             </p>
 
             <div className="mt-7 border-t border-border">
-              <Accordion label="Details" defaultOpen>
+              <Accordion label="Details">
                 <ul className="list-disc space-y-1 pl-4">
                   <li>{description}</li>
                   {fit.map((f) => (
