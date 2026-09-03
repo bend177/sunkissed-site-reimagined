@@ -22,3 +22,17 @@ export function isDesktopViewport(): boolean {
   if (typeof window === "undefined") return false;
   return window.matchMedia("(min-width: 1024px)").matches;
 }
+
+/**
+ * Tracks whether the bag flyout drawer is currently open, so add-to-cart
+ * confirmations can stay silent while the shopper is already looking at the bag.
+ */
+let bagFlyoutOpen = false;
+
+export function setBagFlyoutOpen(open: boolean) {
+  bagFlyoutOpen = open;
+}
+
+export function isBagFlyoutOpen(): boolean {
+  return bagFlyoutOpen;
+}
