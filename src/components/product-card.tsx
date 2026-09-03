@@ -228,7 +228,7 @@ function Gallery({
       )}
 
       {sale && (
-        <span className="absolute left-2 top-2 inline-flex items-center gap-1.5 rounded-full bg-white px-2 py-1 text-[8px] font-normal uppercase tracking-[0.18em] text-black shadow-[0_1px_3px_rgba(0,0,0,0.18)]">
+        <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-white py-1 pl-1.5 pr-2 text-[8px] font-normal uppercase tracking-[0.2em] text-black shadow-[0_1px_3px_rgba(0,0,0,0.18)]">
           <span className="size-1 rounded-full bg-[#BA2C33]" />
           Sale
         </span>
