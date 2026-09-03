@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { ShoppingBag, Check } from "lucide-react";
 import { useCartStore } from "@/lib/cart-store";
-import { openBagFlyout } from "@/lib/bag-events";
+import { openBagFlyout, isBagFlyoutOpen } from "@/lib/bag-events";
 
 function AddedToast({
   description,
@@ -47,6 +47,9 @@ function AddedToast({
  * on all viewports.
  */
 export function notifyAddedToBag(description: string) {
+  // Stay silent when the bag drawer is already open (e.g. adding the matching
+  // set piece from the recommendations inside the drawer).
+  if (isBagFlyoutOpen()) return;
   toast.custom((t) => <AddedToast description={description} toastId={t} />, {
     position: "top-center",
     duration: 4000,

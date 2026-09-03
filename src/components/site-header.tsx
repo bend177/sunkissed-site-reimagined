@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { Menu, Minus, Plus, Search, ShoppingBag, Trash2, User, X } from "lucide-react";
 import { notifyAddedToBag } from "@/lib/toast-added";
-import { onOpenBagFlyout } from "@/lib/bag-events";
+import { onOpenBagFlyout, setBagFlyoutOpen } from "@/lib/bag-events";
 import logoAsset from "@/assets/sunkissed-logo-black.png.asset.json";
 import chevronAsset from "@/assets/serif-chevron.png.asset.json";
 import { useCatalog } from "@/lib/catalog";
@@ -31,6 +31,10 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
   const [closing, setClosing] = useState(false);
+  useEffect(() => {
+    setBagFlyoutOpen(fly === "bag" && !closing);
+    return () => setBagFlyoutOpen(false);
+  }, [fly, closing]);
   const closeFly = useCallback(() => {
     setClosing((wasClosing) => {
       if (!wasClosing) {
