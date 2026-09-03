@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, ShoppingBag } from "lucide-react";
 import { notifyAddedToBag } from "@/lib/toast-added";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchFill, splitTitle } from "@/data/product-details";
@@ -188,9 +188,12 @@ export function ProductCard({ product }: { product: Product }) {
             type="button"
             aria-label={`Quick add ${product.title}`}
             onClick={() => setOpen(true)}
-            className="flex size-5 shrink-0 items-center justify-center rounded-full bg-ink text-background transition-opacity hover:opacity-80 lg:hidden"
+            className="relative shrink-0 text-foreground transition-opacity hover:opacity-70 lg:hidden"
           >
-            <Plus className="size-3.5" strokeWidth={2.5} />
+            <ShoppingBag className="size-5" strokeWidth={1.5} />
+            <span className="absolute -right-1 -top-1 flex size-3.5 items-center justify-center rounded-full bg-ink text-background ring-[1.5px] ring-background">
+              <Plus className="size-2.5" strokeWidth={3} />
+            </span>
           </button>
           <Price product={product} className="shrink-0 hidden lg:block" />
         </div>
