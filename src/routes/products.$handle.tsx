@@ -212,13 +212,15 @@ function ProductPage() {
             </div>
 
             <ColorGroup
-              title={`Classic Colors${!selectedIsPrint ? `: ${colorName}` : ""}`}
+              title="Classic Colors"
+              selectedColor={!selectedIsPrint ? colorName : undefined}
               items={classicColors}
               catalog={catalog}
               currentHandle={product.handle}
             />
             <ColorGroup
-              title={`Seasonal${selectedIsPrint ? `: ${colorName}` : ""}`}
+              title="Seasonal"
+              selectedColor={selectedIsPrint ? colorName : undefined}
               items={seasonalColors}
               catalog={catalog}
               currentHandle={product.handle}
