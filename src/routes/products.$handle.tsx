@@ -81,11 +81,13 @@ function Accordion({
 
 function ColorGroup({
   title,
+  selectedColor,
   items,
   catalog,
   currentHandle,
 }: {
   title: string;
+  selectedColor?: string | undefined;
   items: { handle: string; title: string; image: string }[];
   catalog: Parameters<typeof swatchFill>[0];
   currentHandle: string;
@@ -93,7 +95,15 @@ function ColorGroup({
   if (!items.length) return null;
   return (
     <div className="mt-5">
-      <p className="text-sm">{title}</p>
+      <p className="text-sm">
+        {title}
+        {selectedColor && (
+          <>
+            {": "}
+            <span className="font-semibold">{selectedColor}</span>
+          </>
+        )}
+      </p>
       <div className="mt-2 flex flex-wrap gap-1.5 lg:grid lg:flex-none lg:justify-start lg:[grid-template-columns:repeat(10,min-content)]">
         {items.map((s) => {
           const label = splitTitle(s.title).color || s.title;
@@ -202,13 +212,15 @@ function ProductPage() {
             </div>
 
             <ColorGroup
-              title={`Classic Colors${!selectedIsPrint ? `: ${colorName}` : ""}`}
+              title="Classic Colors"
+              selectedColor={!selectedIsPrint ? colorName : undefined}
               items={classicColors}
               catalog={catalog}
               currentHandle={product.handle}
             />
             <ColorGroup
-              title={`Seasonal${selectedIsPrint ? `: ${colorName}` : ""}`}
+              title="Seasonal"
+              selectedColor={selectedIsPrint ? colorName : undefined}
               items={seasonalColors}
               catalog={catalog}
               currentHandle={product.handle}
