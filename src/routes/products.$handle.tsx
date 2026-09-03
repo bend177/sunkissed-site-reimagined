@@ -176,9 +176,9 @@ function ProductPage() {
           <span className="text-foreground">{base}</span>
         </nav>
 
-        <div className="grid grid-cols-1 gap-0 md:grid-cols-[1fr_400px] md:gap-8 md:px-6 lg:grid-cols-[1fr_460px] lg:gap-10">
+        <div className="grid grid-cols-1 gap-0 md:grid-cols-[1fr_340px] md:gap-6 md:px-6 lg:grid-cols-[1fr_420px] lg:gap-10">
           {/* Gallery - swipeable single column on mobile/tablet, 2-up grid on desktop */}
-          <div className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 md:gap-1 md:overflow-visible">
+          <div className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-auto md:mr-4 md:self-start md:grid md:max-w-[440px] md:grid-cols-2 md:gap-1 md:overflow-visible">
             {gallery.map((src, i) => (
               <div
                 key={src + i}
