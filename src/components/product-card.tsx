@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Plus, Minus, ShoppingBag } from "lucide-react";
+import { Plus, Minus, ShoppingBag, ChevronLeft, ChevronRight } from "lucide-react";
+
 import { notifyAddedToBag } from "@/lib/toast-added";
 import type { Product } from "@/data/products";
 import { siblingColors, swatchFill, splitTitle } from "@/data/product-details";
@@ -138,12 +139,116 @@ function HoverQuickAdd({ product }: { product: Product }) {
   );
 }
 
+function Gallery({
+  images,
+  alt,
+  sale,
+}: {
+  images: string[];
+  alt: string;
+  sale: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (el) el.scrollTo({ left: 0 });
+    setIndex(0);
+  }, [images[0]]);
+
+  const scrollTo = (i: number) => {
+    const el = ref.current;
+    if (!el) return;
+    const next = Math.max(0, Math.min(images.length - 1, i));
+    el.scrollTo({ left: next * el.clientWidth, behavior: "smooth" });
+    setIndex(next);
+  };
+
+  return (
+    <div className="image-bg relative aspect-[3/4] overflow-hidden">
+      <div
+        ref={ref}
+        onScroll={(e) => {
+          const el = e.currentTarget;
+          if (el.clientWidth) setIndex(Math.round(el.scrollLeft / el.clientWidth));
+        }}
+        className="flex size-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {images.map((src, i) => (
+          <img
+            key={`${src}-${i}`}
+            src={src}
+            alt={i === 0 ? alt : ""}
+            loading={i === 0 ? "lazy" : "lazy"}
+            className="size-full shrink-0 snap-center object-cover"
+          />
+        ))}
+      </div>
+
+      {images.length > 1 && (
+        <>
+          <button
+            type="button"
+            aria-label="Previous image"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              scrollTo(index - 1);
+            }}
+            disabled={index === 0}
+            className="absolute left-1.5 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full bg-background/80 p-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 disabled:!opacity-0 lg:flex"
+          >
+            <ChevronLeft className="size-4" strokeWidth={1.5} />
+          </button>
+          <button
+            type="button"
+            aria-label="Next image"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              scrollTo(index + 1);
+            }}
+            disabled={index === images.length - 1}
+            className="absolute right-1.5 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full bg-background/80 p-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100 disabled:!opacity-0 lg:flex"
+          >
+            <ChevronRight className="size-4" strokeWidth={1.5} />
+          </button>
+          <div className="pointer-events-none absolute inset-x-0 bottom-2 flex items-center justify-center gap-1">
+            {images.map((_, i) => (
+              <span
+                key={i}
+                className={`size-1 rounded-full transition-colors ${
+                  i === index ? "bg-foreground" : "bg-foreground/25"
+                }`}
+              />
+            ))}
+          </div>
+        </>
+      )}
+
+      {sale && (
+        <span className="absolute left-2 top-2 bg-foreground px-1.5 py-0.5 text-[9px] uppercase tracking-[0.18em] text-background">
+          Sale
+        </span>
+      )}
+    </div>
+  );
+}
+
 export function ProductCard({ product }: { product: Product }) {
   const catalog = useCatalog();
   const colors = siblingColors(catalog, product);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<(typeof colors)[number] | null>(null);
   const current = active ?? colors.find((c) => c.current) ?? null;
+
+  const images =
+    active && active.image
+      ? [active.image]
+      : product.images.length > 0
+        ? product.images
+        : [product.image];
 
   return (
     <article>
@@ -153,31 +258,11 @@ export function ProductCard({ product }: { product: Product }) {
           params={{ handle: current?.handle ?? product.handle }}
           className="block"
         >
-          <div className="image-bg relative aspect-[3/4] overflow-hidden">
-            <img
-              src={current?.image ?? product.image}
-              alt={product.title}
-              loading="lazy"
-              className="size-full object-cover"
-            />
-            {!active && product.images[1] && (
-              <img
-                src={product.images[1]}
-                alt=""
-                aria-hidden
-                loading="lazy"
-                className="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-              />
-            )}
-            {product.compareAt && (
-              <span className="absolute left-2 top-2 bg-foreground px-1.5 py-0.5 text-[9px] uppercase tracking-[0.18em] text-background">
-                Sale
-              </span>
-            )}
-          </div>
+          <Gallery images={images} alt={product.title} sale={Boolean(product.compareAt)} />
         </Link>
         <HoverQuickAdd product={product} />
       </div>
+
 
       <div className="mt-2.5">
         <div className="flex items-center justify-between gap-2">
