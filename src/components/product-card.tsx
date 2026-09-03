@@ -215,14 +215,18 @@ function Gallery({
             <ChevronRight className="size-4" strokeWidth={1.5} />
           </button>
           <div className="pointer-events-none absolute inset-x-0 bottom-2 flex items-center justify-center gap-1">
-            {images.slice(0, 3).map((_, i) => (
-              <span
-                key={i}
-                className={`size-1 rounded-full transition-colors ${
-                  i === index ? "bg-foreground" : "bg-foreground/25"
-                }`}
-              />
-            ))}
+            {images.slice(0, 3).map((_, i) => {
+              const last = i === 2 && images.length > 3;
+              const active = last ? index >= 2 : i === index;
+              return (
+                <span
+                  key={i}
+                  className={`rounded-full transition-colors ${
+                    last ? "size-1" : "size-1"
+                  } ${active ? "bg-foreground" : "bg-foreground/25"}`}
+                />
+              );
+            })}
           </div>
         </>
       )}
