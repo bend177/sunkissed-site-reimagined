@@ -176,8 +176,8 @@ function ProductPage() {
           <span className="text-foreground">{base}</span>
         </nav>
 
-        <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1fr_460px] lg:gap-10 lg:px-6">
-          {/* Gallery - swipeable on mobile, 2-up grid on desktop */}
+        <div className="grid grid-cols-1 gap-0 md:grid-cols-[1fr_400px] md:gap-8 md:px-6 lg:grid-cols-[1fr_460px] lg:gap-10">
+          {/* Gallery - swipeable single column on mobile/tablet, 2-up grid on desktop */}
           <div className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-2 lg:gap-1 lg:overflow-visible">
             {gallery.map((src, i) => (
               <div
@@ -195,8 +195,8 @@ function ProductPage() {
           </div>
 
           {/* Buy rail */}
-          <div className="px-4 pt-6 md:px-6 lg:sticky lg:top-24 lg:self-start lg:px-0 lg:pt-2">
-            <div className="flex items-start justify-between gap-4 lg:flex-col lg:gap-1">
+          <div className="px-4 pt-6 md:sticky md:top-24 md:self-start md:px-6 md:pt-6 lg:px-0 lg:pt-2">
+            <div className="flex items-start justify-between gap-4 md:flex-col md:gap-1">
               <h1 className="text-xl leading-tight">{base}</h1>
               <Price product={product} className="text-base lg:text-sm" />
             </div>
