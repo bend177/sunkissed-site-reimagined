@@ -94,7 +94,7 @@ function ColorGroup({
   return (
     <div className="mt-5">
       <p className="text-sm">{title}</p>
-      <div className="mt-2 flex flex-wrap gap-1.5 md:gap-2">
+      <div className="mt-2 flex flex-wrap gap-1.5">
         {items.map((s) => {
           const label = splitTitle(s.title).color || s.title;
           const active = s.handle === currentHandle;
@@ -105,7 +105,7 @@ function ColorGroup({
               params={{ handle: s.handle }}
               aria-label={label}
               title={label}
-              className={`block size-6 shrink-0 rounded-full ring-1 ring-inset transition-shadow md:size-8 ${
+              className={`block size-6 shrink-0 rounded-full ring-1 ring-inset transition-shadow ${
                 active
                   ? "ring-foreground"
                   : "ring-foreground/15 hover:ring-foreground/50"
