@@ -246,7 +246,7 @@ function ProductPage() {
                     type="button"
                     disabled={v ? !v.available : false}
                     onClick={() => setSize(s)}
-                    className={`flex-1 border px-3 py-2 text-xs uppercase transition-colors disabled:cursor-not-allowed disabled:line-through disabled:opacity-35 ${
+                    className={`flex-1 border px-3 py-2 text-xs uppercase transition-colors disabled:cursor-not-allowed disabled:line-through disabled:border-border disabled:bg-transparent disabled:text-foreground disabled:opacity-35 ${
                       size === s
                         ? "border-foreground bg-foreground text-background"
                         : "border-border hover:border-foreground"
