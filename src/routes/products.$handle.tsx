@@ -178,11 +178,11 @@ function ProductPage() {
 
         <div className="grid grid-cols-1 gap-0 md:grid-cols-[1fr_400px] md:gap-8 md:px-6 lg:grid-cols-[1fr_460px] lg:gap-10">
           {/* Gallery - swipeable single column on mobile/tablet, 2-up grid on desktop */}
-          <div className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-2 lg:gap-1 lg:overflow-visible">
+          <div className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 md:gap-1 md:overflow-visible">
             {gallery.map((src, i) => (
               <div
                 key={src + i}
-                className="image-bg aspect-[3/4] w-full shrink-0 snap-center lg:w-auto lg:shrink"
+                className="image-bg aspect-[3/4] w-full shrink-0 snap-center md:w-auto md:shrink"
               >
                 <img
                   src={src}
