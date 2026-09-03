@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { ShoppingBag, Check } from "lucide-react";
-import { Link } from "@tanstack/react-router";
 import { useCartStore } from "@/lib/cart-store";
+import { openBagFlyout } from "@/lib/bag-events";
 
 function AddedToast({
   description,
@@ -26,22 +26,25 @@ function AddedToast({
           {description}
         </p>
       </div>
-      <Link
-        to="/cart"
-        onClick={() => toast.dismiss(toastId)}
+      <button
+        type="button"
+        onClick={() => {
+          openBagFlyout();
+          toast.dismiss(toastId);
+        }}
         className="flex shrink-0 items-center gap-1.5 rounded-full bg-ink px-3.5 py-2 text-[11px] font-medium uppercase tracking-[0.08em] text-background transition-opacity hover:opacity-90"
       >
         <ShoppingBag className="size-3.5" strokeWidth={1.5} />
         View bag ({count})
-      </Link>
+      </button>
     </div>
   );
 }
 
 /**
  * After an item is added, shows a compact "Added to bag" toast with the item
- * description and a direct "View bag" link to the cart page. Opens on all
- * viewports.
+ * description and a "View bag" button that opens the bag drawer flyout. Opens
+ * on all viewports.
  */
 export function notifyAddedToBag(description: string) {
   toast.custom((t) => <AddedToast description={description} toastId={t} />, {
