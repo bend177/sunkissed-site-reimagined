@@ -188,9 +188,9 @@ export function ProductCard({ product }: { product: Product }) {
             type="button"
             aria-label={`Quick add ${product.title}`}
             onClick={() => setOpen(true)}
-            className="shrink-0 p-0.5 text-foreground transition-opacity hover:opacity-60 lg:hidden"
+            className="flex size-5 shrink-0 items-center justify-center rounded-full bg-ink text-background transition-opacity hover:opacity-80 lg:hidden"
           >
-            <Plus className="size-5" strokeWidth={1} />
+            <Plus className="size-3.5" strokeWidth={2.5} />
           </button>
           <Price product={product} className="shrink-0 hidden lg:block" />
         </div>
