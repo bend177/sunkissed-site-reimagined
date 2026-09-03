@@ -31,6 +31,10 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [fly, setFly] = useState<Fly>(null);
   const [closing, setClosing] = useState(false);
+  useEffect(() => {
+    setBagFlyoutOpen(fly === "bag" && !closing);
+    return () => setBagFlyoutOpen(false);
+  }, [fly, closing]);
   const closeFly = useCallback(() => {
     setClosing((wasClosing) => {
       if (!wasClosing) {
