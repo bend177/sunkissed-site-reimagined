@@ -216,13 +216,13 @@ function Gallery({
           </button>
           <div className="pointer-events-none absolute inset-x-0 bottom-2 flex items-center justify-center gap-1">
             {images.slice(0, 3).map((_, i) => {
-              const last = i === 2 && images.length > 3;
-              const active = last ? index >= 2 : i === index;
+              const isMore = i === 2 && images.length > 3;
+              const active = isMore ? index >= 2 : i === index;
               return (
                 <span
                   key={i}
-                  className={`rounded-full transition-colors ${
-                    last ? "size-1" : "size-1"
+                  className={`transition-colors ${
+                    isMore ? "h-1 w-2 rounded-full" : "size-1 rounded-full"
                   } ${active ? "bg-foreground" : "bg-foreground/25"}`}
                 />
               );
