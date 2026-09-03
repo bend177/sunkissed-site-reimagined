@@ -182,7 +182,7 @@ function ProductPage() {
             {gallery.map((src, i) => (
               <div
                 key={src + i}
-                className="image-bg aspect-[3/4] w-full shrink-0 snap-center lg:w-auto lg:shrink"
+                className="image-bg aspect-[3/4] w-full shrink-0 snap-center md:w-auto md:shrink"
               >
                 <img
                   src={src}
