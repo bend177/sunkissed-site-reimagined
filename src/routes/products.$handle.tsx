@@ -195,8 +195,8 @@ function ProductPage() {
           </div>
 
           {/* Buy rail */}
-          <div className="px-4 pt-6 md:px-6 lg:sticky lg:top-24 lg:self-start lg:px-0 lg:pt-2">
-            <div className="flex items-start justify-between gap-4 lg:flex-col lg:gap-1">
+          <div className="px-4 pt-6 md:sticky md:top-24 md:self-start md:px-6 md:pt-6 lg:px-0 lg:pt-2">
+            <div className="flex items-start justify-between gap-4 md:flex-col md:gap-1">
               <h1 className="text-xl leading-tight">{base}</h1>
               <Price product={product} className="text-base lg:text-sm" />
             </div>
