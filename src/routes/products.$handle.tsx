@@ -105,7 +105,7 @@ function ColorGroup({
               params={{ handle: s.handle }}
               aria-label={label}
               title={label}
-              className={`block size-7 shrink-0 rounded-full ring-1 ring-inset transition-shadow md:size-8 ${
+              className={`block size-8 shrink-0 rounded-full ring-1 ring-inset transition-shadow ${
                 active
                   ? "ring-foreground"
                   : "ring-foreground/15 hover:ring-foreground/50"
