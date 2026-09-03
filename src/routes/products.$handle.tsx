@@ -140,7 +140,12 @@ function ProductPage() {
     catalog: Parameters<typeof relatedProducts>[0];
   };
   const { product, base, colorName, siblings, gallery, sizes, description, fit, material } = detail;
-  const [size, setSize] = useState<string | null>(sizes.length === 1 ? sizes[0]! : null);
+  const [size, setSize] = useState<string | null>(() => {
+    if (sizes.length !== 1) return null;
+    const only = sizes[0]!;
+    const v = product.variants.find((x) => x.size === only);
+    return !v || v.available ? only : null;
+  });
   const related = relatedProducts(catalog, product, 2);
   const pair = findPair(catalog, product);
   const addItem = useCartStore((s) => s.addItem);
