@@ -176,13 +176,13 @@ function ProductPage() {
           <span className="text-foreground">{base}</span>
         </nav>
 
-        <div className="grid grid-cols-1 gap-0 md:grid-cols-[1fr_340px] md:gap-6 md:px-6 lg:grid-cols-[1fr_420px] lg:gap-10">
+        <div className="grid grid-cols-1 gap-0 md:grid-cols-[1fr_400px] md:gap-8 md:px-6 lg:grid-cols-[1fr_460px] lg:gap-10">
           {/* Gallery - swipeable single column on mobile/tablet, 2-up grid on desktop */}
-          <div className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-auto md:mr-4 md:self-start md:grid md:max-w-[440px] md:grid-cols-2 md:gap-1 md:overflow-visible">
+          <div className="flex snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:grid lg:grid-cols-2 lg:gap-1 lg:overflow-visible">
             {gallery.map((src, i) => (
               <div
                 key={src + i}
-                className="image-bg aspect-[3/4] w-full shrink-0 snap-center md:w-auto md:shrink"
+                className="image-bg aspect-[3/4] w-full shrink-0 snap-center lg:w-auto lg:shrink"
               >
                 <img
                   src={src}
