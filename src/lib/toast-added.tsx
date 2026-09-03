@@ -1,7 +1,7 @@
 import { toast } from "sonner";
 import { ShoppingBag, Check } from "lucide-react";
 import { useCartStore } from "@/lib/cart-store";
-import { openBagFlyout } from "@/lib/bag-events";
+import { openBagFlyout, isBagFlyoutOpen } from "@/lib/bag-events";
 
 function AddedToast({
   description,
