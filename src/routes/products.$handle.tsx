@@ -140,7 +140,12 @@ function ProductPage() {
     catalog: Parameters<typeof relatedProducts>[0];
   };
   const { product, base, colorName, siblings, gallery, sizes, description, fit, material } = detail;
-  const [size, setSize] = useState<string | null>(sizes.length === 1 ? sizes[0]! : null);
+  const [size, setSize] = useState<string | null>(() => {
+    if (sizes.length !== 1) return null;
+    const only = sizes[0]!;
+    const v = product.variants.find((x) => x.size === only);
+    return !v || v.available ? only : null;
+  });
   const related = relatedProducts(catalog, product, 2);
   const pair = findPair(catalog, product);
   const addItem = useCartStore((s) => s.addItem);
@@ -241,7 +246,7 @@ function ProductPage() {
                     type="button"
                     disabled={v ? !v.available : false}
                     onClick={() => setSize(s)}
-                    className={`flex-1 border px-3 py-2 text-xs uppercase transition-colors disabled:cursor-not-allowed disabled:line-through disabled:opacity-35 ${
+                    className={`flex-1 border px-3 py-2 text-xs uppercase transition-colors disabled:cursor-not-allowed disabled:line-through disabled:border-border disabled:bg-transparent disabled:text-foreground disabled:opacity-35 ${
                       size === s
                         ? "border-foreground bg-foreground text-background"
                         : "border-border hover:border-foreground"
