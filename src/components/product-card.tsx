@@ -215,7 +215,7 @@ function Gallery({
             <ChevronRight className="size-4" strokeWidth={1.5} />
           </button>
           <div className="pointer-events-none absolute inset-x-0 bottom-2 flex items-center justify-center gap-1">
-            {images.map((_, i) => (
+            {images.slice(0, 3).map((_, i) => (
               <span
                 key={i}
                 className={`size-1 rounded-full transition-colors ${
