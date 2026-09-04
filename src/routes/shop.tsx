@@ -358,11 +358,11 @@ function Shop() {
       <SiteHeader />
 
       <main>
-        <section className="mx-auto box-border max-w-[1440px] px-4 pt-10 pb-8 md:px-8 md:pt-12">
+        <section className="mx-auto box-border max-w-[1440px] px-4 pt-10 pb-14 md:px-8 md:pt-12">
           {/* Collection navigation - one row, same font; active collection is larger with its count */}
           <nav
             aria-label="Collections"
-            className="display flex h-[44px] items-end gap-x-4 gap-y-2 overflow-x-auto whitespace-nowrap pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:h-[80px] md:gap-x-5"
+            className="display flex h-[44px] items-end gap-x-4 gap-y-2 overflow-x-auto whitespace-nowrap pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:h-[80px] md:gap-x-8"
           >
             {COLLECTIONS.map((col) => {
               const active = col.key === c;
