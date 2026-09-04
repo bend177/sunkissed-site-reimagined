@@ -555,7 +555,7 @@ function Shop() {
                 >
                   <span
                     className="grid size-full gap-[1px]"
-                    style={{ gridTemplateColumns: `repeat(${n}, 1fr)`, gridTemplateRows: "repeat(2, 1fr)` }}
+                    style={{ gridTemplateColumns: `repeat(${n}, 1fr)`, gridTemplateRows: "repeat(2, 1fr)" }}
                   >
                     {Array.from({ length: n * 2 }).map((_, i) => (
                       <span key={i} className="bg-foreground" />
