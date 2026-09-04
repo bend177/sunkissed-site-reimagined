@@ -128,15 +128,14 @@ function Home() {
                 className="size-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/45 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 p-6 md:p-10">
-                <h2 className="display text-5xl leading-[0.95] text-background md:text-6xl">
-                  {block.title}
-                </h2>
+              <h2 className="display absolute left-0 top-0 m-6 text-5xl leading-[0.95] text-background md:m-10 md:text-6xl">
+                {block.title}
+              </h2>
+              <div className="absolute inset-x-0 bottom-0 flex justify-end p-6 md:p-10">
                 <span className="pb-1 text-sm capitalize text-background md:text-base">
                   shop now <span aria-hidden="true" className="align-middle">&rarr;</span>
                 </span>
               </div>
-
             </Link>
           ))}
         </section>
