@@ -173,13 +173,13 @@ function CartPage() {
 
             {/* Summary */}
 
-            <div className="mt-8 lg:flex lg:justify-end">
-              <div className="w-full lg:max-w-[420px]">
-                <div className="flex items-center justify-between border-b border-border pb-3 text-[14px]">
+            <div className="mt-6 lg:flex lg:justify-end">
+              <div className="w-full lg:max-w-[380px]">
+                <div className="flex items-center justify-between border-b border-border pb-2.5 text-[12px]">
                   <span>Subtotal</span>
                   <span>{money(cartTotal)}</span>
                 </div>
-                <p className="mt-3 text-[12px] text-muted-foreground">
+                <p className="mt-2.5 text-[11px] text-muted-foreground">
                   Taxes and{" "}
                   <span className="text-foreground underline underline-offset-4">shipping</span>{" "}
                   calculated at checkout
@@ -187,16 +187,16 @@ function CartPage() {
                 <button
                   type="button"
                   onClick={checkout}
-                  className="mt-4 w-full bg-ink py-3 text-[11px] uppercase tracking-[0.18em] text-background"
+                  className="mt-3 w-full bg-ink py-2.5 text-[10px] uppercase tracking-[0.18em] text-background"
                 >
                   Proceed to checkout
                 </button>
-                <ApplePayButton onClick={checkout} className="mt-2.5" />
+                <ApplePayButton onClick={checkout} className="mt-2" />
 
                 <Link
                   to="/shop"
                   search={{ c: "all" }}
-                  className="mt-3 block text-center text-[12px] underline underline-offset-4"
+                  className="mt-2.5 block text-center text-[11px] underline underline-offset-4"
                 >
                   Continue shopping
                 </Link>
