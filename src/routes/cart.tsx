@@ -51,21 +51,7 @@ function CartPage() {
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
 
-      <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-4 lg:py-6">
-        <div className="mx-auto w-full max-w-[640px]">
-          <div className="h-[2px] w-full bg-border">
-            <div
-              className="h-full bg-ink transition-[width] duration-500"
-              style={{ width: `${progress * 100}%` }}
-            />
-          </div>
-          <p className="mt-2 text-center text-[9px] uppercase tracking-[0.1em]">
-            {remaining === 0
-              ? "You qualify for free shipping!"
-              : `${money(remaining)} away from free shipping`}
-          </p>
-        </div>
-
+      <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-4 lg:py-8">
         {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center py-12">
             <p className="text-sm text-muted-foreground">Your bag is empty</p>
@@ -78,10 +64,11 @@ function CartPage() {
             </Link>
           </div>
         ) : (
-          <div className="mt-6 lg:grid lg:grid-cols-[1fr_360px] lg:gap-10 lg:items-start">
+          <div className="mt-2 lg:grid lg:grid-cols-[1fr_360px] lg:gap-12 lg:items-start">
             {/* Left column: items + complete the set */}
             <div>
-              <h1 className="text-[18px] leading-none lg:text-[22px]">Your Bag</h1>
+              <h1 className="font-serif text-[24px] leading-none lg:text-[30px]">Your Bag</h1>
+              <div className="mt-3 h-px w-full bg-foreground" />
               {/* Column headers (desktop) */}
               <div className="hidden border-b border-border pb-1.5 text-[9px] uppercase tracking-[0.12em] text-muted-foreground lg:mt-4 lg:grid lg:grid-cols-[1fr_90px_150px_90px]">
                 <span>Product</span>
@@ -174,10 +161,26 @@ function CartPage() {
             </div>
 
             {/* Right column: sticky summary */}
-            <div className="mt-6 lg:sticky lg:top-6 lg:mt-0 lg:border lg:border-border lg:bg-[oklch(0.97_0_0)] lg:p-5">
-              <h2 className="text-[18px] leading-none lg:text-[20px]">Summary</h2>
+            <div className="mt-6 lg:sticky lg:top-8 lg:mt-0 lg:border lg:border-border lg:bg-[oklch(0.97_0_0)] lg:p-6">
+              <h2 className="font-serif text-[24px] leading-none lg:text-[30px]">Summary</h2>
+              <div className="mt-3 h-px w-full bg-foreground" />
 
-              <div className="mt-3 flex items-center justify-between border-y border-border py-3 text-[15px] font-medium">
+              {/* Shipping progress */}
+              <div className="mt-4">
+                <div className="h-[3px] w-full bg-border">
+                  <div
+                    className="h-full bg-ink transition-[width] duration-500"
+                    style={{ width: `${progress * 100}%` }}
+                  />
+                </div>
+                <p className="mt-2 text-center text-[9px] uppercase tracking-[0.1em]">
+                  {remaining === 0
+                    ? "You qualify for free shipping!"
+                    : `${money(remaining)} away from free shipping`}
+                </p>
+              </div>
+
+              <div className="mt-4 flex items-center justify-between border-y border-border py-3 text-[15px] font-medium">
                 <span>Subtotal</span>
                 <span>{money(cartTotal)}</span>
               </div>
