@@ -18,10 +18,10 @@ const FREE_SHIPPING_THRESHOLD = 100;
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Cart - Sunkissed" },
-      { name: "description", content: "Review the items in your Sunkissed cart and check out." },
-      { property: "og:title", content: "Your Cart - Sunkissed" },
-      { property: "og:description", content: "Review the items in your Sunkissed cart and check out." },
+      { title: "Your Bag - Sunkissed" },
+      { name: "description", content: "Review the items in your Sunkissed bag and check out." },
+      { property: "og:title", content: "Your Bag - Sunkissed" },
+      { property: "og:description", content: "Review the items in your Sunkissed bag and check out." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
