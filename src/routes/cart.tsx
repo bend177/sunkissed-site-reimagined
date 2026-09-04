@@ -227,19 +227,19 @@ function Stepper({
         aria-label="Decrease quantity"
         disabled={disabled}
         onClick={() => onChange(quantity - 1)}
-        className="px-2 text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
+        className="px-1.5 text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
       >
-        <Minus className="size-3.5" strokeWidth={1.5} />
+        <Minus className="size-3" strokeWidth={1.5} />
       </button>
-      <span className="min-w-7 text-center text-[13px]">{quantity}</span>
+      <span className="min-w-6 text-center text-[11px]">{quantity}</span>
       <button
         type="button"
         aria-label="Increase quantity"
         disabled={disabled}
         onClick={() => onChange(quantity + 1)}
-        className="px-2 text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
+        className="px-1.5 text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
       >
-        <Plus className="size-3.5" strokeWidth={1.5} />
+        <Plus className="size-3" strokeWidth={1.5} />
       </button>
     </div>
   );
