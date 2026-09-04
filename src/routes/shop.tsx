@@ -543,6 +543,24 @@ function Shop() {
                   ))}
                 </button>
               ))}
+              {/* Hide-titles toggle lives inside the two-lines group so it
+                  never reads as a separate icon that pops in. Always visible;
+                  only active when 2-per-row is selected (1-per-row keeps titles). */}
+              <button
+                type="button"
+                aria-label={showTitles ? "Hide titles" : "Show titles"}
+                onClick={() => setShowTitles((v) => !v)}
+                disabled={mobileCols !== 2}
+                className={`flex h-3.5 items-center justify-center lg:hidden ${
+                  mobileCols !== 2
+                    ? "opacity-20"
+                    : showTitles
+                      ? "opacity-30"
+                      : "opacity-100"
+                }`}
+              >
+                <LayoutGrid className="size-3.5" strokeWidth={1.75} />
+              </button>
             </div>
             <button
               type="button"
@@ -559,16 +577,6 @@ function Shop() {
                 />
               ))}
             </button>
-            {mobileCols === 2 && (
-              <button
-                type="button"
-                aria-label={showTitles ? "Hide titles" : "Show titles"}
-                onClick={() => setShowTitles((v) => !v)}
-                className={`flex h-3.5 items-center justify-center lg:hidden ${showTitles ? "opacity-30" : "opacity-100"}`}
-              >
-                <LayoutGrid className="size-3.5" strokeWidth={1.75} />
-              </button>
-            )}
           </div>
 
           <div className="flex shrink-0 items-center gap-3 md:gap-4">
