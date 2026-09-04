@@ -389,7 +389,7 @@ function Shop() {
           </nav>
 
           {subs.length > 0 && (
-            <div className="mt-4 flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="mt-4 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {subs.map((s) => (
                 <button
                   key={s.label}
