@@ -80,127 +80,148 @@ function CartPage() {
             </Link>
           </div>
         ) : (
-          <div className="mt-6">
-            {/* Column headers (desktop) */}
-            <div className="hidden border-b border-border pb-1.5 text-[9px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_120px_180px_120px]">
-              <span>Product</span>
-              <span>Price</span>
-              <span>Quantity</span>
-              <span className="text-right">Total</span>
-            </div>
+          <div className="mt-6 lg:grid lg:grid-cols-[1fr_360px] lg:gap-10 lg:items-start">
+            {/* Left column: items + complete the set */}
+            <div>
+              {/* Column headers (desktop) */}
+              <div className="hidden border-b border-border pb-1.5 text-[9px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_90px_150px_90px]">
+                <span>Product</span>
+                <span>Price</span>
+                <span>Quantity</span>
+                <span className="text-right">Total</span>
+              </div>
 
-            <div className="divide-y divide-border border-b border-border lg:divide-y-0">
-              {items.map((item) => (
-                <div
-                  key={item.variantId}
-                  className="flex gap-2.5 py-3 lg:grid lg:grid-cols-[1fr_120px_180px_120px] lg:items-center lg:gap-0 lg:border-b lg:border-border"
-                >
-                  <div className="flex min-w-0 flex-1 gap-2.5 lg:flex-none">
-                    <Link
-                      to="/products/$handle"
-                      params={{ handle: item.handle }}
-                      className="shrink-0"
-                    >
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="image-bg h-[90px] w-[68px] object-cover lg:h-[130px] lg:w-[98px]"
-                      />
-                    </Link>
-                    <div className="min-w-0 flex-1">
+              <div className="divide-y divide-border border-b border-border lg:divide-y-0">
+                {items.map((item) => (
+                  <div
+                    key={item.variantId}
+                    className="flex gap-2.5 py-3 lg:grid lg:grid-cols-[1fr_90px_150px_90px] lg:items-center lg:gap-0 lg:border-b lg:border-border"
+                  >
+                    <div className="flex min-w-0 flex-1 gap-2.5 lg:flex-none">
                       <Link
                         to="/products/$handle"
                         params={{ handle: item.handle }}
-                        className="text-[12px] leading-snug hover:underline underline-offset-4"
+                        className="shrink-0"
                       >
-                        {item.title}
-                      </Link>
-                      <p className="mt-1.5 text-[11px] text-muted-foreground">
-                        <span className="uppercase tracking-[0.06em]">Size:</span>{" "}
-                        <span className="text-foreground">{item.size}</span>
-                      </p>
-
-                      {/* Mobile price + stepper */}
-                      <div className="mt-2.5 flex items-center gap-4 lg:hidden">
-                        <span className="text-[11px]">{money(Number(item.price))}</span>
-                        <Stepper
-                          quantity={item.quantity}
-                          disabled={isLoading}
-                          onChange={(q) => updateQuantity(item.variantId, q)}
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="image-bg h-[90px] w-[68px] object-cover lg:h-[120px] lg:w-[90px]"
                         />
-                        <button
-                          type="button"
-                          aria-label="Remove item"
-                          disabled={isLoading}
-                          onClick={() => removeItem(item.variantId)}
-                          className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
+                      </Link>
+                      <div className="min-w-0 flex-1">
+                        <Link
+                          to="/products/$handle"
+                          params={{ handle: item.handle }}
+                          className="text-[12px] leading-snug hover:underline underline-offset-4"
                         >
-                          <X className="size-3.5" strokeWidth={1.25} />
-                        </button>
+                          {item.title}
+                        </Link>
+                        <p className="mt-1.5 text-[11px] text-muted-foreground">
+                          <span className="uppercase tracking-[0.06em]">Size:</span>{" "}
+                          <span className="text-foreground">{item.size}</span>
+                        </p>
+
+                        {/* Mobile price + stepper */}
+                        <div className="mt-2.5 flex items-center gap-4 lg:hidden">
+                          <span className="text-[11px]">{money(Number(item.price))}</span>
+                          <Stepper
+                            quantity={item.quantity}
+                            disabled={isLoading}
+                            onChange={(q) => updateQuantity(item.variantId, q)}
+                          />
+                          <button
+                            type="button"
+                            aria-label="Remove item"
+                            disabled={isLoading}
+                            onClick={() => removeItem(item.variantId)}
+                            className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
+                          >
+                            <X className="size-3.5" strokeWidth={1.25} />
+                          </button>
+                        </div>
                       </div>
                     </div>
+
+                    <span className="hidden text-[11px] lg:block">
+                      {money(Number(item.price))}
+                    </span>
+
+                    <div className="hidden items-center gap-3 lg:flex">
+                      <Stepper
+                        quantity={item.quantity}
+                        disabled={isLoading}
+                        onChange={(q) => updateQuantity(item.variantId, q)}
+                      />
+                      <button
+                        type="button"
+                        aria-label="Remove item"
+                        disabled={isLoading}
+                        onClick={() => removeItem(item.variantId)}
+                        className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
+                      >
+                        <X className="size-3" strokeWidth={1.25} />
+                      </button>
+                    </div>
+
+                    <span className="hidden text-right text-[11px] lg:block">
+                      {money(Number(item.price) * item.quantity)}
+                    </span>
                   </div>
+                ))}
+              </div>
 
-                  <span className="hidden text-[11px] lg:block">
-                    {money(Number(item.price))}
-                  </span>
-
-                  <div className="hidden items-center gap-3 lg:flex">
-                    <Stepper
-                      quantity={item.quantity}
-                      disabled={isLoading}
-                      onChange={(q) => updateQuantity(item.variantId, q)}
-                    />
-                    <button
-                      type="button"
-                      aria-label="Remove item"
-                      disabled={isLoading}
-                      onClick={() => removeItem(item.variantId)}
-                      className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
-                    >
-                      <X className="size-3" strokeWidth={1.25} />
-                    </button>
-                  </div>
-
-                  <span className="hidden text-right text-[11px] lg:block">
-                    {money(Number(item.price) * item.quantity)}
-                  </span>
-                </div>
-              ))}
+              <CompleteTheSet />
             </div>
 
-            <CompleteTheSet />
-
-            {/* Summary */}
-
-            <div className="mt-6 lg:flex lg:justify-end">
-              <div className="w-full lg:max-w-[380px]">
-                <div className="flex items-center justify-between border-b border-border pb-2.5 text-[12px]">
-                  <span>Subtotal</span>
-                  <span>{money(cartTotal)}</span>
-                </div>
-                <p className="mt-2.5 text-[11px] text-muted-foreground">
-                  Taxes and{" "}
-                  <span className="text-foreground underline underline-offset-4">shipping</span>{" "}
-                  calculated at checkout
-                </p>
-                <button
-                  type="button"
-                  onClick={checkout}
-                  className="mt-3 w-full bg-ink py-2.5 text-[10px] uppercase tracking-[0.18em] text-background"
-                >
-                  Proceed to checkout
-                </button>
-                <ApplePayButton onClick={checkout} className="mt-2" />
-
-                <Link
-                  to="/shop"
-                  search={{ c: "all" }}
-                  className="mt-2.5 block text-center text-[11px] underline underline-offset-4"
-                >
-                  Continue shopping
-                </Link>
+            {/* Right column: sticky summary */}
+            <div className="mt-6 lg:sticky lg:top-6 lg:mt-0">
+              <div className="flex items-center justify-between border-b border-border pb-2.5 text-[12px]">
+                <span>Subtotal</span>
+                <span>{money(cartTotal)}</span>
               </div>
+
+              {/* Promo code */}
+              <div className="mt-3">
+                <label className="text-[9px] uppercase tracking-[0.12em] text-muted-foreground">
+                  Promo code
+                </label>
+                <div className="mt-1.5 flex gap-2">
+                  <input
+                    type="text"
+                    placeholder="Enter code"
+                    className="min-w-0 flex-1 border border-border px-3 py-2 text-[11px] uppercase tracking-[0.08em] outline-none focus:border-foreground"
+                  />
+                  <button
+                    type="button"
+                    className="border border-ink px-4 py-2 text-[10px] uppercase tracking-[0.14em] transition-colors hover:bg-ink hover:text-background"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+
+              <p className="mt-2.5 text-[11px] text-muted-foreground">
+                Taxes and{" "}
+                <span className="text-foreground underline underline-offset-4">shipping</span>{" "}
+                calculated at checkout
+              </p>
+              <button
+                type="button"
+                onClick={checkout}
+                className="mt-3 w-full bg-ink py-2.5 text-[10px] uppercase tracking-[0.18em] text-background"
+              >
+                Proceed to checkout
+              </button>
+              <ApplePayButton onClick={checkout} className="mt-2" />
+
+              <Link
+                to="/shop"
+                search={{ c: "all" }}
+                className="mt-2.5 block text-center text-[11px] underline underline-offset-4"
+              >
+                Continue shopping
+              </Link>
             </div>
           </div>
         )}
