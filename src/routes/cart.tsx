@@ -175,33 +175,35 @@ function CartPage() {
             </div>
 
             {/* Right column: sticky summary */}
-            <div className="mt-6 lg:sticky lg:top-6 lg:mt-0">
-              <div className="flex items-center justify-between border-b border-border pb-2.5 text-[12px]">
+            <div className="mt-6 lg:sticky lg:top-6 lg:mt-0 lg:border lg:border-border lg:bg-[oklch(0.97_0_0)] lg:p-5">
+              <h2 className="text-[13px] font-medium uppercase tracking-[0.14em]">Order Summary</h2>
+
+              <div className="mt-3 flex items-center justify-between border-y border-border py-3 text-[15px] font-medium">
                 <span>Subtotal</span>
                 <span>{money(cartTotal)}</span>
               </div>
 
               {/* Promo code */}
-              <div className="mt-3">
-                <label className="text-[9px] uppercase tracking-[0.12em] text-muted-foreground">
+              <div className="mt-4">
+                <label className="text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
                   Promo code
                 </label>
                 <div className="mt-1.5 flex gap-2">
                   <input
                     type="text"
                     placeholder="Enter code"
-                    className="min-w-0 flex-1 border border-border px-3 py-2 text-[11px] uppercase tracking-[0.08em] outline-none focus:border-foreground"
+                    className="min-w-0 flex-1 border border-border bg-background px-3 py-2.5 text-[11px] uppercase tracking-[0.08em] outline-none focus:border-foreground"
                   />
                   <button
                     type="button"
-                    className="border border-ink px-4 py-2 text-[10px] uppercase tracking-[0.14em] transition-colors hover:bg-ink hover:text-background"
+                    className="border border-ink px-5 py-2.5 text-[10px] uppercase tracking-[0.14em] transition-colors hover:bg-ink hover:text-background"
                   >
                     Apply
                   </button>
                 </div>
               </div>
 
-              <p className="mt-2.5 text-[11px] text-muted-foreground">
+              <p className="mt-3 text-[11px] text-muted-foreground">
                 Taxes and{" "}
                 <span className="text-foreground underline underline-offset-4">shipping</span>{" "}
                 calculated at checkout
@@ -209,7 +211,7 @@ function CartPage() {
               <button
                 type="button"
                 onClick={checkout}
-                className="mt-3 w-full bg-ink py-2.5 text-[10px] uppercase tracking-[0.18em] text-background"
+                className="mt-3 w-full bg-ink py-3.5 text-[11px] uppercase tracking-[0.18em] text-background"
               >
                 Proceed to checkout
               </button>
@@ -218,7 +220,7 @@ function CartPage() {
               <Link
                 to="/shop"
                 search={{ c: "all" }}
-                className="mt-2.5 block text-center text-[11px] underline underline-offset-4"
+                className="mt-3 block text-center text-[11px] underline underline-offset-4"
               >
                 Continue shopping
               </Link>
