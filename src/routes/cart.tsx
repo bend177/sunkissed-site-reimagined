@@ -51,17 +51,17 @@ function CartPage() {
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
 
-      <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-10 lg:py-14">
-        <h1 className="text-center text-[26px] leading-none lg:text-[30px]">Your Bag</h1>
+      <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-6 lg:py-9">
+        <h1 className="text-center text-[22px] leading-none lg:text-[26px]">Your Cart</h1>
 
-        <div className="mx-auto mt-7 w-full max-w-[640px]">
+        <div className="mx-auto mt-5 w-full max-w-[640px]">
           <div className="h-[3px] w-full bg-border">
             <div
               className="h-full bg-ink transition-[width] duration-500"
               style={{ width: `${progress * 100}%` }}
             />
           </div>
-          <p className="mt-3 text-center text-[11px] uppercase tracking-[0.1em]">
+          <p className="mt-2.5 text-center text-[10px] uppercase tracking-[0.1em]">
             {remaining === 0
               ? "You qualify for free shipping!"
               : `${money(remaining)} away from free shipping`}
@@ -69,8 +69,8 @@ function CartPage() {
         </div>
 
         {items.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center py-20">
-            <p className="text-sm text-muted-foreground">Your bag is empty</p>
+          <div className="flex flex-1 flex-col items-center justify-center py-16">
+            <p className="text-sm text-muted-foreground">Your cart is empty</p>
             <Link
               to="/shop"
               search={{ c: "all" }}
