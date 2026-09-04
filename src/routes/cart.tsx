@@ -175,7 +175,7 @@ function CartPage() {
 
             {/* Right column: sticky summary */}
             <div className="mt-6 lg:sticky lg:top-6 lg:mt-0 lg:border lg:border-border lg:bg-[oklch(0.97_0_0)] lg:p-5">
-              <h2 className="text-[13px] font-medium uppercase tracking-[0.14em]">Order Summary</h2>
+              <h2 className="text-[18px] leading-none lg:text-[20px]">Summary</h2>
 
               <div className="mt-3 flex items-center justify-between border-y border-border py-3 text-[15px] font-medium">
                 <span>Subtotal</span>
