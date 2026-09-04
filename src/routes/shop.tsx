@@ -524,33 +524,43 @@ function Shop() {
             <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground md:text-[12px]">
               View
             </span>
-            <div className="flex items-end gap-1 lg:hidden">
+            <div className="flex items-center gap-1.5 lg:hidden">
               {[1, 2].map((n) => (
                 <button
                   key={n}
                   type="button"
                   aria-label={`${n} per row`}
                   onClick={() => setMobileCols(n)}
-                  className={`flex h-3.5 items-end gap-[2px] ${mobileCols === n ? "opacity-100" : "opacity-30"}`}
+                  className={`flex h-3.5 w-3.5 items-center justify-center ${mobileCols === n ? "opacity-100" : "opacity-30"}`}
                 >
-                  {Array.from({ length: n }).map((_, i) => (
-                    <span key={i} className="block h-3.5 w-[3px] bg-foreground" />
-                  ))}
+                  <span
+                    className="grid size-full gap-[1.5px]"
+                    style={{ gridTemplateColumns: `repeat(${n}, 1fr)`, gridTemplateRows: "repeat(2, 1fr)" }}
+                  >
+                    {Array.from({ length: n * 2 }).map((_, i) => (
+                      <span key={i} className="bg-foreground" />
+                    ))}
+                  </span>
                 </button>
               ))}
             </div>
-            <div className="hidden items-end gap-1 lg:flex">
+            <div className="hidden items-center gap-1.5 lg:flex">
               {[3, 4, 6].map((n) => (
                 <button
                   key={n}
                   type="button"
                   aria-label={`${n} per row`}
                   onClick={() => setDesktopCols(n)}
-                  className={`flex h-3.5 items-end gap-[2px] ${desktopCols === n ? "opacity-100" : "opacity-30"}`}
+                  className={`flex h-3.5 w-3.5 items-center justify-center ${desktopCols === n ? "opacity-100" : "opacity-30"}`}
                 >
-                  {Array.from({ length: n }).map((_, i) => (
-                    <span key={i} className="block h-3.5 w-[3px] bg-foreground" />
-                  ))}
+                  <span
+                    className="grid size-full gap-[1px]"
+                    style={{ gridTemplateColumns: `repeat(${n}, 1fr)`, gridTemplateRows: "repeat(2, 1fr)` }}
+                  >
+                    {Array.from({ length: n * 2 }).map((_, i) => (
+                      <span key={i} className="bg-foreground" />
+                    ))}
+                  </span>
                 </button>
               ))}
             </div>
