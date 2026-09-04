@@ -141,7 +141,7 @@ function CartPage() {
                     </div>
                   </div>
 
-                  <span className="hidden text-[12px] lg:block">
+                  <span className="hidden text-[11px] lg:block">
                     {money(Number(item.price))}
                   </span>
 
@@ -158,11 +158,11 @@ function CartPage() {
                       onClick={() => removeItem(item.variantId)}
                       className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
                     >
-                      <X className="size-3.5" strokeWidth={1.25} />
+                      <X className="size-3" strokeWidth={1.25} />
                     </button>
                   </div>
 
-                  <span className="hidden text-right text-[12px] lg:block">
+                  <span className="hidden text-right text-[11px] lg:block">
                     {money(Number(item.price) * item.quantity)}
                   </span>
                 </div>
