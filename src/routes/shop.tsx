@@ -122,7 +122,10 @@ function Shop() {
   const [sort, setSort] = useState<SortKey>("rec");
   const [sortOpen, setSortOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [mobileCols, setMobileCols] = useState(2);
+  const [desktopCols, setDesktopCols] = useState(4);
+  const [showTitles, setShowTitles] = useState(true);
+
   const [printsAll, setPrintsAll] = useState(false);
   const [sub, setSub] = useState<string | null>(null);
 
