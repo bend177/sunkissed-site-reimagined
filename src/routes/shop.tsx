@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, LayoutGrid } from "lucide-react";
 import { useCatalog } from "@/lib/catalog";
 import {
   colorsIn,
@@ -556,10 +556,11 @@ function Shop() {
             </div>
             <button
               type="button"
+              aria-label={showTitles ? "Hide titles" : "Show titles"}
               onClick={() => setShowTitles((v) => !v)}
-              className="text-[11px] underline underline-offset-[3px] hover:opacity-60 lg:hidden"
+              className={`flex h-3.5 items-center justify-center lg:hidden ${showTitles ? "opacity-30" : "opacity-100"}`}
             >
-              {showTitles ? "Hide titles" : "Show titles"}
+              <LayoutGrid className="size-3.5" strokeWidth={1.75} />
             </button>
           </div>
 
