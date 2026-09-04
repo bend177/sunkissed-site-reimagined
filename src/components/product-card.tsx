@@ -282,9 +282,9 @@ export function ProductCard({ product }: { product: Product }) {
             type="button"
             aria-label={`Quick add ${product.title}`}
             onClick={() => setOpen(true)}
-            className="mr-3 flex size-4 shrink-0 items-center justify-center self-center rounded-[4px] border border-foreground text-foreground transition-opacity hover:opacity-70 lg:hidden"
+            className="mr-3 flex size-3.5 shrink-0 items-center justify-center self-center rounded-[4px] border border-foreground text-foreground transition-opacity hover:opacity-70 lg:hidden"
           >
-            <Plus className="size-2.5" strokeWidth={2} />
+            <Plus className="size-2" strokeWidth={2} />
           </button>
           <Price product={product} className="shrink-0 hidden lg:block" />
         </div>
