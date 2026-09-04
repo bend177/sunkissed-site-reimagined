@@ -214,7 +214,7 @@ function Gallery({
           >
             <ChevronRight className="size-4" strokeWidth={1.5} />
           </button>
-          <div className="pointer-events-none absolute inset-x-0 bottom-2 flex items-center justify-center gap-1">
+          <div className="pointer-events-none absolute inset-x-0 bottom-2 flex items-center justify-center gap-1 lg:hidden">
             {images.length > 1 && (
               <>
                 <span

@@ -240,7 +240,7 @@ function Shop() {
   const colorImage = new Map(allColors.map((x) => [x.name, x] as const));
 
   const chip = (on: boolean) =>
-    `eyebrow border px-2.5 py-1.5 text-[10.5px] whitespace-nowrap transition-colors ${
+    `eyebrow border px-3 py-1.5 text-[10.5px] whitespace-nowrap transition-colors ${
       on ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground"
     }`;
 
@@ -358,7 +358,7 @@ function Shop() {
       <SiteHeader />
 
       <main>
-        <section className="mx-auto box-border max-w-[1440px] px-4 pt-8 lg:px-6 md:pt-14">
+        <section className="mx-auto box-border max-w-[1440px] px-4 pt-10 pb-16 md:px-8 md:pt-12">
           {/* Collection navigation - one row, same font; active collection is larger with its count */}
           <nav
             aria-label="Collections"
@@ -373,7 +373,7 @@ function Shop() {
                   search={{ c: col.key }}
                   className={
                     active
-                      ? "shrink-0 text-[38px] leading-[1.05] transition-all duration-300 ease-out md:text-[clamp(48px,5vw,72px)]"
+                      ? "ml-auto shrink-0 text-[38px] leading-[1.05] transition-all duration-300 ease-out md:text-[clamp(48px,5vw,72px)]"
                       : "shrink-0 text-[15px] text-muted-foreground transition-all duration-300 ease-out hover:text-foreground md:text-[17px]"
                   }
                 >
@@ -389,7 +389,7 @@ function Shop() {
           </nav>
 
           {subs.length > 0 && (
-            <div className="mt-4 flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="mt-4 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {subs.map((s) => (
                 <button
                   key={s.label}
@@ -405,7 +405,7 @@ function Shop() {
 
           <div className="mt-4 flex flex-col gap-4">
             {c === "swim" && (
-                 <div className="flex gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                 <div className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                   {(
                     [
                       ["Bikini sets", ["sets"]],
@@ -480,7 +480,7 @@ function Shop() {
         </section>
 
         {/* Filter toolbar */}
-        <div className="mx-auto box-border flex max-w-[1440px] flex-nowrap items-center gap-2 border-y border-border px-4 py-4 md:gap-4 md:px-12 md:py-5">
+        <div className="mx-auto box-border flex max-w-[1440px] flex-nowrap items-center gap-2 border-y border-border px-4 py-5 md:gap-4 md:px-8 md:py-6">
           <div className="flex shrink-0 items-center gap-2 md:gap-3">
             <button
               type="button"
@@ -622,7 +622,7 @@ function Shop() {
           </div>
         )}
 
-        <div className="mx-auto box-border flex max-w-[1440px] items-start gap-9 px-4 pb-16 md:px-12">
+        <div className="mx-auto box-border flex max-w-[1440px] items-start gap-6 px-4 pb-16 md:px-8 lg:gap-9">
           <section
             key={c}
             className={`grid min-w-0 flex-1 gap-x-3 gap-y-5 md:gap-x-4 ${
