@@ -51,17 +51,17 @@ function CartPage() {
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
 
-      <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-6 lg:py-9">
-        <h1 className="text-center text-[22px] leading-none lg:text-[26px]">Your Cart</h1>
+      <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-4 lg:py-6">
+        <h1 className="text-center text-[18px] leading-none lg:text-[22px]">Your Cart</h1>
 
-        <div className="mx-auto mt-5 w-full max-w-[640px]">
-          <div className="h-[3px] w-full bg-border">
+        <div className="mx-auto mt-3.5 w-full max-w-[640px]">
+          <div className="h-[2px] w-full bg-border">
             <div
               className="h-full bg-ink transition-[width] duration-500"
               style={{ width: `${progress * 100}%` }}
             />
           </div>
-          <p className="mt-2.5 text-center text-[10px] uppercase tracking-[0.1em]">
+          <p className="mt-2 text-center text-[9px] uppercase tracking-[0.1em]">
             {remaining === 0
               ? "You qualify for free shipping!"
               : `${money(remaining)} away from free shipping`}
@@ -69,20 +69,20 @@ function CartPage() {
         </div>
 
         {items.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center py-16">
+          <div className="flex flex-1 flex-col items-center justify-center py-12">
             <p className="text-sm text-muted-foreground">Your cart is empty</p>
             <Link
               to="/shop"
               search={{ c: "all" }}
-              className="mt-8 bg-ink px-10 py-4 text-xs uppercase tracking-[0.18em] text-background"
+              className="mt-6 bg-ink px-8 py-3 text-[11px] uppercase tracking-[0.18em] text-background"
             >
               Continue shopping
             </Link>
           </div>
         ) : (
-          <div className="mt-8">
+          <div className="mt-6">
             {/* Column headers (desktop) */}
-            <div className="hidden border-b border-border pb-2 text-[10px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_120px_180px_120px]">
+            <div className="hidden border-b border-border pb-1.5 text-[9px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_120px_180px_120px]">
               <span>Product</span>
               <span>Price</span>
               <span>Quantity</span>
@@ -93,9 +93,9 @@ function CartPage() {
               {items.map((item) => (
                 <div
                   key={item.variantId}
-                  className="flex gap-3 py-4 lg:grid lg:grid-cols-[1fr_120px_180px_120px] lg:items-center lg:gap-0 lg:border-b lg:border-border"
+                  className="flex gap-2.5 py-3 lg:grid lg:grid-cols-[1fr_120px_180px_120px] lg:items-center lg:gap-0 lg:border-b lg:border-border"
                 >
-                  <div className="flex min-w-0 flex-1 gap-3 lg:flex-none">
+                  <div className="flex min-w-0 flex-1 gap-2.5 lg:flex-none">
                     <Link
                       to="/products/$handle"
                       params={{ handle: item.handle }}
@@ -104,25 +104,25 @@ function CartPage() {
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="image-bg h-[108px] w-[82px] object-cover lg:h-[160px] lg:w-[120px]"
+                        className="image-bg h-[90px] w-[68px] object-cover lg:h-[130px] lg:w-[98px]"
                       />
                     </Link>
                     <div className="min-w-0 flex-1">
                       <Link
                         to="/products/$handle"
                         params={{ handle: item.handle }}
-                        className="text-[14px] leading-snug hover:underline underline-offset-4"
+                        className="text-[12px] leading-snug hover:underline underline-offset-4"
                       >
                         {item.title}
                       </Link>
-                      <p className="mt-2 text-[12px] text-muted-foreground">
+                      <p className="mt-1.5 text-[11px] text-muted-foreground">
                         <span className="uppercase tracking-[0.06em]">Size:</span>{" "}
                         <span className="text-foreground">{item.size}</span>
                       </p>
 
                       {/* Mobile price + stepper */}
-                      <div className="mt-3 flex items-center gap-4 lg:hidden">
-                        <span className="text-[12px]">{money(Number(item.price))}</span>
+                      <div className="mt-2.5 flex items-center gap-4 lg:hidden">
+                        <span className="text-[11px]">{money(Number(item.price))}</span>
                         <Stepper
                           quantity={item.quantity}
                           disabled={isLoading}
@@ -141,7 +141,7 @@ function CartPage() {
                     </div>
                   </div>
 
-                  <span className="hidden text-[12px] lg:block">
+                  <span className="hidden text-[11px] lg:block">
                     {money(Number(item.price))}
                   </span>
 
@@ -158,11 +158,11 @@ function CartPage() {
                       onClick={() => removeItem(item.variantId)}
                       className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
                     >
-                      <X className="size-3.5" strokeWidth={1.25} />
+                      <X className="size-3" strokeWidth={1.25} />
                     </button>
                   </div>
 
-                  <span className="hidden text-right text-[12px] lg:block">
+                  <span className="hidden text-right text-[11px] lg:block">
                     {money(Number(item.price) * item.quantity)}
                   </span>
                 </div>
@@ -173,13 +173,13 @@ function CartPage() {
 
             {/* Summary */}
 
-            <div className="mt-8 lg:flex lg:justify-end">
-              <div className="w-full lg:max-w-[420px]">
-                <div className="flex items-center justify-between border-b border-border pb-3 text-[14px]">
+            <div className="mt-6 lg:flex lg:justify-end">
+              <div className="w-full lg:max-w-[380px]">
+                <div className="flex items-center justify-between border-b border-border pb-2.5 text-[12px]">
                   <span>Subtotal</span>
                   <span>{money(cartTotal)}</span>
                 </div>
-                <p className="mt-3 text-[12px] text-muted-foreground">
+                <p className="mt-2.5 text-[11px] text-muted-foreground">
                   Taxes and{" "}
                   <span className="text-foreground underline underline-offset-4">shipping</span>{" "}
                   calculated at checkout
@@ -187,16 +187,16 @@ function CartPage() {
                 <button
                   type="button"
                   onClick={checkout}
-                  className="mt-4 w-full bg-ink py-3 text-[11px] uppercase tracking-[0.18em] text-background"
+                  className="mt-3 w-full bg-ink py-2.5 text-[10px] uppercase tracking-[0.18em] text-background"
                 >
                   Proceed to checkout
                 </button>
-                <ApplePayButton onClick={checkout} className="mt-2.5" />
+                <ApplePayButton onClick={checkout} className="mt-2" />
 
                 <Link
                   to="/shop"
                   search={{ c: "all" }}
-                  className="mt-3 block text-center text-[12px] underline underline-offset-4"
+                  className="mt-2.5 block text-center text-[11px] underline underline-offset-4"
                 >
                   Continue shopping
                 </Link>
@@ -227,19 +227,19 @@ function Stepper({
         aria-label="Decrease quantity"
         disabled={disabled}
         onClick={() => onChange(quantity - 1)}
-        className="px-2 text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
+        className="px-1.5 text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
       >
-        <Minus className="size-3.5" strokeWidth={1.5} />
+        <Minus className="size-3" strokeWidth={1.5} />
       </button>
-      <span className="min-w-7 text-center text-[13px]">{quantity}</span>
+      <span className="min-w-6 text-center text-[11px]">{quantity}</span>
       <button
         type="button"
         aria-label="Increase quantity"
         disabled={disabled}
         onClick={() => onChange(quantity + 1)}
-        className="px-2 text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
+        className="px-1.5 text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
       >
-        <Plus className="size-3.5" strokeWidth={1.5} />
+        <Plus className="size-3" strokeWidth={1.5} />
       </button>
     </div>
   );
