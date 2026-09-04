@@ -18,10 +18,10 @@ const FREE_SHIPPING_THRESHOLD = 100;
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Cart - Sunkissed" },
-      { name: "description", content: "Review the items in your Sunkissed cart and check out." },
-      { property: "og:title", content: "Your Cart - Sunkissed" },
-      { property: "og:description", content: "Review the items in your Sunkissed cart and check out." },
+      { title: "Your Bag - Sunkissed" },
+      { name: "description", content: "Review the items in your Sunkissed bag and check out." },
+      { property: "og:title", content: "Your Bag - Sunkissed" },
+      { property: "og:description", content: "Review the items in your Sunkissed bag and check out." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -52,9 +52,7 @@ function CartPage() {
       <SiteHeader />
 
       <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-4 lg:py-6">
-        <h1 className="text-center text-[18px] leading-none lg:text-[22px]">Your Cart</h1>
-
-        <div className="mx-auto mt-3.5 w-full max-w-[640px]">
+        <div className="mx-auto w-full max-w-[640px]">
           <div className="h-[2px] w-full bg-border">
             <div
               className="h-full bg-ink transition-[width] duration-500"
@@ -70,7 +68,7 @@ function CartPage() {
 
         {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center py-12">
-            <p className="text-sm text-muted-foreground">Your cart is empty</p>
+            <p className="text-sm text-muted-foreground">Your bag is empty</p>
             <Link
               to="/shop"
               search={{ c: "all" }}
@@ -83,8 +81,9 @@ function CartPage() {
           <div className="mt-6 lg:grid lg:grid-cols-[1fr_360px] lg:gap-10 lg:items-start">
             {/* Left column: items + complete the set */}
             <div>
+              <h1 className="text-[18px] leading-none lg:text-[22px]">Your Bag</h1>
               {/* Column headers (desktop) */}
-              <div className="hidden border-b border-border pb-1.5 text-[9px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_90px_150px_90px]">
+              <div className="hidden border-b border-border pb-1.5 text-[9px] uppercase tracking-[0.12em] text-muted-foreground lg:mt-4 lg:grid lg:grid-cols-[1fr_90px_150px_90px]">
                 <span>Product</span>
                 <span>Price</span>
                 <span>Quantity</span>
@@ -176,7 +175,7 @@ function CartPage() {
 
             {/* Right column: sticky summary */}
             <div className="mt-6 lg:sticky lg:top-6 lg:mt-0 lg:border lg:border-border lg:bg-[oklch(0.97_0_0)] lg:p-5">
-              <h2 className="text-[13px] font-medium uppercase tracking-[0.14em]">Order Summary</h2>
+              <h2 className="text-[18px] leading-none lg:text-[20px]">Summary</h2>
 
               <div className="mt-3 flex items-center justify-between border-y border-border py-3 text-[15px] font-medium">
                 <span>Subtotal</span>
