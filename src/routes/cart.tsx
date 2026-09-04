@@ -51,17 +51,17 @@ function CartPage() {
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
 
-      <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-6 lg:py-9">
-        <h1 className="text-center text-[22px] leading-none lg:text-[26px]">Your Cart</h1>
+      <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-4 lg:py-6">
+        <h1 className="text-center text-[18px] leading-none lg:text-[22px]">Your Cart</h1>
 
-        <div className="mx-auto mt-5 w-full max-w-[640px]">
-          <div className="h-[3px] w-full bg-border">
+        <div className="mx-auto mt-3.5 w-full max-w-[640px]">
+          <div className="h-[2px] w-full bg-border">
             <div
               className="h-full bg-ink transition-[width] duration-500"
               style={{ width: `${progress * 100}%` }}
             />
           </div>
-          <p className="mt-2.5 text-center text-[10px] uppercase tracking-[0.1em]">
+          <p className="mt-2 text-center text-[9px] uppercase tracking-[0.1em]">
             {remaining === 0
               ? "You qualify for free shipping!"
               : `${money(remaining)} away from free shipping`}
@@ -69,20 +69,20 @@ function CartPage() {
         </div>
 
         {items.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center py-16">
+          <div className="flex flex-1 flex-col items-center justify-center py-12">
             <p className="text-sm text-muted-foreground">Your cart is empty</p>
             <Link
               to="/shop"
               search={{ c: "all" }}
-              className="mt-8 bg-ink px-10 py-4 text-xs uppercase tracking-[0.18em] text-background"
+              className="mt-6 bg-ink px-8 py-3 text-[11px] uppercase tracking-[0.18em] text-background"
             >
               Continue shopping
             </Link>
           </div>
         ) : (
-          <div className="mt-8">
+          <div className="mt-6">
             {/* Column headers (desktop) */}
-            <div className="hidden border-b border-border pb-2 text-[10px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_120px_180px_120px]">
+            <div className="hidden border-b border-border pb-1.5 text-[9px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_120px_180px_120px]">
               <span>Product</span>
               <span>Price</span>
               <span>Quantity</span>
@@ -93,9 +93,9 @@ function CartPage() {
               {items.map((item) => (
                 <div
                   key={item.variantId}
-                  className="flex gap-3 py-4 lg:grid lg:grid-cols-[1fr_120px_180px_120px] lg:items-center lg:gap-0 lg:border-b lg:border-border"
+                  className="flex gap-2.5 py-3 lg:grid lg:grid-cols-[1fr_120px_180px_120px] lg:items-center lg:gap-0 lg:border-b lg:border-border"
                 >
-                  <div className="flex min-w-0 flex-1 gap-3 lg:flex-none">
+                  <div className="flex min-w-0 flex-1 gap-2.5 lg:flex-none">
                     <Link
                       to="/products/$handle"
                       params={{ handle: item.handle }}
@@ -104,7 +104,7 @@ function CartPage() {
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="image-bg h-[108px] w-[82px] object-cover lg:h-[160px] lg:w-[120px]"
+                        className="image-bg h-[90px] w-[68px] object-cover lg:h-[130px] lg:w-[98px]"
                       />
                     </Link>
                     <div className="min-w-0 flex-1">
