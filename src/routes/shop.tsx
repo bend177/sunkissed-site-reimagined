@@ -622,7 +622,9 @@ function Shop() {
                 ? "md:grid-cols-3"
                 : desktopCols === 4
                   ? "md:grid-cols-3 xl:grid-cols-4"
-                  : "md:grid-cols-4 xl:grid-cols-6"
+                  : desktopCols === 5
+                    ? "md:grid-cols-4 xl:grid-cols-5"
+                    : "md:grid-cols-4 xl:grid-cols-6"
             }`}
           >
             {list.map((p, i) => (
