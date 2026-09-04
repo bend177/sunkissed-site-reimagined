@@ -521,9 +521,6 @@ function Shop() {
           </div>
 
           <div className="mx-auto flex shrink-0 items-center gap-2">
-            <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground md:text-[12px]">
-              View
-            </span>
             <div className="flex items-end gap-1.5 lg:hidden">
               {[1, 2].map((n) => (
                 <button
