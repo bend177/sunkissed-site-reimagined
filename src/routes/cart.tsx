@@ -80,9 +80,9 @@ function CartPage() {
             </Link>
           </div>
         ) : (
-          <div className="mt-12">
+          <div className="mt-8">
             {/* Column headers (desktop) */}
-            <div className="hidden border-b border-border pb-3 text-[11px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_120px_180px_120px]">
+            <div className="hidden border-b border-border pb-2 text-[10px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_120px_180px_120px]">
               <span>Product</span>
               <span>Price</span>
               <span>Quantity</span>
@@ -93,9 +93,9 @@ function CartPage() {
               {items.map((item) => (
                 <div
                   key={item.variantId}
-                  className="flex gap-4 py-6 lg:grid lg:grid-cols-[1fr_120px_180px_120px] lg:items-center lg:gap-0 lg:border-b lg:border-border"
+                  className="flex gap-3 py-4 lg:grid lg:grid-cols-[1fr_120px_180px_120px] lg:items-center lg:gap-0 lg:border-b lg:border-border"
                 >
-                  <div className="flex min-w-0 flex-1 gap-4 lg:flex-none">
+                  <div className="flex min-w-0 flex-1 gap-3 lg:flex-none">
                     <Link
                       to="/products/$handle"
                       params={{ handle: item.handle }}
@@ -104,7 +104,7 @@ function CartPage() {
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="image-bg h-[132px] w-[100px] object-cover lg:h-[200px] lg:w-[150px]"
+                        className="image-bg h-[108px] w-[82px] object-cover lg:h-[160px] lg:w-[120px]"
                       />
                     </Link>
                     <div className="min-w-0 flex-1">
