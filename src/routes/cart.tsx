@@ -52,12 +52,19 @@ function CartPage() {
       <SiteHeader />
 
       <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-4 lg:py-8">
-        {items.length === 0 && (
+        {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center py-12">
             <p className="text-sm text-muted-foreground">Your bag is empty</p>
+            <Link
+              to="/shop"
+              search={{ c: "all" }}
+              className="mt-6 bg-ink px-8 py-3 text-[11px] uppercase tracking-[0.18em] text-background"
+            >
+              Continue shopping
+            </Link>
           </div>
-        )}
-          <div className="mt-6 lg:grid lg:grid-cols-[1fr_360px] lg:gap-10 lg:items-start">
+        ) : (
+          <div className="mt-2 lg:grid lg:grid-cols-[1fr_360px] lg:gap-12 lg:items-start">
             {/* Left column: items + complete the set */}
             <div>
               <h1 className="text-[18px] leading-none lg:text-[22px]">Your Bag</h1>
