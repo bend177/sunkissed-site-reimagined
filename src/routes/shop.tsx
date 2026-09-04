@@ -527,7 +527,10 @@ function Shop() {
                   key={n}
                   type="button"
                   aria-label={`${n} per row`}
-                  onClick={() => setMobileCols(n)}
+                  onClick={() => {
+                    setMobileCols(n);
+                    if (n === 1) setShowTitles(true);
+                  }}
                   className={`flex h-3.5 items-end gap-[2px] ${mobileCols === n ? "opacity-100" : "opacity-30"}`}
                 >
                   {Array.from({ length: n }).map((_, i) => (
