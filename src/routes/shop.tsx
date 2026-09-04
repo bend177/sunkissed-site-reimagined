@@ -524,7 +524,7 @@ function Shop() {
             <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground md:text-[12px]">
               View
             </span>
-            <div className="flex items-end gap-1 lg:hidden">
+            <div className="flex items-end gap-1.5 lg:hidden">
               {[1, 2].map((n) => (
                 <button
                   key={n}
@@ -534,12 +534,17 @@ function Shop() {
                   className={`flex h-3.5 items-end gap-[2px] ${mobileCols === n ? "opacity-100" : "opacity-30"}`}
                 >
                   {Array.from({ length: n }).map((_, i) => (
-                    <span key={i} className="block h-3.5 w-[3px] bg-foreground" />
+                    <span
+                      key={i}
+                      className={`block h-3.5 w-[5px] rounded-[1.5px] ${
+                        mobileCols === n ? "bg-foreground" : "border border-foreground"
+                      }`}
+                    />
                   ))}
                 </button>
               ))}
             </div>
-            <div className="hidden items-end gap-1 lg:flex">
+            <div className="hidden items-end gap-1.5 lg:flex">
               {[3, 4, 6].map((n) => (
                 <button
                   key={n}
@@ -549,7 +554,12 @@ function Shop() {
                   className={`flex h-3.5 items-end gap-[2px] ${desktopCols === n ? "opacity-100" : "opacity-30"}`}
                 >
                   {Array.from({ length: n }).map((_, i) => (
-                    <span key={i} className="block h-3.5 w-[3px] bg-foreground" />
+                    <span
+                      key={i}
+                      className={`block h-3.5 w-[5px] rounded-[1.5px] ${
+                        desktopCols === n ? "bg-foreground" : "border border-foreground"
+                      }`}
+                    />
                   ))}
                 </button>
               ))}
