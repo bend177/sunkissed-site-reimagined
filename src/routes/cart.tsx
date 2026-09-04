@@ -81,8 +81,9 @@ function CartPage() {
           <div className="mt-6 lg:grid lg:grid-cols-[1fr_360px] lg:gap-10 lg:items-start">
             {/* Left column: items + complete the set */}
             <div>
+              <h1 className="text-[18px] leading-none lg:text-[22px]">Your Bag</h1>
               {/* Column headers (desktop) */}
-              <div className="hidden border-b border-border pb-1.5 text-[9px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_90px_150px_90px]">
+              <div className="hidden border-b border-border pb-1.5 text-[9px] uppercase tracking-[0.12em] text-muted-foreground lg:mt-4 lg:grid lg:grid-cols-[1fr_90px_150px_90px]">
                 <span>Product</span>
                 <span>Price</span>
                 <span>Quantity</span>
