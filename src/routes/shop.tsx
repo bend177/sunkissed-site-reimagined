@@ -622,7 +622,7 @@ function Shop() {
           </div>
         )}
 
-        <div className="mx-auto box-border flex max-w-[1440px] items-start gap-9 px-4 pb-16 md:px-12">
+        <div className="mx-auto box-border flex max-w-[1440px] items-start gap-9 px-4 pb-16 md:px-8">
           <section
             key={c}
             className={`grid min-w-0 flex-1 gap-x-3 gap-y-5 md:gap-x-4 ${
