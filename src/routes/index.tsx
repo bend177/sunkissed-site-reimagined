@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
 import { editorial } from "@/data/products";
+import { JustLanded } from "@/components/just-landed";
 import { useCatalog } from "@/lib/catalog";
 
 export const Route = createFileRoute("/")({
@@ -142,19 +143,7 @@ function Home() {
         </section>
 
         {/* Featured products */}
-        <section className="px-4 py-10 md:px-6 md:py-12">
-          <div className="flex items-end justify-between gap-6">
-            <h2 className="display text-4xl md:text-5xl">Just landed</h2>
-            <Link to="/shop" search={{ c: "new" }} className="rule-link text-sm">
-              shop new arrivals
-            </Link>
-          </div>
-          <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-4 md:gap-x-4">
-            {featured.map((p) => (
-              <ProductCard key={p.handle} product={p} />
-            ))}
-          </div>
-        </section>
+        <JustLanded products={featured} />
 
         {/* Towels feature */}
         <section className="relative">
