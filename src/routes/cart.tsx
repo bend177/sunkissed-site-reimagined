@@ -121,8 +121,8 @@ function CartPage() {
                       </p>
 
                       {/* Mobile price + stepper */}
-                      <div className="mt-4 flex items-center gap-4 lg:hidden">
-                        <span className="text-[13px]">{money(Number(item.price))}</span>
+                      <div className="mt-3 flex items-center gap-4 lg:hidden">
+                        <span className="text-[12px]">{money(Number(item.price))}</span>
                         <Stepper
                           quantity={item.quantity}
                           disabled={isLoading}
@@ -135,13 +135,13 @@ function CartPage() {
                           onClick={() => removeItem(item.variantId)}
                           className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
                         >
-                          <X className="size-4" strokeWidth={1.25} />
+                          <X className="size-3.5" strokeWidth={1.25} />
                         </button>
                       </div>
                     </div>
                   </div>
 
-                  <span className="hidden text-[13px] lg:block">
+                  <span className="hidden text-[12px] lg:block">
                     {money(Number(item.price))}
                   </span>
 
@@ -158,11 +158,11 @@ function CartPage() {
                       onClick={() => removeItem(item.variantId)}
                       className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
                     >
-                      <X className="size-4" strokeWidth={1.25} />
+                      <X className="size-3.5" strokeWidth={1.25} />
                     </button>
                   </div>
 
-                  <span className="hidden text-right text-[13px] lg:block">
+                  <span className="hidden text-right text-[12px] lg:block">
                     {money(Number(item.price) * item.quantity)}
                   </span>
                 </div>
