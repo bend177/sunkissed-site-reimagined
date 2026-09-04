@@ -514,7 +514,52 @@ function Shop() {
               </>
             )}
           </div>
-          <div className="ml-auto flex shrink-0 items-center gap-3 md:gap-4">
+
+          <div className="mx-auto flex shrink-0 items-center gap-2">
+            <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground md:text-[12px]">
+              View
+            </span>
+            <div className="flex items-end gap-1 lg:hidden">
+              {[1, 2].map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  aria-label={`${n} per row`}
+                  onClick={() => setMobileCols(n)}
+                  className={`flex h-3.5 items-end gap-[2px] ${mobileCols === n ? "opacity-100" : "opacity-30"}`}
+                >
+                  {Array.from({ length: n }).map((_, i) => (
+                    <span key={i} className="block h-3.5 w-[3px] bg-foreground" />
+                  ))}
+                </button>
+              ))}
+            </div>
+            <div className="hidden items-end gap-1 lg:flex">
+              {[3, 4, 6].map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  aria-label={`${n} per row`}
+                  onClick={() => setDesktopCols(n)}
+                  className={`flex h-3.5 items-end gap-[2px] ${desktopCols === n ? "opacity-100" : "opacity-30"}`}
+                >
+                  {Array.from({ length: n }).map((_, i) => (
+                    <span key={i} className="block h-3.5 w-[3px] bg-foreground" />
+                  ))}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowTitles((v) => !v)}
+              className="text-[11px] underline underline-offset-[3px] hover:opacity-60 lg:hidden"
+            >
+              {showTitles ? "Hide titles" : "Show titles"}
+            </button>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-3 md:gap-4">
+
             <div className="relative">
               <button
                 type="button"
