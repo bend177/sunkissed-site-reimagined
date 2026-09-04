@@ -609,7 +609,15 @@ function Shop() {
         <div className="mx-auto box-border flex max-w-[1440px] items-start gap-9 px-4 pb-16 md:px-12">
           <section
             key={c}
-            className="grid min-w-0 flex-1 grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3 md:gap-x-4 xl:grid-cols-4"
+            className={`grid min-w-0 flex-1 gap-x-3 gap-y-5 md:gap-x-4 ${
+              mobileCols === 1 ? "grid-cols-1" : "grid-cols-2"
+            } ${
+              desktopCols === 3
+                ? "md:grid-cols-3"
+                : desktopCols === 4
+                  ? "md:grid-cols-3 xl:grid-cols-4"
+                  : "md:grid-cols-4 xl:grid-cols-6"
+            }`}
           >
             {list.map((p, i) => (
               <div
@@ -617,9 +625,10 @@ function Shop() {
                 className="collection-in"
                 style={{ animationDelay: `${Math.min(i * 45, 450)}ms` }}
               >
-                <ProductCard product={p} />
+                <ProductCard product={p} showMeta={showTitles} />
               </div>
             ))}
+
             {list.length === 0 && (
               <p className="col-span-full py-10 text-sm text-muted-foreground">
                 Nothing matches those filters yet.
