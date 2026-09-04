@@ -326,7 +326,7 @@ export function SiteHeader() {
                         <div className="px-6">
                           <div className="h-[3px] w-full bg-border">
                             <div
-                              className="h-full bg-ink transition-[width] duration-500"
+                              className="h-full bg-green-600 transition-[width] duration-500"
                               style={{ width: `${Math.min(1, cartTotal / 100) * 100}%` }}
                             />
                           </div>
