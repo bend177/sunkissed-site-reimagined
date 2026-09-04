@@ -161,10 +161,26 @@ function CartPage() {
             </div>
 
             {/* Right column: sticky summary */}
-            <div className="mt-6 lg:sticky lg:top-6 lg:mt-0 lg:border lg:border-border lg:bg-[oklch(0.97_0_0)] lg:p-5">
-              <h2 className="text-[18px] leading-none lg:text-[20px]">Summary</h2>
+            <div className="mt-6 lg:sticky lg:top-8 lg:mt-0 lg:border lg:border-border lg:bg-[oklch(0.97_0_0)] lg:p-6">
+              <h2 className="font-serif text-[24px] leading-none lg:text-[30px]">Summary</h2>
+              <div className="mt-3 h-px w-full bg-foreground" />
 
-              <div className="mt-3 flex items-center justify-between border-y border-border py-3 text-[15px] font-medium">
+              {/* Shipping progress */}
+              <div className="mt-4">
+                <div className="h-[3px] w-full bg-border">
+                  <div
+                    className="h-full bg-ink transition-[width] duration-500"
+                    style={{ width: `${progress * 100}%` }}
+                  />
+                </div>
+                <p className="mt-2 text-center text-[9px] uppercase tracking-[0.1em]">
+                  {remaining === 0
+                    ? "You qualify for free shipping!"
+                    : `${money(remaining)} away from free shipping`}
+                </p>
+              </div>
+
+              <div className="mt-4 flex items-center justify-between border-y border-border py-3 text-[15px] font-medium">
                 <span>Subtotal</span>
                 <span>{money(cartTotal)}</span>
               </div>
