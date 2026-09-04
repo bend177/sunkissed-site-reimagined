@@ -524,6 +524,26 @@ function Shop() {
             <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground md:text-[12px]">
               View
             </span>
+            <div className="flex items-end gap-1.5 lg:hidden">
+              {[1, 2].map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  aria-label={`${n} per row`}
+                  onClick={() => setMobileCols(n)}
+                  className={`flex h-3.5 items-end gap-[2px] ${mobileCols === n ? "opacity-100" : "opacity-30"}`}
+                >
+                  {Array.from({ length: n }).map((_, i) => (
+                    <span
+                      key={i}
+                      className={`block h-3.5 w-[5px] rounded-[1.5px] ${
+                        mobileCols === n ? "bg-foreground" : "border border-foreground"
+                      }`}
+                    />
+                  ))}
+                </button>
+              ))}
+            </div>
             <button
               type="button"
               aria-label={`${desktopCols} per row`}
@@ -541,36 +561,11 @@ function Shop() {
             </button>
             <button
               type="button"
-              aria-label={
-                !showTitles
-                  ? "Grid view, titles hidden"
-                  : mobileCols === 2
-                    ? "Two per row"
-                    : "One per row"
-              }
-              onClick={() => {
-                if (!showTitles) {
-                  setShowTitles(true);
-                  setMobileCols(2);
-                } else if (mobileCols === 2) {
-                  setMobileCols(1);
-                } else {
-                  setShowTitles(false);
-                  setMobileCols(2);
-                }
-              }}
-              className="flex h-3.5 items-end justify-center lg:hidden"
+              aria-label={showTitles ? "Hide titles" : "Show titles"}
+              onClick={() => setShowTitles((v) => !v)}
+              className={`flex h-3.5 items-center justify-center lg:hidden ${showTitles ? "opacity-30" : "opacity-100"}`}
             >
-              {!showTitles ? (
-                <LayoutGrid className="size-3.5" strokeWidth={1.75} />
-              ) : (
-                Array.from({ length: mobileCols }).map((_, i) => (
-                  <span
-                    key={i}
-                    className="block h-3.5 w-[5px] rounded-[1.5px] bg-foreground"
-                  />
-                ))
-              )}
+              <LayoutGrid className="size-3.5" strokeWidth={1.75} />
             </button>
           </div>
 
