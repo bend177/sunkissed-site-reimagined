@@ -18,10 +18,10 @@ const FREE_SHIPPING_THRESHOLD = 100;
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Bag - Sunkissed" },
-      { name: "description", content: "Review the items in your Sunkissed bag and check out." },
-      { property: "og:title", content: "Your Bag - Sunkissed" },
-      { property: "og:description", content: "Review the items in your Sunkissed bag and check out." },
+      { title: "Your Cart - Sunkissed" },
+      { name: "description", content: "Review the items in your Sunkissed cart and check out." },
+      { property: "og:title", content: "Your Cart - Sunkissed" },
+      { property: "og:description", content: "Review the items in your Sunkissed cart and check out." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -51,17 +51,17 @@ function CartPage() {
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
 
-      <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-10 lg:py-14">
-        <h1 className="text-center text-[26px] leading-none lg:text-[30px]">Your Bag</h1>
+      <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-6 lg:py-9">
+        <h1 className="text-center text-[22px] leading-none lg:text-[26px]">Your Cart</h1>
 
-        <div className="mx-auto mt-7 w-full max-w-[640px]">
+        <div className="mx-auto mt-5 w-full max-w-[640px]">
           <div className="h-[3px] w-full bg-border">
             <div
               className="h-full bg-ink transition-[width] duration-500"
               style={{ width: `${progress * 100}%` }}
             />
           </div>
-          <p className="mt-3 text-center text-[11px] uppercase tracking-[0.1em]">
+          <p className="mt-2.5 text-center text-[10px] uppercase tracking-[0.1em]">
             {remaining === 0
               ? "You qualify for free shipping!"
               : `${money(remaining)} away from free shipping`}
@@ -69,8 +69,8 @@ function CartPage() {
         </div>
 
         {items.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center py-20">
-            <p className="text-sm text-muted-foreground">Your bag is empty</p>
+          <div className="flex flex-1 flex-col items-center justify-center py-16">
+            <p className="text-sm text-muted-foreground">Your cart is empty</p>
             <Link
               to="/shop"
               search={{ c: "all" }}
@@ -80,9 +80,9 @@ function CartPage() {
             </Link>
           </div>
         ) : (
-          <div className="mt-12">
+          <div className="mt-8">
             {/* Column headers (desktop) */}
-            <div className="hidden border-b border-border pb-3 text-[11px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_120px_180px_120px]">
+            <div className="hidden border-b border-border pb-2 text-[10px] uppercase tracking-[0.12em] text-muted-foreground lg:grid lg:grid-cols-[1fr_120px_180px_120px]">
               <span>Product</span>
               <span>Price</span>
               <span>Quantity</span>
@@ -93,9 +93,9 @@ function CartPage() {
               {items.map((item) => (
                 <div
                   key={item.variantId}
-                  className="flex gap-4 py-6 lg:grid lg:grid-cols-[1fr_120px_180px_120px] lg:items-center lg:gap-0 lg:border-b lg:border-border"
+                  className="flex gap-3 py-4 lg:grid lg:grid-cols-[1fr_120px_180px_120px] lg:items-center lg:gap-0 lg:border-b lg:border-border"
                 >
-                  <div className="flex min-w-0 flex-1 gap-4 lg:flex-none">
+                  <div className="flex min-w-0 flex-1 gap-3 lg:flex-none">
                     <Link
                       to="/products/$handle"
                       params={{ handle: item.handle }}
@@ -104,7 +104,7 @@ function CartPage() {
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="image-bg h-[132px] w-[100px] object-cover lg:h-[200px] lg:w-[150px]"
+                        className="image-bg h-[108px] w-[82px] object-cover lg:h-[160px] lg:w-[120px]"
                       />
                     </Link>
                     <div className="min-w-0 flex-1">
@@ -121,8 +121,8 @@ function CartPage() {
                       </p>
 
                       {/* Mobile price + stepper */}
-                      <div className="mt-4 flex items-center gap-4 lg:hidden">
-                        <span className="text-[13px]">{money(Number(item.price))}</span>
+                      <div className="mt-3 flex items-center gap-4 lg:hidden">
+                        <span className="text-[12px]">{money(Number(item.price))}</span>
                         <Stepper
                           quantity={item.quantity}
                           disabled={isLoading}
@@ -135,13 +135,13 @@ function CartPage() {
                           onClick={() => removeItem(item.variantId)}
                           className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
                         >
-                          <X className="size-4" strokeWidth={1.25} />
+                          <X className="size-3.5" strokeWidth={1.25} />
                         </button>
                       </div>
                     </div>
                   </div>
 
-                  <span className="hidden text-[13px] lg:block">
+                  <span className="hidden text-[12px] lg:block">
                     {money(Number(item.price))}
                   </span>
 
@@ -158,11 +158,11 @@ function CartPage() {
                       onClick={() => removeItem(item.variantId)}
                       className="text-muted-foreground transition-colors hover:text-foreground disabled:opacity-40"
                     >
-                      <X className="size-4" strokeWidth={1.25} />
+                      <X className="size-3.5" strokeWidth={1.25} />
                     </button>
                   </div>
 
-                  <span className="hidden text-right text-[13px] lg:block">
+                  <span className="hidden text-right text-[12px] lg:block">
                     {money(Number(item.price) * item.quantity)}
                   </span>
                 </div>
@@ -173,13 +173,13 @@ function CartPage() {
 
             {/* Summary */}
 
-            <div className="mt-10 lg:flex lg:justify-end">
+            <div className="mt-8 lg:flex lg:justify-end">
               <div className="w-full lg:max-w-[420px]">
-                <div className="flex items-center justify-between border-b border-border pb-4 text-[16px]">
+                <div className="flex items-center justify-between border-b border-border pb-3 text-[14px]">
                   <span>Subtotal</span>
                   <span>{money(cartTotal)}</span>
                 </div>
-                <p className="mt-4 text-[13px] text-muted-foreground">
+                <p className="mt-3 text-[12px] text-muted-foreground">
                   Taxes and{" "}
                   <span className="text-foreground underline underline-offset-4">shipping</span>{" "}
                   calculated at checkout
@@ -187,7 +187,7 @@ function CartPage() {
                 <button
                   type="button"
                   onClick={checkout}
-                  className="mt-5 w-full bg-ink py-4 text-xs uppercase tracking-[0.18em] text-background"
+                  className="mt-4 w-full bg-ink py-3 text-[11px] uppercase tracking-[0.18em] text-background"
                 >
                   Proceed to checkout
                 </button>
@@ -196,7 +196,7 @@ function CartPage() {
                 <Link
                   to="/shop"
                   search={{ c: "all" }}
-                  className="mt-4 block text-center text-[13px] underline underline-offset-4"
+                  className="mt-3 block text-center text-[12px] underline underline-offset-4"
                 >
                   Continue shopping
                 </Link>
