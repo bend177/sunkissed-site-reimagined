@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { ProductCard } from "@/components/product-card";
 import { editorial } from "@/data/products";
 import { JustLanded } from "@/components/just-landed";
 import { useCatalog } from "@/lib/catalog";
