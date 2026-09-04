@@ -480,7 +480,7 @@ function Shop() {
         </section>
 
         {/* Filter toolbar */}
-        <div className="mx-auto box-border flex max-w-[1440px] flex-nowrap items-center gap-2 px-4 pb-5 pt-6 md:gap-4 md:px-12 md:pb-6 md:pt-11">
+        <div className="mx-auto box-border flex max-w-[1440px] flex-nowrap items-center gap-2 border-y border-border px-4 py-4 md:gap-4 md:px-12 md:py-5">
           <div className="flex shrink-0 items-center gap-2 md:gap-3">
             <button
               type="button"
