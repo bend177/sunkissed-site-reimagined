@@ -557,7 +557,7 @@ function Shop() {
             <button
               type="button"
               aria-label={showTitles ? "Hide titles" : "Show titles"}
-              onClick={() => setShowTitles((v) => !v}
+              onClick={() => setShowTitles((v) => !v)}
               className={`flex h-3.5 items-center justify-center lg:hidden ${showTitles ? "opacity-30" : "opacity-100"}`}
             >
               <LayoutGrid className="size-3.5" strokeWidth={1.75} />
