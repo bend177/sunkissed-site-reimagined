@@ -315,6 +315,8 @@ export function ProductCard({
           />
         )}
       </div>
+      )}
+
 
       <QuickAddDrawer product={product} open={open} onOpenChange={setOpen} />
     </article>
