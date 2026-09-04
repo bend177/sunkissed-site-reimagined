@@ -52,9 +52,7 @@ function CartPage() {
       <SiteHeader />
 
       <main className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col px-4 py-4 lg:py-6">
-        <h1 className="text-center text-[18px] leading-none lg:text-[22px]">Your Cart</h1>
-
-        <div className="mx-auto mt-3.5 w-full max-w-[640px]">
+        <div className="mx-auto w-full max-w-[640px]">
           <div className="h-[2px] w-full bg-border">
             <div
               className="h-full bg-ink transition-[width] duration-500"
@@ -70,7 +68,7 @@ function CartPage() {
 
         {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center py-12">
-            <p className="text-sm text-muted-foreground">Your cart is empty</p>
+            <p className="text-sm text-muted-foreground">Your bag is empty</p>
             <Link
               to="/shop"
               search={{ c: "all" }}
