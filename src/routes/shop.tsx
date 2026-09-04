@@ -240,7 +240,7 @@ function Shop() {
   const colorImage = new Map(allColors.map((x) => [x.name, x] as const));
 
   const chip = (on: boolean) =>
-    `eyebrow border px-2 py-1 text-[10.5px] whitespace-nowrap transition-colors ${
+    `eyebrow border px-2.5 py-1.5 text-[10.5px] whitespace-nowrap transition-colors ${
       on ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground"
     }`;
 
