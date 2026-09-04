@@ -123,6 +123,11 @@ function Shop() {
   const [sortOpen, setSortOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [mobileCols, setMobileCols] = useState(2);
+
+  const [desktopCols, setDesktopCols] = useState(4);
+  const [showTitles, setShowTitles] = useState(true);
+
   const [printsAll, setPrintsAll] = useState(false);
   const [sub, setSub] = useState<string | null>(null);
 
@@ -514,7 +519,52 @@ function Shop() {
               </>
             )}
           </div>
-          <div className="ml-auto flex shrink-0 items-center gap-3 md:gap-4">
+
+          <div className="mx-auto flex shrink-0 items-center gap-2">
+            <span className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground md:text-[12px]">
+              View
+            </span>
+            <div className="flex items-end gap-1 lg:hidden">
+              {[1, 2].map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  aria-label={`${n} per row`}
+                  onClick={() => setMobileCols(n)}
+                  className={`flex h-3.5 items-end gap-[2px] ${mobileCols === n ? "opacity-100" : "opacity-30"}`}
+                >
+                  {Array.from({ length: n }).map((_, i) => (
+                    <span key={i} className="block h-3.5 w-[3px] bg-foreground" />
+                  ))}
+                </button>
+              ))}
+            </div>
+            <div className="hidden items-end gap-1 lg:flex">
+              {[3, 4, 6].map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  aria-label={`${n} per row`}
+                  onClick={() => setDesktopCols(n)}
+                  className={`flex h-3.5 items-end gap-[2px] ${desktopCols === n ? "opacity-100" : "opacity-30"}`}
+                >
+                  {Array.from({ length: n }).map((_, i) => (
+                    <span key={i} className="block h-3.5 w-[3px] bg-foreground" />
+                  ))}
+                </button>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowTitles((v) => !v)}
+              className="text-[11px] underline underline-offset-[3px] hover:opacity-60 lg:hidden"
+            >
+              {showTitles ? "Hide titles" : "Show titles"}
+            </button>
+          </div>
+
+          <div className="flex shrink-0 items-center gap-3 md:gap-4">
+
             <div className="relative">
               <button
                 type="button"
@@ -559,7 +609,15 @@ function Shop() {
         <div className="mx-auto box-border flex max-w-[1440px] items-start gap-9 px-4 pb-16 md:px-12">
           <section
             key={c}
-            className="grid min-w-0 flex-1 grid-cols-2 gap-x-3 gap-y-5 md:grid-cols-3 md:gap-x-4 xl:grid-cols-4"
+            className={`grid min-w-0 flex-1 gap-x-3 gap-y-5 md:gap-x-4 ${
+              mobileCols === 1 ? "grid-cols-1" : "grid-cols-2"
+            } ${
+              desktopCols === 3
+                ? "md:grid-cols-3"
+                : desktopCols === 4
+                  ? "md:grid-cols-3 xl:grid-cols-4"
+                  : "md:grid-cols-4 xl:grid-cols-6"
+            }`}
           >
             {list.map((p, i) => (
               <div
@@ -567,9 +625,10 @@ function Shop() {
                 className="collection-in"
                 style={{ animationDelay: `${Math.min(i * 45, 450)}ms` }}
               >
-                <ProductCard product={p} />
+                <ProductCard product={p} showMeta={showTitles} />
               </div>
             ))}
+
             {list.length === 0 && (
               <p className="col-span-full py-10 text-sm text-muted-foreground">
                 Nothing matches those filters yet.

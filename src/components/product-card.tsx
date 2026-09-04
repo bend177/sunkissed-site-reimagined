@@ -245,7 +245,13 @@ function Gallery({
   );
 }
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({
+  product,
+  showMeta = true,
+}: {
+  product: Product;
+  showMeta?: boolean;
+}) {
   const catalog = useCatalog();
   const colors = siblingColors(catalog, product);
   const [open, setOpen] = useState(false);
@@ -270,10 +276,21 @@ export function ProductCard({ product }: { product: Product }) {
           <Gallery images={images} alt={product.title} sale={Boolean(product.compareAt)} />
         </Link>
         <HoverQuickAdd product={product} />
+        {!showMeta && (
+          <button
+            type="button"
+            aria-label={`Quick add ${product.title}`}
+            onClick={() => setOpen(true)}
+            className="absolute right-2 top-2 flex size-5 items-center justify-center rounded-[4px] border border-foreground bg-background/85 text-foreground transition-opacity hover:opacity-70 lg:hidden"
+          >
+            <Plus className="size-2.5" strokeWidth={2} />
+          </button>
+        )}
       </div>
 
-
+      {showMeta && (
       <div className="mt-2.5">
+
         <div className="flex items-center justify-between gap-2">
           <Link to="/products/$handle" params={{ handle: product.handle }} className="min-w-0">
             <h3 className="product-meta truncate">{splitTitle(product.title).base}</h3>
@@ -298,6 +315,8 @@ export function ProductCard({ product }: { product: Product }) {
           />
         )}
       </div>
+      )}
+
 
       <QuickAddDrawer product={product} open={open} onOpenChange={setOpen} />
     </article>
