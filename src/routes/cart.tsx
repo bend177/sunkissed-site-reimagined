@@ -173,13 +173,13 @@ function CartPage() {
 
             {/* Summary */}
 
-            <div className="mt-10 lg:flex lg:justify-end">
+            <div className="mt-8 lg:flex lg:justify-end">
               <div className="w-full lg:max-w-[420px]">
-                <div className="flex items-center justify-between border-b border-border pb-4 text-[16px]">
+                <div className="flex items-center justify-between border-b border-border pb-3 text-[14px]">
                   <span>Subtotal</span>
                   <span>{money(cartTotal)}</span>
                 </div>
-                <p className="mt-4 text-[13px] text-muted-foreground">
+                <p className="mt-3 text-[12px] text-muted-foreground">
                   Taxes and{" "}
                   <span className="text-foreground underline underline-offset-4">shipping</span>{" "}
                   calculated at checkout
@@ -187,7 +187,7 @@ function CartPage() {
                 <button
                   type="button"
                   onClick={checkout}
-                  className="mt-5 w-full bg-ink py-4 text-xs uppercase tracking-[0.18em] text-background"
+                  className="mt-4 w-full bg-ink py-3 text-[11px] uppercase tracking-[0.18em] text-background"
                 >
                   Proceed to checkout
                 </button>
@@ -196,7 +196,7 @@ function CartPage() {
                 <Link
                   to="/shop"
                   search={{ c: "all" }}
-                  className="mt-4 block text-center text-[13px] underline underline-offset-4"
+                  className="mt-3 block text-center text-[12px] underline underline-offset-4"
                 >
                   Continue shopping
                 </Link>
