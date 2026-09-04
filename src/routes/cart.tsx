@@ -111,18 +111,18 @@ function CartPage() {
                       <Link
                         to="/products/$handle"
                         params={{ handle: item.handle }}
-                        className="text-[14px] leading-snug hover:underline underline-offset-4"
+                        className="text-[12px] leading-snug hover:underline underline-offset-4"
                       >
                         {item.title}
                       </Link>
-                      <p className="mt-2 text-[12px] text-muted-foreground">
+                      <p className="mt-1.5 text-[11px] text-muted-foreground">
                         <span className="uppercase tracking-[0.06em]">Size:</span>{" "}
                         <span className="text-foreground">{item.size}</span>
                       </p>
 
                       {/* Mobile price + stepper */}
-                      <div className="mt-3 flex items-center gap-4 lg:hidden">
-                        <span className="text-[12px]">{money(Number(item.price))}</span>
+                      <div className="mt-2.5 flex items-center gap-4 lg:hidden">
+                        <span className="text-[11px]">{money(Number(item.price))}</span>
                         <Stepper
                           quantity={item.quantity}
                           disabled={isLoading}
