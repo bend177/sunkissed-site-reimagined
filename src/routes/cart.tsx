@@ -169,7 +169,7 @@ function CartPage() {
               <div className="mt-4">
                 <div className="h-[3px] w-full bg-border">
                   <div
-                    className="h-full bg-ink transition-[width] duration-500"
+                    className="h-full bg-green-600 transition-[width] duration-500"
                     style={{ width: `${progress * 100}%` }}
                   />
                 </div>
