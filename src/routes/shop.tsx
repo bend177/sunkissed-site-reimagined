@@ -522,27 +522,27 @@ function Shop() {
 
           <div className="mx-auto flex shrink-0 items-center gap-2">
             <div className="flex items-end gap-1.5 lg:hidden">
-              {[1, 2].map((n) => (
-                <button
-                  key={n}
-                  type="button"
-                  aria-label={`${n} per row`}
-                  onClick={() => {
-                    setMobileCols(n);
-                    if (n === 1) setShowTitles(true);
-                  }}
-                  className={`flex h-3.5 items-end gap-[2px] ${mobileCols === n ? "opacity-100" : "opacity-30"}`}
-                >
-                  {Array.from({ length: n }).map((_, i) => (
-                    <span
-                      key={i}
-                      className={`block h-3.5 w-[5px] rounded-[1.5px] ${
-                        mobileCols === n ? "bg-foreground" : "border border-foreground"
-                      }`}
-                    />
-                  ))}
-                </button>
-              ))}
+              {/* Single cycling control like desktop: 2 bars, filled count =
+                  columns shown. Click cycles 1 <-> 2 per row. */}
+              <button
+                type="button"
+                aria-label={`${mobileCols} per row`}
+                onClick={() => {
+                  const next = mobileCols === 1 ? 2 : 1;
+                  setMobileCols(next);
+                  if (next === 1) setShowTitles(true);
+                }}
+                className="flex h-3.5 items-end gap-[2px]"
+              >
+                {Array.from({ length: 2 }).map((_, i) => (
+                  <span
+                    key={i}
+                    className={`block h-3.5 w-[5px] rounded-[1.5px] ${
+                      i < mobileCols ? "bg-foreground" : "border border-foreground opacity-40"
+                    }`}
+                  />
+                ))}
+              </button>
               {/* Hide-titles toggle lives inside the two-lines group so it
                   never reads as a separate icon that pops in. Always visible;
                   only active when 2-per-row is selected (1-per-row keeps titles). */}
