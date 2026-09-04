@@ -544,26 +544,21 @@ function Shop() {
                 </button>
               ))}
             </div>
-            <div className="hidden items-end gap-1.5 lg:flex">
-              {[3, 4, 6].map((n) => (
-                <button
-                  key={n}
-                  type="button"
-                  aria-label={`${n} per row`}
-                  onClick={() => setDesktopCols(n)}
-                  className={`flex h-3.5 items-end gap-[2px] ${desktopCols === n ? "opacity-100" : "opacity-30"}`}
-                >
-                  {Array.from({ length: n }).map((_, i) => (
-                    <span
-                      key={i}
-                      className={`block h-3.5 w-[5px] rounded-[1.5px] ${
-                        desktopCols === n ? "bg-foreground" : "border border-foreground"
-                      }`}
-                    />
-                  ))}
-                </button>
+            <button
+              type="button"
+              aria-label={`${desktopCols} per row`}
+              onClick={() => setDesktopCols((n) => (n === 4 ? 5 : n === 5 ? 3 : 4))}
+              className="hidden items-end gap-[2px] lg:flex"
+            >
+              {Array.from({ length: 5 }).map((_, i) => (
+                <span
+                  key={i}
+                  className={`block h-3.5 w-[5px] rounded-[1.5px] ${
+                    i < desktopCols ? "bg-foreground" : "border border-foreground opacity-40"
+                  }`}
+                />
               ))}
-            </div>
+            </button>
             <button
               type="button"
               aria-label={showTitles ? "Hide titles" : "Show titles"}
