@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ProductCard } from "@/components/product-card";
-import { Plus, Minus, LayoutGrid } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 import { useCatalog } from "@/lib/catalog";
 import {
   colorsIn,
@@ -123,10 +123,11 @@ function Shop() {
   const [sortOpen, setSortOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [mobileCols, setMobileCols] = useState(2);
+  const [mobileView, setMobileView] = useState<1 | 2 | 3>(2);
+  const mobileCols = mobileView === 1 ? 1 : 2;
+  const showTitles = mobileView !== 3;
 
   const [desktopCols, setDesktopCols] = useState(4);
-  const [showTitles, setShowTitles] = useState(true);
 
   const [printsAll, setPrintsAll] = useState(false);
   const [sub, setSub] = useState<string | null>(null);
@@ -521,47 +522,41 @@ function Shop() {
           </div>
 
           <div className="mx-auto flex shrink-0 items-center gap-2">
-            <div className="flex items-end gap-1.5 lg:hidden">
-              {/* Single cycling control like desktop: 2 bars, filled count =
-                  columns shown. Click cycles 1 <-> 2 per row. */}
-              <button
-                type="button"
-                aria-label={`${mobileCols} per row`}
-                onClick={() => {
-                  const next = mobileCols === 1 ? 2 : 1;
-                  setMobileCols(next);
-                  if (next === 1) setShowTitles(true);
-                }}
-                className="flex h-3.5 items-end gap-[2px]"
-              >
-                {Array.from({ length: 2 }).map((_, i) => (
-                  <span
-                    key={i}
-                    className={`block h-3.5 w-[5px] rounded-[1.5px] ${
-                      i < mobileCols ? "bg-foreground" : "border border-foreground opacity-40"
-                    }`}
-                  />
-                ))}
-              </button>
-              {/* Hide-titles toggle lives inside the two-lines group so it
-                  never reads as a separate icon that pops in. Always visible;
-                  only active when 2-per-row is selected (1-per-row keeps titles). */}
-              <button
-                type="button"
-                aria-label={showTitles ? "Hide titles" : "Show titles"}
-                onClick={() => setShowTitles((v) => !v)}
-                disabled={mobileCols !== 2}
-                className={`flex h-3.5 items-center justify-center lg:hidden ${
-                  mobileCols !== 2
-                    ? "opacity-20"
-                    : showTitles
-                      ? "opacity-30"
-                      : "opacity-100"
-                }`}
-              >
-                <LayoutGrid className="size-3.5" strokeWidth={1.75} />
-              </button>
-            </div>
+            <div className="flex items-center lg:hidden">
+               {/* One cycling control: first bar = 1 product, both bars = 2
+                   products, four squares = 2 products no titles. */}
+               <button
+                 type="button"
+                 aria-label="Cycle product view"
+                 onClick={() =>
+                   setMobileView((v) => (v === 1 ? 2 : v === 2 ? 3 : 1))
+                 }
+                 className="flex h-3.5 items-center gap-[3px]"
+               >
+                 {[0, 1].map((i) => (
+                   <span
+                     key={i}
+                     className={`block h-3.5 w-[5px] rounded-[1.5px] ${
+                       (mobileView === 1 && i === 0) || mobileView === 2
+                         ? "bg-foreground"
+                         : "border border-foreground opacity-40"
+                     }`}
+                   />
+                 ))}
+                 <span className="grid grid-cols-2 gap-[1.5px]">
+                   {[0, 1, 2, 3].map((i) => (
+                     <span
+                       key={i}
+                       className={`block h-[6px] w-[6px] rounded-[1px] ${
+                         mobileView === 3
+                           ? "bg-foreground"
+                           : "border border-foreground opacity-40"
+                       }`}
+                     />
+                   ))}
+                 </span>
+               </button>
+             </div>
             <button
               type="button"
               aria-label={`${desktopCols} per row`}
