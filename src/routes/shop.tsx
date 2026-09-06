@@ -359,11 +359,11 @@ function Shop() {
       <SiteHeader />
 
       <main>
-        <section className="mx-auto box-border max-w-[1440px] px-4 pt-8 lg:px-6 md:pt-14">
+        <section className="mx-auto box-border max-w-[1440px] px-4 pt-3 lg:px-6 md:pt-4">
           {/* Collection navigation - one row, same font; active collection is larger with its count */}
           <nav
             aria-label="Collections"
-            className="display flex h-[44px] items-end gap-x-5 gap-y-2 overflow-x-auto whitespace-nowrap pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:h-[80px] md:gap-x-7"
+            className="display flex h-[40px] items-end gap-x-5 gap-y-2 overflow-x-auto whitespace-nowrap pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:h-[60px] md:gap-x-7"
           >
             {COLLECTIONS.map((col) => {
               const active = col.key === c;
@@ -481,7 +481,7 @@ function Shop() {
         </section>
 
         {/* Filter toolbar */}
-        <div className="mx-auto box-border flex max-w-[1440px] flex-nowrap items-center gap-2 px-4 pb-5 pt-6 md:gap-4 md:px-12 md:pb-6 md:pt-11">
+        <div className="mx-auto box-border flex max-w-[1440px] flex-nowrap items-center gap-2 px-4 pb-4 pt-3 md:gap-4 md:px-12 md:pb-5 md:pt-5">
           <div className="flex shrink-0 items-center gap-2 md:gap-3">
             <button
               type="button"
