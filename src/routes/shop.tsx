@@ -359,33 +359,29 @@ function Shop() {
 
       <main>
         <section className="mx-auto box-border max-w-[1440px] px-4 pt-10 pb-16 md:px-8 md:pt-12">
-          {/* Collection navigation - one row, same font; active collection is larger with its count */}
+          {/* Active collection as a large centered title with its count */}
+          <h1 className="display text-center text-[42px] leading-[1.05] md:text-[clamp(48px,5vw,72px)]">
+            {COLLECTION_LABEL[c]}
+            <sup className="font-sans text-[12px] text-muted-foreground md:text-[15px]">
+              {list.length}
+            </sup>
+          </h1>
+
+          {/* Other collections in one serif row below the title */}
           <nav
             aria-label="Collections"
-            className="display flex h-[44px] items-end gap-x-5 gap-y-2 overflow-x-auto whitespace-nowrap pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:h-[80px] md:gap-x-7"
+            className="display mt-5 flex items-center gap-x-5 overflow-x-auto whitespace-nowrap pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mt-7 md:gap-x-7"
           >
-            {COLLECTIONS.map((col) => {
-              const active = col.key === c;
-              return (
-                <Link
-                  key={col.key}
-                  to="/shop"
-                  search={{ c: col.key }}
-                  className={
-                    active
-                      ? "ml-auto shrink-0 text-[38px] leading-[1.05] transition-all duration-300 ease-out md:text-[clamp(48px,5vw,72px)]"
-                      : "shrink-0 text-[15px] text-muted-foreground transition-all duration-300 ease-out hover:text-foreground md:text-[17px]"
-                  }
-                >
-                  {col.label}
-                  {active && (
-                    <sup className="font-sans text-[12px] text-muted-foreground md:text-[15px]">
-                      {list.length}
-                    </sup>
-                  )}
-                </Link>
-              );
-            })}
+            {COLLECTIONS.filter((col) => col.key !== c).map((col) => (
+              <Link
+                key={col.key}
+                to="/shop"
+                search={{ c: col.key }}
+                className="shrink-0 text-[15px] transition-opacity duration-200 hover:opacity-50 md:text-[18px]"
+              >
+                {col.label}
+              </Link>
+            ))}
           </nav>
 
           {subs.length > 0 && (
