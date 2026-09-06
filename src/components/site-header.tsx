@@ -180,7 +180,10 @@ export function SiteHeader() {
 
         {/* Desktop: single row - nav left, centered logo, actions right */}
         <div className="hidden lg:block">
-          <div className={`relative z-[46] grid grid-cols-[1fr_auto_1fr] items-center gap-8 border-b px-6 py-3.5 transition-[background-color,color,border-color] duration-500 ease-out ${transparent ? "border-transparent bg-transparent text-background" : "border-border bg-background text-foreground"}`}>
+          <div
+            onMouseEnter={() => setHeaderHovered(true)}
+            onMouseLeave={() => setHeaderHovered(false)}
+            className={`relative z-[46] grid grid-cols-[1fr_auto_1fr] items-center gap-8 border-b px-6 py-3.5 transition-[background-color,color,border-color] duration-500 ease-out ${transparent ? "border-transparent bg-transparent text-background" : "border-border bg-background text-foreground"}`}>
             <nav className="flex items-center gap-6">
               {nav.map((l) => (
                 <Link
