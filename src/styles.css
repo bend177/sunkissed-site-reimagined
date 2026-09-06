@@ -198,17 +198,11 @@
   text-transform: uppercase;
 }
 
-/*
- * Demo only: light beige background behind all product images.
- * mix-blend-mode: darken replaces only the white/near-white photo
- * background pixels with this beige, leaving darker subjects (people,
- * swimwear) untouched. Remove this block once real transparent
- * /on-background images are in place.
- */
 @utility image-bg {
-  background-color: oklch(0.93 0.012 80);
+  background-color: transparent;
   & img {
-    mix-blend-mode: darken;
+    mix-blend-mode: normal;
+    opacity: 1;
   }
 }
 
