@@ -448,7 +448,7 @@ function Shop() {
                       <span
                         aria-hidden
                         style={swatchFill(products, name, colorImage.get(name)?.image, colorImage.get(name)?.focusY)}
-                        className={`size-[24px] shrink-0 rounded-full ring-1 ${
+                        className={`size-[20px] shrink-0 rounded-full ring-1 ${
                           colors.includes(name) ? "ring-2 ring-foreground" : "ring-border"
                         }`}
                       />
@@ -462,7 +462,7 @@ function Shop() {
                     type="button"
                     aria-label="Show all featured prints"
                     onClick={() => setPrintsAll(true)}
-                    className="flex size-[24px] shrink-0 items-center justify-center rounded-full ring-1 ring-border text-muted-foreground transition-colors hover:ring-foreground/50 hover:text-foreground"
+                    className="flex size-[20px] shrink-0 items-center justify-center rounded-full ring-1 ring-border text-muted-foreground transition-colors hover:ring-foreground/50 hover:text-foreground"
                   >
                     <Plus className="size-3" strokeWidth={1.5} />
                   </button>
